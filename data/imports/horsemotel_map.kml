@@ -91,6 +91,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>AL - Hope Hull</name>
+        <description><![CDATA[PINCHONA SANCTUARY AND PRESERVE<br>www.horsemotel.com/Alabama.html#pf<br>Tel: 334-315-0925]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -86.37856,32.19998,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>AL - Mobile
 </name>
         <description><![CDATA[Spyglass Farms<br>www.horsemotel.com/Alabama.html#stf<br>Tel: 251-401-6228]]></description>
@@ -2235,6 +2245,16 @@
         <Point>
           <coordinates>
             -86.8199166666667,39.5261388888889,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>IN - Cloverdale</name>
+        <description><![CDATA[Silver Feathers Acres, LLC<br>www.horsemotel.com/Indiana.html#sfa<br>Tel: 317-982-2627]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -86.85088,39.49225,0
           </coordinates>
         </Point>
       </Placemark>
@@ -8466,16 +8486,6 @@
         <Point>
           <coordinates>
             1.31547,51.17854,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>AL - Hope Hull</name>
-        <description><![CDATA[PINCHONA SANCTUARY AND PRESERVE<br>www.horsemotel.com/Alabama.html#pf<br>Tel: 334-315-0925]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -86.37856,32.19998,0
           </coordinates>
         </Point>
       </Placemark>
