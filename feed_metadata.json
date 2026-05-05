@@ -1,0 +1,11 @@
+{
+  "appName": "HorseMotel",
+  "feedPurpose": "Mobile app listing feed",
+  "sourceOfTruth": "HorseMotel.com",
+  "usedWithPermission": true,
+  "attribution": "Listings provided by HorseMotel.com",
+  "feedVersion": 1,
+  "generatedAt": "2026-05-05T04:26:01.085468+00:00",
+  "listingCount": 717,
+  "feedUrl": "https://horsemotel.pyoba.com/horsemotel_listings.json"
+}
