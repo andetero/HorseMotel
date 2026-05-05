@@ -2,8 +2,8 @@ name: Sync HorseMotel.com Listings
 
 on:
   schedule:
-    # Runs daily at 12:00 PM Mountain Time.
-    - cron: "0 12 * * *"
+    # Runs daily at 2:00 AM Mountain Time.
+    - cron: "0 2 * * *"
       timezone: "America/Denver"
   workflow_dispatch:
 
@@ -32,23 +32,16 @@ jobs:
       - name: Import authorized HorseMotel.com listings
         run: |
           if [ -n "${{ secrets.HORSEMOTEL_SOURCE_URL }}" ]; then
-            python scripts/import_horsemotel.py \
-              --csv data/imports/horsemotel_listings.csv \
-              --output data/horsemotel_listings.json \
-              --report data/imports/horsemotel_import_report.md \
-              --allow-empty \
-              --download-kml \
-              --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
+            python scripts/import_horsemotel.py               --csv data/imports/horsemotel_listings.csv               --output data/horsemotel_listings.json               --report data/imports/horsemotel_import_report.md               --allow-empty               --download-kml               --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
           else
-            python scripts/import_horsemotel.py \
-              --csv data/imports/horsemotel_listings.csv \
-              --output data/horsemotel_listings.json \
-              --report data/imports/horsemotel_import_report.md \
-              --allow-empty \
-              --download-kml \
-              --scrape-site \
-              --site-url "https://www.horsemotel.com/"
+            python scripts/import_horsemotel.py               --csv data/imports/horsemotel_listings.csv               --output data/horsemotel_listings.json               --report data/imports/horsemotel_import_report.md               --allow-empty               --download-kml               --scrape-site               --site-url "https://www.horsemotel.com/"
           fi
+
+      - name: Validate feed
+        run: python scripts/validate_feed.py
+
+      - name: Publish feed to GitHub Pages docs folder
+        run: python scripts/publish_feed.py
 
       - name: Upload HorseMotel.com sync outputs as artifact
         uses: actions/upload-artifact@v4
@@ -56,7 +49,10 @@ jobs:
           name: horsemotel-sync-outputs
           path: |
             data/horsemotel_listings.json
+            data/feed_metadata.json
             data/imports/horsemotel_import_report.md
+            docs/horsemotel_listings.json
+            docs/feed_metadata.json
 
       - name: Commit outputs
         run: |
@@ -64,8 +60,12 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add data/horsemotel_listings.json
+          git add data/feed_metadata.json
           git add data/imports/horsemotel_import_report.md
           git add data/imports/horsemotel_map.kml
+          git add docs/CNAME
+          git add docs/horsemotel_listings.json
+          git add docs/feed_metadata.json
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
