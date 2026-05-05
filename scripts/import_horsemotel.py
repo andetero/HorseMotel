@@ -1189,7 +1189,7 @@ def main() -> int:
     parser.add_argument("--kml-url", default=DEFAULT_KML_URL, help="Authorized Google My Maps KML URL for better coordinates")
     parser.add_argument("--download-kml", action="store_true", help="Download the authorized KML URL into --kml before importing")
     parser.add_argument("--output", type=Path, default=DEFAULT_JSON, help="Output JSON path")
-    parser.add_argument("--report", type=Path, default=DEFAULT_REPORT, help="Import report path")
+    parser.add_argument("--report", type=Path, default=None, help="Optional import report path")
     parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
     args = parser.parse_args()
 
@@ -1242,7 +1242,8 @@ def main() -> int:
         return 2
 
     compact_json_dump(args.output, listings)
-    write_report(args.report, len(listings), inputs or ["No input rows; initialized empty partner JSON"])
+    if args.report:
+        write_report(args.report, len(listings), inputs or ["No input rows; initialized empty partner JSON"])
     print(f"Wrote {len(listings)} listings to {args.output}")
     return 0
 
