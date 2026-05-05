@@ -1,1 +1,75 @@
-asdf
+name: Sync HorseMotel.com Listings
+
+on:
+  schedule:
+    # Runs nightly at 12:00 AM Mountain Time.
+    - cron: "0 1 * * *"
+      timezone: "America/Denver"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-horsemotel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install importer dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+
+      - name: Import authorized HorseMotel.com listings
+        run: |
+          if [ -n "${{ secrets.HORSEMOTEL_SOURCE_URL }}" ]; then
+            python scripts/import_horsemotel.py \
+              --csv data/imports/horsemotel_listings.csv \
+              --output data/horsemotel_listings.json \
+              --report data/imports/horsemotel_import_report.md \
+              --allow-empty \
+              --download-kml \
+              --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
+          else
+            python scripts/import_horsemotel.py \
+              --csv data/imports/horsemotel_listings.csv \
+              --output data/horsemotel_listings.json \
+              --report data/imports/horsemotel_import_report.md \
+              --allow-empty \
+              --download-kml \
+              --scrape-site \
+              --site-url "https://www.horsemotel.com/"
+          fi
+
+      - name: Upload HorseMotel.com sync outputs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: horsemotel-sync-outputs
+          path: |
+            data/horsemotel_listings.json
+            data/imports/horsemotel_import_report.md
+
+      - name: Commit outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/horsemotel_listings.json
+          git add data/imports/horsemotel_import_report.md
+          git add data/imports/horsemotel_map.kml
+
+          if git diff --staged --quiet; then
+            echo "No HorseMotel.com changes to commit."
+          else
+            git commit -m "chore: sync HorseMotel.com listings"
+            git push
+          fi
