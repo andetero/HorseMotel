@@ -71,6 +71,7 @@ jobs:
           git add horsemotel_listings.json
           git add feed_metadata.json
           git add data/imports/horsemotel_map.kml
+          git rm --ignore-unmatch data/imports/horsemotel_import_report.md
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
