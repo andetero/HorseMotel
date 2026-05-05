@@ -666,6 +666,49 @@ def extract_photo_urls(block: list[dict[str, str]], base_url: str) -> list[str]:
     return photos
 
 
+def is_bad_listing_website_url(url: str) -> bool:
+    lower = (url or "").lower()
+    if not lower:
+        return True
+    skip_fragments = [
+        "google.com/maps", "maps.google", "facebook.com", "jotform.com",
+        "paypal.com", "nps.gov", "parelli.com", "viewcomments", "postcomments",
+        "mailto:", "tel:",
+    ]
+    return any(fragment in lower for fragment in skip_fragments) or is_photo_url(url)
+
+
+def extract_website_from_labeled_block(block: list[dict[str, str]], base_url: str) -> str:
+    """Capture the URL immediately associated with the HorseMotel.com 'Web Site:' label.
+
+    Some listing blocks contain unrelated links later in the text. Using the last
+    non-photo/non-map link can accidentally assign those unrelated links as the
+    listing website. This keeps the extraction anchored to the actual label.
+    """
+    saw_website_label = False
+    for token in block:
+        token_type = token.get("type", "")
+        token_text = clean_text(token.get("text", ""))
+
+        if token_type == "text" and re.search(r"\bWeb\s*Site\s*:\s*$", token_text, re.IGNORECASE):
+            saw_website_label = True
+            continue
+
+        if saw_website_label and token_type == "link":
+            href = urljoin(base_url, token.get("href", "").strip())
+            if not is_bad_listing_website_url(href):
+                return href
+            return ""
+
+        if saw_website_label and token_type == "text":
+            # Stop once the next labeled section starts.
+            if re.search(r"\b(?:Location on Google Maps|Facilities|View Comments|Post Comments)\b", token_text, re.IGNORECASE):
+                return ""
+    return ""
+
+
+
+
 def strip_html(value: str) -> str:
     value = re.sub(r"<br\s*/?>", "\n", value, flags=re.IGNORECASE)
     value = re.sub(r"<[^>]+>", " ", value)
@@ -939,6 +982,14 @@ def append_unmatched_kml_rows(rows: list[Dict[str, Any]], kml_rows: list[Dict[st
         if best_score >= 70:
             continue
 
+        # Do not publish orphaned U.S. KML-only placemarks. The U.S. state
+        # listing pages are the authoritative visible source for U.S. listings,
+        # and old KML pins can remain after a listing is removed from the site.
+        # Keep non-U.S. KML-only placemarks because the legacy website navigation
+        # does not reliably expose Canada/international listing pages.
+        if str(kml_row.get("country", "")).strip() == "United States":
+            continue
+
         output.append(kml_row)
         appended += 1
     return output, appended
@@ -995,16 +1046,12 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
     links = [token for token in block if token["type"] == "link"]
     photo_urls = extract_photo_urls(block, state_url)
     maps_href = ""
-    website = ""
+    website = extract_website_from_labeled_block(block, state_url)
     for token in links:
         href = urljoin(state_url, token.get("href", ""))
-        link_text = token.get("text", "")
         href_lower = href.lower()
         if "google.com/maps" in href_lower or "maps.google" in href_lower:
             maps_href = href
-        elif "view comments" not in link_text.lower() and "post comments" not in link_text.lower():
-            if not is_photo_url(href) and not any(skip in href_lower for skip in ["facebook.com", "parelli.com", "jotform.com"]):
-                website = href
 
     lat, lng = extract_coords(maps_href) if maps_href else (0.0, 0.0)
     confirmed = "(confirmed)" in text.lower()
