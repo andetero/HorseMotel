@@ -1,14 +1,303 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HorseMotel Privacy Policy</title></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>HorseMotel.com App Privacy Policy</title>
+  <style>
+
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f1e8;
+      --bg-accent: #efe1d0;
+      --card: rgba(255, 252, 247, 0.92);
+      --text: #2b2119;
+      --muted: #6e5b4b;
+      --accent: #8b5a35;
+      --accent-strong: #5f351d;
+      --border: rgba(95, 53, 29, 0.18);
+      --shadow: 0 18px 45px rgba(72, 45, 26, 0.14);
+      --badge: #f0dfcd;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #14100d;
+        --bg-accent: #211811;
+        --card: rgba(34, 26, 20, 0.92);
+        --text: #f6eee5;
+        --muted: #c7b5a3;
+        --accent: #d6a16f;
+        --accent-strong: #f0c596;
+        --border: rgba(240, 197, 150, 0.22);
+        --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+        --badge: #332419;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, var(--bg-accent), transparent 34rem),
+        linear-gradient(135deg, var(--bg), var(--bg-accent));
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 85% 15%, rgba(139, 90, 53, 0.16), transparent 18rem),
+        transparent;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 40px 18px;
+    }
+
+    .shell {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 22px;
+    }
+
+    .hero,
+    .card,
+    footer {
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      border-radius: 30px;
+      padding: clamp(28px, 5vw, 56px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      right: -80px;
+      top: -90px;
+      border-radius: 999px;
+      background: rgba(139, 90, 53, 0.13);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--badge);
+      color: var(--accent-strong);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 6vw, 4.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: 24px;
+      padding: clamp(20px, 3vw, 30px);
+    }
+
+    .span-7 {
+      grid-column: span 7;
+    }
+
+    .span-5 {
+      grid-column: span 5;
+    }
+
+    .span-6 {
+      grid-column: span 6;
+    }
+
+    .span-12 {
+      grid-column: span 12;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      letter-spacing: -0.015em;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    p:last-child,
+    ul:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .contact-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 15px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent-strong);
+    }
+
+    footer {
+      border-radius: 20px;
+      padding: 18px 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 18px 12px;
+      }
+
+      .hero {
+        border-radius: 24px;
+      }
+
+      .span-7,
+      .span-5,
+      .span-6 {
+        grid-column: span 12;
+      }
+
+      footer {
+        display: block;
+      }
+
+      footer span {
+        display: block;
+        margin: 4px 0;
+      }
+    }
+
+  </style>
+</head>
 <body>
-  <main>
-    <h1>HorseMotel Privacy Policy</h1>
-    <p>The HorseMotel mobile app displays listing information provided by HorseMotel.com.</p>
-    <p>The app may request location access so it can show nearby listings, distances, and directions. Location is used on-device for app functionality.</p>
-    <p>Favorites are stored locally on the device.</p>
-    <p>HorseMotel.com remains the official website and source of truth for listings.</p>
-    <p>Listings are provided by HorseMotel.com and used with permission.</p>
+  <main class="page">
+    <div class="shell">
+      <section class="hero">
+        <p class="eyebrow">HorseMotel.com App</p>
+        <h1>Privacy Policy</h1>
+        <p class="lead">HorseMotel.com is designed to help horse owners find overnight horse lodging while keeping the app simple, practical, and respectful of your privacy.</p>
+      </section>
+
+      <section class="grid" aria-label="Privacy details">
+        <article class="card span-7">
+          <h2>Information the app uses</h2>
+          <p>The HorseMotel.com app displays lodging information provided by HorseMotel.com. The app may use your approximate device location to show nearby listings, sort by distance, and open directions in your preferred maps app.</p>
+          <p>Location access is optional and is used for app functionality. You can change location permissions at any time in iOS Settings.</p>
+        </article>
+
+        <article class="card span-5">
+          <h2>Saved listings</h2>
+          <p>Favorites and saved listings are stored locally on your device. They are not used to create an account profile by the app.</p>
+        </article>
+
+        <article class="card span-6">
+          <h2>Contacting listings</h2>
+          <p>When you choose to call, email, visit a website, or open directions, the app hands that action to the appropriate phone, mail, browser, or maps app on your device.</p>
+        </article>
+
+        <article class="card span-6">
+          <h2>Listing issue reports</h2>
+          <p>If you use the report issue option, your device opens an email addressed to HorseMotel.com. Any information sent is included only because you choose to send that email.</p>
+        </article>
+
+        <article class="card span-12">
+          <h2>Data source and accuracy</h2>
+          <p>HorseMotel.com remains the official website and source of truth for listings. Listings are provided by HorseMotel.com and used with permission.</p>
+          <p class="muted">Always contact a facility directly before arrival to confirm availability, pricing, directions, amenities, and current conditions.</p>
+        </article>
+      </section>
+
+      <footer>
+        <span>© HorseMotel.com</span>
+        <span>Questions? <a href="mailto:contact@horsemotel.com">contact@horsemotel.com</a></span>
+      </footer>
+    </div>
   </main>
 </body>
 </html>
