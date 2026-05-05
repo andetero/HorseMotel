@@ -35,7 +35,6 @@ jobs:
             python scripts/import_horsemotel.py \
               --csv data/imports/horsemotel_listings.csv \
               --output horsemotel_listings.json \
-              --report data/imports/horsemotel_import_report.md \
               --allow-empty \
               --download-kml \
               --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
@@ -43,7 +42,6 @@ jobs:
             python scripts/import_horsemotel.py \
               --csv data/imports/horsemotel_listings.csv \
               --output horsemotel_listings.json \
-              --report data/imports/horsemotel_import_report.md \
               --allow-empty \
               --download-kml \
               --scrape-site \
@@ -63,7 +61,6 @@ jobs:
           path: |
             horsemotel_listings.json
             feed_metadata.json
-            data/imports/horsemotel_import_report.md
             data/imports/horsemotel_map.kml
 
       - name: Commit outputs
@@ -73,7 +70,6 @@ jobs:
 
           git add horsemotel_listings.json
           git add feed_metadata.json
-          git add data/imports/horsemotel_import_report.md
           git add data/imports/horsemotel_map.kml
 
           if git diff --staged --quiet; then
