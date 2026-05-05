@@ -372,6 +372,58 @@ def infer_accommodations(text: str) -> list[str]:
     return values
 
 
+def parse_gps_coordinates_from_text(value: str) -> tuple[Optional[float], Optional[float]]:
+    """Parse GPS coordinates embedded in HorseMotel.com listing descriptions.
+
+    Handles decimal coordinates and DMS-style values such as:
+    GPS Coordinates: 63 20'01.0"N 143 02'11.3"W
+    GPS Coordinates: 36 12 24 N by 78 00 26 W
+    """
+    text = value or ""
+
+    dms_pattern = re.compile(
+        r"(?:GPS\s*Coordinates?|Coordinates?)\s*:?\s*"
+        r"([0-9.+\-]+)\s+([0-9.+\-]+)'?\s*([0-9.+\-]+)?\"?\s*([NS])"
+        r"(?:\s*,?\s*|\s+by\s+)"
+        r"([0-9.+\-]+)\s+([0-9.+\-]+)'?\s*([0-9.+\-]+)?\"?\s*([EW])",
+        flags=re.IGNORECASE,
+    )
+    gps_match = dms_pattern.search(text)
+    if gps_match:
+        lat_deg = float(gps_match.group(1))
+        lat_min = float(gps_match.group(2))
+        lat_sec = float(gps_match.group(3) or 0)
+        lat_dir = gps_match.group(4).upper()
+        lon_deg = float(gps_match.group(5))
+        lon_min = float(gps_match.group(6))
+        lon_sec = float(gps_match.group(7) or 0)
+        lon_dir = gps_match.group(8).upper()
+
+        lat = lat_deg + (lat_min / 60.0) + (lat_sec / 3600.0)
+        lon = lon_deg + (lon_min / 60.0) + (lon_sec / 3600.0)
+        if lat_dir == "S":
+            lat *= -1
+        if lon_dir == "W":
+            lon *= -1
+        if -90 <= lat <= 90 and -180 <= lon <= 180:
+            return lat, lon
+
+    # Require a comma for decimal pairs so ordinary directions like "36 12 24 N"
+    # do not get misread as latitude=36, longitude=12.
+    decimal_match = re.search(
+        r"(?:GPS\s*Coordinates?|Coordinates?)\s*:?\s*([+-]?\d+(?:\.\d+)?)\s*,\s*([+-]?\d+(?:\.\d+)?)",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if decimal_match:
+        lat = float(decimal_match.group(1))
+        lon = float(decimal_match.group(2))
+        if -90 <= lat <= 90 and -180 <= lon <= 180:
+            return lat, lon
+
+    return None, None
+
+
 def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     name = cleanup_listing_name(first_value(row, FIELD_ALIASES["name"]))
     if not name:
@@ -399,6 +451,12 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         coordinate_source = f"{coordinate_source}_approximate"
 
     description = first_value(row, FIELD_ALIASES["description"]) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
+    gps_lat, gps_lng = parse_gps_coordinates_from_text(description)
+    if gps_lat is not None and gps_lng is not None:
+        lat = gps_lat
+        lng = gps_lng
+        coordinate_source = "description_gps"
+
     accommodations = parse_list(first_value(row, FIELD_ALIASES["accommodations"]))
     for required in infer_accommodations(description):
         if required not in accommodations:
