@@ -4,7 +4,7 @@ Import authorized HorseMotel.com partner listings into the HorseMotel app feed.
 
 HorseMotel.com remains the source of truth. This script normalizes an approved
 partner export, or the authorized public HorseMotel.com listing pages, into
-data/horsemotel_listings.json for the HorseMotel mobile app feed.
+horsemotel_listings.json for the HorseMotel mobile app feed.
 
 Supported first-phase inputs:
   - CSV file exported/provided by HorseMotel.com
@@ -34,7 +34,7 @@ from urllib.request import Request, urlopen
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CSV = REPO_ROOT / "data" / "imports" / "horsemotel_listings.csv"
-DEFAULT_JSON = REPO_ROOT / "data" / "horsemotel_listings.json"
+DEFAULT_JSON = REPO_ROOT / "horsemotel_listings.json"
 DEFAULT_REPORT = REPO_ROOT / "data" / "imports" / "horsemotel_import_report.md"
 DEFAULT_KML = REPO_ROOT / "data" / "imports" / "horsemotel_map.kml"
 DEFAULT_KML_URL = "https://www.google.com/maps/d/kml?mid=1qrjPl4O3jErNdqkjkci9NcMi1AU&forcekml=1"
