@@ -11,6 +11,9 @@ FEED = REPO_ROOT / "horsemotel_listings.json"
 METADATA = REPO_ROOT / "feed_metadata.json"
 REQUIRED = ["id", "name", "latitude", "longitude", "sourceUrl", "attribution"]
 EXPECTED_ATTRIBUTION = "Listing provided by HorseMotel.com"
+MIN_LISTINGS = 600
+MIN_PHOTO_LISTINGS = 400
+BAD_WEBSITE_FRAGMENTS = ("mailto:", "tel:", "@", "google.com/maps", "maps.google", "nps.gov")
 
 
 def main() -> int:
@@ -29,6 +32,13 @@ def main() -> int:
     if not isinstance(listings, list):
         print("Feed must be a JSON array", file=sys.stderr)
         return 1
+
+    if len(listings) < MIN_LISTINGS:
+        errors.append(f"feed has only {len(listings)} listings; expected at least {MIN_LISTINGS}")
+
+    photo_listing_count = sum(1 for item in listings if isinstance(item, dict) and item.get("photoURLs"))
+    if photo_listing_count < MIN_PHOTO_LISTINGS:
+        errors.append(f"feed has only {photo_listing_count} listings with photos; expected at least {MIN_PHOTO_LISTINGS}")
 
     seen: set[str] = set()
     for index, item in enumerate(listings):
@@ -54,6 +64,14 @@ def main() -> int:
             errors.append(f"[{index}] invalid latitude {lat}")
         if not isinstance(lon, (int, float)) or not (-180 <= lon <= 180):
             errors.append(f"[{index}] invalid longitude {lon}")
+
+        website = str(item.get("website") or "").strip().lower()
+        if website and any(fragment in website for fragment in BAD_WEBSITE_FRAGMENTS):
+            errors.append(f"[{index}] {item.get('name', '<unnamed>')} has invalid website value: {item.get('website')}")
+
+        for list_key in ("photoURLs", "hookups", "accommodations"):
+            if list_key in item and not isinstance(item.get(list_key), list):
+                errors.append(f"[{index}] {item.get('name', '<unnamed>')} {list_key} must be an array")
 
     if METADATA.exists():
         try:

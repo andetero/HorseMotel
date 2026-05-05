@@ -387,7 +387,7 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     city = cleanup_city(city, location, state)
 
     source_url = first_value(row, FIELD_ALIASES["sourceUrl"])
-    website = first_value(row, FIELD_ALIASES["website"]) or source_url
+    website = sanitize_listing_website(first_value(row, FIELD_ALIASES["website"]))
     lat = parse_float(first_value(row, FIELD_ALIASES["latitude"]), default=0.0)
     lng = parse_float(first_value(row, FIELD_ALIASES["longitude"]), default=0.0)
     usable_address = has_usable_street_address(location)
@@ -678,6 +678,25 @@ def is_bad_listing_website_url(url: str) -> bool:
     return any(fragment in lower for fragment in skip_fragments) or is_photo_url(url)
 
 
+def sanitize_listing_website(value: str) -> str:
+    """Return a real listing website URL, or empty string for email/phone/resource links."""
+    raw = clean_text(value or "")
+    if not raw:
+        return ""
+    lower = raw.lower()
+    if is_bad_listing_website_url(raw) or "@" in raw:
+        return ""
+
+    # Keep the first web-looking token if the value contains extra text.
+    match = re.search(r"https?://[^\s<>]+|(?:www\.)?[A-Za-z0-9][A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:/[^\s<>]*)?", raw)
+    if not match:
+        return ""
+    url = match.group(0).strip(".,;:()[]{}<>\"'")
+    if is_bad_listing_website_url(url) or "@" in url or "." not in url:
+        return ""
+    return url
+
+
 def extract_website_from_labeled_block(block: list[dict[str, str]], base_url: str) -> str:
     """Capture the URL immediately associated with the HorseMotel.com 'Web Site:' label.
 
@@ -696,9 +715,7 @@ def extract_website_from_labeled_block(block: list[dict[str, str]], base_url: st
 
         if saw_website_label and token_type == "link":
             href = urljoin(base_url, token.get("href", "").strip())
-            if not is_bad_listing_website_url(href):
-                return href
-            return ""
+            return sanitize_listing_website(href)
 
         if saw_website_label and token_type == "text":
             # Stop once the next labeled section starts.
@@ -749,7 +766,7 @@ def parse_kml_placemark_location(placemark_name: str) -> tuple[str, str, str]:
     if us_match and us_match.group(1) in set(STATE_NAME_TO_CODE.values()):
         return clean_text(us_match.group(2)), us_match.group(1), "United States"
 
-    canada_match = re.match(r"^(.+?),\s*(?:Canad[aa]|Canada)\s*-\s*(.+)$", cleaned, flags=re.IGNORECASE)
+    canada_match = re.match(r"^(.+?),\s*(?:Canada|Candada)\s*-\s*(.+)$", cleaned, flags=re.IGNORECASE)
     if canada_match:
         region = clean_text(canada_match.group(1).replace("Candada", "Canada"))
         city = clean_text(canada_match.group(2))
@@ -810,7 +827,7 @@ def parse_kml_text(kml_text: str) -> list[Dict[str, Any]]:
             if lower.startswith("tel:"):
                 phone = clean_text(line.split(":", 1)[1])
             elif "horsemotel.com" in lower and not url:
-                url = line
+                url = re.sub(r"\s+", "", line)
             elif line and not lower.startswith("image"):
                 description_parts.append(line)
 
@@ -1223,7 +1240,7 @@ def main() -> int:
     if args.kml and args.kml.exists():
         kml_rows.extend(read_kml(args.kml))
         inputs.append(str(args.kml.relative_to(REPO_ROOT) if args.kml.is_relative_to(REPO_ROOT) else args.kml))
-    if args.kml_url:
+    if args.kml_url and not args.download_kml:
         try:
             kml_rows.extend(read_kml_url(args.kml_url))
             inputs.append(args.kml_url)
