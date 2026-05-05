@@ -1,11 +1,12 @@
 # HorseMotel.com Import Report
 
-Generated: 2026-05-05T05:51:36.568360+00:00
+Generated: 2026-05-05T06:04:17.638678+00:00
 Listings written: 772
 
 ## Inputs
-- data/imports/previous_horsemotel_feed.json
+- Authorized public HorseMotel.com listing pages: https://www.horsemotel.com/
 - data/imports/horsemotel_map.kml
+- https://www.google.com/maps/d/kml?mid=1qrjPl4O3jErNdqkjkci9NcMi1AU&forcekml=1
 
 ## Notes
 - Partner/source: HorseMotel.com
