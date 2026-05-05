@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Import authorized HorseMotel.com partner listings into HorseCamp.
+Import authorized HorseMotel.com partner listings into the HorseMotel app feed.
 
 HorseMotel.com remains the source of truth. This script normalizes an approved
 partner export, or the authorized public HorseMotel.com listing pages, into
-/data/horsemotel_listings.json so the existing HorseCamp nightly seed can merge
-it into camps.json.
+data/horsemotel_listings.json for the HorseMotel mobile app feed.
 
 Supported first-phase inputs:
   - CSV file exported/provided by HorseMotel.com
@@ -1042,7 +1041,7 @@ def write_report(path: Path, count: int, inputs: list[str]) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Import authorized HorseMotel.com listings into HorseCamp JSON")
+    parser = argparse.ArgumentParser(description="Import authorized HorseMotel.com listings into the HorseMotel app JSON feed")
     parser.add_argument("--csv", type=Path, default=DEFAULT_CSV, help="CSV export/input path")
     parser.add_argument("--json", type=Path, help="Optional JSON export/input path")
     parser.add_argument("--source-url", help="Optional authorized CSV/JSON export URL")
