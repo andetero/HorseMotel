@@ -67,23 +67,23 @@ FIELD_ALIASES = {
     "website": ["website", "url", "listing_url", "link", "horse_motel_url"],
     "description": ["description", "notes", "details", "summary"],
     "email": ["email", "email_address"],
-    "pricePerNight": ["price_per_night", "price", "nightly_rate"],
-    "horseFeePerNight": ["horse_fee_per_night", "horse_fee"],
-    "stallCount": ["stall_count", "stalls"],
-    "paddockCount": ["paddock_count", "paddocks", "corrals"],
-    "maxRigLength": ["max_rig_length", "rig_length", "max_length"],
-    "photoURLs": ["photo_urls", "photos", "image_urls", "images"],
+    "pricePerNight": ["pricePerNight", "price_per_night", "price", "nightly_rate"],
+    "horseFeePerNight": ["horseFeePerNight", "horse_fee_per_night", "horse_fee"],
+    "stallCount": ["stallCount", "stall_count", "stalls"],
+    "paddockCount": ["paddockCount", "paddock_count", "paddocks", "corrals"],
+    "maxRigLength": ["maxRigLength", "max_rig_length", "rig_length", "max_length"],
+    "photoURLs": ["photoURLs", "photo_urls", "photos", "image_urls", "images"],
     "accommodations": ["accommodations", "amenities", "features"],
-    "sourceUrl": ["source_url", "source", "horse_motel_listing_url"],
-    "coordinateSource": ["coordinate_source", "coordinateSource"],
+    "sourceUrl": ["sourceUrl", "source_url", "source", "horse_motel_listing_url"],
+    "coordinateSource": ["coordinateSource", "coordinate_source"],
 }
 
 BOOL_FIELDS = {
-    "hasWashRack": ["has_wash_rack", "wash_rack"],
-    "hasDumpStation": ["has_dump_station", "dump_station"],
-    "hasWifi": ["has_wifi", "wifi"],
-    "hasBathhouse": ["has_bathhouse", "bathhouse", "bathrooms", "showers"],
-    "pullThroughAvailable": ["pull_through_available", "pull_through", "pullthrough"],
+    "hasWashRack": ["hasWashRack", "has_wash_rack", "wash_rack"],
+    "hasDumpStation": ["hasDumpStation", "has_dump_station", "dump_station"],
+    "hasWifi": ["hasWifi", "has_wifi", "wifi"],
+    "hasBathhouse": ["hasBathhouse", "has_bathhouse", "bathhouse", "bathrooms", "showers"],
+    "pullThroughAvailable": ["pullThroughAvailable", "pull_through_available", "pull_through", "pullthrough"],
 }
 
 
