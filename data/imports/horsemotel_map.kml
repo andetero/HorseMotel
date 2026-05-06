@@ -2685,6 +2685,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>KY - Berry</name>
+        <description><![CDATA[F-N-B Ranch<br>www.horsemotel.com/Kentucky.html#fnb<br>Tel: 859-609-4221]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -84.43662,38.49582,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>KY - Bloomfield</name>
         <description><![CDATA[Twin Pond Stables<br>www.horsemotel.com/Kentucky.html#tps<br>Tel: 559-765-5005]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
