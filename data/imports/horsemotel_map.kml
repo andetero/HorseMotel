@@ -4077,6 +4077,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>NE - Brady</name>
+        <description><![CDATA[NC River Ranch<br>www.horsemotel.com/Nebraska.html#ncrr<br>Tel: 308-529-2164]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -100.50595,41.03275,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>NE - Chadron</name>
         <description><![CDATA[RUJODEN Ranch Horse Motel<br>www.horsemotel.com/Nebraska.html#rrh<br>Tel: 308-432-5954]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -5752,6 +5762,16 @@
         <Point>
           <coordinates>
             -76.0828055555556,39.984,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PA - Smithfield</name>
+        <description><![CDATA[Covenant Hill Farms<br>www.horsemotel.com/Pennsylvania.html#chf<br>Tel: 724-487-3862]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -79.87165,39.76709,0
           </coordinates>
         </Point>
       </Placemark>
@@ -8184,16 +8204,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>Ontario, Canada - Forresters Falls</name>
-        <description><![CDATA[Horse Country Campground<br>www.horsemotel.com/ZCan-Ontario.html#horse<br>Tel: 613-867-0585]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -76.725056,45.665639,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>Ontario, Canada - Hearst</name>
         <description><![CDATA[Angolly’s Ranch<br>www.horsemotel.com/ZCan-Ontario.html#ang<br>Tel: 705-372-8388 or 705-362-8388]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -8496,6 +8506,16 @@
         <Point>
           <coordinates>
             1.31547,51.17854,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>AZ - Sedona</name>
+        <description><![CDATA[Redrock Camp<br>www.horsemotel.com/Arizona.html#rdk<br>Tel: 650-274-8499]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -111.86558,34.8333,0
           </coordinates>
         </Point>
       </Placemark>
