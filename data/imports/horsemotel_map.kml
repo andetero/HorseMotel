@@ -479,6 +479,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>AZ - Sedona</name>
+        <description><![CDATA[Redrock Camp<br>www.horsemotel.com/Arizona.html#rdk<br>Tel: 650-274-8499]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -111.86558,34.8333,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>AZ - Sonoita</name>
         <description><![CDATA[Irbinskas Stables RV Horse Camp<br>www.horsemotel.com/Arizona.html#isr<br>Tel: 520-444-2460]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -2685,12 +2695,12 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>KY - Berry</name>
+        <name>KY – Berry</name>
         <description><![CDATA[F-N-B Ranch<br>www.horsemotel.com/Kentucky.html#fnb<br>Tel: 859-609-4221]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
         <Point>
           <coordinates>
-            -84.43662,38.49582,0
+            -84.436307,38.497062,0
           </coordinates>
         </Point>
       </Placemark>
@@ -8506,16 +8516,6 @@
         <Point>
           <coordinates>
             1.31547,51.17854,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>AZ - Sedona</name>
-        <description><![CDATA[Redrock Camp<br>www.horsemotel.com/Arizona.html#rdk<br>Tel: 650-274-8499]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -111.86558,34.8333,0
           </coordinates>
         </Point>
       </Placemark>
