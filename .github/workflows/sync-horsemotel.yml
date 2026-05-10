@@ -2,8 +2,8 @@ name: Sync HorseMotel.com Listings
 
 on:
   schedule:
-    # Runs daily at 5:00 AM America/Denver.
-    - cron: "0 5 * * *"
+    # Runs daily at 6:00 AM America/Denver.
+    - cron: "0 6 * * *"
       timezone: "America/Denver"
   workflow_dispatch:
 
@@ -34,14 +34,14 @@ jobs:
           if [ -n "${{ secrets.HORSEMOTEL_SOURCE_URL }}" ]; then
             python scripts/import_horsemotel.py \
               --csv data/imports/horsemotel_listings.csv \
-              --output horsemotel_listings.json \
+              --output horsemotel.json \
               --allow-empty \
               --download-kml \
               --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
           else
             python scripts/import_horsemotel.py \
               --csv data/imports/horsemotel_listings.csv \
-              --output horsemotel_listings.json \
+              --output horsemotel.json \
               --allow-empty \
               --download-kml \
               --scrape-site \
@@ -54,7 +54,7 @@ jobs:
         with:
           name: horsemotel-sync-outputs
           path: |
-            horsemotel_listings.json
+            horsemotel.json
             data/imports/horsemotel_map.kml
 
       - name: Commit outputs
@@ -62,9 +62,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add horsemotel_listings.json
+          git add horsemotel.json
           git add data/imports/horsemotel_map.kml
-          git rm --ignore-unmatch feed_metadata.json scripts/generate_metadata.py scripts/validate_feed.py
+          git rm --ignore-unmatch horsemotel_listings.json feed_metadata.json scripts/generate_metadata.py scripts/validate_feed.py
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
