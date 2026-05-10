@@ -39,7 +39,6 @@ DEFAULT_REPORT = REPO_ROOT / "data" / "imports" / "horsemotel_import_report.md"
 DEFAULT_KML = REPO_ROOT / "data" / "imports" / "horsemotel_map.kml"
 DEFAULT_KML_URL = "https://www.google.com/maps/d/kml?mid=1qrjPl4O3jErNdqkjkci9NcMi1AU&forcekml=1"
 PARTNER_NAME = "HorseMotel.com"
-ATTRIBUTION = "Listing provided by HorseMotel.com"
 DEFAULT_SITE_URL = "https://www.horsemotel.com/"
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
 
@@ -511,7 +510,6 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         "sourceDetail": PARTNER_NAME,
         "category": PARTNER_NAME,
         "partner": PARTNER_NAME,
-        "attribution": ATTRIBUTION,
         "lastSynced": datetime.now(timezone.utc).date().isoformat(),
     }
 
