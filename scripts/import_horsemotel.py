@@ -1087,25 +1087,73 @@ def extract_between(text: str, start_label: str, end_labels: list[str]) -> str:
 
 
 
-def is_listing_notice_line(value: str) -> bool:
-    """Return True for HorseMotel.com banner/status text that appears above a listing name.
+def strip_listing_notice_text(value: str) -> str:
+    """Remove HorseMotel.com announcement text from a candidate listing name.
 
-    Some listing pages place seasonal notices in red text immediately before the
-    actual facility name. The importer should keep that text in the description,
-    but it should not become the app listing name.
+    Lyndsay sometimes places seasonal/status announcements immediately above the
+    actual facility name. Keep those words in the listing description/location
+    content from the site, but do not let them become the app title.
     """
-    text = clean_text(value).lower()
+    text = cleanup_listing_name(value)
+    if not text:
+        return ""
+
+    leading_notice_patterns = [
+        r"^due to construction,?\s*we cannot accommodate,?\s*overnight guests until further notice\.?,?\s*",
+        r"^we offer our facility as a refuge for (?:hurricane|natural disaster) evacuees(?: at no cost)?\.?,?\s*",
+        r"^this horse motel will officially close on [A-Za-z]+\s+\d{1,2},\s*\d{4}\.?,?\s*",
+        r"^we are closed to overnight guests from [^,]+,?\s*",
+        r"^we are closed for the seasons? of [^,]+\.?,?\s*",
+        r"^we are closed [^,]+,?\s*",
+        r"^we are open(?: from)? [^,]+,?\s*",
+        r"^open from [^,]+,?\s*",
+        r"^temporarily closed[^,]*,?\s*",
+        r"^winter availability[^,]*,?\s*",
+    ]
+
+    changed = True
+    while changed and text:
+        changed = False
+        for pattern in leading_notice_patterns:
+            updated = re.sub(pattern, "", text, count=1, flags=re.IGNORECASE).strip(" ,.-")
+            if updated != text:
+                text = cleanup_listing_name(updated)
+                changed = True
+                break
+
+    trailing_notice_patterns = [
+        r"\s+we are open(?: from)?\b.*$",
+        r"\s+we are closed\b.*$",
+        r"\s+this horse motel will officially close\b.*$",
+        r"\s+due to construction\b.*$",
+    ]
+    for pattern in trailing_notice_patterns:
+        text = re.sub(pattern, "", text, flags=re.IGNORECASE).strip(" ,.-")
+
+    return cleanup_listing_name(text)
+
+
+def is_listing_notice_line(value: str) -> bool:
+    """Return True when a line is only a HorseMotel.com status/seasonal banner."""
+    text = cleanup_listing_name(value)
     if not text:
         return False
-    notice_patterns = [
-        r"^we are open from\b",
-        r"^open from\b",
-        r"^closed\b",
-        r"^temporarily closed\b",
-        r"^seasonal(?:ly)?\b",
-        r"^winter availability\b",
-    ]
-    return any(re.search(pattern, text) for pattern in notice_patterns)
+    stripped = strip_listing_notice_text(text)
+    return stripped == ""
+
+
+def looks_like_address_line(value: str, state_code: str) -> bool:
+    """Identify the first real address line without mistaking date notices for addresses."""
+    text = cleanup_listing_name(value)
+    if not text or is_listing_notice_line(text):
+        return False
+    if STREET_ADDRESS_PATTERN.search(text):
+        return True
+    if re.search(r"\bP\.?\s*O\.?\s*Box\b", text, flags=re.IGNORECASE):
+        return True
+    if state_code and re.search(rf"\b{re.escape(state_code)}\s+\d{{5}}(?:-\d{{4}})?\b", text, flags=re.IGNORECASE):
+        return True
+    return bool(re.search(r"\b[A-Z]{2}\s+\d{5}(?:-\d{4})?\b", text))
 
 def parse_city_state(address_lines: list[str], fallback_state: str) -> tuple[str, str, str]:
     city = ""
@@ -1170,24 +1218,26 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
         return None
 
     # Use all leading non-address lines as name/owner context until an address-looking line begins.
+    # Do not treat seasonal/status notice lines as addresses just because they contain dates.
     address_start = None
     for idx, line in enumerate(lines):
-        if re.search(r"\d", line):
+        if looks_like_address_line(line, state_code):
             address_start = idx
             break
+
     if address_start is None:
-        name = lines[0]
+        name_lines = lines
         address_lines: list[str] = []
     else:
         name_lines = lines[:address_start]
-        # HorseMotel.com sometimes has a seasonal/status banner above the real
-        # facility name, for example "We are open from November 1st through
-        # March 15th" above "Lazee Day Dairy, Lyle Brown". Keep mirroring the
-        # listing content, but do not use that banner as the app title.
-        while len(name_lines) > 1 and is_listing_notice_line(name_lines[0]):
-            name_lines = name_lines[1:]
-        name = cleanup_listing_name(", ".join(name_lines[:3])) or cleanup_listing_name(lines[0])
         address_lines = lines[address_start:]
+
+    cleaned_name_lines = []
+    for line in name_lines:
+        cleaned_line = strip_listing_notice_text(line)
+        if cleaned_line:
+            cleaned_name_lines.append(cleaned_line)
+    name = cleanup_listing_name(", ".join(cleaned_name_lines[:3])) or cleanup_listing_name(lines[0])
 
     city, state, _zip_code = parse_city_state(address_lines, state_code)
     location = clean_text(", ".join(address_lines)) or ", ".join(v for v in [city, state] if v)
