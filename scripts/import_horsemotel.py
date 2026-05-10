@@ -200,6 +200,11 @@ def has_negative_phrase(text: str, patterns: Iterable[str]) -> bool:
 
 def cleanup_listing_name(value: str) -> str:
     value = clean_text(value)
+    # HorseMotel.com occasionally has a stray leading quote before a listing
+    # title, e.g. "'Ears The Place Equine Inn". Keep quoted words inside
+    # names, but strip accidental leading/trailing wrapper punctuation.
+    value = re.sub(r"^[\'\"`]+", "", value)
+    value = re.sub(r"[\'\"`]+$", "", value)
     value = re.sub(r"\s*,\s*,+", ", ", value)
     value = re.sub(r",\s{2,}", ", ", value)
     value = re.sub(r"\s{2,}", " ", value)
@@ -1244,7 +1249,14 @@ def looks_like_address_line(value: str, state_code: str) -> bool:
         return True
     if re.search(r"\bP\.?\s*O\.?\s*Box\b", text, flags=re.IGNORECASE):
         return True
-    if re.search(r"\b\d{1,6}\s+(?:[NSEW]\s+)?(?:[A-Za-z0-9.'-]+\s+){0,5}(?:county\s+\d+|calle|camino|via|mesa|ranch|farm)\b", text, flags=re.IGNORECASE):
+    # Western/rural grid addresses often have no named street suffix, for
+    # example "310 W. 4000 N." or "3046 E 3400 N". Treat these as addresses
+    # so they do not get appended to the facility name.
+    if re.search(r"^\d{1,6}\s+[NSEW]\.?\s+\d{1,6}\s+[NSEW]\.?$", text, flags=re.IGNORECASE):
+        return True
+    if re.search(r"^\d{1,6}\s+[NSEW]\.?\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+){0,4}\s+[NSEW]\.?$", text, flags=re.IGNORECASE):
+        return True
+    if re.search(r"\b\d{1,6}\s+(?:[NSEW]\.?\s+)?(?:[A-Za-z0-9.'-]+\s+){0,5}(?:county\s+\d+|calle|camino|via|mesa|ranch|farm)\b", text, flags=re.IGNORECASE):
         return True
     if state_code and re.search(rf"\b{re.escape(state_code)}\s+\d{{5}}(?:-\d{{4}})?\b", text, flags=re.IGNORECASE):
         return True
@@ -1285,7 +1297,10 @@ def parse_city_state(address_lines: list[str], fallback_state: str) -> tuple[str
     # Prefer the city immediately before the state/ZIP. This avoids turning
     # "14945 Sipsey Valley Rd. S, Ralph, AL 35480" into
     # "Sipsey Valley Rd. S Ralph".
-    comma_matches = re.findall(r",\s*([^,]+?)\s*,?\s*([A-Z]{2})\s+(\d{5}(?:-\d{4})?)", joined)
+    comma_matches = [
+        match for match in re.findall(r",\s*([^,]+?)\s*,?\s*([A-Z]{2})\s+(\d{5}(?:-\d{4})?)", joined)
+        if clean_text(match[0])
+    ]
     if comma_matches:
         raw_city, state, zip_code = comma_matches[-1]
         city = clean_text(raw_city)
@@ -1296,7 +1311,7 @@ def parse_city_state(address_lines: list[str], fallback_state: str) -> tuple[str
             state = match.group(2)
             zip_code = match.group(3)
 
-    city = re.sub(r"^(?:N|S|E|W|North|South|East|West)\s+", "", city).strip()
+    city = re.sub(r"^(?:N|S|E|W|North|South|East|West)\.?\s+", "", city).strip()
     return city, state, zip_code
 
 
