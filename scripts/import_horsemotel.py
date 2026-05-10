@@ -1434,6 +1434,17 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
             cleaned_name_lines.append(cleaned_line)
     name = cleanup_listing_name(", ".join(cleaned_name_lines[:3])) or cleanup_listing_name(lines[0])
 
+    # Defensive second pass: if the inferred title still contains an embedded
+    # street address, split it out and prepend it to the address lines. This
+    # covers source blocks where HorseMotel.com wraps the name/contact/address
+    # together and the remaining location line is only "IL 60151" or similar.
+    embedded_name_split = split_embedded_address_line(name, state_code)
+    if embedded_name_split:
+        split_name, split_address = embedded_name_split
+        name = cleanup_listing_name(split_name)
+        if split_address:
+            address_lines = [split_address] + address_lines
+
     city, state, _zip_code = parse_city_state(address_lines, state_code)
     location = clean_text(", ".join(address_lines)) or ", ".join(v for v in [city, state] if v)
     source_url = state_url
