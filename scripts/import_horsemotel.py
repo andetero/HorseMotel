@@ -1085,6 +1085,28 @@ def extract_between(text: str, start_label: str, end_labels: list[str]) -> str:
     return clean_text(value)
 
 
+
+
+def is_listing_notice_line(value: str) -> bool:
+    """Return True for HorseMotel.com banner/status text that appears above a listing name.
+
+    Some listing pages place seasonal notices in red text immediately before the
+    actual facility name. The importer should keep that text in the description,
+    but it should not become the app listing name.
+    """
+    text = clean_text(value).lower()
+    if not text:
+        return False
+    notice_patterns = [
+        r"^we are open from\b",
+        r"^open from\b",
+        r"^closed\b",
+        r"^temporarily closed\b",
+        r"^seasonal(?:ly)?\b",
+        r"^winter availability\b",
+    ]
+    return any(re.search(pattern, text) for pattern in notice_patterns)
+
 def parse_city_state(address_lines: list[str], fallback_state: str) -> tuple[str, str, str]:
     city = ""
     state = fallback_state
@@ -1158,6 +1180,12 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
         address_lines: list[str] = []
     else:
         name_lines = lines[:address_start]
+        # HorseMotel.com sometimes has a seasonal/status banner above the real
+        # facility name, for example "We are open from November 1st through
+        # March 15th" above "Lazee Day Dairy, Lyle Brown". Keep mirroring the
+        # listing content, but do not use that banner as the app title.
+        while len(name_lines) > 1 and is_listing_notice_line(name_lines[0]):
+            name_lines = name_lines[1:]
         name = cleanup_listing_name(", ".join(name_lines[:3])) or cleanup_listing_name(lines[0])
         address_lines = lines[address_start:]
 
