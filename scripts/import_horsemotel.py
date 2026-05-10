@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
-from urllib.parse import unquote, urljoin
+from urllib.parse import unquote, urljoin, urlsplit
 from urllib.request import Request, urlopen
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -748,6 +748,43 @@ def add_photo_candidate(photos: list[str], seen: set[str], base_url: str, candid
         photos.append(absolute)
 
 
+def is_full_size_photo_url(url: str) -> bool:
+    """HorseMotel.com commonly names hover/full-size images with Big before the extension."""
+    path = urlsplit(url).path
+    return bool(re.search(r"big(?=\.(?:jpe?g|png|webp|gif)$)", path, flags=re.IGNORECASE))
+
+
+def photo_family_key(url: str) -> str:
+    """Group thumbnail/full-size pairs like ZP-Koda1.jpg and ZP-Koda1Big.jpg."""
+    parsed = urlsplit(url)
+    path = re.sub(r"big(?=\.(?:jpe?g|png|webp|gif)$)", "", parsed.path, flags=re.IGNORECASE)
+    return f"{parsed.netloc.lower()}{path.lower()}"
+
+
+def prefer_full_size_photo_urls(urls: list[str]) -> list[str]:
+    """Keep one URL per HorseMotel.com image, preferring the clearer Big/hover image.
+
+    The source pages often expose both the visible thumbnail and a hover image:
+    ZP-Example1.jpg and ZP-Example1Big.jpg. The app only needs the best one.
+    """
+    output: list[str] = []
+    key_to_index: dict[str, int] = {}
+
+    for url in urls:
+        key = photo_family_key(url)
+        existing_index = key_to_index.get(key)
+        if existing_index is None:
+            key_to_index[key] = len(output)
+            output.append(url)
+            continue
+
+        existing = output[existing_index]
+        if is_full_size_photo_url(url) and not is_full_size_photo_url(existing):
+            output[existing_index] = url
+
+    return output
+
+
 def extract_photo_urls(block: list[dict[str, str]], base_url: str) -> list[str]:
     """Extract listing photo URLs from a parsed HorseMotel.com listing block.
 
@@ -777,7 +814,7 @@ def extract_photo_urls(block: list[dict[str, str]], base_url: str) -> list[str]:
 
         for candidate in candidates:
             add_photo_candidate(photos, seen, base_url, candidate)
-    return photos
+    return prefer_full_size_photo_urls(photos)
 
 
 def is_bad_listing_website_url(url: str) -> bool:
@@ -1207,9 +1244,37 @@ def looks_like_address_line(value: str, state_code: str) -> bool:
         return True
     if re.search(r"\bP\.?\s*O\.?\s*Box\b", text, flags=re.IGNORECASE):
         return True
+    if re.search(r"\b\d{1,6}\s+(?:[NSEW]\s+)?(?:[A-Za-z0-9.'-]+\s+){0,5}(?:county\s+\d+|calle|camino|via|mesa|ranch|farm)\b", text, flags=re.IGNORECASE):
+        return True
     if state_code and re.search(rf"\b{re.escape(state_code)}\s+\d{{5}}(?:-\d{{4}})?\b", text, flags=re.IGNORECASE):
         return True
     return bool(re.search(r"\b[A-Z]{2}\s+\d{5}(?:-\d{4})?\b", text))
+
+
+def split_embedded_address_line(value: str, state_code: str) -> tuple[str, str] | None:
+    """Split lines where HorseMotel.com put name and street address on one line.
+
+    Examples from the source page include:
+    "Blue Line Farm, Maureen Noe, 4329 Miller County 43" and
+    "Moody Ranch, 5348 W Calle Maverick". Those should become title + address,
+    not a title that includes the street address.
+    """
+    text = cleanup_listing_name(value)
+    if not text or "," not in text:
+        return None
+
+    parts = [cleanup_listing_name(part) for part in text.split(",") if cleanup_listing_name(part)]
+    if len(parts) < 2:
+        return None
+
+    for idx in range(1, len(parts)):
+        possible_name = cleanup_listing_name(", ".join(parts[:idx]))
+        possible_address = cleanup_listing_name(", ".join(parts[idx:]))
+        first_address_part = parts[idx]
+        if possible_name and looks_like_address_line(first_address_part, state_code):
+            return possible_name, possible_address
+    return None
+
 
 def parse_city_state(address_lines: list[str], fallback_state: str) -> tuple[str, str, str]:
     city = ""
@@ -1276,7 +1341,13 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
     # Use all leading non-address lines as name/owner context until an address-looking line begins.
     # Do not treat seasonal/status notice lines as addresses just because they contain dates.
     address_start = None
+    embedded_split: tuple[str, str] | None = None
     for idx, line in enumerate(lines):
+        split_line = split_embedded_address_line(line, state_code)
+        if split_line:
+            address_start = idx
+            embedded_split = split_line
+            break
         if looks_like_address_line(line, state_code):
             address_start = idx
             break
@@ -1284,6 +1355,10 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
     if address_start is None:
         name_lines = lines
         address_lines: list[str] = []
+    elif embedded_split:
+        embedded_name, embedded_address = embedded_split
+        name_lines = lines[:address_start] + [embedded_name]
+        address_lines = [embedded_address] + lines[address_start + 1:]
     else:
         name_lines = lines[:address_start]
         address_lines = lines[address_start:]
