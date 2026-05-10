@@ -598,6 +598,7 @@ class BlockParser(HTMLParser):
         self.blocks: list[list[dict[str, str]]] = [[]]
         self._href: Optional[str] = None
         self._link_text: list[str] = []
+        self._link_attr_values: list[str] = []
 
     def current(self) -> list[dict[str, str]]:
         return self.blocks[-1]
@@ -608,11 +609,19 @@ class BlockParser(HTMLParser):
         if tag == "a":
             self._href = attrs_dict.get("href")
             self._link_text = []
+            self._link_attr_values = [value for _key, value in attrs if value]
         elif tag == "img":
             src = attrs_dict.get("src") or attrs_dict.get("data-src") or attrs_dict.get("data-original") or attrs_dict.get("data-lazy-src")
             alt = attrs_dict.get("alt") or ""
-            if src:
-                self.current().append({"type": "image", "src": src, "alt": alt})
+            src_attr_names = {"src", "data-src", "data-original", "data-lazy-src"}
+            attr_values = [value for key, value in attrs if value and key.lower() not in src_attr_names]
+            if src or attr_values:
+                self.current().append({
+                    "type": "image",
+                    "src": src or "",
+                    "alt": alt,
+                    "attr_values": "\n".join(attr_values),
+                })
         elif tag == "br":
             self.current().append({"type": "text", "text": "\n"})
         elif tag == "hr":
@@ -631,9 +640,15 @@ class BlockParser(HTMLParser):
         tag = tag.lower()
         if tag == "a" and self._href is not None:
             text = clean_text(" ".join(self._link_text))
-            self.current().append({"type": "link", "text": text, "href": self._href})
+            self.current().append({
+                "type": "link",
+                "text": text,
+                "href": self._href,
+                "attr_values": "\n".join(self._link_attr_values),
+            })
             self._href = None
             self._link_text = []
+            self._link_attr_values = []
         elif tag in {"p", "div", "tr", "li"}:
             self.current().append({"type": "text", "text": "\n"})
 
@@ -701,26 +716,67 @@ def is_photo_url(url: str) -> bool:
     return not any(term in cleaned for term in skip_terms)
 
 
+def extract_image_urls_from_value(value: str) -> list[str]:
+    """Return image URL/path candidates embedded in an arbitrary HTML attribute.
+
+    HorseMotel.com sometimes exposes clearer hover images through attributes such
+    as onmouseover, data-* attributes, CSS url(...), or linked image hrefs instead
+    of only through the visible img src. Capture those candidates at import time
+    so the mobile feed can prefer the best image URL the source page publishes.
+    """
+    if not value:
+        return []
+    image_ext_pattern = r"(?:jpg|jpeg|png|webp|gif)"
+    pattern = re.compile(
+        rf"(?i)(?:https?:)?//[^\s'\"<>)]*?\.{image_ext_pattern}(?:\?[^\s'\"<>)]*)?"
+        rf"|[A-Za-z0-9_./:%+-]+?\.{image_ext_pattern}(?:\?[^\s'\"<>)]*)?"
+    )
+    found: list[str] = []
+    seen: set[str] = set()
+    for match in pattern.findall(value):
+        candidate = match.strip(" \t\r\n'\"()")
+        if candidate and candidate not in seen:
+            seen.add(candidate)
+            found.append(candidate)
+    return found
+
+
+def add_photo_candidate(photos: list[str], seen: set[str], base_url: str, candidate: str) -> None:
+    absolute = urljoin(base_url, candidate.strip())
+    if is_photo_url(absolute) and absolute not in seen:
+        seen.add(absolute)
+        photos.append(absolute)
+
+
 def extract_photo_urls(block: list[dict[str, str]], base_url: str) -> list[str]:
     """Extract listing photo URLs from a parsed HorseMotel.com listing block.
 
-    Photos can appear as img src/data-src values or as links to image files.
-    Keep this conservative so decorative site images do not become listing photos.
+    Prefer full/hover image URLs when HorseMotel.com exposes them in HTML
+    attributes, while still falling back to the visible img src/link href. This
+    preserves Lyndsay's source data but avoids feeding the app only blurry
+    thumbnail URLs when a clearer source URL is present on the same listing.
     """
     photos: list[str] = []
     seen: set[str] = set()
     for token in block:
         candidates: list[str] = []
-        if token["type"] == "image":
-            candidates.append(token.get("src", ""))
-        elif token["type"] == "link":
+        token_type = token.get("type", "")
+
+        if token_type == "link":
+            # If an image is wrapped in an image href, that href is usually the
+            # intended full-size image. Prefer it before attribute fallbacks.
             candidates.append(token.get("href", ""))
 
+        # Pull image URLs from data-* and hover/mouse attributes before plain src
+        # so clearer hover images appear first when the site publishes both.
+        for embedded in extract_image_urls_from_value(token.get("attr_values", "")):
+            candidates.append(embedded)
+
+        if token_type == "image":
+            candidates.append(token.get("src", ""))
+
         for candidate in candidates:
-            absolute = urljoin(base_url, candidate.strip())
-            if is_photo_url(absolute) and absolute not in seen:
-                seen.add(absolute)
-                photos.append(absolute)
+            add_photo_candidate(photos, seen, base_url, candidate)
     return photos
 
 
