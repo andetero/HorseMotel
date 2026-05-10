@@ -48,11 +48,6 @@ jobs:
               --site-url "https://www.horsemotel.com/"
           fi
 
-      - name: Generate feed metadata
-        run: python scripts/generate_metadata.py
-
-      - name: Validate feed
-        run: python scripts/validate_feed.py
 
       - name: Upload HorseMotel.com sync outputs as artifact
         uses: actions/upload-artifact@v4
@@ -60,7 +55,6 @@ jobs:
           name: horsemotel-sync-outputs
           path: |
             horsemotel_listings.json
-            feed_metadata.json
             data/imports/horsemotel_map.kml
 
       - name: Commit outputs
@@ -69,9 +63,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add horsemotel_listings.json
-          git add feed_metadata.json
           git add data/imports/horsemotel_map.kml
-          git rm --ignore-unmatch data/imports/horsemotel_import_report.md
+          git rm --ignore-unmatch feed_metadata.json scripts/generate_metadata.py scripts/validate_feed.py
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
