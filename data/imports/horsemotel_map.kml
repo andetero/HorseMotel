@@ -6079,6 +6079,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>TN - Adams</name>
+        <description><![CDATA[Harmony Acres<br>www.horsemotel.com/Tennessee.html#haa<br>Tel: 615-752-8506]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -87.11766,36.53395,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>TN - Arlington</name>
         <description><![CDATA[Shady Creek Ranch<br>www.horsemotel.com/Tennessee.html#shady<br>Tel: 901-828-3619]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
