@@ -1263,28 +1263,77 @@ def looks_like_address_line(value: str, state_code: str) -> bool:
     return bool(re.search(r"\b[A-Z]{2}\s+\d{5}(?:-\d{4})?\b", text))
 
 
+def find_embedded_address_start(value: str) -> int | None:
+    """Return the index where an embedded street address begins, if present.
+
+    HorseMotel.com sometimes keeps the contact name and street address on the
+    same visual line, e.g. "David Canton 45w129 welter road". This catches
+    normal numeric street addresses plus rural/alphanumeric house numbers such
+    as Illinois-style "45w129".
+    """
+    text = cleanup_listing_name(value)
+    if not text:
+        return None
+
+    patterns = [
+        # Standard address inside a longer line: "John Doe 123 Main Road".
+        r"\b\d{1,6}\s+(?:[NSEW]\.?\s+)?(?:[A-Za-z0-9.'-]+\s+){0,6}(?:street|st|road|rd|avenue|ave|drive|dr|lane|ln|court|ct|circle|cir|trail|trl|way|highway|hwy|route|rte|place|pl|boulevard|blvd|pike|parkway|pkwy)\b",
+        # Rural grid/alphanumeric address: "45w129 Welter Road".
+        r"\b\d{1,5}[NSEW]\d{1,6}\s+(?:[A-Za-z0-9.'-]+\s+){0,6}(?:street|st|road|rd|avenue|ave|drive|dr|lane|ln|court|ct|circle|cir|trail|trl|way|highway|hwy|route|rte|place|pl|boulevard|blvd|pike|parkway|pkwy)\b",
+        # Western/rural grid address embedded after the contact name: "310 W. 4000 N.".
+        r"\b\d{1,6}\s+[NSEW]\.?\s+\d{1,6}\s+[NSEW]\.?\b",
+        # Named county/grid style: "4329 Miller County 43".
+        r"\b\d{1,6}\s+(?:[A-Za-z0-9.'-]+\s+){0,4}county\s+\d+\b",
+    ]
+
+    matches = []
+    for pattern in patterns:
+        match = re.search(pattern, text, flags=re.IGNORECASE)
+        if match:
+            matches.append(match.start())
+    return min(matches) if matches else None
+
+
 def split_embedded_address_line(value: str, state_code: str) -> tuple[str, str] | None:
     """Split lines where HorseMotel.com put name and street address on one line.
 
     Examples from the source page include:
-    "Blue Line Farm, Maureen Noe, 4329 Miller County 43" and
-    "Moody Ranch, 5348 W Calle Maverick". Those should become title + address,
-    not a title that includes the street address.
+    "Blue Line Farm, Maureen Noe, 4329 Miller County 43",
+    "Moody Ranch, 5348 W Calle Maverick", and
+    "C&M Clydesdales, LLC, David Canton 45w129 Welter Road".
+    Those should become title + address, not a title that includes the street
+    address.
     """
     text = cleanup_listing_name(value)
-    if not text or "," not in text:
+    if not text:
         return None
 
-    parts = [cleanup_listing_name(part) for part in text.split(",") if cleanup_listing_name(part)]
-    if len(parts) < 2:
-        return None
+    if "," in text:
+        parts = [cleanup_listing_name(part) for part in text.split(",") if cleanup_listing_name(part)]
+        if len(parts) >= 2:
+            for idx in range(1, len(parts)):
+                possible_name = cleanup_listing_name(", ".join(parts[:idx]))
+                possible_address = cleanup_listing_name(", ".join(parts[idx:]))
+                first_address_part = parts[idx]
+                if possible_name and looks_like_address_line(first_address_part, state_code):
+                    return possible_name, possible_address
 
-    for idx in range(1, len(parts)):
-        possible_name = cleanup_listing_name(", ".join(parts[:idx]))
-        possible_address = cleanup_listing_name(", ".join(parts[idx:]))
-        first_address_part = parts[idx]
-        if possible_name and looks_like_address_line(first_address_part, state_code):
+                # Sometimes the first tail part still starts with the owner/contact
+                # name and then the street address: "David Canton 45w129 Welter Road".
+                embedded_start = find_embedded_address_start(possible_address)
+                if possible_name and embedded_start is not None and embedded_start > 0:
+                    owner_prefix = cleanup_listing_name(possible_address[:embedded_start])
+                    embedded_address = cleanup_listing_name(possible_address[embedded_start:])
+                    if owner_prefix and embedded_address:
+                        return cleanup_listing_name(f"{possible_name}, {owner_prefix}"), embedded_address
+
+    embedded_start = find_embedded_address_start(text)
+    if embedded_start is not None and embedded_start > 0:
+        possible_name = cleanup_listing_name(text[:embedded_start])
+        possible_address = cleanup_listing_name(text[embedded_start:])
+        if possible_name and possible_address:
             return possible_name, possible_address
+
     return None
 
 
