@@ -74,6 +74,7 @@ FIELD_ALIASES = {
     "photoURLs": ["photoURLs", "photo_urls", "photos", "image_urls", "images"],
     "accommodations": ["accommodations", "amenities", "features"],
     "sourceUrl": ["sourceUrl", "source_url", "source", "horse_motel_listing_url"],
+    "statusNotice": ["statusNotice", "status_notice", "notice", "banner", "alert"],
     "coordinateSource": ["coordinateSource", "coordinate_source"],
 }
 
@@ -429,7 +430,14 @@ def parse_gps_coordinates_from_text(value: str) -> tuple[Optional[float], Option
 
 
 def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-    name = cleanup_listing_name(first_value(row, FIELD_ALIASES["name"]))
+    raw_name = cleanup_listing_name(first_value(row, FIELD_ALIASES["name"]))
+    status_notices: list[str] = []
+    notice, stripped_name = split_listing_notice_prefix(raw_name)
+    if notice:
+        add_status_notice(status_notices, notice)
+        name = stripped_name
+    else:
+        name = raw_name
     if not name:
         return None
 
@@ -438,8 +446,15 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     state = raw_state.upper() if re.fullmatch(r"[A-Za-z]{2}", raw_state or "") else raw_state
     country = str(row.get("country") or "").strip()
     location = first_value(row, FIELD_ALIASES["location"])
+    location_notice, stripped_location = split_listing_notice_prefix(location)
+    if location_notice:
+        add_status_notice(status_notices, location_notice)
+        location = stripped_location
     if not location:
         location = ", ".join(v for v in [city, state] if v)
+    explicit_status_notice = first_value(row, FIELD_ALIASES["statusNotice"]) or str(row.get("status_notice") or row.get("statusNotice") or "").strip()
+    if explicit_status_notice:
+        add_status_notice(status_notices, explicit_status_notice)
     city = cleanup_city(city, location, state)
 
     source_url = first_value(row, FIELD_ALIASES["sourceUrl"])
@@ -494,6 +509,7 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         "website": website,
         "sourceUrl": source_url or website or DEFAULT_SITE_URL,
         "description": description,
+        "statusNotice": " ".join(status_notices),
         "isVerified": True,
         "seasonStart": 1,
         "seasonEnd": 12,
@@ -525,6 +541,9 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         explicit = first_value(row, aliases)
         if explicit:
             listing[output_field] = parse_bool(explicit, listing[output_field])
+
+    if not listing.get("statusNotice"):
+        listing.pop("statusNotice", None)
 
     return listing
 
@@ -1183,40 +1202,49 @@ def extract_between(text: str, start_label: str, end_labels: list[str]) -> str:
 
 
 
-def strip_listing_notice_text(value: str) -> str:
-    """Remove HorseMotel.com announcement text from a candidate listing name.
+def split_listing_notice_prefix(value: str) -> tuple[str, str]:
+    """Split a leading HorseMotel.com status/banner notice from real listing text.
 
-    Lyndsay sometimes places seasonal/status announcements immediately above the
-    actual facility name. Keep those words in the listing description/location
-    content from the site, but do not let them become the app title.
+    The source pages sometimes place seasonal/closure/refuge announcements above
+    or directly before the facility name. Those notices are useful to travelers,
+    but they should not become the app's listing title.
     """
     text = cleanup_listing_name(value)
     if not text:
-        return ""
+        return "", ""
 
-    leading_notice_patterns = [
-        r"^due to construction,?\s*we cannot accommodate,?\s*overnight guests until further notice\.?,?\s*",
-        r"^we offer our facility as a refuge for (?:hurricane|natural disaster) evacuees(?: at no cost)?\.?,?\s*",
-        r"^this horse motel will officially close on [A-Za-z]+\s+\d{1,2},\s*\d{4}\.?,?\s*",
-        r"^we are closed to overnight guests from [^,]+,?\s*",
-        r"^we are closed for the seasons? of [^,]+\.?,?\s*",
-        r"^we are closed [^,]+,?\s*",
-        r"^we are open(?: from)? [^,]+,?\s*",
-        r"^open from [^,]+,?\s*",
-        r"^temporarily closed[^,]*,?\s*",
-        r"^winter availability[^,]*,?\s*",
+    notice_patterns = [
+        r"(?P<notice>due to construction,?\s*we cannot accommodate,?\s*overnight guests until further notice\.?)",
+        r"(?P<notice>we offer our facility as a refuge for (?:hurricane|natural disaster) evacuees(?: at no cost)?\.?)",
+        r"(?P<notice>this horse motel will officially close on [A-Za-z]+\s+\d{1,2},\s*\d{4}\.?)",
+        r"(?P<notice>we are closed to overnight guests from [^,.]+(?:\s+through\s+[^,.]+|\s+to\s+[^,.]+)?\.?)",
+        r"(?P<notice>we are closed for the seasons? of [^,.]+\.?)",
+        r"(?P<notice>we are closed [^,.]+(?:\s+to\s+[^,.]+|\s+through\s+[^,.]+|\s+until\s+[^,.]+)?\.?)",
+        r"(?P<notice>we are open from [^,.]+(?:\s+to\s+[^,.]+|\s+through\s+[^,.]+)?\.?)",
+        r"(?P<notice>open from [^,.]+(?:\s+to\s+[^,.]+|\s+through\s+[^,.]+)?\.?)",
+        r"(?P<notice>temporarily closed[^,.]*\.?)",
+        r"(?P<notice>winter availability[^,.]*\.?)",
     ]
 
-    changed = True
-    while changed and text:
-        changed = False
-        for pattern in leading_notice_patterns:
-            updated = re.sub(pattern, "", text, count=1, flags=re.IGNORECASE).strip(" ,.-")
-            if updated != text:
-                text = cleanup_listing_name(updated)
-                changed = True
-                break
+    for pattern in notice_patterns:
+        match = re.match(rf"^\s*{pattern}\s*(?P<rest>,?\s*.*)?$", text, flags=re.IGNORECASE)
+        if not match:
+            continue
+        notice = cleanup_listing_name(match.group("notice")).rstrip(" .") + "."
+        rest = cleanup_listing_name(match.group("rest") or "")
+        rest = re.sub(r"^,\s*", "", rest)
+        return notice, cleanup_listing_name(rest)
 
+    return "", text
+
+
+def strip_listing_notice_text(value: str) -> str:
+    """Remove HorseMotel.com announcement text from a candidate listing name."""
+    notice, rest = split_listing_notice_prefix(value)
+    if notice:
+        return cleanup_listing_name(rest)
+
+    text = cleanup_listing_name(value)
     trailing_notice_patterns = [
         r"\s+we are open(?: from)?\b.*$",
         r"\s+we are closed\b.*$",
@@ -1225,17 +1253,21 @@ def strip_listing_notice_text(value: str) -> str:
     ]
     for pattern in trailing_notice_patterns:
         text = re.sub(pattern, "", text, flags=re.IGNORECASE).strip(" ,.-")
-
     return cleanup_listing_name(text)
 
 
 def is_listing_notice_line(value: str) -> bool:
     """Return True when a line is only a HorseMotel.com status/seasonal banner."""
-    text = cleanup_listing_name(value)
-    if not text:
-        return False
-    stripped = strip_listing_notice_text(text)
-    return stripped == ""
+    notice, rest = split_listing_notice_prefix(value)
+    return bool(notice and not rest)
+
+
+def add_status_notice(notices: list[str], value: str) -> None:
+    notice = cleanup_listing_name(value).rstrip(" .")
+    if notice:
+        notice += "."
+        if notice not in notices:
+            notices.append(notice)
 
 
 def looks_like_address_line(value: str, state_code: str) -> bool:
@@ -1397,6 +1429,17 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
     pre_contact = re.sub(r"\bNew Listing\b", "", pre_contact, flags=re.IGNORECASE)
     lines = [clean_text(line) for line in re.split(r"\n| {2,}", pre_contact) if clean_text(line)]
     lines = [line for line in lines if line.lower() not in {"image", state_name.lower()}]
+    status_notices: list[str] = []
+    normalized_lines: list[str] = []
+    for line in lines:
+        notice, remainder = split_listing_notice_prefix(line)
+        if notice:
+            add_status_notice(status_notices, notice)
+            if remainder:
+                normalized_lines.append(remainder)
+        else:
+            normalized_lines.append(line)
+    lines = normalized_lines
     if not lines:
         return None
 
@@ -1461,6 +1504,7 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
         "website": website,
         "source_url": source_url,
         "description": description or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival.",
+        "status_notice": " ".join(status_notices),
         "photo_urls": "|".join(photo_urls),
         "accommodations": "|".join(infer_accommodations(description)),
         "is_confirmed_map_marker": "true" if confirmed else "false",
@@ -1522,6 +1566,7 @@ def write_report(path: Path, count: int, inputs: list[str]) -> None:
         f"- Partner/source: {PARTNER_NAME}",
         f"- Attribution: {ATTRIBUTION}",
         "- HorseMotel.com remains the source of truth.",
+        "- Seasonal/status banners are preserved as statusNotice and are not used as listing names.",
         "- Rows without coordinates are skipped until latitude/longitude are provided.",
         "- Street addresses are captured as the preferred external map/search location when available.",
         "- KML / Google My Maps coordinates are treated as fallback or approximate pin coordinates, not authoritative street-address validation.",
