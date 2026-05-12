@@ -469,7 +469,8 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     if usable_address and coordinate_source in {"website_map", "kml", "provided"}:
         coordinate_source = f"{coordinate_source}_approximate"
 
-    description = first_value(row, FIELD_ALIASES["description"]) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
+    raw_description = first_value(row, FIELD_ALIASES["description"])
+    description = normalize_description_text(raw_description) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
     gps_lat, gps_lng = parse_gps_coordinates_from_text(description)
     if gps_lat is not None and gps_lng is not None:
         lat = gps_lat
@@ -678,6 +679,29 @@ class BlockParser(HTMLParser):
 def clean_text(value: str) -> str:
     value = html.unescape(value).replace("\xa0", " ")
     return re.sub(r"[ \t\r\f\v]+", " ", value).strip()
+
+
+def normalize_description_text(value: str) -> str:
+    """Normalize HorseMotel.com free-text details without changing meaning.
+
+    The source pages often contain hard line breaks from HTML wrapping, not
+    intentional paragraph breaks. Store clean descriptions in horsemotel.json
+    so iOS, Android, and any future clients do not have to independently fix
+    display artifacts such as "there will be\nother horses".
+    """
+    text = html.unescape(value or "").replace("\xa0", " ")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    text = re.sub(r"[ \t\f\v]+", " ", text)
+    text = re.sub(r" *\n *", "\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+
+    paragraphs = []
+    for paragraph in re.split(r"\n{2,}", text):
+        cleaned = re.sub(r"\n+", " ", paragraph)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+        if cleaned:
+            paragraphs.append(cleaned)
+    return "\n\n".join(paragraphs)
 
 
 def block_to_text(block: list[dict[str, str]]) -> str:
@@ -1019,7 +1043,7 @@ def parse_kml_text(kml_text: str) -> list[Dict[str, Any]]:
             "longitude": longitude,
             "phone": phone,
             "source_url": url,
-            "description": clean_text(" ".join(description_parts)) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival.",
+            "description": normalize_description_text(" ".join(description_parts)) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival.",
             "placemarkName": placemark_name,
             "coordinate_source": "kml",
             "locationConfidence": "coordinate_only",
@@ -1418,7 +1442,7 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
 
     facilities = extract_between(text, "Facilities:", ["Location:", "View Comments", "Post Comments"])
     location_notes = extract_between(text, "Location:", ["View Comments", "Post Comments"])
-    description = clean_text(" ".join(v for v in [facilities, f"Location notes: {location_notes}" if location_notes else ""] if v))
+    description = normalize_description_text(" ".join(v for v in [facilities, f"Location notes: {location_notes}" if location_notes else ""] if v))
 
     phone_match = re.search(r"Tel:\s*(.*?)(?:E-?mail:|E-Mail:|Email:|Web Site:|Location on Google Maps|Facilities:|$)", text, re.IGNORECASE | re.DOTALL)
     email_match = re.search(r"E-?mail:\s*(.*?)(?:Web Site:|Location on Google Maps|Facilities:|$)", text, re.IGNORECASE | re.DOTALL)
