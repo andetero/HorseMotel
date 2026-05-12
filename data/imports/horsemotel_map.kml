@@ -2007,6 +2007,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>IL - Danville</name>
+        <description><![CDATA[Bar-H Equine Center<br>www.horsemotel.com/Illinois.html#bhe<br>Tel: 918-340-2369]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -87.60739,40.08533,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>IL - East Carondelet</name>
         <description><![CDATA[Horse Motel & Bunkhouse at Cement Hollow Equine Ctr<br>www.horsemotel.com/Illinois.html#hmb<br>Tel: 314-312-9678]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -5072,6 +5082,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>OH - Middlefield</name>
+        <description><![CDATA[KC's "tReining" Center<br>www.horsemotel.com/Ohio.html#kcc<br>Tel: 440-552-9130]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -81.05086,41.50336,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>OH - Plain City
 </name>
         <description><![CDATA[R/C Stables<br>https://www.horsemotel.com/Ohio.html#rcs<br>Tel: 614-832-2147]]></description>
@@ -5258,6 +5278,16 @@
         <Point>
           <coordinates>
             -95.494067,36.113454,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>OK - Inola</name>
+        <description><![CDATA[Riverbend RV Park & Event Center<br>www.horsemotel.com/Oklahoma.html#rrp<br>Tel: 918-340-2369]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -95.60361,36.14723,0
           </coordinates>
         </Point>
       </Placemark>
