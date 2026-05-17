@@ -2110,16 +2110,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>IL - Mascoutah</name>
-        <description><![CDATA[CW Equestrian Center, Inc.<br>www.horsemotel.com/Illinois.html#cwe<br>Tel: 618-910-7946]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -89.723116,38.480583,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>IL - Mt. Vernon</name>
         <description><![CDATA[Rock N 4L Training Center<br>www.horsemotel.com/Illinois.html#rock<br>Tel: 618-244-0700]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -4746,16 +4736,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>NC - Catawba</name>
-        <description><![CDATA[SFW FARM, LLC<br>www.horsemotel.com/NorthCarolina.html#sfw<br>Tel: 704-619-5436]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -81.075622,35.708032,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>NC - Dobson
 </name>
         <description><![CDATA[Fox Trail Farm<br>www.horsemotel.com/NorthCarolina.html#ftf<br>Tel: 954-309-0158]]></description>
@@ -5121,17 +5101,6 @@
         <Point>
           <coordinates>
             -83.6313055555555,41.1471666666667,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>OH - Vermilion
-</name>
-        <description><![CDATA[Weathertree Farm<br>https://www.horsemotel.com/Ohio.html#wtf<br>Tel: 440-213-0748]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -82.33742,41.391302,0
           </coordinates>
         </Point>
       </Placemark>
@@ -6346,6 +6315,16 @@
         <Point>
           <coordinates>
             -89.5561388888889,35.1724722222222,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>TN - Springfield</name>
+        <description><![CDATA[Breakaway Ranch<br>www.horsemotel.com/Tennessee.html#sec<br>Tel: 615-714-6600]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -86.96826,36.46656,0
           </coordinates>
         </Point>
       </Placemark>
