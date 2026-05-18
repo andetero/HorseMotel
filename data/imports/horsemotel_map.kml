@@ -4092,7 +4092,7 @@
         <styleUrl>#icon-960-DB4436</styleUrl>
         <Point>
           <coordinates>
-            -100.50595,41.03275,0
+            -100.505638888889,41.0328611111111,0
           </coordinates>
         </Point>
       </Placemark>
@@ -8535,6 +8535,16 @@
         <Point>
           <coordinates>
             1.31547,51.17854,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>TX - Pipe Creek</name>
+        <description><![CDATA[Nancy Keller<br>http://www.horsemotel.com/Texas.html#nkk<br>903-570-6809<br>Location not confirmed.]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -98.98546,29.7578,0
           </coordinates>
         </Point>
       </Placemark>
