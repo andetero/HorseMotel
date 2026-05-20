@@ -1945,6 +1945,113 @@ def merge_listing_values(existing: Dict[str, Any], incoming: Dict[str, Any]) -> 
     return merged
 
 
+def phone_last7_values(value: str) -> set[str]:
+    raw = digits_only(str(value or ""))
+    values: set[str] = set()
+    if len(raw) >= 7:
+        for match in re.finditer(r"\d{7,}", raw):
+            token = match.group(0)
+            values.add(token[-7:])
+        values.add(raw[-7:])
+    return values
+
+
+def coordinates_are_near(a: Dict[str, Any], b: Dict[str, Any], tolerance: float = 0.02) -> bool:
+    lat_a = parse_float(str(a.get("latitude", "")), default=0.0)
+    lng_a = parse_float(str(a.get("longitude", "")), default=0.0)
+    lat_b = parse_float(str(b.get("latitude", "")), default=0.0)
+    lng_b = parse_float(str(b.get("longitude", "")), default=0.0)
+    if not lat_a or not lng_a or not lat_b or not lng_b:
+        return False
+    return abs(lat_a - lat_b) <= tolerance and abs(lng_a - lng_b) <= tolerance
+
+
+def is_probably_same_facility(existing: Dict[str, Any], incoming: Dict[str, Any]) -> bool:
+    """Conservative second-pass desktop/mobile duplicate matcher.
+
+    Primary merge keys intentionally avoid over-merging. This second pass catches
+    the remaining same-name desktop/mobile duplicates where Google Maps/KML
+    coordinates differ slightly between the desktop and mobile pages. Require the
+    same cleaned name, same state/province, nearby coordinates, and at least one
+    corroborating contact/detail signal before merging.
+    """
+    name_a = norm_match_text(cleanup_listing_name(str(existing.get("name", ""))))
+    name_b = norm_match_text(cleanup_listing_name(str(incoming.get("name", ""))))
+    if not name_a or name_a != name_b:
+        return False
+    state_a = norm_match_text(str(existing.get("state", "")))
+    state_b = norm_match_text(str(incoming.get("state", "")))
+    if state_a != state_b:
+        return False
+    if not coordinates_are_near(existing, incoming):
+        return False
+
+    email_a = norm_match_text(str(existing.get("email", "")))
+    email_b = norm_match_text(str(incoming.get("email", "")))
+    if email_a and email_a == email_b:
+        return True
+
+    phone_overlap = phone_last7_values(str(existing.get("phone", ""))) & phone_last7_values(str(incoming.get("phone", "")))
+    if phone_overlap:
+        return True
+
+    website_a = norm_match_text(str(existing.get("website", "")))
+    website_b = norm_match_text(str(incoming.get("website", "")))
+    if website_a and website_a == website_b:
+        return True
+
+    location_a = norm_match_text(str(existing.get("location", "") or existing.get("address", "") or ""))
+    location_b = norm_match_text(str(incoming.get("location", "") or incoming.get("address", "") or ""))
+    if location_a and location_a == location_b:
+        return True
+
+    return False
+
+
+def merge_near_duplicate_listings(listings: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
+    merged: list[Dict[str, Any]] = []
+    for incoming in listings:
+        match_index: Optional[int] = None
+        for idx, existing in enumerate(merged):
+            if is_probably_same_facility(existing, incoming):
+                match_index = idx
+                break
+        if match_index is None:
+            merged.append(incoming)
+        else:
+            merged[match_index] = merge_listing_values(merged[match_index], incoming)
+    return merged
+
+
+def ensure_unique_ids(listings: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
+    """Keep app IDs unique without changing stable IDs unless a collision occurs."""
+    seen: set[str] = set()
+    fixed: list[Dict[str, Any]] = []
+    for item in listings:
+        updated = dict(item)
+        base_id = str(updated.get("id") or build_id(str(updated.get("name", "")), str(updated.get("state", "")), str(updated.get("location", "")), ""))
+        candidate = base_id
+        if candidate in seen:
+            stable = "|".join([
+                str(updated.get("name", "")),
+                str(updated.get("state", "")),
+                str(updated.get("city", "")),
+                str(updated.get("location", "")),
+                str(updated.get("latitude", "")),
+                str(updated.get("longitude", "")),
+            ])
+            suffix = hashlib.sha1(stable.encode("utf-8")).hexdigest()[:8]
+            candidate = f"{base_id}-{suffix}"
+            counter = 2
+            while candidate in seen:
+                candidate = f"{base_id}-{suffix}-{counter}"
+                counter += 1
+        updated["id"] = candidate
+        seen.add(candidate)
+        fixed.append(updated)
+    return fixed
+
+
 def merge_unique(listings: Iterable[Dict[str, Any]]) -> list[Dict[str, Any]]:
     by_key: dict[str, Dict[str, Any]] = {}
     skipped_missing_geo = 0
@@ -1965,12 +2072,17 @@ def merge_unique(listings: Iterable[Dict[str, Any]]) -> list[Dict[str, Any]]:
             by_key[key] = merge_listing_values(by_key[key], normalized)
         else:
             by_key[key] = normalized
+
+    first_pass = list(by_key.values())
+    merged = merge_near_duplicate_listings(first_pass)
+    merged = ensure_unique_ids(merged)
+
     if skipped_missing_geo:
         print(f"Skipped {skipped_missing_geo} HorseMotel.com rows missing latitude/longitude")
-    duplicate_count = max(0, normalized_count - skipped_missing_geo - len(by_key))
+    duplicate_count = max(0, normalized_count - skipped_missing_geo - len(merged))
     if duplicate_count:
         print(f"Merged {duplicate_count} duplicate/supplemental HorseMotel.com rows from desktop/mobile/KML sources")
-    return sorted(by_key.values(), key=lambda item: (item.get("state", ""), item.get("name", "")))
+    return sorted(merged, key=lambda item: (item.get("state", ""), item.get("name", "")))
 
 def write_report(path: Path, count: int, inputs: list[str]) -> None:
     lines = [
