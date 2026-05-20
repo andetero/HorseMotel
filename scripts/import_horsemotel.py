@@ -41,6 +41,15 @@ DEFAULT_KML_URL = "https://www.google.com/maps/d/kml?mid=1qrjPl4O3jErNdqkjkci9Nc
 PARTNER_NAME = "HorseMotel.com"
 DEFAULT_SITE_URL = "https://www.horsemotel.com/"
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
+USER_AGENT = "HorseMotel.com authorized feed sync (+https://horsemotel.pyoba.com/)"
+FETCH_TIMEOUT_SECONDS = 45
+ROBOTS_META_BLOCK_PHRASES = (
+    "javascript is required",
+    "enable javascript before you are allowed",
+    "access denied",
+    "temporarily unavailable",
+)
+
 
 STATE_NAME_TO_CODE = {
     "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR", "California": "CA",
@@ -569,15 +578,15 @@ def read_json(path: Path) -> list[Dict[str, Any]]:
 
 
 def fetch_text(url: str) -> str:
-    request = Request(url, headers={"User-Agent": "HorseCamp authorized HorseMotel.com sync"})
-    with urlopen(request, timeout=45) as response:
+    request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
+    with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
         charset = response.headers.get_content_charset() or "utf-8"
         return response.read().decode(charset, errors="replace")
 
 
 def read_url(url: str) -> list[Dict[str, Any]]:
-    request = Request(url, headers={"User-Agent": "HorseCamp authorized HorseMotel.com sync"})
-    with urlopen(request, timeout=45) as response:
+    request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
+    with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
         content_type = response.headers.get("content-type", "").lower()
         body = response.read().decode("utf-8-sig")
     if "json" in content_type or url.lower().endswith(".json"):
@@ -680,6 +689,34 @@ def clean_text(value: str) -> str:
     value = html.unescape(value).replace("\xa0", " ")
     return re.sub(r"[ \t\r\f\v]+", " ", value).strip()
 
+def page_looks_blocked_or_empty(html_text: str) -> bool:
+    text = clean_text(strip_html(html_text)).lower()
+    if not text:
+        return True
+    return any(phrase in text for phrase in ROBOTS_META_BLOCK_PHRASES)
+
+
+def text_lines_from_html(html_text: str) -> list[str]:
+    text = html.unescape(html_text or "").replace("\xa0", " ")
+    text = re.sub(r"<\s*(?:br|p|div|tr|li|hr)\b[^>]*>", "\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"</\s*(?:p|div|tr|li|table|tbody|body|html)\s*>", "\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"<script\b.*?</script>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+    text = re.sub(r"<style\b.*?</style>", " ", text, flags=re.IGNORECASE | re.DOTALL)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = html.unescape(text)
+    return [clean_text(line) for line in text.splitlines() if clean_text(line)]
+
+
+def canonical_url_key(url: str) -> str:
+    parsed = urlsplit(url or "")
+    path = re.sub(r"/index\.html?$", "/", parsed.path, flags=re.IGNORECASE)
+    return f"{parsed.netloc.lower()}{path.lower()}"
+
+
+def mobile_state_index_url(site_url: str, state_name: str) -> str:
+    compact_state = re.sub(r"[^A-Za-z0-9]", "", state_name)
+    return urljoin(site_url, f"A1MobilePages/A2Mobile{compact_state}Cities.html")
+
 
 def normalize_description_text(value: str) -> str:
     """Normalize HorseMotel.com free-text details without changing meaning.
@@ -731,6 +768,39 @@ def extract_state_links(site_url: str) -> list[tuple[str, str, str]]:
             seen.add(state_name)
     if not links:
         raise RuntimeError("No HorseMotel.com state links found on home page")
+    return links
+
+def extract_international_links(site_url: str) -> list[tuple[str, str, str]]:
+    """Return Canada/international listing pages from the HorseMotel.com international index."""
+    index_url = urljoin(site_url, "indexInternational.html")
+    try:
+        html_text = fetch_text(index_url)
+    except Exception as exc:  # noqa: BLE001 - keep U.S. sync working if international index is down.
+        print(f"Warning: could not fetch international index ({index_url}): {exc}", file=sys.stderr)
+        return []
+
+    parser = LinkParser()
+    parser.feed(html_text)
+    links: list[tuple[str, str, str]] = []
+    seen: set[str] = set()
+    for text, href in parser.links:
+        href_clean = href.strip()
+        href_lower = href_clean.lower()
+        if not (href_lower.startswith("zcan-") or href_lower.startswith("z-")):
+            continue
+        label = cleanup_listing_name(text)
+        if not label or label.lower() in {"home", "mobile friendly version"}:
+            continue
+        absolute = urljoin(index_url, href_clean)
+        key = canonical_url_key(absolute)
+        if key in seen:
+            continue
+        seen.add(key)
+        if href_lower.startswith("zcan-"):
+            region = f"{label}, Canada"
+        else:
+            region = label
+        links.append((label, region, absolute))
     return links
 
 
@@ -1414,9 +1484,27 @@ def parse_city_state(address_lines: list[str], fallback_state: str) -> tuple[str
             state = match.group(2)
             zip_code = match.group(3)
 
+    # Canada/international fallback: keep the HorseMotel region/country label and
+    # infer the city from the segment immediately before that region/country.
+    if not city and fallback_state and "," in joined:
+        parts = [cleanup_listing_name(part) for part in joined.split(",") if cleanup_listing_name(part)]
+        fallback_parts = [cleanup_listing_name(part) for part in fallback_state.split(",") if cleanup_listing_name(part)]
+        if parts and fallback_parts:
+            fallback_norms = {norm_match_text(part) for part in fallback_parts if norm_match_text(part)}
+            for idx, part in enumerate(parts):
+                part_norm = norm_match_text(re.sub(r"\b[A-Z]\d[A-Z]\s*\d[A-Z]\d\b", "", part, flags=re.IGNORECASE))
+                if part_norm in fallback_norms and idx > 0:
+                    city = cleanup_listing_name(parts[idx - 1])
+                    break
+        if not city and len(parts) >= 2:
+            # Last resort: first comma-delimited chunk that does not look like a street/address.
+            for part in parts:
+                if not looks_like_address_line(part, fallback_state) and not re.search(r"\b(?:Canada|United States)\b", part, re.IGNORECASE):
+                    city = part
+                    break
+
     city = re.sub(r"^(?:N|S|E|W|North|South|East|West)\.?\s+", "", city).strip()
     return city, state, zip_code
-
 
 def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, state_url: str) -> Optional[Dict[str, Any]]:
     text = block_to_text(block)
@@ -1536,43 +1624,252 @@ def parse_block(block: list[dict[str, str]], state_name: str, state_code: str, s
     return row
 
 
-def scrape_horsemotel(site_url: str) -> list[Dict[str, Any]]:
+def extract_mobile_listing_links(index_html: str, index_url: str) -> list[tuple[str, str, str]]:
+    """Extract listing detail links from a mobile state index page.
+
+    The mobile pages are simpler than the desktop pages and are valuable as a
+    resilience layer when a desktop page is blocked, malformed, or missing a row.
+    """
+    parser = LinkParser()
+    parser.feed(index_html)
+    output: list[tuple[str, str, str]] = []
+    seen: set[str] = set()
+    for text, href in parser.links:
+        href_lower = href.lower()
+        if not href or "mobile home" in text.lower() or "original home" in text.lower():
+            continue
+        if "google" in href_lower or "maps" in href_lower or "jotform" in href_lower:
+            continue
+        if not re.search(r"A3Mobile", href, flags=re.IGNORECASE):
+            continue
+        absolute = urljoin(index_url, href)
+        key = canonical_url_key(absolute)
+        if key in seen:
+            continue
+        seen.add(key)
+        output.append((cleanup_listing_name(text), "", absolute))
+    return output
+
+
+def parse_mobile_detail(html_text: str, state_name: str, state_code: str, detail_url: str, index_city: str = "") -> Optional[Dict[str, Any]]:
+    parser = BlockParser()
+    parser.feed(html_text)
+    combined_block: list[dict[str, str]] = []
+    for block in parser.blocks:
+        if block_to_text(block):
+            combined_block.extend(block)
+            combined_block.append({"type": "text", "text": "\n"})
+
+    text = block_to_text(combined_block)
+    if not text or "Facilities:" not in text or not re.search(r"\bTel\s*:", text, re.IGNORECASE):
+        return None
+
+    row = parse_block(combined_block, state_name, state_code, detail_url)
+    if not row:
+        return None
+
+    lines = text_lines_from_html(html_text)
+    junk_patterns = [
+        r"^Horse Motels International$",
+        r"^Horse motel directory",
+        r"^\*+\s*\*+",
+        r"^Click here",
+        r"^Mobile Home Page$",
+        r"^Original Home Page$",
+        r"^View Comments",
+        r"^Post Comments",
+    ]
+    useful = [line for line in lines if not any(re.search(pattern, line, re.IGNORECASE) for pattern in junk_patterns)]
+    tel_index = next((idx for idx, line in enumerate(useful) if re.search(r"\bTel\s*:", line, re.IGNORECASE)), None)
+    if tel_index is not None and tel_index > 0:
+        pre_contact = useful[:tel_index]
+        # Drop page title lines like "Inyokern, California" when they are not the
+        # listing name/address. Keep the listing name plus owner/address lines.
+        filtered: list[str] = []
+        for line in pre_contact:
+            if re.fullmatch(r"[A-Za-z .'-]+,\s*[A-Za-z .'-]+", line) and not looks_like_address_line(line, state_code):
+                continue
+            filtered.append(line)
+        if filtered:
+            address_start = None
+            for idx, line in enumerate(filtered):
+                if looks_like_address_line(line, state_code):
+                    address_start = idx
+                    break
+            if address_start is None:
+                name_lines = filtered[:2]
+                address_lines = []
+            else:
+                name_lines = filtered[:address_start]
+                address_lines = filtered[address_start:]
+            name = cleanup_listing_name(", ".join(name_lines[:2]))
+            location = clean_text(", ".join(address_lines))
+            if name:
+                row["name"] = name
+            if location:
+                row["location"] = location
+                city, parsed_state, _zip = parse_city_state(address_lines, state_code)
+                row["city"] = city or index_city or row.get("city", "")
+                row["state"] = parsed_state or state_code
+        elif index_city and not row.get("city"):
+            row["city"] = index_city
+
+    row["source_url"] = detail_url
+    return row
+
+
+def scrape_mobile_state_page(site_url: str, state_name: str, state_code: str) -> list[Dict[str, Any]]:
+    index_url = mobile_state_index_url(site_url, state_name)
+    try:
+        index_html = fetch_text(index_url)
+    except Exception as exc:  # noqa: BLE001 - mobile pages are fallback/supplement only.
+        print(f"Warning: could not fetch mobile {state_name} index ({index_url}): {exc}", file=sys.stderr)
+        return []
+    if page_looks_blocked_or_empty(index_html):
+        return []
+
     rows: list[Dict[str, Any]] = []
-    state_links = extract_state_links(site_url)
-    print(f"Found {len(state_links)} HorseMotel.com state pages")
-    for state_name, state_code, state_url in state_links:
+    links = extract_mobile_listing_links(index_html, index_url)
+    for index_city, _index_name, detail_url in links:
         try:
-            html_text = fetch_text(state_url)
-        except Exception as exc:  # noqa: BLE001 - report and keep going state-by-state
-            print(f"Warning: could not fetch {state_name} ({state_url}): {exc}", file=sys.stderr)
+            detail_html = fetch_text(detail_url)
+        except Exception as exc:  # noqa: BLE001
+            print(f"Warning: could not fetch mobile detail {detail_url}: {exc}", file=sys.stderr)
+            continue
+        parsed = parse_mobile_detail(detail_html, state_name, state_code, detail_url, index_city=index_city)
+        if parsed:
+            rows.append(parsed)
+    return rows
+
+
+def scrape_international_horsemotel(site_url: str) -> list[Dict[str, Any]]:
+    rows: list[Dict[str, Any]] = []
+    links = extract_international_links(site_url)
+    if not links:
+        return rows
+    print(f"Found {len(links)} HorseMotel.com Canada/international pages")
+    for region_name, region_code, page_url in links:
+        try:
+            html_text = fetch_text(page_url)
+        except Exception as exc:  # noqa: BLE001
+            print(f"Warning: could not fetch international page {region_name} ({page_url}): {exc}", file=sys.stderr)
+            continue
+        if page_looks_blocked_or_empty(html_text):
+            print(f"  {region_name}: page looked blocked/empty; skipped", file=sys.stderr)
             continue
         parser = BlockParser()
         parser.feed(html_text)
         before = len(rows)
         for block in parser.blocks:
-            parsed = parse_block(block, state_name, state_code, state_url)
+            parsed = parse_block(block, region_name, region_code, page_url)
             if parsed:
+                parsed["country"] = "Canada" if region_code.endswith(", Canada") else region_code
                 rows.append(parsed)
-        print(f"  {state_code}: {len(rows) - before} listing rows found")
+        print(f"  {region_name}: {len(rows) - before} listing rows found")
     return rows
+
+def scrape_horsemotel(site_url: str) -> list[Dict[str, Any]]:
+    rows: list[Dict[str, Any]] = []
+    state_links = extract_state_links(site_url)
+    print(f"Found {len(state_links)} HorseMotel.com state pages")
+    for state_name, state_code, state_url in state_links:
+        desktop_rows: list[Dict[str, Any]] = []
+        try:
+            html_text = fetch_text(state_url)
+        except Exception as exc:  # noqa: BLE001 - report and keep going state-by-state
+            print(f"Warning: could not fetch {state_name} ({state_url}): {exc}", file=sys.stderr)
+            html_text = ""
+        if html_text and not page_looks_blocked_or_empty(html_text):
+            parser = BlockParser()
+            parser.feed(html_text)
+            for block in parser.blocks:
+                parsed = parse_block(block, state_name, state_code, state_url)
+                if parsed:
+                    desktop_rows.append(parsed)
+        elif html_text:
+            print(f"  {state_code}: desktop page looked blocked/empty; using mobile fallback")
+
+        mobile_rows = scrape_mobile_state_page(site_url, state_name, state_code)
+        rows.extend(desktop_rows)
+        rows.extend(mobile_rows)
+        print(f"  {state_code}: {len(desktop_rows)} desktop rows, {len(mobile_rows)} mobile rows found")
+
+    international_rows = scrape_international_horsemotel(site_url)
+    rows.extend(international_rows)
+    return rows
+
+def listing_merge_key(listing: Dict[str, Any]) -> str:
+    state = norm_match_text(str(listing.get("state", "")))
+    city = norm_match_text(str(listing.get("city", "")))
+    name = norm_match_text(str(listing.get("name", "")))
+    phone_digits = digits_only(str(listing.get("phone", "")))
+    if name:
+        return f"name:{state}:{city}:{name}"
+    if phone_digits and len(phone_digits) >= 7:
+        return f"phone-city:{state}:{city}:{phone_digits[-7:]}"
+    return f"id:{listing.get('id', '')}"
+
+def merge_listing_values(existing: Dict[str, Any], incoming: Dict[str, Any]) -> Dict[str, Any]:
+    merged = dict(existing)
+    prefer_longer_fields = {"description", "location"}
+    prefer_non_empty_fields = {
+        "address", "mapSearchAddress", "city", "country", "phone", "email", "website", "sourceUrl",
+        "statusNotice", "coordinateSource", "locationConfidence",
+    }
+    for key, value in incoming.items():
+        if value in (None, "", [], 0, 0.0, False):
+            continue
+        old = merged.get(key)
+        if key in prefer_longer_fields and isinstance(value, str):
+            if not old or len(value) > len(str(old)):
+                merged[key] = value
+        elif key in prefer_non_empty_fields:
+            if not old:
+                merged[key] = value
+        elif key in {"latitude", "longitude"}:
+            if not old or float(old or 0) == 0.0:
+                merged[key] = value
+        elif isinstance(value, list):
+            combined = list(old or [])
+            for item in value:
+                if item not in combined:
+                    combined.append(item)
+            merged[key] = combined
+        elif isinstance(value, bool):
+            merged[key] = bool(old) or value
+        elif old in (None, "", 0, 0.0, False):
+            merged[key] = value
+
+    # Prefer stable IDs that do not include a mobile detail URL when the existing
+    # listing already represents the same facility.
+    merged["id"] = existing.get("id") or incoming.get("id")
+    return merged
 
 
 def merge_unique(listings: Iterable[Dict[str, Any]]) -> list[Dict[str, Any]]:
-    by_id: dict[str, Dict[str, Any]] = {}
+    by_key: dict[str, Dict[str, Any]] = {}
     skipped_missing_geo = 0
+    normalized_count = 0
     for row in listings:
         normalized = normalize_row(row)
         if not normalized:
             continue
+        normalized_count += 1
         # The app map requires coordinates. Keep a report trail, but do not ship unmappable rows.
         if not normalized.get("latitude") or not normalized.get("longitude"):
             skipped_missing_geo += 1
             continue
-        by_id[normalized["id"]] = normalized
+        key = listing_merge_key(normalized)
+        if key in by_key:
+            by_key[key] = merge_listing_values(by_key[key], normalized)
+        else:
+            by_key[key] = normalized
     if skipped_missing_geo:
         print(f"Skipped {skipped_missing_geo} HorseMotel.com rows missing latitude/longitude")
-    return sorted(by_id.values(), key=lambda item: (item.get("state", ""), item.get("name", "")))
-
+    duplicate_count = max(0, normalized_count - skipped_missing_geo - len(by_key))
+    if duplicate_count:
+        print(f"Merged {duplicate_count} duplicate/supplemental HorseMotel.com rows from desktop/mobile/KML sources")
+    return sorted(by_key.values(), key=lambda item: (item.get("state", ""), item.get("name", "")))
 
 def write_report(path: Path, count: int, inputs: list[str]) -> None:
     lines = [
@@ -1588,7 +1885,7 @@ def write_report(path: Path, count: int, inputs: list[str]) -> None:
         "",
         "## Notes",
         f"- Partner/source: {PARTNER_NAME}",
-        f"- Attribution: {ATTRIBUTION}",
+        "- Attribution: not emitted in-app because this is the official HorseMotel.com app.",
         "- HorseMotel.com remains the source of truth.",
         "- Seasonal/status banners are preserved as statusNotice and are not used as listing names.",
         "- Rows without coordinates are skipped until latitude/longitude are provided.",
@@ -1617,6 +1914,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_JSON, help="Output JSON path")
     parser.add_argument("--report", type=Path, default=None, help="Optional import report path")
     parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
+    parser.add_argument("--min-listings", type=int, default=1, help="Fail instead of writing output when the final listing count is below this threshold")
     args = parser.parse_args()
 
     rows: list[Dict[str, Any]] = []
@@ -1666,6 +1964,9 @@ def main() -> int:
     if not listings and not args.allow_empty:
         print("No HorseMotel.com listings found. Provide CSV/JSON input, use --scrape-site, or pass --allow-empty.", file=sys.stderr)
         return 2
+    if listings and len(listings) < args.min_listings:
+        print(f"Refusing to write {len(listings)} listings because --min-listings is {args.min_listings}. This protects the live feed when the source website changes or blocks scraping.", file=sys.stderr)
+        return 3
 
     compact_json_dump(args.output, listings)
     if args.report:
