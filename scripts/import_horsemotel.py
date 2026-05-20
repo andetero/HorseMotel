@@ -488,6 +488,7 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
 
     source_url = first_value(row, FIELD_ALIASES["sourceUrl"])
     website = sanitize_listing_website(first_value(row, FIELD_ALIASES["website"]))
+    email = sanitize_email(first_value(row, FIELD_ALIASES["email"]))
     lat = parse_float(first_value(row, FIELD_ALIASES["latitude"]), default=0.0)
     lng = parse_float(first_value(row, FIELD_ALIASES["longitude"]), default=0.0)
     usable_address = has_usable_street_address(location)
@@ -518,62 +519,34 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         "name": name,
         "location": location,
         "address": location if usable_address else "",
+
         "mapSearchAddress": map_search_address,
-        "addressPreferredForMaps": usable_address,
         "city": city,
         "state": state,
         "country": country,
         "latitude": lat,
         "longitude": lng,
-        "coordinateSource": coordinate_source or ("address_only" if usable_address else "unknown"),
-        "locationConfidence": "address_preferred" if usable_address else ("coordinate_only" if (lat or lng) else "missing"),
-        "pricePerNight": parse_float(first_value(row, FIELD_ALIASES["pricePerNight"]), 0.0),
-        "horseFeePerNight": parse_float(first_value(row, FIELD_ALIASES["horseFeePerNight"]), 0.0),
+
+        "mapStatus": map_status_from_row(row),
         "hookups": infer_hookups(description),
         "accommodations": accommodations,
-        "maxRigLength": parse_int(first_value(row, FIELD_ALIASES["maxRigLength"]), 0),
-        "stallCount": parse_int(first_value(row, FIELD_ALIASES["stallCount"]), 0),
-        "paddockCount": parse_int(first_value(row, FIELD_ALIASES["paddockCount"]), 0),
+
         "phone": first_value(row, FIELD_ALIASES["phone"]),
-        "email": first_value(row, FIELD_ALIASES["email"]),
+        "email": email,
         "website": website,
         "sourceUrl": source_url or website or DEFAULT_SITE_URL,
         "description": description,
         "statusNotice": " ".join(status_notices),
-        "isVerified": True,
-        "seasonStart": 1,
-        "seasonEnd": 12,
-        "hasWashRack": False,
-        "hasDumpStation": False,
-        "hasWifi": False,
-        "hasBathhouse": False,
-        "pullThroughAvailable": False,
-        "rating": 0.0,
-        "reviewCount": 0,
-        "imageColors": ["6D4C41", "BCAAA4"],
+
         "photoURLs": photo_urls,
-        "source": PARTNER_NAME,
-        "sourceDetail": PARTNER_NAME,
-        "category": PARTNER_NAME,
-        "partner": PARTNER_NAME,
-        "lastSynced": datetime.now(timezone.utc).date().isoformat(),
     }
-
-    lower_desc = description.lower()
-    hookups = set(listing["hookups"])
-    listing["hasWashRack"] = any(term in lower_desc for term in ["wash rack", "washrack", "wash racks", "wash station"])
-    listing["hasDumpStation"] = "Dump Station" in hookups or "Sewer" in hookups or "Full Hookups" in hookups
-    listing["hasWifi"] = any(term in lower_desc for term in ["wifi", "wi-fi", "internet"])
-    listing["hasBathhouse"] = any(term in lower_desc for term in ["bathroom", "restroom", "shower", "bathhouse"])
-    listing["pullThroughAvailable"] = any(term in lower_desc for term in ["pull through", "pull-through", "pull thru", "big rig", "large rig", "semi", "18 wheeler", "tractor/trailer"])
-
-    for output_field, aliases in BOOL_FIELDS.items():
-        explicit = first_value(row, aliases)
-        if explicit:
-            listing[output_field] = parse_bool(explicit, listing[output_field])
 
     if not listing.get("statusNotice"):
         listing.pop("statusNotice", None)
+    if not listing.get("mapStatus"):
+        listing.pop("mapStatus", None)
+    if not listing.get("mapSearchAddress"):
+        listing.pop("mapSearchAddress", None)
 
     return listing
 
@@ -763,6 +736,8 @@ def normalize_description_text(value: str) -> str:
     """
     text = html.unescape(value or "").replace("\xa0", " ")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
+    text = re.sub(r"href=\"[^\"]+\"", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"[ \t\f\v]+", " ", text)
     text = re.sub(r" *\n *", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
@@ -998,6 +973,28 @@ def sanitize_listing_website(value: str) -> str:
         return ""
     return url
 
+
+
+
+def sanitize_email(value: str) -> str:
+    """Return only a real email address from a HorseMotel.com email field.
+
+    Some source pages append extra link text such as "Airbnb Page: Click Here"
+    after the email address. Keep JSON email fields machine-readable and leave
+    non-email links in the free-text description/source page.
+    """
+    raw = clean_text(value or "")
+    match = re.search(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", raw, flags=re.IGNORECASE)
+    return match.group(0).strip(".,;:()[]{}<>\"'") if match else ""
+
+
+def map_status_from_row(row: Dict[str, Any]) -> str:
+    confirmed = str(row.get("is_confirmed_map_marker") or row.get("mapConfirmed") or "").strip().lower()
+    if confirmed in {"true", "1", "yes", "confirmed"}:
+        return "confirmed"
+    if row.get("maps_href") or row.get("mapsHref"):
+        return "notConfirmed"
+    return ""
 
 def extract_website_from_labeled_block(block: list[dict[str, str]], base_url: str) -> str:
     """Capture the URL immediately associated with the HorseMotel.com 'Web Site:' label.
@@ -1906,7 +1903,7 @@ def merge_listing_values(existing: Dict[str, Any], incoming: Dict[str, Any]) -> 
     prefer_longer_fields = {"description", "location"}
     prefer_non_empty_fields = {
         "address", "mapSearchAddress", "city", "country", "phone", "email", "website", "sourceUrl",
-        "statusNotice", "coordinateSource", "locationConfidence",
+        "statusNotice", "mapStatus",
     }
     for key, value in incoming.items():
         if value in (None, "", [], 0, 0.0, False):
@@ -2101,6 +2098,7 @@ def write_report(path: Path, count: int, inputs: list[str]) -> None:
         "- Attribution: not emitted in-app because this is the official HorseMotel.com app.",
         "- HorseMotel.com remains the source of truth.",
         "- Seasonal/status banners are preserved as statusNotice and are not used as listing names.",
+        "- Feed schema is HorseMotel-specific: only listing content and app-critical mapping fields are emitted.",
         "- Rows without coordinates are skipped until latitude/longitude are provided.",
         "- Street addresses are captured as the preferred external map/search location when available.",
         "- KML / Google My Maps coordinates are treated as fallback or approximate pin coordinates, not authoritative street-address validation.",
