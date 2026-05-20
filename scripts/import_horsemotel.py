@@ -35,7 +35,6 @@ from urllib.request import Request, urlopen
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CSV = REPO_ROOT / "data" / "imports" / "horsemotel_listings.csv"
 DEFAULT_JSON = REPO_ROOT / "horsemotel.json"
-DEFAULT_REPORT = REPO_ROOT / "data" / "imports" / "horsemotel_import_report.md"
 DEFAULT_KML = REPO_ROOT / "data" / "imports" / "horsemotel_map.kml"
 DEFAULT_KML_URL = "https://www.google.com/maps/d/kml?mid=1qrjPl4O3jErNdqkjkci9NcMi1AU&forcekml=1"
 PARTNER_NAME = "HorseMotel.com"
