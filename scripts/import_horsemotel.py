@@ -207,8 +207,28 @@ def has_negative_phrase(text: str, patterns: Iterable[str]) -> bool:
     return False
 
 
+SITE_TITLE_PREFIX_RE = re.compile(
+    r"^\s*Horse\s+Motels\s+International\.\s*Horse\s+motel\s*&\s*overnight\s+stabling\s+directory\s+for\s+the\s+traveling\s+equestrian\.\s*We\s+find\s+horse\s+motels,\s*horse\s+hotels,\s*overnight\s+stabling,\s*overnight\s+boarding,\s*horse\s+vacations,\s*ranches,\s*bed\s+and\s+breakfasts,\s*and\s+hurricane\s+shelter\.?,?\s*",
+    flags=re.IGNORECASE,
+)
+
+def strip_site_title_boilerplate(value: str) -> str:
+    """Remove HorseMotel.com's global page title when it leaks into listing names.
+
+    The mobile pages sometimes expose the site-wide title before the actual
+    facility name. If it remains in the name, desktop/mobile dedupe fails and
+    the app shows ugly titles. Keep this intentionally narrow so normal facility
+    names are not changed.
+    """
+    text = clean_text(value)
+    if not text:
+        return ""
+    text = SITE_TITLE_PREFIX_RE.sub("", text).strip(" ,.-")
+    text = re.sub(r"^Horse\s+Motels\s+International\.?,?\s*", "", text, flags=re.IGNORECASE).strip(" ,.-")
+    return text
+
 def cleanup_listing_name(value: str) -> str:
-    value = clean_text(value)
+    value = strip_site_title_boilerplate(value)
     # HorseMotel.com occasionally has a stray leading quote before a listing
     # title, e.g. "'Ears The Place Equine Inn". Keep quoted words inside
     # names, but strip accidental leading/trailing wrapper punctuation.
@@ -1813,26 +1833,62 @@ def scrape_horsemotel(site_url: str) -> list[Dict[str, Any]]:
     rows.extend(international_rows)
     return rows
 
-def listing_merge_key(listing: Dict[str, Any]) -> str:
-    """Return a conservative facility-level key for desktop/mobile/KML merges.
+def name_quality_score(value: str) -> int:
+    """Higher means the listing name is more likely to be a real facility name."""
+    text = cleanup_listing_name(value)
+    if not text:
+        return -100
+    score = 0
+    lower = text.lower()
+    if "horse motels international" in lower or "overnight stabling directory" in lower:
+        score -= 100
+    if is_listing_notice_line(text):
+        score -= 80
+    if re.search(r"\btemporarily\b|\bnot taking reservations\b|\bclosed\b", lower):
+        score -= 20
+    # Prefer concise facility names over long page-title/contact/address blends.
+    if len(text) <= 80:
+        score += 30
+    elif len(text) <= 140:
+        score += 10
+    else:
+        score -= 20
+    # Names that contain a comma often include owner/contact info, which is OK,
+    # but a shorter version without boilerplate is usually better for display.
+    score -= min(text.count(",") * 2, 10)
+    return score
 
-    Desktop and mobile HorseMotel.com pages often represent the same facility with
-    slightly different city/name/address text. Prefer stable contact identifiers
-    first, then fall back to name + nearby coordinate. This prevents the mobile
-    supplement from doubling the feed while still allowing multiple facilities in
-    the same city to remain separate.
+
+def listing_merge_key(listing: Dict[str, Any]) -> str:
+    """Return a facility-level key for desktop/mobile/KML merges.
+
+    Use contact/address + coordinate evidence before name evidence. Mobile pages
+    can leak HorseMotel.com's global page title into the facility name, so a
+    name-first key can fail to merge obvious duplicates. Coordinate rounding is
+    intentionally modest (~10m) to merge the same website/KML point without
+    collapsing different facilities in the same town.
     """
     state = norm_match_text(str(listing.get("state", "")))
     city = norm_match_text(str(listing.get("city", "")))
-    name = norm_match_text(str(listing.get("name", "")))
+    name = norm_match_text(cleanup_listing_name(str(listing.get("name", ""))))
     phone_digits = digits_only(str(listing.get("phone", "")))
     email = norm_match_text(str(listing.get("email", "")))
     website = norm_match_text(str(listing.get("website", "")))
+    location = norm_match_text(str(listing.get("location", "") or listing.get("address", "") or listing.get("mapSearchAddress", "")))
     lat = parse_float(str(listing.get("latitude", "")), default=0.0)
     lng = parse_float(str(listing.get("longitude", "")), default=0.0)
+    coord = f"{state}:{round(lat, 4)}:{round(lng, 4)}" if lat and lng else ""
 
-    if name and lat and lng:
-        return f"name-coord:{state}:{name}:{round(lat, 4)}:{round(lng, 4)}"
+    if coord and phone_digits and len(phone_digits) >= 7:
+        return f"phone-coord:{coord}:{phone_digits[-7:]}"
+    if coord and email:
+        return f"email-coord:{coord}:{email}"
+    if coord and website:
+        return f"website-coord:{coord}:{website}"
+    if coord and location:
+        return f"location-coord:{coord}:{location}"
+    if coord and name:
+        return f"name-coord:{coord}:{name}"
     if phone_digits and len(phone_digits) >= 7 and name:
         return f"phone-name:{state}:{name}:{phone_digits[-7:]}"
     if email and name:
@@ -1856,7 +1912,14 @@ def merge_listing_values(existing: Dict[str, Any], incoming: Dict[str, Any]) -> 
         if value in (None, "", [], 0, 0.0, False):
             continue
         old = merged.get(key)
-        if key in prefer_longer_fields and isinstance(value, str):
+        if key == "name" and isinstance(value, str):
+            incoming_name = cleanup_listing_name(value)
+            old_name = cleanup_listing_name(str(old or ""))
+            if name_quality_score(incoming_name) > name_quality_score(old_name):
+                merged[key] = incoming_name
+            elif old_name and old_name != old:
+                merged[key] = old_name
+        elif key in prefer_longer_fields and isinstance(value, str):
             if not old or len(value) > len(str(old)):
                 merged[key] = value
         elif key in prefer_non_empty_fields:
@@ -1890,6 +1953,8 @@ def merge_unique(listings: Iterable[Dict[str, Any]]) -> list[Dict[str, Any]]:
         normalized = normalize_row(row)
         if not normalized:
             continue
+        if normalized.get("name"):
+            normalized["name"] = cleanup_listing_name(str(normalized.get("name", "")))
         normalized_count += 1
         # The app map requires coordinates. Keep a report trail, but do not ship unmappable rows.
         if not normalized.get("latitude") or not normalized.get("longitude"):
