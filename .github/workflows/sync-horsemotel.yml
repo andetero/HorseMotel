@@ -38,7 +38,6 @@ jobs:
               python scripts/import_horsemotel.py \
                 --csv data/imports/horsemotel_listings.csv \
                 --output horsemotel.json \
-                --report data/imports/horsemotel_import_report.md \
                 --min-listings 700 \
                 --max-listings 950 \
                 --download-kml \
@@ -47,7 +46,6 @@ jobs:
               python scripts/import_horsemotel.py \
                 --csv data/imports/horsemotel_listings.csv \
                 --output horsemotel.json \
-                --report data/imports/horsemotel_import_report.md \
                 --min-listings 700 \
                 --max-listings 950 \
                 --download-kml \
@@ -77,7 +75,6 @@ jobs:
           path: |
             horsemotel.json
             data/imports/horsemotel_map.kml
-            data/imports/horsemotel_import_report.md
 
       - name: Commit outputs
         run: |
@@ -88,8 +85,8 @@ jobs:
 
           git add horsemotel.json
           git add data/imports/horsemotel_map.kml
-          git add data/imports/horsemotel_import_report.md
           git rm --ignore-unmatch horsemotel_listings.json feed_metadata.json scripts/generate_metadata.py scripts/validate_feed.py
+          git rm --ignore-unmatch data/imports/horsemotel_schema_audit.md data/imports/horsemotel_import_report.md
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
