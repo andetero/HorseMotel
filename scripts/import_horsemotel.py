@@ -29,7 +29,7 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
-from urllib.parse import unquote, urljoin, urlsplit
+from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -577,8 +577,23 @@ def read_json(path: Path) -> list[Dict[str, Any]]:
     return [item for item in data if isinstance(item, dict)]
 
 
+def make_request_safe_url(url: str) -> str:
+    """Quote spaces/stray characters Lyndsay's legacy HTML may leave in links.
+
+    Some HorseMotel.com mobile links contain spaces in the href. Browsers tolerate
+    those, but urllib refuses them. Keep the importer forgiving so small website
+    edits do not break a full sync.
+    """
+    parts = urlsplit(url.strip())
+    path = quote(unquote(parts.path), safe="/%:@")
+    query = quote(unquote(parts.query), safe="=&?/%:+,@-._~")
+    fragment = quote(unquote(parts.fragment), safe="=&?/%:+,@-._~")
+    return urlunsplit((parts.scheme, parts.netloc, path, query, fragment))
+
+
 def fetch_text(url: str) -> str:
-    request = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
+    safe_url = make_request_safe_url(url)
+    request = Request(safe_url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
     with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
         charset = response.headers.get_content_charset() or "utf-8"
         return response.read().decode(charset, errors="replace")
@@ -1799,10 +1814,31 @@ def scrape_horsemotel(site_url: str) -> list[Dict[str, Any]]:
     return rows
 
 def listing_merge_key(listing: Dict[str, Any]) -> str:
+    """Return a conservative facility-level key for desktop/mobile/KML merges.
+
+    Desktop and mobile HorseMotel.com pages often represent the same facility with
+    slightly different city/name/address text. Prefer stable contact identifiers
+    first, then fall back to name + nearby coordinate. This prevents the mobile
+    supplement from doubling the feed while still allowing multiple facilities in
+    the same city to remain separate.
+    """
     state = norm_match_text(str(listing.get("state", "")))
     city = norm_match_text(str(listing.get("city", "")))
     name = norm_match_text(str(listing.get("name", "")))
     phone_digits = digits_only(str(listing.get("phone", "")))
+    email = norm_match_text(str(listing.get("email", "")))
+    website = norm_match_text(str(listing.get("website", "")))
+    lat = parse_float(str(listing.get("latitude", "")), default=0.0)
+    lng = parse_float(str(listing.get("longitude", "")), default=0.0)
+
+    if name and lat and lng:
+        return f"name-coord:{state}:{name}:{round(lat, 4)}:{round(lng, 4)}"
+    if phone_digits and len(phone_digits) >= 7 and name:
+        return f"phone-name:{state}:{name}:{phone_digits[-7:]}"
+    if email and name:
+        return f"email-name:{email}:{name}"
+    if website and name:
+        return f"website-name:{website}:{name}"
     if name:
         return f"name:{state}:{city}:{name}"
     if phone_digits and len(phone_digits) >= 7:
@@ -1915,6 +1951,7 @@ def main() -> int:
     parser.add_argument("--report", type=Path, default=None, help="Optional import report path")
     parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
     parser.add_argument("--min-listings", type=int, default=1, help="Fail instead of writing output when the final listing count is below this threshold")
+    parser.add_argument("--max-listings", type=int, default=0, help="Fail instead of writing output when the final listing count is above this threshold")
     args = parser.parse_args()
 
     rows: list[Dict[str, Any]] = []
@@ -1967,6 +2004,9 @@ def main() -> int:
     if listings and len(listings) < args.min_listings:
         print(f"Refusing to write {len(listings)} listings because --min-listings is {args.min_listings}. This protects the live feed when the source website changes or blocks scraping.", file=sys.stderr)
         return 3
+    if args.max_listings and len(listings) > args.max_listings:
+        print(f"Refusing to write {len(listings)} listings because --max-listings is {args.max_listings}. This protects the live feed when desktop/mobile rows fail to dedupe.", file=sys.stderr)
+        return 4
 
     compact_json_dump(args.output, listings)
     if args.report:
