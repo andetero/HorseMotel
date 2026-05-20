@@ -39,7 +39,7 @@ jobs:
                 --csv data/imports/horsemotel_listings.csv \
                 --output horsemotel.json \
                 --min-listings 700 \
-                --max-listings 950 \
+                --max-growth-percent 50 \
                 --download-kml \
                 --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
             else
@@ -47,7 +47,7 @@ jobs:
                 --csv data/imports/horsemotel_listings.csv \
                 --output horsemotel.json \
                 --min-listings 700 \
-                --max-listings 950 \
+                --max-growth-percent 50 \
                 --download-kml \
                 --scrape-site \
                 --site-url "https://www.horsemotel.com/"
