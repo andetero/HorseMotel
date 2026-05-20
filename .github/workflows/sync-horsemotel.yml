@@ -40,6 +40,7 @@ jobs:
                 --output horsemotel.json \
                 --report data/imports/horsemotel_import_report.md \
                 --min-listings 700 \
+                --max-listings 950 \
                 --download-kml \
                 --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
             else
@@ -48,6 +49,7 @@ jobs:
                 --output horsemotel.json \
                 --report data/imports/horsemotel_import_report.md \
                 --min-listings 700 \
+                --max-listings 950 \
                 --download-kml \
                 --scrape-site \
                 --site-url "https://www.horsemotel.com/"
