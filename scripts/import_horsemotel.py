@@ -764,8 +764,27 @@ def block_to_text(block: list[dict[str, str]]) -> str:
     return clean_text(raw)
 
 
+def fallback_state_links(site_url: str) -> list[tuple[str, str, str]]:
+    """Return deterministic state page URLs when the HorseMotel.com home page is slow/unavailable.
+
+    The home page is only used as an index. State pages use stable filenames such as
+    Alabama.html and NorthCarolina.html, so this fallback keeps the authorized sync from
+    failing just because the index request times out.
+    """
+    base_url = site_url.rstrip("/") + "/"
+    return [
+        (state_name, state_code, urljoin(base_url, f"{state_name.replace(' ', '')}.html"))
+        for state_name, state_code in STATE_NAME_TO_CODE.items()
+    ]
+
+
 def extract_state_links(site_url: str) -> list[tuple[str, str, str]]:
-    html_text = fetch_text(site_url)
+    try:
+        html_text = fetch_text(site_url)
+    except Exception as exc:  # noqa: BLE001 - keep the sync working if only the index times out.
+        print(f"Warning: could not fetch HorseMotel.com state index ({site_url}): {exc}; using known state URLs", file=sys.stderr)
+        return fallback_state_links(site_url)
+
     parser = LinkParser()
     parser.feed(html_text)
     links: list[tuple[str, str, str]] = []
@@ -776,7 +795,8 @@ def extract_state_links(site_url: str) -> list[tuple[str, str, str]]:
             links.append((state_name, STATE_NAME_TO_CODE[state_name], urljoin(site_url, href)))
             seen.add(state_name)
     if not links:
-        raise RuntimeError("No HorseMotel.com state links found on home page")
+        print("Warning: no HorseMotel.com state links found on home page; using known state URLs", file=sys.stderr)
+        return fallback_state_links(site_url)
     return links
 
 def extract_international_links(site_url: str) -> list[tuple[str, str, str]]:
@@ -2125,7 +2145,7 @@ def main() -> int:
     parser.add_argument("--report", type=Path, default=None, help="Optional import report path")
     parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
     parser.add_argument("--min-listings", type=int, default=1, help="Fail instead of writing output when the final listing count is below this threshold")
-    parser.add_argument("--max-listings", type=int, default=0, help="Fail instead of writing output when the final listing count is above this threshold")
+    parser.add_argument("--max-growth-percent", type=float, default=0.0, help="Fail if the new listing count grows more than this percent compared with the existing output file. Set 0 to disable.")
     args = parser.parse_args()
 
     rows: list[Dict[str, Any]] = []
@@ -2178,9 +2198,24 @@ def main() -> int:
     if listings and len(listings) < args.min_listings:
         print(f"Refusing to write {len(listings)} listings because --min-listings is {args.min_listings}. This protects the live feed when the source website changes or blocks scraping.", file=sys.stderr)
         return 3
-    if args.max_listings and len(listings) > args.max_listings:
-        print(f"Refusing to write {len(listings)} listings because --max-listings is {args.max_listings}. This protects the live feed when desktop/mobile rows fail to dedupe.", file=sys.stderr)
-        return 4
+    if args.max_growth_percent > 0 and args.output:
+        existing_output_path = Path(args.output)
+        if existing_output_path.exists():
+            try:
+                existing_data = json.loads(existing_output_path.read_text(encoding="utf-8"))
+                if isinstance(existing_data, list):
+                    previous_count = len(existing_data)
+                    allowed_count = int(previous_count * (1 + (args.max_growth_percent / 100.0)))
+                    if previous_count > 0 and len(listings) > allowed_count:
+                        print(
+                            f"Refusing to write {len(listings)} listings because the existing output has {previous_count} listings "
+                            f"and --max-growth-percent is {args.max_growth_percent:g}% (allowed up to {allowed_count}). "
+                            "This protects the live feed when desktop/mobile rows fail to dedupe while still allowing normal growth.",
+                            file=sys.stderr,
+                        )
+                        return 4
+            except Exception as exc:
+                print(f"Warning: could not evaluate existing output count for growth guard: {exc}", file=sys.stderr)
 
     compact_json_dump(args.output, listings)
     if args.report:
