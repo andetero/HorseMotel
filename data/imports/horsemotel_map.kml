@@ -3,42 +3,6 @@
   <Document>
     <name>Worldwide Horse Motel Listings</name>
     <description>The U.S. horse motels are listed first, followed by Canada. Remaining countries are listed alphabetically after Canada.</description>
-    <Style id="icon-503-DB4436-normal">
-      <IconStyle>
-        <color>ff3644db</color>
-        <scale>1.1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-    </Style>
-    <Style id="icon-503-DB4436-highlight">
-      <IconStyle>
-        <color>ff3644db</color>
-        <scale>1.1</scale>
-        <Icon>
-          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1.1</scale>
-      </LabelStyle>
-    </Style>
-    <StyleMap id="icon-503-DB4436">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-503-DB4436-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-503-DB4436-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
     <Style id="icon-960-DB4436-normal">
       <IconStyle>
         <color>ff3644db</color>
@@ -4317,6 +4281,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>NV - Sandy Valley</name>
+        <description><![CDATA[Kingston Ranch<br>www.horsemotel.com/Nevada.html#kgstn<br>702-538-5749]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -115.6498817,35.7596225,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>NV - Washoe Valley
 </name>
         <description><![CDATA[Franktown Meadows Equestrian Facility<br>www.horsemotel.com/Nevada.html#fme<br>Tel: 775-722-4261]]></description>
@@ -6325,7 +6299,7 @@
       <Placemark>
         <name>TN - Nieto</name>
         <description><![CDATA[Donkey Ridge Glamping<br>www.horsemotel.com/Tennessee.html#drg<br>423-400-7046]]></description>
-        <styleUrl>#icon-503-DB4436</styleUrl>
+        <styleUrl>#icon-960-DB4436</styleUrl>
         <Point>
           <coordinates>
             -84.62667,35.6022,0
@@ -8136,6 +8110,16 @@
         <Point>
           <coordinates>
             -111.7764533,53.0960793,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Alberta, Canada - Wainwright</name>
+        <description><![CDATA[Sporting Dog Ranch<br>http://www.horsemotel.com/ZCan-Alberta.html#sdr<br>Tel: 780-806-5136]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -110.860722222222,52.8432777777778,0
           </coordinates>
         </Point>
       </Placemark>
