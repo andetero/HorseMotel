@@ -78,7 +78,6 @@ FIELD_ALIASES = {
     "accommodations": ["accommodations", "amenities", "features"],
     "sourceUrl": ["sourceUrl", "source_url", "source", "horse_motel_listing_url"],
     "statusNotice": ["statusNotice", "status_notice", "notice", "banner", "alert"],
-    "coordinateSource": ["coordinateSource", "coordinate_source"],
 }
 
 
@@ -128,22 +127,6 @@ def parse_float(value: str, default: float = 0.0) -> float:
         return float(cleaned) if cleaned else default
     except ValueError:
         return default
-
-
-def parse_int(value: str, default: int = 0) -> int:
-    if not value:
-        return default
-    cleaned = re.sub(r"[^0-9\-]", "", value)
-    try:
-        return int(cleaned) if cleaned else default
-    except ValueError:
-        return default
-
-
-def parse_bool(value: str, default: bool = False) -> bool:
-    if not value:
-        return default
-    return value.strip().lower() in {"1", "true", "yes", "y", "available", "included", "x"}
 
 
 def parse_list(value: str) -> list[str]:
@@ -537,19 +520,12 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     lng = parse_float(first_value(row, FIELD_ALIASES["longitude"]), default=0.0)
     usable_address = has_usable_street_address(location)
     map_search_address = build_map_search_address(name, location) if usable_address else ""
-    coordinate_source = first_value(row, FIELD_ALIASES["coordinateSource"]) or str(row.get("coordinate_source") or row.get("coordinateSource") or "").strip()
-    if not coordinate_source and (lat or lng):
-        coordinate_source = "website_map" if row.get("maps_href") or row.get("mapsHref") else "provided"
-    if usable_address and coordinate_source in {"website_map", "kml", "provided"}:
-        coordinate_source = f"{coordinate_source}_approximate"
-
     raw_description = first_value(row, FIELD_ALIASES["description"])
     description = normalize_description_text(raw_description) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
     gps_lat, gps_lng = parse_gps_coordinates_from_text(description)
     if gps_lat is not None and gps_lng is not None:
         lat = gps_lat
         lng = gps_lng
-        coordinate_source = "description_gps"
 
     accommodations = clean_accommodation_values(parse_list(first_value(row, FIELD_ALIASES["accommodations"])))
     for required in infer_accommodations(description):
