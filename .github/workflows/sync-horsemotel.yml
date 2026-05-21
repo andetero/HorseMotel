@@ -68,6 +68,13 @@ jobs:
           echo "Import failed after retries."
           exit 1
 
+      - name: Post-process duplicate HorseMotel.com listings
+        run: |
+          set -euo pipefail
+          python scripts/postprocess_horsemotel_feed.py \
+            --input horsemotel.json \
+            --output horsemotel.json
+
       - name: Upload HorseMotel.com sync outputs as artifact
         uses: actions/upload-artifact@v4
         with:
