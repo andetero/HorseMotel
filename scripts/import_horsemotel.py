@@ -129,6 +129,7 @@ def parse_float(value: str, default: float = 0.0) -> float:
         return default
 
 
+
 def parse_list(value: str) -> list[str]:
     if not value:
         return []
@@ -520,12 +521,18 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     lng = parse_float(first_value(row, FIELD_ALIASES["longitude"]), default=0.0)
     usable_address = has_usable_street_address(location)
     map_search_address = build_map_search_address(name, location) if usable_address else ""
+    if not coordinate_source and (lat or lng):
+        coordinate_source = "website_map" if row.get("maps_href") or row.get("mapsHref") else "provided"
+    if usable_address and coordinate_source in {"website_map", "kml", "provided"}:
+        coordinate_source = f"{coordinate_source}_approximate"
+
     raw_description = first_value(row, FIELD_ALIASES["description"])
     description = normalize_description_text(raw_description) or "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
     gps_lat, gps_lng = parse_gps_coordinates_from_text(description)
     if gps_lat is not None and gps_lng is not None:
         lat = gps_lat
         lng = gps_lng
+        coordinate_source = "description_gps"
 
     accommodations = clean_accommodation_values(parse_list(first_value(row, FIELD_ALIASES["accommodations"])))
     for required in infer_accommodations(description):
@@ -2121,6 +2128,285 @@ def merge_unique(listings: Iterable[Dict[str, Any]]) -> list[Dict[str, Any]]:
         print(f"Merged {duplicate_count} duplicate/supplemental HorseMotel.com rows from desktop/mobile/KML sources")
     return sorted(merged, key=lambda item: (item.get("state", ""), item.get("name", "")))
 
+
+# -----------------------------------------------------------------------------
+# Final feed cleanup
+# -----------------------------------------------------------------------------
+
+FALLBACK_DESCRIPTION = "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
+US_STATE_CODES = set(STATE_NAME_TO_CODE.values())
+CITY_STREET_WORD_PATTERN = re.compile(
+    r"\d|\b(?:road|rd|street|avenue|ave|highway|hwy|county|route|drive|dr|lane|ln|court|ct|circle|cir|"
+    r"trail|trl|way|boulevard|blvd|pike|parkway|pkwy|place|pl)\b",
+    flags=re.IGNORECASE,
+)
+
+
+def feed_norm(value: str) -> str:
+    value = clean_text(value).lower()
+    value = re.sub(r"https?://\S+|www\.\S+", " ", value)
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def feed_digits(value: str) -> str:
+    return re.sub(r"\D+", "", value or "")
+
+
+def feed_parse_float(value: Any) -> float:
+    try:
+        return float(value or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def feed_has_values(value: Any) -> bool:
+    if isinstance(value, list):
+        return any(clean_text(str(item)) for item in value)
+    return bool(clean_text(str(value or "")))
+
+
+def is_placeholder_listing(item: dict[str, Any]) -> bool:
+    if clean_text(str(item.get("description", ""))) != FALLBACK_DESCRIPTION:
+        return False
+    if feed_has_values(item.get("address")) or feed_has_values(item.get("mapSearchAddress")):
+        return False
+    if feed_has_values(item.get("photoURLs")):
+        return False
+    if feed_has_values(item.get("hookups")) or feed_has_values(item.get("accommodations")):
+        return False
+    return True
+
+
+def phone_last7_values(value: str) -> set[str]:
+    raw = feed_digits(value)
+    values: set[str] = set()
+    for match in re.finditer(r"\d{7,}", raw):
+        values.add(match.group(0)[-7:])
+    if len(raw) >= 7:
+        values.add(raw[-7:])
+    return values
+
+
+def feed_contact_keys(item: dict[str, Any]) -> set[str]:
+    keys: set[str] = set()
+    for phone in phone_last7_values(str(item.get("phone", ""))):
+        keys.add(f"phone:{phone}")
+    email = feed_norm(str(item.get("email", "")))
+    if email:
+        keys.add(f"email:{email}")
+    website = feed_norm(str(item.get("website", "")))
+    if website:
+        keys.add(f"website:{website}")
+    return keys
+
+
+def feed_address_key(item: dict[str, Any]) -> str:
+    raw = str(item.get("address") or item.get("location") or item.get("mapSearchAddress") or "")
+    text = feed_norm(raw)
+    if not text or not re.search(r"\d", text):
+        return ""
+    name = feed_norm(str(item.get("name", "")))
+    if name and text.startswith(name + " "):
+        text = text[len(name):].strip()
+    match = re.search(r"\b\d{1,6}\b", text)
+    if match and match.start() > 0:
+        text = text[match.start():].strip()
+    return text
+
+
+def feed_description_fingerprint(item: dict[str, Any]) -> str:
+    text = feed_norm(str(item.get("description", "")))
+    if len(text) < 80:
+        return ""
+    text = re.sub(r"\b\d+\b", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text[:220]
+
+
+def feed_coords_near(a: dict[str, Any], b: dict[str, Any], tolerance: float = 0.02) -> bool:
+    lat_a, lng_a = feed_parse_float(a.get("latitude")), feed_parse_float(a.get("longitude"))
+    lat_b, lng_b = feed_parse_float(b.get("latitude")), feed_parse_float(b.get("longitude"))
+    if not lat_a or not lng_a or not lat_b or not lng_b:
+        return False
+    return abs(lat_a - lat_b) <= tolerance and abs(lng_a - lng_b) <= tolerance
+
+
+def feed_coordinate_score(item: dict[str, Any]) -> int:
+    if not feed_parse_float(item.get("latitude")) or not feed_parse_float(item.get("longitude")):
+        return 0
+    score = 10
+    if item.get("address"):
+        score += 20
+    if item.get("mapStatus") == "confirmed":
+        score += 20
+    source = str(item.get("sourceUrl", "")).lower()
+    if "a1mobilepages/a3mobile" in source and item.get("address"):
+        score += 35
+    elif "horsemotel.com/" in source and item.get("address"):
+        score += 10
+    return score
+
+
+def feed_same_facility(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    if feed_norm(str(a.get("state", ""))) != feed_norm(str(b.get("state", ""))):
+        return False
+
+    contact_overlap = feed_contact_keys(a) & feed_contact_keys(b)
+    a_addr, b_addr = feed_address_key(a), feed_address_key(b)
+    if a_addr and a_addr == b_addr and contact_overlap:
+        return True
+
+    a_desc, b_desc = feed_description_fingerprint(a), feed_description_fingerprint(b)
+    if a_desc and a_desc == b_desc and contact_overlap:
+        return True
+
+    if feed_norm(str(a.get("name", ""))) == feed_norm(str(b.get("name", ""))) and feed_coords_near(a, b) and contact_overlap:
+        return True
+
+    return False
+
+
+def feed_name_score(value: str) -> int:
+    text = clean_text(value)
+    if not text:
+        return -100
+    score = 0
+    if len(text) <= 80:
+        score += 30
+    elif len(text) <= 140:
+        score += 10
+    else:
+        score -= 20
+    score -= min(text.count(",") * 2, 10)
+    return score
+
+
+def feed_merge_values(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
+    merged = dict(existing)
+
+    for key, value in incoming.items():
+        if value in (None, "", [], 0, 0.0, False):
+            continue
+        old = merged.get(key)
+
+        if key == "name":
+            if feed_name_score(str(value)) > feed_name_score(str(old or "")):
+                merged[key] = value
+        elif key in {"description", "location"}:
+            if not old or len(str(value)) > len(str(old)):
+                merged[key] = value
+        elif key in {"latitude", "longitude"}:
+            continue
+        elif isinstance(value, list):
+            combined = list(old or [])
+            for item in value:
+                if item not in combined:
+                    combined.append(item)
+            merged[key] = combined
+        elif not old:
+            merged[key] = value
+
+    if feed_coordinate_score(incoming) > feed_coordinate_score(existing):
+        merged["latitude"] = incoming.get("latitude")
+        merged["longitude"] = incoming.get("longitude")
+        if incoming.get("mapStatus"):
+            merged["mapStatus"] = incoming.get("mapStatus")
+
+    merged["id"] = existing.get("id") or incoming.get("id")
+    return merged
+
+
+def postprocess_final_listings(listings: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int, int]:
+    merged: list[dict[str, Any]] = []
+    duplicate_removed = 0
+    placeholder_removed = 0
+
+    for incoming in listings:
+        if is_placeholder_listing(incoming):
+            placeholder_removed += 1
+            continue
+
+        match_index = None
+        for index, existing in enumerate(merged):
+            if feed_same_facility(existing, incoming):
+                match_index = index
+                break
+        if match_index is None:
+            merged.append(incoming)
+        else:
+            merged[match_index] = feed_merge_values(merged[match_index], incoming)
+            duplicate_removed += 1
+
+    return merged, duplicate_removed, placeholder_removed
+
+
+def should_repair_feed_city(city: str) -> bool:
+    city = clean_text(city)
+    if not city:
+        return True
+    if len(city) > 32 or len(city.split()) > 4:
+        return True
+    return bool(CITY_STREET_WORD_PATTERN.search(city))
+
+
+def extract_feed_city_from_location(location: str, state: str, country: str) -> str:
+    location = clean_text(location)
+    state = clean_text(state)
+    country = clean_text(country)
+    if not location:
+        return ""
+
+    parts = [clean_text(part) for part in re.split(r"\s*,\s*", location) if clean_text(part)]
+    if len(parts) < 2:
+        return ""
+
+    state_code = state.upper()
+    if re.fullmatch(r"[A-Z]{2}", state_code) and state_code in US_STATE_CODES:
+        for index, part in enumerate(parts):
+            if re.search(rf"\b{re.escape(state_code)}\b", part, flags=re.IGNORECASE) and index > 0:
+                return re.sub(r"\s+\d{5}(?:-\d{4})?\b.*$", "", parts[index - 1]).strip()
+
+    state_country_text = f"{state} {country}".lower()
+    if "canada" in state_country_text:
+        province = state.split(",")[0].strip()
+        province_names = [province]
+        if province.upper() == "BC":
+            province_names.append("British Columbia")
+        elif province.lower() == "british columbia":
+            province_names.append("BC")
+        for index, part in enumerate(parts):
+            if index == 0:
+                continue
+            if any(re.search(rf"\b{re.escape(name)}\b", part, flags=re.IGNORECASE) for name in province_names if name):
+                return re.sub(r"\s+[A-Z]\d[A-Z]\s*\d[A-Z]\d\b.*$", "", parts[index - 1], flags=re.IGNORECASE).strip()
+
+    if "australia" in state_country_text:
+        if re.search(r"\d", parts[0]) and len(parts) >= 2:
+            return re.sub(r"\s+\d{3,4}\b.*$", "", parts[1]).strip()
+        if parts[-1].lower().startswith("australia") and len(parts) >= 2:
+            return parts[-2]
+
+    return ""
+
+
+def repair_feed_city_values(listings: list[dict[str, Any]]) -> int:
+    repaired = 0
+    for item in listings:
+        old_city = clean_text(item.get("city"))
+        if not should_repair_feed_city(old_city):
+            continue
+        new_city = extract_feed_city_from_location(
+            clean_text(item.get("location")),
+            clean_text(item.get("state")),
+            clean_text(item.get("country")),
+        )
+        if new_city and new_city != old_city:
+            item["city"] = new_city
+            repaired += 1
+    return repaired
+
+
 def write_report(path: Path, count: int, inputs: list[str]) -> None:
     lines = [
         "# HorseMotel.com Import Report",
@@ -2213,6 +2499,17 @@ def main() -> int:
             print(f"Added {kml_only_count} KML-only HorseMotel.com placemarks, including Canada/international listings")
 
     listings = merge_unique(rows)
+    original_listing_count = len(listings)
+    listings, duplicate_removed, placeholder_removed = postprocess_final_listings(listings)
+    print(
+        "Post-processed HorseMotel feed: "
+        f"{original_listing_count} input listings, {len(listings)} output listings, "
+        f"merged {duplicate_removed} high-confidence duplicates, "
+        f"removed {placeholder_removed} placeholder listings"
+    )
+    repaired_city_count = repair_feed_city_values(listings)
+    print(f"Repaired {repaired_city_count} HorseMotel city values")
+
     if not listings and not args.allow_empty:
         print("No HorseMotel.com listings found. Provide CSV/JSON input, use --scrape-site, or pass --allow-empty.", file=sys.stderr)
         return 2
