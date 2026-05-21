@@ -29,6 +29,7 @@ from pathlib import Path
 from typing import Any
 
 FALLBACK_DESCRIPTION = "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
+COMPACT_ARRAY_FIELDS = {"hookups", "accommodations", "photoURLs"}
 
 
 def clean_text(value: str) -> str:
@@ -40,6 +41,29 @@ def norm(value: str) -> str:
     value = re.sub(r"https?://\S+|www\.\S+", " ", value)
     value = re.sub(r"[^a-z0-9]+", " ", value)
     return re.sub(r"\s+", " ", value).strip()
+
+
+def compact_json_dump(path: Path, payload: Any) -> None:
+    rendered = json.dumps(payload, indent=2, ensure_ascii=False)
+    rendered = compact_selected_array_fields(rendered, COMPACT_ARRAY_FIELDS)
+    path.write_text(rendered + "\n", encoding="utf-8")
+
+
+def compact_selected_array_fields(json_text: str, field_names: set[str]) -> str:
+    field_pattern = "|".join(re.escape(name) for name in sorted(field_names))
+    pattern = re.compile(
+        rf'(?P<indent>^[ \t]*)"(?P<field>{field_pattern})": \[\n'
+        rf'(?P<body>(?:^[ \t]+.*\n)*?)'
+        rf'(?P=indent)\]',
+        flags=re.MULTILINE,
+    )
+
+    def repl(match: re.Match[str]) -> str:
+        array_text = "[\n" + match.group("body") + match.group("indent") + "]"
+        values = json.loads(array_text)
+        return f'{match.group("indent")}"{match.group("field")}": {json.dumps(values, ensure_ascii=False)}'
+
+    return pattern.sub(repl, json_text)
 
 
 def digits(value: str) -> str:
@@ -252,7 +276,7 @@ def main() -> int:
         raise SystemExit("Feed must be a JSON array")
 
     cleaned, duplicate_removed, placeholder_removed = postprocess([item for item in data if isinstance(item, dict)])
-    args.output.write_text(json.dumps(cleaned, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    compact_json_dump(args.output, cleaned)
     print(
         "Post-processed HorseMotel feed: "
         f"{len(data)} input listings, {len(cleaned)} output listings, "
