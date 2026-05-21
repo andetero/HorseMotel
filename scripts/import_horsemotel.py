@@ -519,6 +519,7 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     email = sanitize_email(first_value(row, FIELD_ALIASES["email"]))
     lat = parse_float(first_value(row, FIELD_ALIASES["latitude"]), default=0.0)
     lng = parse_float(first_value(row, FIELD_ALIASES["longitude"]), default=0.0)
+    coordinate_source = str(row.get("coordinate_source") or row.get("coordinateSource") or "").strip()
     usable_address = has_usable_street_address(location)
     map_search_address = build_map_search_address(name, location) if usable_address else ""
     if not coordinate_source and (lat or lng):
