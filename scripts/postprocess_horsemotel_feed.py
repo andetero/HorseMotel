@@ -10,6 +10,11 @@ same facility through stronger evidence than coordinates alone:
 - same normalized description fingerprint plus matching phone/email/website, or
 - same cleaned name, same state, nearby coordinates, plus matching contact info.
 
+It also drops narrow placeholder/KML-only rows that do not have enough listing
+content to be useful in the app. This is intentionally conservative: a row must
+have the generic fallback description, no address, no photos, no hookups, and no
+accommodation chips before it is removed.
+
 When duplicate rows disagree on coordinates, prefer the row with the stronger
 coordinate signal, especially mobile detail pages that include an exact address.
 Photos, hookups, accommodations, and contact fields are combined.
@@ -22,6 +27,8 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+
+FALLBACK_DESCRIPTION = "HorseMotel.com overnight horse lodging listing. Confirm availability before arrival."
 
 
 def clean_text(value: str) -> str:
@@ -44,6 +51,30 @@ def parse_float(value: Any) -> float:
         return float(value or 0)
     except (TypeError, ValueError):
         return 0.0
+
+
+def has_values(value: Any) -> bool:
+    if isinstance(value, list):
+        return any(clean_text(str(item)) for item in value)
+    return bool(clean_text(str(value or "")))
+
+
+def is_placeholder_listing(item: dict[str, Any]) -> bool:
+    """Return True only for low-information KML/link placeholder rows.
+
+    These rows are usually anchor/KML references rather than full HorseMotel.com
+    listing details. Keep this intentionally narrow so real listings with sparse
+    data are not removed.
+    """
+    if clean_text(str(item.get("description", ""))) != FALLBACK_DESCRIPTION:
+        return False
+    if has_values(item.get("address")) or has_values(item.get("mapSearchAddress")):
+        return False
+    if has_values(item.get("photoURLs")):
+        return False
+    if has_values(item.get("hookups")) or has_values(item.get("accommodations")):
+        return False
+    return True
 
 
 def phone_last7_values(value: str) -> set[str]:
@@ -186,10 +217,16 @@ def merge_values(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[str
     return merged
 
 
-def dedupe(listings: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
+def postprocess(listings: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int, int]:
     merged: list[dict[str, Any]] = []
-    removed = 0
+    duplicate_removed = 0
+    placeholder_removed = 0
+
     for incoming in listings:
+        if is_placeholder_listing(incoming):
+            placeholder_removed += 1
+            continue
+
         match_index = None
         for index, existing in enumerate(merged):
             if same_facility(existing, incoming):
@@ -199,8 +236,9 @@ def dedupe(listings: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
             merged.append(incoming)
         else:
             merged[match_index] = merge_values(merged[match_index], incoming)
-            removed += 1
-    return merged, removed
+            duplicate_removed += 1
+
+    return merged, duplicate_removed, placeholder_removed
 
 
 def main() -> int:
@@ -213,9 +251,14 @@ def main() -> int:
     if not isinstance(data, list):
         raise SystemExit("Feed must be a JSON array")
 
-    cleaned, removed = dedupe([item for item in data if isinstance(item, dict)])
+    cleaned, duplicate_removed, placeholder_removed = postprocess([item for item in data if isinstance(item, dict)])
     args.output.write_text(json.dumps(cleaned, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Post-processed HorseMotel feed: {len(data)} input listings, {len(cleaned)} output listings, merged {removed} high-confidence duplicates")
+    print(
+        "Post-processed HorseMotel feed: "
+        f"{len(data)} input listings, {len(cleaned)} output listings, "
+        f"merged {duplicate_removed} high-confidence duplicates, "
+        f"removed {placeholder_removed} placeholder listings"
+    )
     return 0
 
 
