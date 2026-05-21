@@ -75,6 +75,13 @@ jobs:
             --input horsemotel.json \
             --output horsemotel.json
 
+      - name: Repair HorseMotel.com city values
+        run: |
+          set -euo pipefail
+          python scripts/repair_horsemotel_cities.py \
+            --input horsemotel.json \
+            --output horsemotel.json
+
       - name: Upload HorseMotel.com sync outputs as artifact
         uses: actions/upload-artifact@v4
         with:
