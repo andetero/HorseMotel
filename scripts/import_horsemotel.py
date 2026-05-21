@@ -74,11 +74,6 @@ FIELD_ALIASES = {
     "website": ["website", "url", "listing_url", "link", "horse_motel_url"],
     "description": ["description", "notes", "details", "summary"],
     "email": ["email", "email_address"],
-    "pricePerNight": ["pricePerNight", "price_per_night", "price", "nightly_rate"],
-    "horseFeePerNight": ["horseFeePerNight", "horse_fee_per_night", "horse_fee"],
-    "stallCount": ["stallCount", "stall_count", "stalls"],
-    "paddockCount": ["paddockCount", "paddock_count", "paddocks", "corrals"],
-    "maxRigLength": ["maxRigLength", "max_rig_length", "rig_length", "max_length"],
     "photoURLs": ["photoURLs", "photo_urls", "photos", "image_urls", "images"],
     "accommodations": ["accommodations", "amenities", "features"],
     "sourceUrl": ["sourceUrl", "source_url", "source", "horse_motel_listing_url"],
@@ -86,18 +81,11 @@ FIELD_ALIASES = {
     "coordinateSource": ["coordinateSource", "coordinate_source"],
 }
 
-BOOL_FIELDS = {
-    "hasWashRack": ["hasWashRack", "has_wash_rack", "wash_rack"],
-    "hasDumpStation": ["hasDumpStation", "has_dump_station", "dump_station"],
-    "hasWifi": ["hasWifi", "has_wifi", "wifi"],
-    "hasBathhouse": ["hasBathhouse", "has_bathhouse", "bathhouse", "bathrooms", "showers"],
-    "pullThroughAvailable": ["pullThroughAvailable", "pull_through_available", "pull_through", "pullthrough"],
-}
 
 
 def compact_json_dump(path: Path, payload: Any) -> None:
     rendered = json.dumps(payload, indent=2, ensure_ascii=False)
-    rendered = _compact_selected_array_fields(rendered, {"hookups", "accommodations", "imageColors", "photoURLs"})
+    rendered = _compact_selected_array_fields(rendered, {"hookups", "accommodations", "photoURLs"})
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(rendered + "\n", encoding="utf-8")
 
@@ -385,23 +373,80 @@ def infer_hookups(text: str) -> list[str]:
     return hookups
 
 
+GENERIC_ACCOMMODATION_LABELS = {"horsemotel.com", "layover", "horse camping"}
+
+
+def clean_accommodation_values(values: list[str]) -> list[str]:
+    """Return useful, source-derived feature labels for app chips.
+
+    Older importer versions added generic labels such as HorseMotel.com, Layover,
+    and Horse Camping to every row. Those are true, but they are not useful chips
+    in the official HorseMotel.com app. Keep only listing-specific details.
+    """
+    cleaned: list[str] = []
+    for value in values:
+        label = clean_text(value)
+        if not label or label.lower() in GENERIC_ACCOMMODATION_LABELS:
+            continue
+        add_unique(cleaned, label)
+    return cleaned
+
+
 def infer_accommodations(text: str) -> list[str]:
-    lower = text.lower()
-    values = ["HorseMotel.com", "Layover", "Horse Camping"]
-    no_rv_hookups = has_negative_phrase(text, [r"\b(?:rv\s+|trailer\s+|electrical\s+|electric\s+)?hook[- ]?ups?\b"])
-    checks = [
-        ("Stalls", ["stall", "barn"], False),
-        ("Paddocks", ["paddock", "turnout", "pasture", "corral", "pen"], False),
-        ("RV Hookups", ["rv hookup", "hookup", "electric", "30 amp", "30a", "50 amp", "50a", "water hook", "fhu", "full hookup"], no_rv_hookups),
-        ("Big Rig Friendly", ["big rig", "semi", "any size rig", "large trailer", "large rig", "18 wheeler", "tractor/trailer"], False),
-        ("Wash Rack", ["wash rack", "washrack", "wash racks", "wash station"], False),
-        ("WiFi", ["wifi", "wi-fi", "internet"], False),
-        ("Lodging", ["cabin", "guest house", "bed and breakfast", "apartment", "room", "airbnb", "vrbo", "bunkhouse", "casita"], False),
-        ("Trails", ["trail"], False),
-    ]
-    for label, terms, suppressed in checks:
-        if not suppressed and any(term in lower for term in terms) and label not in values:
-            values.append(label)
+    """Infer listing-specific amenity chips from HorseMotel.com detail text.
+
+    Use regex boundaries instead of loose substring checks so words like
+    "trailer" do not create a Trails chip and phrases like "room for big rigs"
+    do not create a Lodging chip.
+    """
+    values: list[str] = []
+
+    def add_if(label: str, patterns: list[str], negative_patterns: list[str] | None = None) -> None:
+        if negative_patterns and has_negative_phrase(text, negative_patterns):
+            return
+        if text_matches(text, patterns):
+            add_unique(values, label)
+
+    add_if("Stalls", [r"\bstalls?\b", r"\bstabling\b", r"\bbarn\b"], [r"\bstalls?\b", r"\bstabling\b", r"\bbarn\b"])
+    add_if("Paddocks", [r"\bpaddocks?\b", r"\bturnouts?\b", r"\bpastures?\b", r"\bcorrals?\b", r"\bpens?\b"], [r"\bpaddocks?\b", r"\bturnouts?\b", r"\bpastures?\b", r"\bcorrals?\b", r"\bpens?\b"])
+
+    # Show one high-level RV Hookups chip when the more specific hookups array
+    # has detected electric/water/sewer/amp details.
+    if infer_hookups(text):
+        add_unique(values, "RV Hookups")
+
+    add_if("Big Rig Friendly", [
+        r"\bbig\s+rigs?\b",
+        r"\blarge\s+(?:rigs?|trailers?)\b",
+        r"\bany\s+size\s+rig\b",
+        r"\b18[- ]?wheelers?\b",
+        r"\btractor\s*/\s*trailers?\b",
+        r"\bsemi(?:s| truck)?\b",
+        r"\broom\s+for\s+(?:big\s+)?rigs?\b",
+        r"\broom\s+to\s+turn\s+around\b",
+    ])
+    add_if("Wash Rack", [r"\bwash\s+racks?\b", r"\bwashracks?\b", r"\bwash\s+stations?\b"], [r"\bwash\s+racks?\b", r"\bwashracks?\b", r"\bwash\s+stations?\b"])
+    add_if("WiFi", [r"\bwi[- ]?fi\b", r"\binternet\s+(?:access|available|included)\b"], [r"\bwi[- ]?fi\b", r"\binternet\b"])
+    add_if("Lodging", [
+        r"\bcabins?\b",
+        r"\bguest\s+houses?\b",
+        r"\bbed\s+(?:and|&)\s+breakfast\b",
+        r"\bapartments?\b",
+        r"\bairbnb\b",
+        r"\bvrbo\b",
+        r"\bbunkhouses?\b",
+        r"\bcasitas?\b",
+        r"\bguest\s+rooms?\b",
+        r"\bbedrooms?\b",
+        r"\bmotel\s+rooms?\b",
+    ], [r"\blodging\b", r"\bcabins?\b", r"\bguest\s+houses?\b", r"\bbedrooms?\b", r"\bguest\s+rooms?\b"])
+    add_if("Trails", [
+        r"\briding\s+trails?\b",
+        r"\btrail\s+riding\b",
+        r"\btrailheads?\b",
+        r"\btrails?\b",
+    ], [r"\briding\s+trails?\b", r"\btrailheads?\b", r"\btrails?\b"])
+
     return values
 
 
@@ -506,7 +551,7 @@ def normalize_row(row: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         lng = gps_lng
         coordinate_source = "description_gps"
 
-    accommodations = parse_list(first_value(row, FIELD_ALIASES["accommodations"]))
+    accommodations = clean_accommodation_values(parse_list(first_value(row, FIELD_ALIASES["accommodations"])))
     for required in infer_accommodations(description):
         if required not in accommodations:
             accommodations.append(required)
@@ -1168,7 +1213,7 @@ def parse_kml_text(kml_text: str) -> list[Dict[str, Any]]:
             "placemarkName": placemark_name,
             "coordinate_source": "kml",
             "locationConfidence": "coordinate_only",
-            "accommodations": "HorseMotel.com|Horse Camping",
+            "accommodations": "",
         })
     return rows
 
