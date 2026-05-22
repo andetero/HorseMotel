@@ -2131,17 +2131,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>IN - Osgood
-</name>
-        <description><![CDATA[Appy Trails<br>www.horsemotel.com/Indiana.html#apt<br>Tel: 812-569-6255]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -85.250007,39.132866,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>IL - Paw Paw
 </name>
         <description><![CDATA[Breaking Wind Farm<br>www.horsemotel.com/Illinois.html#bwf<br>Tel: 815-501-4647]]></description>
@@ -2327,6 +2316,17 @@
         <Point>
           <coordinates>
             -87.39517,38.29224,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>IN - Osgood
+</name>
+        <description><![CDATA[Appy Trails<br>www.horsemotel.com/Indiana.html#apt<br>Tel: 812-569-6255]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -85.250007,39.132866,0
           </coordinates>
         </Point>
       </Placemark>
@@ -4218,6 +4218,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>NV - Fallon</name>
+        <description><![CDATA[CLARK RANCH HORSE HOTEL<br>www.horsemotel.com/Nevada.html#crh<br>Tel: 775-866-7562]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -118.77469,39.41686,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>NV - Las Vegas
 </name>
         <description><![CDATA[Fly Again Ranch<br>www.horsemotel.com/Nevada.html#far<br>Tel: 702-496-0987]]></description>
@@ -5598,6 +5608,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>PA - Abbottstown</name>
+        <description><![CDATA[Mane Retreat<br>www.horemotel.com/Pennsylvania.html#mrt<br>Tel: 229-291-9656]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -76.9860833333333,39.9021111111111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>OR - Turner
 </name>
         <description><![CDATA[M&R Stables<br>www.horsemotel.com/Oregon.html#mrs<br>Tel: 503-409-9577]]></description>
@@ -5615,16 +5635,6 @@
         <Point>
           <coordinates>
             -123.46852,43.10688,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>PA - Abbottstown</name>
-        <description><![CDATA[Mane Retreat<br>www.horemotel.com/Pennsylvania.html#mrt<br>Tel: 229-291-9656]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -76.9860833333333,39.9021111111111,0
           </coordinates>
         </Point>
       </Placemark>
@@ -8411,6 +8421,16 @@
         <Point>
           <coordinates>
             -105.890542,52.340151,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>FL - Labelle</name>
+        <description><![CDATA[The Salty Cracker<br>www.horsemotel.com/Florida.html#salty<br>305-970-2196]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -81.4258984,26.7862134,0
           </coordinates>
         </Point>
       </Placemark>
