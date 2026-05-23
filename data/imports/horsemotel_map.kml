@@ -1955,16 +1955,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>ID - Twin Falls</name>
-        <description><![CDATA[High Desert Equestrian Center, LLC<br>www.horsemotel.com/Idaho.html#otter<br>Tel: 509-560-3634]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -114.4516,42.48782,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>IL - Altamont</name>
         <description><![CDATA[Campground Stables<br>www.horsemotel.com/Illinois.html#campground<br>Tel: 618-267-6990]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -2441,17 +2431,6 @@
         <Point>
           <coordinates>
             -93.50267,41.761514,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>IA - Grinnell
-</name>
-        <description><![CDATA[A & W Ranch<br>www.horsemotel.com/Iowa.html#awr<br>Tel: 641-990-8387]]></description>
-        <styleUrl>#icon-960-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            -92.746832,41.747423,0
           </coordinates>
         </Point>
       </Placemark>
