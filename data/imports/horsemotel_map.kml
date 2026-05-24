@@ -5445,6 +5445,16 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>OR - Chiloquin</name>
+        <description><![CDATA[Abiding Dudes Equine Hotel<br>www.horsemotel.com/Oregon.html#adeh<br>989-627-3236]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -121.9138711,42.5629318,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>OR - Coos Bay</name>
         <description><![CDATA[Lazy H Ranch<br>www.horsemotel.com/Oregon.html#lhr<br>Tel: 619-992-5342]]></description>
         <styleUrl>#icon-960-DB4436</styleUrl>
@@ -8574,6 +8584,16 @@
         <Point>
           <coordinates>
             1.31547,51.17854,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>FL - Loxahatchee</name>
+        <description><![CDATA[Lox Fresh Farm<br>www.horsemotel.com/Florida.html#loxf<br>989-627-3236]]></description>
+        <styleUrl>#icon-960-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            -80.2916969,26.732602,0
           </coordinates>
         </Point>
       </Placemark>

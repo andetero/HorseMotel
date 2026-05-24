@@ -1546,15 +1546,15 @@
     "photoURLs": []
   },
   {
-    "id": "horsemotel-sporting-dog-ranch-alberta, canada-2a224843",
-    "name": "Sporting Dog Ranch",
-    "location": "PO Box 3346, Wainwright , Alberta, Canada T9W 1T3",
+    "id": "horsemotel-sporting-dog-ranch-wainwright-alberta-canada-t9w-1t3-alberta, canada-2a224843",
+    "name": "Sporting Dog Ranch, Wainwright , Alberta, Canada T9W 1T3",
+    "location": "Alberta, Canada",
     "address": "",
     "city": "Wainwright",
     "state": "Alberta, Canada",
     "country": "Canada",
-    "latitude": 52.843273,
-    "longitude": -110.860715,
+    "latitude": 52.839781,
+    "longitude": -110.8916766,
     "mapStatus": "notConfirmed",
     "hookups": ["Electric", "Water", "Sewer", "Dump Station"],
     "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly", "WiFi"],
@@ -1562,7 +1562,7 @@
     "email": "info@sportingdogranch.com",
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/ZCan-Alberta.html",
-    "description": "Overnight stays for RV's and campers with horse(s). Outdoor 24' x 24' steel panel pens. Indoor box stalls, tie stalls, outdoor riding arena and round pen are coming soon. All outdoor pens have water. Grass hay and feed are available. Plenty of room for big rigs. Water hookup is available. Free WiFi. RV sanitary dump station nearby. Gated and pavement to property. A negative Coggins test and health certificate are required for each horse. All pets must be leashed or stay in the truck/trailer. Liability release required. Owners live on site. May long weekend to September long weekend. Location notes: Located just off Highway #14 west of Wainwright, AB. Close (10 minutes) to restaurants, fuel, feed stores, grocery stores and entertainment.",
+    "description": "Overnight stays for RV’s and campers with horse(s). Outdoor 24’ x 24’ steel panel pens. Indoor box stalls, tie stalls, outdoor riding arena and round pen are coming soon. Located just off Highway #14 west of Wainwright, AB. Close (10 mins) to restaurants, fuel, feed stores, grocery stores and entertainment. All outdoor pens have water. Grass hay and feed is available. Plenty of room for big rigs. Water hookup is available. Free WiFi. RV sanitary dump station nearby. Gated and pavement to property. A negative Coggins test and health certificate is required for each horse. All pets must be leashed or stay in truck/trailer. Liability release required. Owners live on site. May long weekend to September long weekend. $25.00 per night per unit for dry camping. $20.00 per horse per night outdoor. Location notes: Wainwright, Alberta",
     "photoURLs": []
   },
   {
@@ -3318,6 +3318,27 @@
     "sourceUrl": "https://www.horsemotel.com/Florida.html",
     "description": "Private, fully fenced, gated farm located 2 minutes west of the World Equestrian Center on Highway 40! Brand new barn with 16' concrete center aisle, impeccably clean, (8) 12' x 12' stalls that are sanitized between guests. Round pen, turnout paddocks, 120' x 240' sand arena. Additional 12' x 15' stalls available in an older barn if needed. 30 and 50 amp trailer hookups with electric and water for $40/night. Plenty of room for big rigs. $40 stall/night with discounts for haulers and large families, 2 minutes to WEC, across the street from Live Oak, 15 minutes to HITS, 15 minutes to Rainbow Springs and just 6 miles off I-75. Also offering partial and full board for short and long term stays. Location notes: On Highway 40, two miles west of the World Equestrian Center. We are the last farm on your right before 110th Ave.",
     "photoURLs": ["https://www.horsemotel.com/ZP-HTH5Big.jpg", "https://www.horsemotel.com/ZP-HTH2Big.jpg", "https://www.horsemotel.com/ZP-HTH3Big.jpg", "https://www.horsemotel.com/ZP-HTH6Big.jpg", "https://www.horsemotel.com/ZP-HTH1Big.jpg", "https://www.horsemotel.com/ZP-HTH4Big.jpg"]
+  },
+  {
+    "id": "horsemotel-lox-fresh-farm-fl-7410042e",
+    "name": "Lox Fresh Farm",
+    "location": "15696 Ferris Pl, Loxahatchee , FL 33470",
+    "address": "15696 Ferris Pl, Loxahatchee , FL 33470",
+    "mapSearchAddress": "Lox Fresh Farm, 15696 Ferris Pl, Loxahatchee , FL 33470",
+    "city": "Loxahatchee",
+    "state": "FL",
+    "country": "",
+    "latitude": 26.732602,
+    "longitude": -80.2916969,
+    "mapStatus": "confirmed",
+    "hookups": [],
+    "accommodations": ["Stalls", "Paddocks", "Trails"],
+    "phone": "786-344-3332",
+    "email": "mikesaavedra305@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Florida.html",
+    "description": "3 Horse Stalls Large Fenced Paddocks. Trailer Parking. Private RV/Fifth Wheel Available. Fire Pit & Outdoor Seating Area. Quiet Equestrian Property. Minutes from Wellington. Private RV farmstay with horse accommodations including 3 stalls, large paddocks, trailer parking, outdoor seating area, and fire pit. Ideal for horse travelers, seasonal equestrians, and guests looking for a quiet ranch-style stay near Wellington. Location notes: Loxahatchee, Florida. Peaceful equestrian area just minutes from Wellington horse venues, trails, feed stores, and major showgrounds.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-LoxFresh3Big.jpg", "https://www.horsemotel.com/ZP-LoxFresh1Big.jpg", "https://www.horsemotel.com/ZP-LoxFresh5Big.jpg", "https://www.horsemotel.com/ZP-LoxFresh4Big.jpg", "https://www.horsemotel.com/ZP-LoxFresh2Big.jpg", "https://www.horsemotel.com/ZP-LoxFresh6Big.jpg"]
   },
   {
     "id": "horsemotel-mahan-farm-lindsay-barrack-fl-7410042e",
@@ -11306,6 +11327,27 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-Suncatcher1Big.jpg", "https://www.horsemotel.com/ZP-Suncatcher2Big.jpg", "https://www.horsemotel.com/ZP-Suncatcher3Big.jpg"]
   },
   {
+    "id": "horsemotel-abiding-dudes-equine-hotel-or-4547b85c",
+    "name": "Abiding Dudes Equine Hotel",
+    "location": "37110 Highway 62, Chiloquin , OR 97624",
+    "address": "37110 Highway 62, Chiloquin , OR 97624",
+    "mapSearchAddress": "Abiding Dudes Equine Hotel, 37110 Highway 62, Chiloquin , OR 97624",
+    "city": "Chiloquin",
+    "state": "OR",
+    "country": "",
+    "latitude": 42.5629318,
+    "longitude": -121.9138711,
+    "mapStatus": "notConfirmed",
+    "hookups": ["30A", "Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Wash Rack", "Trails"],
+    "phone": "989-627-3236",
+    "email": "equinehotel@gmail.com",
+    "website": "https://www.abidingdudeshotel.com",
+    "sourceUrl": "https://www.horsemotel.com/Oregon.html",
+    "description": "4 matted 12X12 stalls with 12X24 attached paddocks with pea gravel. Easy access off Oregon highway 97 & 62 with full turn around for large truck & trailers, one RV (30amp) hook up, water, wash rack, indoor arena, 60' round pen. Stalls sanitized after each clients departure. Location notes: 37110 Oregon 62, just off Oregon Highway 97 in Chiloquin, Oregon. Conveniently located off highway 97, 3 miles to truck fuel stop (KlaMoYa Casino for dining), Sleep Inn Hotel. Water Wheel RV camping on the river as well. Also perfect stop take in sites, Crater lake National Park, and trust your horses will be safe while you investigate this beautiful area! Many local trails to ride!",
+    "photoURLs": ["https://www.horsemotel.com/ZP-AbidingDudes2Big.jpg", "https://www.horsemotel.com/ZP-AbidingDudes3Big.jpg", "https://www.horsemotel.com/ZP-AbidingDudes1Big.jpg"]
+  },
+  {
     "id": "horsemotel-broken-arrow-ranch-or-4547b85c",
     "name": "Broken Arrow Ranch",
     "location": "291 Quarter Horse Lane, Winston , OR 97496",
@@ -14596,7 +14638,7 @@
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/Texas.html",
     "description": "A 1 bedroom, with king size bed, 1 and 1/2 bath 2 story cabin on 300 acres. Arena, 3 stalls with paddock area. Look out window and see your horses! It’s a little piece of heaven, very quiet. Dry camping allowed Location notes: 1 mile off highway 16, between San Antonio and Bandera. We are 45 minutes to Rose Palace horse event center in San Antonio. There are trails on my property and in Bandera.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-NancyKeller1Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller2Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller3Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller4Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller5Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller6Big.jpg"]
+    "photoURLs": ["https://www.horsemotel.com/ZP-NancyKeller1Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller2Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller3Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller6Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller5Big.jpg", "https://www.horsemotel.com/ZP-NancyKeller4Big.jpg"]
   },
   {
     "id": "horsemotel-not-just-horses-carrie-dodson-1097-fm-2640-quanah-tx-9fa4dfb9",
