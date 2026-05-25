@@ -2249,23 +2249,55 @@ def feed_coordinate_score(item: dict[str, Any]) -> int:
     return score
 
 
-def feed_same_facility(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    if feed_norm(str(a.get("state", ""))) != feed_norm(str(b.get("state", ""))):
-        return False
+def feed_contact_debug_label(keys: set[str]) -> str:
+    if not keys:
+        return "none"
+    return ", ".join(sorted(keys))
 
+
+def feed_same_facility_reasons(a: dict[str, Any], b: dict[str, Any]) -> list[str]:
+    if feed_norm(str(a.get("state", ""))) != feed_norm(str(b.get("state", ""))):
+        return []
+
+    reasons: list[str] = []
     contact_overlap = feed_contact_keys(a) & feed_contact_keys(b)
+    contact_label = feed_contact_debug_label(contact_overlap)
     a_addr, b_addr = feed_address_key(a), feed_address_key(b)
     if a_addr and a_addr == b_addr and contact_overlap:
-        return True
+        reasons.append(f"same normalized address + contact overlap ({contact_label})")
 
     a_desc, b_desc = feed_description_fingerprint(a), feed_description_fingerprint(b)
     if a_desc and a_desc == b_desc and contact_overlap:
-        return True
+        reasons.append(f"same description fingerprint + contact overlap ({contact_label})")
 
     if feed_norm(str(a.get("name", ""))) == feed_norm(str(b.get("name", ""))) and feed_coords_near(a, b) and contact_overlap:
-        return True
+        reasons.append(f"same normalized name + nearby coordinates + contact overlap ({contact_label})")
 
-    return False
+    return reasons
+
+
+def feed_same_facility(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    return bool(feed_same_facility_reasons(a, b))
+
+
+def listing_debug_summary(item: dict[str, Any]) -> str:
+    name = clean_text(str(item.get("name", ""))) or "<blank name>"
+    city = clean_text(str(item.get("city", "")))
+    state = clean_text(str(item.get("state", "")))
+    location_label = ", ".join(part for part in [city, state] if part) or "<blank city/state>"
+    source_url = clean_text(str(item.get("sourceUrl", ""))) or "<blank sourceUrl>"
+    phone = clean_text(str(item.get("phone", ""))) or "<blank phone>"
+    email = clean_text(str(item.get("email", ""))) or "<blank email>"
+    website = clean_text(str(item.get("website", ""))) or "<blank website>"
+    address = clean_text(str(item.get("address") or item.get("location") or item.get("mapSearchAddress") or "")) or "<blank address/location>"
+    lat = item.get("latitude", "")
+    lng = item.get("longitude", "")
+    listing_id = clean_text(str(item.get("id", ""))) or "<blank id>"
+    return (
+        f"name={name!r}; city/state={location_label!r}; sourceUrl={source_url!r}; "
+        f"phone={phone!r}; email={email!r}; website={website!r}; "
+        f"address/location={address!r}; coords=({lat}, {lng}); id={listing_id!r}"
+    )
 
 
 def feed_name_score(value: str) -> int:
@@ -2326,17 +2358,27 @@ def postprocess_final_listings(listings: list[dict[str, Any]]) -> tuple[list[dic
     for incoming in listings:
         if is_placeholder_listing(incoming):
             placeholder_removed += 1
+            print(f"Diagnostic: removed placeholder listing: {listing_debug_summary(incoming)}")
             continue
 
         match_index = None
+        match_reasons: list[str] = []
         for index, existing in enumerate(merged):
-            if feed_same_facility(existing, incoming):
+            reasons = feed_same_facility_reasons(existing, incoming)
+            if reasons:
                 match_index = index
+                match_reasons = reasons
                 break
         if match_index is None:
             merged.append(incoming)
         else:
-            merged[match_index] = feed_merge_values(merged[match_index], incoming)
+            existing = merged[match_index]
+            print("Diagnostic: merged high-confidence duplicate listing")
+            print(f"  reason: {'; '.join(match_reasons)}")
+            print(f"  kept/merged-into: {listing_debug_summary(existing)}")
+            print(f"  incoming-merged: {listing_debug_summary(incoming)}")
+            merged[match_index] = feed_merge_values(existing, incoming)
+            print(f"  result: {listing_debug_summary(merged[match_index])}")
             duplicate_removed += 1
 
     return merged, duplicate_removed, placeholder_removed
