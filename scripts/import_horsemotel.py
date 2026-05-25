@@ -21,7 +21,6 @@ import re
 import sys
 import time
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Iterable, Optional
@@ -37,7 +36,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_JSON = REPO_ROOT / "horsemotel.json"
 DEFAULT_KML = REPO_ROOT / "data" / "imports" / "horsemotel_map.kml"
 DEFAULT_KML_URL = "https://www.google.com/maps/d/kml?mid=1qrjPl4O3jErNdqkjkci9NcMi1AU&forcekml=1"
-PARTNER_NAME = "HorseMotel.com"
 DEFAULT_SITE_URL = "https://www.horsemotel.com/"
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
 USER_AGENT = "HorseMotel.com authorized feed sync (+https://horsemotel.pyoba.com/)"
@@ -885,30 +883,6 @@ def fetch_text(url: str) -> str:
 # ---------------------------------------------------------------------------
 # Data readers (JSON, URL)
 # ---------------------------------------------------------------------------
-
-def _parse_json_rows(data: Any, source_label: str) -> list[dict[str, Any]]:
-    if isinstance(data, dict):
-        data = data.get("listings") or data.get("data") or data.get("items") or []
-    if not isinstance(data, list):
-        raise ValueError(f"{source_label} must contain a JSON array or an object with listings/data/items")
-    return [item for item in data if isinstance(item, dict)]
-
-
-def read_json(path: Path) -> list[dict[str, Any]]:
-    if not path.exists():
-        return []
-    return _parse_json_rows(json.loads(path.read_text(encoding="utf-8")), str(path))
-
-
-def read_url(url: str) -> list[dict[str, Any]]:
-    request = Request(url, headers={
-        "User-Agent": USER_AGENT,
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    })
-    with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
-        body = response.read().decode("utf-8-sig")
-    return _parse_json_rows(json.loads(body), url)
-
 
 # ---------------------------------------------------------------------------
 # HTML parsers
@@ -2158,77 +2132,23 @@ def scrape_horsemotel(site_url: str) -> list[dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Report
-# ---------------------------------------------------------------------------
-
-def write_report(path: Path, count: int, inputs: list[str]) -> None:
-    lines = [
-        "# HorseMotel.com Import Report",
-        "",
-        f"Generated: {datetime.now(timezone.utc).isoformat()}",
-        f"Listings written: {count}",
-        "",
-        "## Inputs",
-    ]
-    lines.extend(f"- {item}" for item in inputs if item)
-    lines.extend([
-        "",
-        "## Notes",
-        f"- Partner/source: {PARTNER_NAME}",
-        "- Attribution: not emitted in-app because this is the official HorseMotel.com app.",
-        "- HorseMotel.com remains the source of truth.",
-        "- Seasonal/status banners are preserved as statusNotice and are not used as listing names.",
-        "- Feed schema is HorseMotel-specific: only listing content and app-critical mapping fields are emitted.",
-        "- Rows without coordinates are skipped until latitude/longitude are provided.",
-        "- Street addresses are captured as the preferred external map/search location when available.",
-        "- KML / Google My Maps coordinates are treated as fallback or approximate pin coordinates, not authoritative street-address validation.",
-        '- Hookups are inferred from free-text descriptions, with negative phrases such as "no dump station" or "no sewer" excluded.',
-        "- Listing image URLs are captured from HorseMotel.com listing blocks when image files are present.",
-        "- The importer can download the authorized Google My Maps KML into data/imports/horsemotel_map.kml and use it to improve fallback coordinates.",
-        "- Website-derived imports read public HorseMotel.com listing pages with permission from HorseMotel.com.",
-        "- KML-only placemarks are included so Canada and international HorseMotel.com listings are not lost when they are not exposed through U.S. state pages.",
-    ])
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Import authorized HorseMotel.com listings into the HorseMotel app JSON feed")
-    parser.add_argument("--json", type=Path, help="Optional JSON export/input path")
-    parser.add_argument("--source-url", help="Optional authorized JSON export URL")
     parser.add_argument("--scrape-site", action="store_true", help="Import from authorized public HorseMotel.com listing pages")
     parser.add_argument("--site-url", default=DEFAULT_SITE_URL, help="HorseMotel.com home page URL")
     parser.add_argument("--kml", type=Path, default=DEFAULT_KML, help="Optional Google My Maps KML export path for better coordinates")
     parser.add_argument("--kml-url", default=DEFAULT_KML_URL, help="Authorized Google My Maps KML URL for better coordinates")
     parser.add_argument("--download-kml", action="store_true", help="Download the authorized KML URL into --kml before importing")
     parser.add_argument("--output", type=Path, default=DEFAULT_JSON, help="Output JSON path")
-    parser.add_argument("--report", type=Path, default=None, help="Optional import report path")
-    parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
-    parser.add_argument("--min-listings", type=int, default=1, help="Fail when the final listing count is below this threshold")
-    parser.add_argument("--max-growth-percent", type=float, default=0.0, help="Fail if listing count grows more than this percent vs existing output (0 = disabled)")
     args = parser.parse_args()
 
     rows: list[dict[str, Any]] = []
-    inputs: list[str] = []
-
-    def _rel(path: Path) -> str:
-        return str(path.relative_to(REPO_ROOT) if path.is_relative_to(REPO_ROOT) else path)
-
-    if args.json:
-        rows.extend(read_json(args.json))
-        inputs.append(_rel(args.json))
-
-    if args.source_url:
-        rows.extend(read_url(args.source_url))
-        inputs.append(args.source_url)
 
     if args.scrape_site:
         rows.extend(scrape_horsemotel(args.site_url))
-        inputs.append(f"Authorized public HorseMotel.com listing pages: {args.site_url}")
 
     kml_rows: list[dict[str, Any]] = []
     if args.download_kml and args.kml_url and args.kml:
@@ -2236,12 +2156,10 @@ def main() -> int:
 
     if args.kml and args.kml.exists():
         kml_rows.extend(read_kml(args.kml))
-        inputs.append(_rel(args.kml))
 
     if args.kml_url and not args.download_kml:
         try:
             kml_rows.extend(read_kml_url(args.kml_url))
-            inputs.append(args.kml_url)
         except Exception as exc:
             print(f"Warning: could not read HorseMotel.com KML URL {args.kml_url}: {exc}", file=sys.stderr)
 
@@ -2264,35 +2182,7 @@ def main() -> int:
     repaired_city_count = repair_feed_city_values(listings)
     print(f"Repaired {repaired_city_count} HorseMotel city values")
 
-    if not listings and not args.allow_empty:
-        print("No HorseMotel.com listings found. Provide a JSON input, use --scrape-site, or pass --allow-empty.", file=sys.stderr)
-        return 2
-    if listings and len(listings) < args.min_listings:
-        print(f"Refusing to write {len(listings)} listings because --min-listings is {args.min_listings}. This protects the live feed when the source website changes or blocks scraping.", file=sys.stderr)
-        return 3
-
-    if args.output:
-        existing_path = Path(args.output)
-        if existing_path.exists() and args.max_growth_percent > 0:
-            try:
-                existing_data = json.loads(existing_path.read_text(encoding="utf-8"))
-                if isinstance(existing_data, list):
-                    previous_count = len(existing_data)
-                    allowed_count = int(previous_count * (1 + args.max_growth_percent / 100.0))
-                    if previous_count > 0 and len(listings) > allowed_count:
-                        print(
-                            f"Refusing to write {len(listings)} listings because the existing output has {previous_count} listings "
-                            f"and --max-growth-percent is {args.max_growth_percent:g}% (allowed up to {allowed_count}). "
-                            "This protects the live feed when desktop/mobile rows fail to dedupe while still allowing normal growth.",
-                            file=sys.stderr,
-                        )
-                        return 4
-            except Exception as exc:
-                print(f"Warning: could not evaluate existing output count guards: {exc}", file=sys.stderr)
-
     compact_json_dump(args.output, listings)
-    if args.report:
-        write_report(args.report, len(listings), inputs or ["No input rows; initialized empty partner JSON"])
     print(f"Wrote {len(listings)} listings to {args.output}")
     return 0
 
