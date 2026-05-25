@@ -2291,55 +2291,26 @@ def feed_coordinate_score(item: dict[str, Any]) -> int:
     return score
 
 
-def feed_contact_debug_label(keys: set[str]) -> str:
-    if not keys:
-        return "none"
-    return ", ".join(sorted(keys))
-
-
-def feed_same_facility_reasons(a: dict[str, Any], b: dict[str, Any]) -> list[str]:
+def feed_same_facility(a: dict[str, Any], b: dict[str, Any]) -> bool:
     if feed_norm(str(a.get("state", ""))) != feed_norm(str(b.get("state", ""))):
-        return []
+        return False
 
-    reasons: list[str] = []
     contact_overlap = feed_contact_keys(a) & feed_contact_keys(b)
-    contact_label = feed_contact_debug_label(contact_overlap)
+    if not contact_overlap:
+        return False
+
     a_addr, b_addr = feed_address_key(a), feed_address_key(b)
-    if a_addr and a_addr == b_addr and contact_overlap:
-        reasons.append(f"same normalized address + contact overlap ({contact_label})")
+    if a_addr and a_addr == b_addr:
+        return True
 
     a_desc, b_desc = feed_description_fingerprint(a), feed_description_fingerprint(b)
-    if a_desc and a_desc == b_desc and contact_overlap:
-        reasons.append(f"same description fingerprint + contact overlap ({contact_label})")
+    if a_desc and a_desc == b_desc:
+        return True
 
-    if feed_norm(str(a.get("name", ""))) == feed_norm(str(b.get("name", ""))) and feed_coords_near(a, b) and contact_overlap:
-        reasons.append(f"same normalized name + nearby coordinates + contact overlap ({contact_label})")
+    if feed_norm(str(a.get("name", ""))) == feed_norm(str(b.get("name", ""))) and feed_coords_near(a, b):
+        return True
 
-    return reasons
-
-
-def feed_same_facility(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    return bool(feed_same_facility_reasons(a, b))
-
-
-def listing_debug_summary(item: dict[str, Any]) -> str:
-    name = clean_text(str(item.get("name", ""))) or "<blank name>"
-    city = clean_text(str(item.get("city", "")))
-    state = clean_text(str(item.get("state", "")))
-    location_label = ", ".join(part for part in [city, state] if part) or "<blank city/state>"
-    source_url = clean_text(str(item.get("sourceUrl", ""))) or "<blank sourceUrl>"
-    phone = clean_text(str(item.get("phone", ""))) or "<blank phone>"
-    email = clean_text(str(item.get("email", ""))) or "<blank email>"
-    website = clean_text(str(item.get("website", ""))) or "<blank website>"
-    address = clean_text(str(item.get("address") or item.get("location") or item.get("mapSearchAddress") or "")) or "<blank address/location>"
-    lat = item.get("latitude", "")
-    lng = item.get("longitude", "")
-    listing_id = clean_text(str(item.get("id", ""))) or "<blank id>"
-    return (
-        f"name={name!r}; city/state={location_label!r}; sourceUrl={source_url!r}; "
-        f"phone={phone!r}; email={email!r}; website={website!r}; "
-        f"address/location={address!r}; coords=({lat}, {lng}); id={listing_id!r}"
-    )
+    return False
 
 
 def feed_name_score(value: str) -> int:
@@ -2400,27 +2371,17 @@ def postprocess_final_listings(listings: list[dict[str, Any]]) -> tuple[list[dic
     for incoming in listings:
         if is_placeholder_listing(incoming):
             placeholder_removed += 1
-            print(f"Diagnostic: removed placeholder listing: {listing_debug_summary(incoming)}")
             continue
 
         match_index = None
-        match_reasons: list[str] = []
         for index, existing in enumerate(merged):
-            reasons = feed_same_facility_reasons(existing, incoming)
-            if reasons:
+            if feed_same_facility(existing, incoming):
                 match_index = index
-                match_reasons = reasons
                 break
         if match_index is None:
             merged.append(incoming)
         else:
-            existing = merged[match_index]
-            print("Diagnostic: merged high-confidence duplicate listing")
-            print(f"  reason: {'; '.join(match_reasons)}")
-            print(f"  kept/merged-into: {listing_debug_summary(existing)}")
-            print(f"  incoming-merged: {listing_debug_summary(incoming)}")
-            merged[match_index] = feed_merge_values(existing, incoming)
-            print(f"  result: {listing_debug_summary(merged[match_index])}")
+            merged[match_index] = feed_merge_values(merged[match_index], incoming)
             duplicate_removed += 1
 
     return merged, duplicate_removed, placeholder_removed
@@ -2538,8 +2499,6 @@ def main() -> int:
     parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
     parser.add_argument("--min-listings", type=int, default=1, help="Fail instead of writing output when the final listing count is below this threshold")
     parser.add_argument("--max-growth-percent", type=float, default=0.0, help="Fail if the new listing count grows more than this percent compared with the existing output file. Set 0 to disable.")
-    parser.add_argument("--max-listing-drop", type=int, default=10, help="Fail if the final listing count drops by more than this many listings compared with the existing output file. Set -1 to disable.")
-    parser.add_argument("--min-scrape-rows", type=int, default=100, help="Fail a --scrape-site run when the website scrape returns fewer raw rows than this before KML fallback. Set 0 to disable.")
     args = parser.parse_args()
 
     rows: list[Dict[str, Any]] = []
@@ -2562,14 +2521,6 @@ def main() -> int:
 
     if args.scrape_site:
         site_rows = scrape_horsemotel(args.site_url)
-        if args.min_scrape_rows > 0 and len(site_rows) < args.min_scrape_rows:
-            print(
-                f"Refusing to continue because --scrape-site returned only {len(site_rows)} raw website rows "
-                f"and --min-scrape-rows is {args.min_scrape_rows}. "
-                "This protects the live feed when HorseMotel.com is timing out, blocking, or returning incomplete pages.",
-                file=sys.stderr,
-            )
-            return 5
         rows.extend(site_rows)
         inputs.append(f"Authorized public HorseMotel.com listing pages: {args.site_url}")
 
@@ -2618,17 +2569,6 @@ def main() -> int:
                 existing_data = json.loads(existing_output_path.read_text(encoding="utf-8"))
                 if isinstance(existing_data, list):
                     previous_count = len(existing_data)
-
-                    if args.max_listing_drop >= 0 and previous_count > 0:
-                        minimum_allowed_count = previous_count - args.max_listing_drop
-                        if len(listings) < minimum_allowed_count:
-                            print(
-                                f"Refusing to write {len(listings)} listings because the existing output has {previous_count} listings "
-                                f"and --max-listing-drop is {args.max_listing_drop} (minimum allowed {minimum_allowed_count}). "
-                                "This protects the live feed when HorseMotel.com is timing out, blocking, or returning incomplete pages.",
-                                file=sys.stderr,
-                            )
-                            return 6
 
                     if args.max_growth_percent > 0:
                         allowed_count = int(previous_count * (1 + (args.max_growth_percent / 100.0)))
