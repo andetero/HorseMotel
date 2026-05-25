@@ -2,7 +2,7 @@ name: Sync HorseMotel.com Listings
 
 on:
   schedule:
-    # Runs daily at 12:00 AM America/Denver.
+    # Runs daily at midnight America/Denver.
     - cron: "0 0 * * *"
       timezone: "America/Denver"
   workflow_dispatch:
@@ -13,7 +13,6 @@ permissions:
 jobs:
   sync-horsemotel:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
 
     steps:
       - name: Checkout repo
@@ -24,54 +23,15 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Import authorized HorseMotel.com listings
+      - name: Import HorseMotel.com listings
         run: |
           set -euo pipefail
+          python scripts/import_horsemotel.py \
+            --scrape-site \
+            --site-url "https://www.horsemotel.com/" \
+            --output horsemotel.json
 
-          run_import() {
-            if [ -n "${{ secrets.HORSEMOTEL_SOURCE_URL }}" ]; then
-              python scripts/import_horsemotel.py \
-                --csv data/imports/horsemotel_listings.csv \
-                --output horsemotel.json \
-                --min-listings 700 \
-                --max-growth-percent 50 \
-                --download-kml \
-                --source-url "${{ secrets.HORSEMOTEL_SOURCE_URL }}"
-            else
-              python scripts/import_horsemotel.py \
-                --csv data/imports/horsemotel_listings.csv \
-                --output horsemotel.json \
-                --min-listings 700 \
-                --max-growth-percent 50 \
-                --download-kml \
-                --scrape-site \
-                --site-url "https://www.horsemotel.com/"
-            fi
-          }
-
-          for attempt in 1 2 3; do
-            echo "Import attempt ${attempt}..."
-            if run_import; then
-              echo "Import succeeded."
-              exit 0
-            fi
-
-            echo "Import failed. Waiting before retry..."
-            sleep $((attempt * 30))
-          done
-
-          echo "Import failed after retries."
-          exit 1
-
-      - name: Upload HorseMotel.com sync outputs as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: horsemotel-sync-outputs
-          path: |
-            horsemotel.json
-            data/imports/horsemotel_map.kml
-
-      - name: Commit outputs
+      - name: Commit output
         run: |
           set -euo pipefail
 
@@ -79,9 +39,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           git add horsemotel.json
-          git add data/imports/horsemotel_map.kml
-          git rm --ignore-unmatch horsemotel_listings.json feed_metadata.json scripts/generate_metadata.py scripts/validate_feed.py
-          git rm --ignore-unmatch data/imports/horsemotel_schema_audit.md data/imports/horsemotel_import_report.md
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
@@ -89,17 +46,4 @@ jobs:
           fi
 
           git commit -m "chore: sync HorseMotel.com listings"
-
-          for attempt in 1 2 3 4 5; do
-            echo "Push attempt ${attempt}..."
-            if git push; then
-              echo "Push succeeded."
-              exit 0
-            fi
-
-            echo "Push failed. Waiting before retry..."
-            sleep $((attempt * 30))
-          done
-
-          echo "Push failed after retries."
-          exit 1
+          git push
