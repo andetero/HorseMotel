@@ -24,12 +24,14 @@ import html
 import json
 import re
 import sys
+import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -42,6 +44,10 @@ DEFAULT_SITE_URL = "https://www.horsemotel.com/"
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
 USER_AGENT = "HorseMotel.com authorized feed sync (+https://horsemotel.pyoba.com/)"
 FETCH_TIMEOUT_SECONDS = 45
+FETCH_RETRY_COUNT = 3
+FETCH_RETRY_BACKOFF_SECONDS = 2.0
+FETCH_REQUEST_DELAY_SECONDS = 0.35
+_last_fetch_started_at = 0.0
 ROBOTS_META_BLOCK_PHRASES = (
     "javascript is required",
     "enable javascript before you are allowed",
@@ -612,12 +618,48 @@ def make_request_safe_url(url: str) -> str:
     return urlunsplit((parts.scheme, parts.netloc, path, query, fragment))
 
 
+def throttle_fetches() -> None:
+    """Be polite to HorseMotel.com and avoid hammering the legacy site.
+
+    GitHub Actions runners can reach the site differently than a normal browser.
+    A small delay plus retries makes the importer less likely to trip over a
+    temporary server/network timeout while keeping the nightly run practical.
+    """
+    global _last_fetch_started_at
+    now = time.monotonic()
+    elapsed = now - _last_fetch_started_at
+    if elapsed < FETCH_REQUEST_DELAY_SECONDS:
+        time.sleep(FETCH_REQUEST_DELAY_SECONDS - elapsed)
+    _last_fetch_started_at = time.monotonic()
+
+
 def fetch_text(url: str) -> str:
     safe_url = make_request_safe_url(url)
     request = Request(safe_url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
-    with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
-        charset = response.headers.get_content_charset() or "utf-8"
-        return response.read().decode(charset, errors="replace")
+    last_error: Exception | None = None
+
+    for attempt in range(1, FETCH_RETRY_COUNT + 1):
+        try:
+            throttle_fetches()
+            with urlopen(request, timeout=FETCH_TIMEOUT_SECONDS) as response:
+                charset = response.headers.get_content_charset() or "utf-8"
+                return response.read().decode(charset, errors="replace")
+        except HTTPError as exc:
+            # Missing legacy detail pages should remain a normal warning path;
+            # retrying known 404/410 responses only slows the sync.
+            if exc.code in {404, 410}:
+                raise
+            last_error = exc
+        except Exception as exc:  # noqa: BLE001 - retry transient network/server failures.
+            last_error = exc
+
+        if attempt < FETCH_RETRY_COUNT:
+            delay = FETCH_RETRY_BACKOFF_SECONDS * attempt
+            print(f"Warning: fetch attempt {attempt}/{FETCH_RETRY_COUNT} failed for {safe_url}: {last_error}; retrying in {delay:g}s", file=sys.stderr)
+            time.sleep(delay)
+
+    assert last_error is not None
+    raise last_error
 
 
 def read_url(url: str) -> list[Dict[str, Any]]:
@@ -2496,6 +2538,8 @@ def main() -> int:
     parser.add_argument("--allow-empty", action="store_true", help="Write [] when no input rows are available")
     parser.add_argument("--min-listings", type=int, default=1, help="Fail instead of writing output when the final listing count is below this threshold")
     parser.add_argument("--max-growth-percent", type=float, default=0.0, help="Fail if the new listing count grows more than this percent compared with the existing output file. Set 0 to disable.")
+    parser.add_argument("--max-listing-drop", type=int, default=10, help="Fail if the final listing count drops by more than this many listings compared with the existing output file. Set -1 to disable.")
+    parser.add_argument("--min-scrape-rows", type=int, default=100, help="Fail a --scrape-site run when the website scrape returns fewer raw rows than this before KML fallback. Set 0 to disable.")
     args = parser.parse_args()
 
     rows: list[Dict[str, Any]] = []
@@ -2518,6 +2562,14 @@ def main() -> int:
 
     if args.scrape_site:
         site_rows = scrape_horsemotel(args.site_url)
+        if args.min_scrape_rows > 0 and len(site_rows) < args.min_scrape_rows:
+            print(
+                f"Refusing to continue because --scrape-site returned only {len(site_rows)} raw website rows "
+                f"and --min-scrape-rows is {args.min_scrape_rows}. "
+                "This protects the live feed when HorseMotel.com is timing out, blocking, or returning incomplete pages.",
+                file=sys.stderr,
+            )
+            return 5
         rows.extend(site_rows)
         inputs.append(f"Authorized public HorseMotel.com listing pages: {args.site_url}")
 
@@ -2559,24 +2611,37 @@ def main() -> int:
     if listings and len(listings) < args.min_listings:
         print(f"Refusing to write {len(listings)} listings because --min-listings is {args.min_listings}. This protects the live feed when the source website changes or blocks scraping.", file=sys.stderr)
         return 3
-    if args.max_growth_percent > 0 and args.output:
+    if args.output:
         existing_output_path = Path(args.output)
         if existing_output_path.exists():
             try:
                 existing_data = json.loads(existing_output_path.read_text(encoding="utf-8"))
                 if isinstance(existing_data, list):
                     previous_count = len(existing_data)
-                    allowed_count = int(previous_count * (1 + (args.max_growth_percent / 100.0)))
-                    if previous_count > 0 and len(listings) > allowed_count:
-                        print(
-                            f"Refusing to write {len(listings)} listings because the existing output has {previous_count} listings "
-                            f"and --max-growth-percent is {args.max_growth_percent:g}% (allowed up to {allowed_count}). "
-                            "This protects the live feed when desktop/mobile rows fail to dedupe while still allowing normal growth.",
-                            file=sys.stderr,
-                        )
-                        return 4
+
+                    if args.max_listing_drop >= 0 and previous_count > 0:
+                        minimum_allowed_count = previous_count - args.max_listing_drop
+                        if len(listings) < minimum_allowed_count:
+                            print(
+                                f"Refusing to write {len(listings)} listings because the existing output has {previous_count} listings "
+                                f"and --max-listing-drop is {args.max_listing_drop} (minimum allowed {minimum_allowed_count}). "
+                                "This protects the live feed when HorseMotel.com is timing out, blocking, or returning incomplete pages.",
+                                file=sys.stderr,
+                            )
+                            return 6
+
+                    if args.max_growth_percent > 0:
+                        allowed_count = int(previous_count * (1 + (args.max_growth_percent / 100.0)))
+                        if previous_count > 0 and len(listings) > allowed_count:
+                            print(
+                                f"Refusing to write {len(listings)} listings because the existing output has {previous_count} listings "
+                                f"and --max-growth-percent is {args.max_growth_percent:g}% (allowed up to {allowed_count}). "
+                                "This protects the live feed when desktop/mobile rows fail to dedupe while still allowing normal growth.",
+                                file=sys.stderr,
+                            )
+                            return 4
             except Exception as exc:
-                print(f"Warning: could not evaluate existing output count for growth guard: {exc}", file=sys.stderr)
+                print(f"Warning: could not evaluate existing output count guards: {exc}", file=sys.stderr)
 
     compact_json_dump(args.output, listings)
     if args.report:
