@@ -1494,11 +1494,11 @@
     "longitude": -110.8916766,
     "hookups": ["Electric", "Water", "Sewer", "Dump Station"],
     "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly", "WiFi"],
-    "phone": "780-806-5136",
-    "email": "info@sportingdogranch.com",
+    "phone": "780-806-5136 For an immediate response please text \ninfo@sportingdogranch.com",
+    "email": "",
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/ZCan-Alberta.html",
-    "description": "Overnight stays for RV’s and campers with horse(s). Outdoor 24’ x 24’ steel panel pens. Indoor box stalls, tie stalls, outdoor riding arena and round pen are coming soon. Located just off Highway #14 west of Wainwright, AB. Close (10 mins) to restaurants, fuel, feed stores, grocery stores and entertainment. All outdoor pens have water. Grass hay and feed is available. Plenty of room for big rigs. Water hookup is available. Free WiFi. RV sanitary dump station nearby. Gated and pavement to property. A negative Coggins test and health certificate is required for each horse. All pets must be leashed or stay in truck/trailer. Liability release required. Owners live on site. May long weekend to September long weekend. $25.00 per night per unit for dry camping. $20.00 per horse per night outdoor. Location notes: Wainwright, Alberta",
+    "description": "Overnight stays for RV's and campers with horse(s). Outdoor 24' x 24' steel panel pens. Indoor box stalls, tie stalls, outdoor riding arena and round pen are coming soon. Located just off Highway #14 west of Wainwright, AB. Close (10 mins) to restaurants, fuel, feed stores, grocery stores and entertainment. All outdoor pens have water. Grass hay and feed is available. Plenty of room for big rigs. Water hookup is available. Free WiFi. RV sanitary dump station nearby. Gated and pavement to property. A negative Coggins test and health certificate is required for each horse. All pets must be leashed or stay in truck/trailer. Liability release required. Owners live on site. May long weekend to September long weekend. $25.00 per night per unit for dry camping. $20.00 per horse per night outdoor. Location notes: Wainwright, Alberta",
     "photoURLs": []
   },
   {
@@ -7738,7 +7738,7 @@
     "website": "https://foxtrailfarmnc.com/",
     "sourceUrl": "https://www.horsemotel.com/NorthCarolina.html",
     "description": "Clean, safe barn has 12' x 12' matted box stalls with individual turnouts off stalls. Automatic waterers, fans for warm weather, 2 wash bays, 2 round pens, 125' x 250' riding arena. Ample parking for trailers. Owners live on premises. Please see website for details and rates. Location notes: Conveniently located 3 miles off I-95, exit 72 in NC. Ample hotels and restaurants within 5 miles, The Comfort Inn and Brass Lantern Steak house are at our exit. Perfect stop between New England and Florida.",
-    "photoURLs": []
+    "photoURLs": ["https://www.horsemotel.com/ZP-FoxTrailBig.jpg"]
   },
   {
     "id": "horsemotel-e9f927919e",
@@ -10269,15 +10269,15 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-Suncatcher1Big.jpg", "https://www.horsemotel.com/ZP-Suncatcher2Big.jpg", "https://www.horsemotel.com/ZP-Suncatcher3Big.jpg"]
   },
   {
-    "id": "horsemotel-450e0a3d74",
+    "id": "horsemotel-8c91d28fc1",
     "name": "Abiding Dudes Equine Hotel",
     "location": "37110 Highway 62, Chiloquin , OR 97624",
     "address": "37110 Highway 62, Chiloquin , OR 97624",
     "city": "Chiloquin",
     "state": "OR",
     "country": "",
-    "latitude": 42.5629318,
-    "longitude": -121.9138711,
+    "latitude": 42.562634,
+    "longitude": -121.9111506,
     "hookups": ["30A", "Electric"],
     "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Wash Rack", "Trails"],
     "phone": "989-627-3236",
