@@ -2852,6 +2852,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-ThorsBig.jpg"]
   },
   {
+    "id": "horsemotel-58a613d144",
+    "name": "Triple BBB Farm on 285",
+    "location": "16103 US Highway 285, Salida , CO 81201",
+    "address": "16103 US Highway 285, Salida , CO 81201",
+    "city": "Salida",
+    "state": "CO",
+    "country": "",
+    "latitude": 38.653692,
+    "longitude": -106.085102,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly", "Lodging"],
+    "phone": "Cell - 970-215-9786 or 719-239-3496",
+    "email": "nextstep1174@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Colorado.html",
+    "description": "7 12' x 12' stalls, indoors ($25 per horse.). Ample pasture land or dry lots, as desired. 46' in diameter round pen. Circle drive can accommodate any size rig. Trailer hook-up available ($30/night) so you can stay with your horses.) or we have a one bedroom, fully equipped VRBO Cottage (kitchen, bathroom, living room) on site available for $110 per night. Sleeps 4 with one queen sized bed and 2 single beds in loft. Incredible views of Collegiate Peaks. Plenty of places to exercise or ride - the round pen, pastures, extensive circle drive, and long dirt/gravel road that leads to an archery range is also perfect for riding. Friendly dogs welcome. Owner lives on site, open 24/7, call ahead for accommodations. Health certificates and a negative Coggins for each horse must be provided to meet Colorado Regulations. Note:This is a non-smoking property. Can pay via Venmo, Paypal or cash. Location notes: Easy access east off Hwy. 285. Arriving from the north on 285 - watch for Chaffee County Landfill sign, go south 3/4 miles turn left off highway at 3 mailboxes. Arriving from the south on Hwy. 285 - look for the Heckla Junction turn, go beyond 1 mile north, turn right at three mailboxes. Look for sign with big arrows pointing into the ground, east side in a pasture, that's the farm.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-TripleB1Big.jpg", "https://www.horsemotel.com/ZP-TripleB2Big.jpg"]
+  },
+  {
     "id": "horsemotel-f17232312f",
     "name": "Turtle Creek Farm, LLC, Amy Tjardes",
     "location": "40720 County Road 15, Fort Collins, CO 80524",
