@@ -2509,6 +2509,25 @@
     "photoURLs": []
   },
   {
+    "id": "horsemotel-208360b89f",
+    "name": "Fruita, Colorado, Fruita Horse Motel &",
+    "location": "2053 L Road, Fruita, CO 81521",
+    "address": "2053 L Road, Fruita, CO 81521",
+    "city": "Fruita",
+    "state": "CO",
+    "country": "",
+    "latitude": 39.178756,
+    "longitude": -108.672686,
+    "hookups": ["20A", "30A", "Electric", "Water"],
+    "accommodations": ["RV Hookups"],
+    "phone": "970-753-9235",
+    "email": "kiwifirmin@yahoo.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Colorado.html",
+    "description": "* 8 outdoor covered pens (14' x 14') * 1 large outdoor double pen (20' x 30') * Multiple turnout paddocks * Additional areas available as needed * Hay and shavings available for purchase * Electric/water trailer hookups (2 - 20 amp, 1 - 30 amp - based on availability) * Shared-use kitchen * Shower/toilet facility * Covered picnic/lounge area Rates: * $25 per horse per night * +$10 per pen for muck-out/clean‑up * $15 per trailer per night with electric/water hookup. Owners are available 24/7 to ensure a safe, smooth stop for you and your horses. Policies: * Health certificates & negative Coggins required * No smoking anywhere on the property * Well-behaved dogs welcome - must remain on leash. Payment: Cash, Venmo, or Zelle upon arrival. Contact: Call or email for availability and more information. Location notes: Fruita is in southwest Colorado off Interstate 70. Private, owner-operated farm just 10 minutes off Interstate 70 and close to dining, fuel, entertainment, and supplies.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-Fruita1Big.jpg", "https://www.horsemotel.com/ZP-Fruita2Big.jpg", "https://www.horsemotel.com/ZP-Fruita3Big.jpg", "https://www.horsemotel.com/ZP-Fruita4Big.jpg"]
+  },
+  {
     "id": "horsemotel-86a9895ac2",
     "name": "Grand Mesa Stay With Your Horses",
     "location": "9065 48 1/2 Road, Mesa , CO 81643",
