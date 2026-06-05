@@ -2718,6 +2718,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-Salt1Big.jpg", "https://www.horsemotel.com/ZP-Salt2Big.jpg", "https://www.horsemotel.com/ZP-Salt3Big.jpg", "https://www.horsemotel.com/ZP-Salt4Big.jpg", "https://www.horsemotel.com/ZP-Salt5Big.jpg", "https://www.horsemotel.com/ZP-Salt6Big.jpg"]
   },
   {
+    "id": "horsemotel-7d477e4501",
+    "name": "State Line Stables",
+    "location": "19800 US Highway 385, Burlington , CO 80807",
+    "address": "19800 US Highway 385, Burlington , CO 80807",
+    "city": "Burlington",
+    "state": "CO",
+    "country": "",
+    "latitude": 39.327063,
+    "longitude": -102.259838,
+    "hookups": ["Electric"],
+    "accommodations": ["Paddocks", "RV Hookups", "Big Rig Friendly"],
+    "phone": "719-342-2944 or 303-359-2859",
+    "email": "statelinestables19800@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Colorado.html",
+    "description": "We offer 5 12' x 12' fully covered stalls with 13' x 50' paddocks off each run that are built with heavy duty pipe to ensure the safety of your horse while boarded with us. These stalls are matted and covered with pine bedding. We also have 5 8' x 12' semi covered stalls with 12 x 40 paddocks. (These are not matted stalls) Water will be in each stall upon your arrival and there is an area to place hay for your horses in each stall. - we have hay for purchase if needed - The stalls are lit with dusk to dawn lighting. There is an outdoor arena available for your use, we just ask that you supervise your horse while they are out there and are not left unattended while in the arena. Dogs are allowed on the property as long as they are friendly and on a leash. The driveway on the property is a U shape, perfect to pull any size trailer/rig through. We have 2 hook ups for trailers if you wish to stay in your trailer to be close to your horse. As long as you are boarding with us, hook up is free. We have one water line hook up. We live on the premises and will greet you and your horses upon arrival. We will be available for any of your needs while you are with us. We are open yearly 24/7 so please reach out for your boarding needs. We do require that you provide us with proof of negative Coggins test and health certificate for your horse to be on the property. We offer nightly and monthly boarding. Please contact for pricing and availability. We offer multiple payment options to make it convenient for you while traveling. Location notes: Less then 2 miles off of I-70, just north of the the highway. We are located close to multiple fast food restaurants, a few sit down restaurants, Safeway, multiple hotels and multiple gas stations that will fit large rigs. Conveniently located near the I-70 exits and multiple smaller highways.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-StateLine1Big.jpg", "https://www.horsemotel.com/ZP-StateLine2Big.jpg"]
+  },
+  {
     "id": "horsemotel-0c579e25e3",
     "name": "Sunset Pines",
     "location": "2026 Andrea Place, Parker, CO 80138",
@@ -5874,25 +5893,6 @@
     "sourceUrl": "https://www.horsemotel.com/Massachusetts.html",
     "description": "Golden Moon Farm is a horse farm with a large indoor riding arena with three large stalls available for traveling horse guests. We offer horse hotel accommodation when traveling through central Massachusetts area with your horses. We offer inside and outside turnout for limited stays. We also host truck-ins for those local horse riders that want to use the lighted indoor arena. Location notes: Approximately half way between Worcester, MA and Providence, RI and tucked away in the wooded countryside, southeast of Douglas.",
     "photoURLs": ["https://www.horsemotel.com/ZP-GoldenMoonBig.jpg"]
-  },
-  {
-    "id": "horsemotel-13fe1ade24",
-    "name": "Hidden Creek Homestead, Stevie LeBlanc",
-    "location": "37 St George Road, Brimfield , MA 01010",
-    "address": "37 St George Road, Brimfield , MA 01010",
-    "city": "Brimfield",
-    "state": "MA",
-    "country": "",
-    "latitude": 42.0353988,
-    "longitude": -71.7066849,
-    "hookups": ["Electric"],
-    "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
-    "phone": "774-573-0656",
-    "email": "stevie.magri0656@gmail.com",
-    "website": "",
-    "sourceUrl": "https://www.horsemotel.com/Massachusetts.html",
-    "description": "Four 10' x 12' stalls available and a paddock with electric fencing if desired for short stays. Quiet home based farm. Owner lives on premises. We also have a B&B (when available) for owners! Coggins and health check required on all horses. Please text 774-573-0656 Location notes: Northwest of Sturbridge and convenient to I-80.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-HiddenCreekMABig.jpg"]
   },
   {
     "id": "horsemotel-15a15e76a5",
@@ -12362,6 +12362,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-Ocio1Big.jpg", "https://www.horsemotel.com/ZP-Ocio2Big.jpg", "https://www.horsemotel.com/ZP-Ocio3Big.jpg", "https://www.horsemotel.com/ZP-Ocio4Big.jpg"]
   },
   {
+    "id": "horsemotel-4bb7303e24",
+    "name": "Adams, Tennessee, Harmony Acres",
+    "location": "3799 Harmony Church Rd, Adams , TN 37010",
+    "address": "3799 Harmony Church Rd, Adams , TN 37010",
+    "city": "Adams",
+    "state": "TN",
+    "country": "",
+    "latitude": 36.5339528,
+    "longitude": -87.1176617,
+    "hookups": ["50A", "Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "WiFi"],
+    "phone": "Blain - 615-752-8506",
+    "email": "harmonyacrestn@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeHarmonyAcres.html",
+    "description": "Stall, round pen, dry lot, bath house, RV/LQ hook ups (W/E/S), 50 amp, Wifi Location notes: 9 minutes off of interstate 24, Exit 11 or Exit 19.",
+    "photoURLs": []
+  },
+  {
     "id": "horsemotel-930eb1bf39",
     "name": "Arlington, Tennessee, Due to construction, we cannot accommodate",
     "location": "5985 Cedar Grove Road, Arlington , TN 38002 (Memphis area)",
@@ -12573,8 +12592,8 @@
   {
     "id": "horsemotel-0e99683bbc",
     "name": "Harmony Acres, Jessica Kolb",
-    "location": "3799 Harmony Church Rd, Adams , TN 37010",
-    "address": "3799 Harmony Church Rd, Adams , TN 37010",
+    "location": "3799 Harmony Church Road, Adams , TN 37010",
+    "address": "3799 Harmony Church Road, Adams , TN 37010",
     "city": "Adams",
     "state": "TN",
     "country": "",
