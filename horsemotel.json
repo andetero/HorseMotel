@@ -1958,6 +1958,25 @@
     "photoURLs": []
   },
   {
+    "id": "horsemotel-1428613087",
+    "name": "Oakdale, California, Kaufman Creek Ranch",
+    "location": "6101 Kaufman Road, Oakdale , CA 95361",
+    "address": "6101 Kaufman Road, Oakdale , CA 95361",
+    "city": "Oakdale",
+    "state": "CA",
+    "country": "",
+    "latitude": 37.727343,
+    "longitude": -120.848477,
+    "hookups": ["30A", "50A", "Electric", "Water", "Sewer"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
+    "phone": "209-505-5728",
+    "email": "kaufmancreek@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileCaliforniaKaufman.html",
+    "description": "This facility is only available from May 1st - October 1st. Grass parking area, 50/30 electric, water, warm up arena, 40' round corral, paddock turn out, 12' x 12' stall. Prices: Dry Camping: $25.00 per night, electric/water. $35.00 per night, 12' x 12' stall: $25.00 per night, cleaning fee: $35.00, sewer dump: $10.00, shavings: $10.00. Nearby feed stores: Conlin Supply, Oakdale Feed, Tractor Supply. Guests must bring their own feed and clean up any manure left in the stalls. Clean-up service is available for an additional fee. *All horses must submit to temperature check and health verification. High temperatures and symptoms of illness,( runny nose, cough) or traveling from a known quarantine area will not be permitted to stay. Location notes: This quite isolated ranch is located on a dead-end road just minutes from downtown Oakdale and the Oakdale Rodeo grounds.",
+    "photoURLs": []
+  },
+  {
     "id": "horsemotel-4ac820eaef",
     "name": "Phelan, California, Sweethart Farms",
     "location": "9590 Beekley Road, Phelan , CA 92371",
