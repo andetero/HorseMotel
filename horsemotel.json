@@ -1973,7 +1973,7 @@
     "email": "kaufmancreek@gmail.com",
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileCaliforniaKaufman.html",
-    "description": "This facility is only available from May 1st - October 1st. Grass parking area, 50/30 electric, water, warm up arena, 40' round corral, paddock turn out, 12' x 12' stall. Prices: Dry Camping: $25.00 per night, electric/water. $35.00 per night, 12' x 12' stall: $25.00 per night, cleaning fee: $35.00, sewer dump: $10.00, shavings: $10.00. Nearby feed stores: Conlin Supply, Oakdale Feed, Tractor Supply. Guests must bring their own feed and clean up any manure left in the stalls. Clean-up service is available for an additional fee. *All horses must submit to temperature check and health verification. High temperatures and symptoms of illness,( runny nose, cough) or traveling from a known quarantine area will not be permitted to stay. Location notes: This quite isolated ranch is located on a dead-end road just minutes from downtown Oakdale and the Oakdale Rodeo grounds.",
+    "description": "This facility is only available from May 1st - October 1st. Grass parking area, 50/30 electric, water, warm up arena, 50' round corral, paddock turn out, 12' x 12' stall. Prices: Dry Camping: $25.00 per night, electric/water. $35.00 per night, 12' x 12' stall: $25.00 per night, cleaning fee: $35.00, sewer dump: $10.00, shavings: $10.00. Nearby feed stores: Conlin Supply, Oakdale Feed, Tractor Supply. Guests must bring their own feed and clean up any manure left in the stalls. Clean-up service is available for an additional fee. *All horses must submit to temperature check and health verification. High temperatures and symptoms of illness,( runny nose, cough) or traveling from a known quarantine area will not be permitted to stay. Location notes: This quite isolated ranch is located on a dead-end road just minutes from downtown Oakdale and the Oakdale Rodeo grounds.",
     "photoURLs": []
   },
   {
@@ -9565,25 +9565,6 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-HeartsStars1Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars2Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars3Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars4Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars5Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars6Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars7Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars8Big.jpg"]
   },
   {
-    "id": "horsemotel-f40edb4441",
-    "name": "KaiseRosa Ranch, Eric Coons",
-    "location": "3485 Vicki Ave., Las Vegas , NV 89139",
-    "address": "3485 Vicki Ave., Las Vegas , NV 89139",
-    "city": "Las Vegas",
-    "state": "NV",
-    "country": "",
-    "latitude": 36.022777,
-    "longitude": -115.186159,
-    "hookups": [],
-    "accommodations": ["Stalls"],
-    "phone": "702-524-9728",
-    "email": "ezreiner@gmail.com",
-    "website": "https://kaiserosaranchlv.com/",
-    "sourceUrl": "https://www.horsemotel.com/Nevada.html",
-    "description": "Welcome to KaiseRosa Ranch, offering overnight horse boarding and self-service horse stalls. We provide a safe, convenient, and horse-friendly stop for travelers, competitors, rodeo participants, and horses passing through Southern Nevada. Whether you are hauling across the country, attending an event, or simply need a reliable overnight horse motel near Las Vegas, our facility offers clean stalls, trailer access, and flexible accommodations for short-term stays. Our overnight boarding options are designed for traveling horses and riders who need a comfortable place to stop and rest. Self-service stalls are available, making it easy for horse owners to care for their horses on their own schedule. We strive to provide a quiet, clean, and dependable environment for both horses and riders during overnight stays. Location notes: Less than a mile from South Point Casino and Arena",
-    "photoURLs": ["https://www.horsemotel.com/ZP-KaiseRosaBig.jpg"]
-  },
-  {
     "id": "horsemotel-d514b7a803",
     "name": "Kingston Ranch, Silke Ortloff",
     "location": "2500 Kingston Rd, Sandy Valley , NV 89019",
@@ -9601,6 +9582,25 @@
     "sourceUrl": "https://www.horsemotel.com/Nevada.html",
     "description": "2 stalls 12' x 12' with adjacent paddocks 20' x 20'. 2 Partial hook ups 30 and 50 amp ( electric and water) no sewer. Guest bathroom with shower at the barn. Guesthouse with 3 bedroom, 1 bathroom. Private lake for swimming. Dogs welcome. 60' round pen. Endless trails from out the ranch. Health certificates and negative coggins test required. Price list: Horse stalls $25 per night. RVs $50 p/n. Guesthouse $175 p/n plus cleaning $70. Location notes: Sandy Valley. GPS- address: 2500 Kingston Rd., Nipton, CA 92311, United States.",
     "photoURLs": ["https://www.horsemotel.com/ZP-KingstonRanch1Big.jpg", "https://www.horsemotel.com/ZP-KingstonRanch6Big.jpg", "https://www.horsemotel.com/ZP-KingstonRanch2Big.jpg", "https://www.horsemotel.com/ZP-KingstonRanch3Big.jpg", "https://www.horsemotel.com/ZP-KingstonRanch4Big.jpg", "https://www.horsemotel.com/ZP-KingstonRanch5Big.jpg"]
+  },
+  {
+    "id": "horsemotel-c3fbe9989e",
+    "name": "Las Vegas Horse Hotel, Eric Coons",
+    "location": "3485 Vicki Ave., Las Vegas , NV 89139",
+    "address": "3485 Vicki Ave., Las Vegas , NV 89139",
+    "city": "Las Vegas",
+    "state": "NV",
+    "country": "",
+    "latitude": 36.022777,
+    "longitude": -115.186159,
+    "hookups": [],
+    "accommodations": ["Stalls"],
+    "phone": "702-524-9728",
+    "email": "ezreiner@gmail.com",
+    "website": "https://lasvegashorsehotel.com/",
+    "sourceUrl": "https://www.horsemotel.com/Nevada.html",
+    "description": "Welcome to KaiseRosa Ranch, offering overnight horse boarding and self-service horse stalls. We provide a safe, convenient, and horse-friendly stop for travelers, competitors, rodeo participants, and horses passing through Southern Nevada. Whether you are hauling across the country, attending an event, or simply need a reliable overnight horse motel near Las Vegas, our facility offers clean stalls, trailer access, and flexible accommodations for short-term stays. Our overnight boarding options are designed for traveling horses and riders who need a comfortable place to stop and rest. Self-service stalls are available, making it easy for horse owners to care for their horses on their own schedule. We strive to provide a quiet, clean, and dependable environment for both horses and riders during overnight stays. Location notes: Less than a mile from South Point Casino and Arena",
+    "photoURLs": ["https://www.horsemotel.com/ZP-KaiseRosaBig.jpg"]
   },
   {
     "id": "horsemotel-f57216409f",
