@@ -2,8 +2,8 @@ name: Sync HorseMotel.com Listings
 
 on:
   schedule:
-    # Runs daily at 9p Mountain Time.
-    - cron: "0 21 * * *"
+    # Runs daily at 9a Mountain Time.
+    - cron: "0 9 * * *"
       timezone: "America/Denver"
   workflow_dispatch:
 
