@@ -4128,6 +4128,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-ElmoreCountyBig.jpg"]
   },
   {
+    "id": "horsemotel-d030d1889a",
+    "name": "Emmett, Idaho, Moonlight Pond Camp & Corral",
+    "location": "1800 W Sales Yard Road, Emmett , ID 83617",
+    "address": "1800 W Sales Yard Road, Emmett , ID 83617",
+    "city": "Emmett",
+    "state": "ID",
+    "country": "",
+    "latitude": 43.850416,
+    "longitude": -116.527749,
+    "hookups": [],
+    "accommodations": ["Stalls", "Paddocks", "Lodging", "Trails"],
+    "phone": "208-922-0619",
+    "email": "donnabrutsman123@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Idaho.html",
+    "description": "Private, 12' x 12' indoor stall, 12' x 20' run out, arena and round pen, dry parking overnight, with drinking water and charging station available. No hook up for camping overnight. Indoor restroom with shower available and washer and dryer if needed. Reservation required, cabin available if needed, trails right from the property.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-Moonlight1Big.jpg", "https://www.horsemotel.com/ZP-Moonlight2Big.jpg", "https://www.horsemotel.com/ZP-Moonlight3Big.jpg", "https://www.horsemotel.com/ZP-Moonlight4Big.jpg"]
+  },
+  {
     "id": "horsemotel-45084cc121",
     "name": "Hidden Dove Ranch, John and Julie Franson",
     "location": "5940 East Sublette Road, Lava Hot Springs (Pocatello), ID 83246",
@@ -14921,10 +14940,10 @@
     "accommodations": ["Stalls", "Wash Rack", "Trails"],
     "phone": "Carl - 801-360-1491 or \nKylynn - 801-836-0799 \nBoth calls and texts are welcomed, \nthough texts are preferred",
     "email": "",
-    "website": "",
+    "website": "https://www.oakhillsstables.com/",
     "sourceUrl": "https://www.horsemotel.com/Utah.html",
-    "description": "Oak Hills Stable is just off the 1-15 corridor, right outside Spanish Fork, Utah. An easy stopover with high quality accommodations for your horses and plenty of parking. We offer naturally lit, 12' x 12' or 12' x 16' stalls with fresh shavings, and plenty of room to stretch out after a long day of travel. The nightly rate is $40 per horse. Feed can be purchased on site. Other horse boarding amenities include: room for any size RV or trailer rig, an indoor wash rack, 32 acres of on site trails for a refreshing trail ride, several arenas (indoor and outdoor) for exercise, access to mountain trails from the main facility. Three families living on site provide security. Please bring travel papers for each horse. Payment in cash or check. There is a $20 fee for calls after 9pm. Calling anytime ahead is much appreciated. Location notes: 900 South Salem, Utah, 84653",
-    "photoURLs": ["https://www.horsemotel.com/ZP-OakHills1big.jpg", "https://www.horsemotel.com/ZP-OakHills2Big.jpg"]
+    "description": "Whether you're traveling on I-15 or Highway 6 through Spanish Fork Canyon, Oak Hills is only 10-15 minutes from either route, making it an easy stopover. We offer naturally lit, 12' x 12' or 12' x 16' stalls with fresh shavings, and plenty of room to stretch out after a long day of travel. The nightly rate is $40 per horse. Feed can be purchased on site. Other horse boarding amenities include: room for any size RV or trailer rig, an indoor wash rack, 32 acres of on site trails for a refreshing trail ride, several arenas (indoor and outdoor) for exercise, access to mountain trails from the main facility. Three families living on site provide security. Please bring travel papers for each horse. Payment in cash or check. There is a $20 fee for calls after 9pm. Calling/texting anytime ahead is much appreciated. Location notes: 900 South Salem, Utah, 84653.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-OakHills4big.jpg", "https://www.horsemotel.com/ZP-OakHills2Big.jpg"]
   },
   {
     "id": "horsemotel-5dbeb5ac33",
