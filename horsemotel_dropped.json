@@ -1,12 +1,5 @@
 [
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "AZ",
-    "detail": "Arizona",
-    "url": "https://www.horsemotel.com/Arizona.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
     "state": "AZ",
@@ -30,13 +23,6 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "CO",
-    "detail": "Colorado",
-    "url": "https://www.horsemotel.com/Colorado.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
     "state": "HI",
     "detail": "Hawaii",
     "url": "https://www.horsemotel.com/Hawaii.html"
@@ -49,18 +35,18 @@
     "url": "https://www.horsemotel.com/Montana.html"
   },
   {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NM",
+    "detail": "New Mexico",
+    "url": "https://www.horsemotel.com/NewMexico.html"
+  },
+  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "OK",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOklahomaSummitRidge.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "OR",
-    "detail": "Oregon",
-    "url": "https://www.horsemotel.com/Oregon.html"
   },
   {
     "stage": "mobile",
@@ -103,34 +89,6 @@
     "state": "TX",
     "detail": "Texas",
     "url": "https://www.horsemotel.com/Texas.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "UT",
-    "detail": "Utah",
-    "url": "https://www.horsemotel.com/Utah.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "UT",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�X{s۸\u0011�?3�\u000e\u0010ol�c�o=숺�-�qj9�Xi�t:\u0019�\u0004)�$�\u0003@˺8��vAI��N;��\u0005b\u0001,v�\u00024hD \u0019�\\�2\u001aa�3E��*��*� �s^(V��\u00148\u001b$�{��ؽ�p�3\u0012Ω�L\u0005����B�\u001d��\u001a\u001b^\u0005�Y`ܲ傋Hnq�sX�\"9W,�-2_����\"M�E�",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileUtahIronHorse.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "UT",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xko�8\u0016�\u001e ��֠q��z��#��i�t�E�\u0016��b�X h���H�F��x���=��\u0015���3�\u0005v�@2/��8��A�\u001a���*\u0013l���e�,�|f�-��l�Ҳ^L_�W�� �:��,״���ވ���\u0001�\u0013�8\u0018��-~+�۱�\\�J��=\u0005g���hl(q�,���� �",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileUtahSageHill.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "UT",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xmo�F\u0012�n��a�\"� K��e9��8v�\u0014�\u0013�j���P�ȥȈ䲻K�j��~�,EY�[��\u0001w�,r�������,ǵ@�f� \u0016�4ay1Ob�9M�{u1����g��rv���.�=�㶜��ޘ�ګ�\u0001]Sa8\u0018��)~/����RfFd�9\u0003g���h�\u0018�` �֏@��-V[x",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileUtahHorseHaven.html"
   },
   {
     "stage": "mobile",
