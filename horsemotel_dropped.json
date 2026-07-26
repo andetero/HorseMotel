@@ -35,13 +35,6 @@
     "url": "https://www.horsemotel.com/Montana.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NM",
-    "detail": "New Mexico",
-    "url": "https://www.horsemotel.com/NewMexico.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "OK",
@@ -82,13 +75,6 @@
     "state": "TN",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "TX",
-    "detail": "Texas",
-    "url": "https://www.horsemotel.com/Texas.html"
   },
   {
     "stage": "mobile",
