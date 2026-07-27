@@ -23,16 +23,44 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
+    "state": "CO",
+    "detail": "Colorado",
+    "url": "https://www.horsemotel.com/Colorado.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
     "state": "HI",
     "detail": "Hawaii",
     "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
-    "stage": "parse_block",
-    "reason": "has contact info but no Facilities/Maps marker",
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
+    "state": "MO",
+    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileMissouriCreekside Country.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
     "state": "MT",
-    "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
+    "detail": "Montana",
     "url": "https://www.horsemotel.com/Montana.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NV",
+    "detail": "Nevada",
+    "url": "https://www.horsemotel.com/Nevada.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NM",
+    "detail": "New Mexico",
+    "url": "https://www.horsemotel.com/NewMexico.html"
   },
   {
     "stage": "mobile",
