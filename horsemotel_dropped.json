@@ -1,5 +1,12 @@
 [
   {
+    "stage": "homepage",
+    "reason": "homepage parse failed, using guessed state URLs: no state links found on homepage",
+    "state": "",
+    "detail": "",
+    "url": "https://www.horsemotel.com/"
+  },
+  {
     "stage": "mobile",
     "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
     "state": "AZ",
@@ -12,6 +19,13 @@
     "state": "AZ",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileArizonaMcClure.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "AR",
+    "detail": "Arkansas",
+    "url": "https://www.horsemotel.com/Arkansas.html"
   },
   {
     "stage": "desktop",
@@ -37,23 +51,37 @@
   {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
+    "state": "ID",
+    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�X�s۸\u0011�=3�\u001fּƲ�\u0016����4�c�������\\:�\u001b�\u0004E�$�\u0003@)�8�{�\u0005$Y�K��ә�\u000f�X\u0000��oA�m'*��ZRf˂�fR�1\u0005�(��\u001c�����\u0005�\u001a_���˛(ꅝ`�����Q���RZ\u0001\u0006�n�_�|6 ^���ʶ��\u001cP�g��ʏ6���(΄6�\u000e�y���i",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoEarsThePlaceRanch.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "KS",
+    "detail": "Kansas",
+    "url": "https://www.horsemotel.com/Kansas.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "KY",
+    "detail": "Kentucky",
+    "url": "https://www.horsemotel.com/Kentucky.html"
+  },
+  {
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
     "state": "MO",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileMissouriCreekside Country.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
+    "stage": "parse_block",
+    "reason": "has contact info but no Facilities/Maps marker",
     "state": "MT",
-    "detail": "Montana",
+    "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
     "url": "https://www.horsemotel.com/Montana.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NV",
-    "detail": "Nevada",
-    "url": "https://www.horsemotel.com/Nevada.html"
   },
   {
     "stage": "desktop",
@@ -89,6 +117,13 @@
     "state": "TN",
     "detail": "Serenity Manor Stables \nLebanon , TN \nWeb Site: http://www.SerenityManorStables.com \nLocation on Google Maps (Town of Lebanon) \nFacilities: Pasture or stall boa",
     "url": "https://www.horsemotel.com/Tennessee.html"
+  },
+  {
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
+    "state": "TN",
+    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xmo�8\u0012�^���֢q�ؒeٱ���&m�fѤ�Է��ᰠ%�R#�*E��6��~ϐ�co_v\u000fw��\u0013[�\u001c� < �*�4\"\u0019�e)X���,KC�=��|���O��W��מw~�y]��L\u001e?:���*xD�\\h\u000e\u0006�l��uz;v��B�B����ЎƎ\u0016wڣ�OY�pU =^�E$\u0017U",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeQuailRun.html"
   },
   {
     "stage": "mobile",
