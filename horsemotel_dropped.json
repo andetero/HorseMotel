@@ -23,23 +23,9 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "AR",
-    "detail": "Arkansas",
-    "url": "https://www.horsemotel.com/Arkansas.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
     "state": "CA",
     "detail": "California",
     "url": "https://www.horsemotel.com/California.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "CO",
-    "detail": "Colorado",
-    "url": "https://www.horsemotel.com/Colorado.html"
   },
   {
     "stage": "desktop",
@@ -56,20 +42,6 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoEarsThePlaceRanch.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "KS",
-    "detail": "Kansas",
-    "url": "https://www.horsemotel.com/Kansas.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "KY",
-    "detail": "Kentucky",
-    "url": "https://www.horsemotel.com/Kentucky.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "MO",
@@ -82,13 +54,6 @@
     "state": "MT",
     "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
     "url": "https://www.horsemotel.com/Montana.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NM",
-    "detail": "New Mexico",
-    "url": "https://www.horsemotel.com/NewMexico.html"
   },
   {
     "stage": "mobile",
@@ -122,13 +87,6 @@
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "TN",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xmo�8\u0012�^���֢q�ؒeٱ���&m�fѤ�Է��ᰠ%�R#�*E��6��~ϐ�co_v\u000fw��\u0013[�\u001c� < �*�4\"\u0019�e)X���,KC�=��|���O��W��מw~�y]��L\u001e?:���*xD�\\h\u000e\u0006�l��uz;v��B�B����ЎƎ\u0016wڣ�OY�pU =^�E$\u0017U",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeQuailRun.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "TN",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeLuckyFour.html"
   },
@@ -138,6 +96,13 @@
     "state": "TN",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "UT",
+    "detail": "Utah",
+    "url": "https://www.horsemotel.com/Utah.html"
   },
   {
     "stage": "mobile",
