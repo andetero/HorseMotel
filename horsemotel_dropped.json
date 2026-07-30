@@ -42,6 +42,34 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoEarsThePlaceRanch.html"
   },
   {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "IL",
+    "detail": "Illinois",
+    "url": "https://www.horsemotel.com/Illinois.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "KS",
+    "detail": "Kansas",
+    "url": "https://www.horsemotel.com/Kansas.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "KY",
+    "detail": "Kentucky",
+    "url": "https://www.horsemotel.com/Kentucky.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "MO",
+    "detail": "Missouri",
+    "url": "https://www.horsemotel.com/Missouri.html"
+  },
+  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "MO",
@@ -54,6 +82,13 @@
     "state": "MT",
     "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
     "url": "https://www.horsemotel.com/Montana.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NE",
+    "detail": "Nebraska",
+    "url": "https://www.horsemotel.com/Nebraska.html"
   },
   {
     "stage": "mobile",
@@ -96,13 +131,6 @@
     "state": "TN",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "UT",
-    "detail": "Utah",
-    "url": "https://www.horsemotel.com/Utah.html"
   },
   {
     "stage": "mobile",
