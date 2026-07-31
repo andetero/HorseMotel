@@ -35,60 +35,11 @@
     "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "ID",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�X�s۸\u0011�=3�\u001fּƲ�\u0016����4�c�������\\:�\u001b�\u0004E�$�\u0003@)�8�{�\u0005$Y�K��ә�\u000f�X\u0000��oA�m'*��ZRf˂�fR�1\u0005�(��\u001c�����\u0005�\u001a_���˛(ꅝ`�����Q���RZ\u0001\u0006�n�_�|6 ^���ʶ��\u001cP�g��ʏ6���(΄6�\u000e�y���i",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoEarsThePlaceRanch.html"
-  },
-  {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "IL",
-    "detail": "Illinois",
-    "url": "https://www.horsemotel.com/Illinois.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "KS",
-    "detail": "Kansas",
-    "url": "https://www.horsemotel.com/Kansas.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "KY",
-    "detail": "Kentucky",
-    "url": "https://www.horsemotel.com/Kentucky.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "MO",
-    "detail": "Missouri",
-    "url": "https://www.horsemotel.com/Missouri.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "MO",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileMissouriCreekside Country.html"
-  },
-  {
-    "stage": "parse_block",
-    "reason": "has contact info but no Facilities/Maps marker",
     "state": "MT",
-    "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
+    "detail": "Montana",
     "url": "https://www.horsemotel.com/Montana.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NE",
-    "detail": "Nebraska",
-    "url": "https://www.horsemotel.com/Nebraska.html"
   },
   {
     "stage": "mobile",
