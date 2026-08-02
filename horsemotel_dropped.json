@@ -30,16 +30,37 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
+    "state": "CO",
+    "detail": "Colorado",
+    "url": "https://www.horsemotel.com/Colorado.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
     "state": "HI",
     "detail": "Hawaii",
     "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
-    "stage": "parse_block",
-    "reason": "has contact info but no Facilities/Maps marker",
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "IL",
+    "detail": "Illinois",
+    "url": "https://www.horsemotel.com/Illinois.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
     "state": "MT",
-    "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
+    "detail": "Montana",
     "url": "https://www.horsemotel.com/Montana.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NE",
+    "detail": "Nebraska",
+    "url": "https://www.horsemotel.com/Nebraska.html"
   },
   {
     "stage": "mobile",
@@ -63,10 +84,10 @@
     "url": "https://www.horsemotel.com/RhodeIsland.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
+    "stage": "parse_block",
+    "reason": "listing-like block with no phone/email",
     "state": "TN",
-    "detail": "Tennessee",
+    "detail": "Serenity Manor Stables \nLebanon , TN \nWeb Site: http://www.SerenityManorStables.com \nLocation on Google Maps (Town of Lebanon) \nFacilities: Pasture or stall boa",
     "url": "https://www.horsemotel.com/Tennessee.html"
   },
   {
@@ -82,13 +103,6 @@
     "state": "TN",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "TX",
-    "detail": "Texas",
-    "url": "https://www.horsemotel.com/Texas.html"
   },
   {
     "stage": "mobile",
