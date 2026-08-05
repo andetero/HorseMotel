@@ -35,18 +35,25 @@
     "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "ID",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�X�s۸\u0011�=3�\u001fּƲ�\u0016����4�c�������\\:�\u001b�\u0004E�$�\u0003@)�8�{�\u0005$Y�K��ә�\u000f�X\u0000��oA�m'*��ZRf˂�fR�1\u0005�(��\u001c�����\u0005�\u001a_���˛(ꅝ`�����Q���RZ\u0001\u0006�n�_�|6 ^���ʶ��\u001cP�g��ʏ6���(΄6�\u000e�y���i",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoEarsThePlaceRanch.html"
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "IA",
+    "detail": "Iowa",
+    "url": "https://www.horsemotel.com/Iowa.html"
   },
   {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "MO",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xksۺ\u0011�����\u0015�Ĳ��K�^������nc;��x�N�\u000eD�\u0012#�`\bȲ\u0012�w\u0017$�H|��igZ�#\u0010K`�{v�\u0007а\u0011�@�r\u000e3�&�/&I\u001c�a�����\u001b�~}�\u001a�n/����m�-�\u0018?6����,�6务\u0002����\"�\u001f\u0019'\"S ����5�#���\u001c|�]�I���XJ",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileMissouriMyEpiphany.html"
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "KY",
+    "detail": "Kentucky",
+    "url": "https://www.horsemotel.com/Kentucky.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "MN",
+    "detail": "Minnesota",
+    "url": "https://www.horsemotel.com/Minnesota.html"
   },
   {
     "stage": "parse_block",
@@ -54,6 +61,13 @@
     "state": "MT",
     "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
     "url": "https://www.horsemotel.com/Montana.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NE",
+    "detail": "Nebraska",
+    "url": "https://www.horsemotel.com/Nebraska.html"
   },
   {
     "stage": "mobile",
@@ -98,13 +112,6 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "WI",
-    "detail": "Wisconsin",
-    "url": "https://www.horsemotel.com/Wisconsin.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "WI",
@@ -117,6 +124,13 @@
     "state": "WI",
     "detail": "Kenosha",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "WY",
+    "detail": "Wyoming",
+    "url": "https://www.horsemotel.com/Wyoming.html"
   },
   {
     "stage": "build_listing",
