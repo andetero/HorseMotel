@@ -7,6 +7,13 @@
     "url": "https://www.horsemotel.com/"
   },
   {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "AL",
+    "detail": "Alabama",
+    "url": "https://www.horsemotel.com/Alabama.html"
+  },
+  {
     "stage": "mobile",
     "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
     "state": "AZ",
@@ -37,13 +44,6 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "IA",
-    "detail": "Iowa",
-    "url": "https://www.horsemotel.com/Iowa.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
     "state": "KY",
     "detail": "Kentucky",
     "url": "https://www.horsemotel.com/Kentucky.html"
@@ -51,9 +51,9 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "MN",
-    "detail": "Minnesota",
-    "url": "https://www.horsemotel.com/Minnesota.html"
+    "state": "MO",
+    "detail": "Missouri",
+    "url": "https://www.horsemotel.com/Missouri.html"
   },
   {
     "stage": "parse_block",
@@ -68,6 +68,13 @@
     "state": "NE",
     "detail": "Nebraska",
     "url": "https://www.horsemotel.com/Nebraska.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "OH",
+    "detail": "Ohio",
+    "url": "https://www.horsemotel.com/Ohio.html"
   },
   {
     "stage": "mobile",
@@ -112,6 +119,13 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
   },
   {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "TX",
+    "detail": "Texas",
+    "url": "https://www.horsemotel.com/Texas.html"
+  },
+  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "WI",
@@ -124,13 +138,6 @@
     "state": "WI",
     "detail": "Kenosha",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "WY",
-    "detail": "Wyoming",
-    "url": "https://www.horsemotel.com/Wyoming.html"
   },
   {
     "stage": "build_listing",
