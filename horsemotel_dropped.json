@@ -23,16 +23,16 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "AR",
-    "detail": "Arkansas",
-    "url": "https://www.horsemotel.com/Arkansas.html"
+    "state": "CA",
+    "detail": "California",
+    "url": "https://www.horsemotel.com/California.html"
   },
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "CA",
-    "detail": "California",
-    "url": "https://www.horsemotel.com/California.html"
+    "state": "CO",
+    "detail": "Colorado",
+    "url": "https://www.horsemotel.com/Colorado.html"
   },
   {
     "stage": "desktop",
@@ -42,11 +42,32 @@
     "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
+    "state": "ID",
+    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�X{o�8\u0012��@��X�� b�m�I-c���d��E���z8,h���H����x�~�\u001bR�\u001f�n�w8��NDqH��7�\u0019��V�B�*)$2Ϡ\\̲4\u0004�kYW��[�\u001aO�p9����ɭe��m��^ �\\�R\u0012�6�� \u0003Yv�o��10.X!i!�S�l@X�\u0002C�'i��o L",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoRafterH.html"
+  },
+  {
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
+    "state": "KS",
+    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�\u0018ks۸�{f�\u001fּ�eOŗ\u001e����������j=�N�\u0006$A�\u0011I�\u0000Њ\u0012�w\u0017�d��8��δz�X`ߋ݅��������\"��\u000e�,\u0002�v����k�=\u0019������^�n���Ƌ!�5#g1�\u0005� �����m`\u001d�R�R�c�lA��\u0002K��%�W\u0010�L*��YV�b�l���X+Z%",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileKansasWichitaRiding.html"
+  },
+  {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
     "state": "KY",
     "detail": "Kentucky",
     "url": "https://www.horsemotel.com/Kentucky.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "MO",
+    "detail": "Missouri",
+    "url": "https://www.horsemotel.com/Missouri.html"
   },
   {
     "stage": "parse_block",
@@ -58,16 +79,9 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NE",
-    "detail": "Nebraska",
-    "url": "https://www.horsemotel.com/Nebraska.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "OH",
-    "detail": "Ohio",
-    "url": "https://www.horsemotel.com/Ohio.html"
+    "state": "OK",
+    "detail": "Oklahoma",
+    "url": "https://www.horsemotel.com/Oklahoma.html"
   },
   {
     "stage": "mobile",
@@ -91,10 +105,10 @@
     "url": "https://www.horsemotel.com/RhodeIsland.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
+    "stage": "parse_block",
+    "reason": "listing-like block with no phone/email",
     "state": "TN",
-    "detail": "Tennessee",
+    "detail": "Serenity Manor Stables \nLebanon , TN \nWeb Site: http://www.SerenityManorStables.com \nLocation on Google Maps (Town of Lebanon) \nFacilities: Pasture or stall boa",
     "url": "https://www.horsemotel.com/Tennessee.html"
   },
   {
@@ -126,10 +140,10 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
   },
   {
-    "stage": "build_listing",
-    "reason": "no coordinates (no Maps link or KML match)",
-    "state": "OK",
-    "detail": "Summit Ridge Ranch",
-    "url": "https://www.horsemotel.com/Oklahoma.html"
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "WY",
+    "detail": "Wyoming",
+    "url": "https://www.horsemotel.com/Wyoming.html"
   }
 ]
