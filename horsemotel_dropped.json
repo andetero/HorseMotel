@@ -1,5 +1,12 @@
 [
   {
+    "stage": "homepage",
+    "reason": "homepage parse failed, using guessed state URLs: no state links found on homepage",
+    "state": "",
+    "detail": "",
+    "url": "https://www.horsemotel.com/"
+  },
+  {
     "stage": "mobile",
     "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
     "state": "AZ",
@@ -23,16 +30,16 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "CO",
-    "detail": "Colorado",
-    "url": "https://www.horsemotel.com/Colorado.html"
+    "state": "HI",
+    "detail": "Hawaii",
+    "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "HI",
-    "detail": "Hawaii",
-    "url": "https://www.horsemotel.com/Hawaii.html"
+    "state": "IN",
+    "detail": "Indiana",
+    "url": "https://www.horsemotel.com/Indiana.html"
   },
   {
     "stage": "parse_block",
@@ -40,6 +47,20 @@
     "state": "MT",
     "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
     "url": "https://www.horsemotel.com/Montana.html"
+  },
+  {
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
+    "state": "MT",
+    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xms۸\u0011��\u0019��53��DR��\u001dQsv�\\��΍�6�t:7\u0010 ��I�\u0007��uq�{w\u0001I��N�:�L+�\u0004��.v\u001f\u0000�\u0002\u001e�%26ˊCf�\u001c�z��\u0018�V\u0010���� ���9��\\]\u0006��u\u0010t��\u001b��-9K�,�ah�T-�K-��Z����5A�\u001eĮ\u0016y�ߙ��_A�1���\u0016",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileMontanaMountainView.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "NE",
+    "detail": "Nebraska",
+    "url": "https://www.horsemotel.com/Nebraska.html"
   },
   {
     "stage": "mobile",
@@ -82,6 +103,13 @@
     "state": "TN",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "VA",
+    "detail": "Virginia",
+    "url": "https://www.horsemotel.com/Virginia.html"
   },
   {
     "stage": "mobile",
