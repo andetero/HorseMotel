@@ -37,9 +37,9 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "IN",
-    "detail": "Indiana",
-    "url": "https://www.horsemotel.com/Indiana.html"
+    "state": "KS",
+    "detail": "Kansas",
+    "url": "https://www.horsemotel.com/Kansas.html"
   },
   {
     "stage": "parse_block",
@@ -49,18 +49,11 @@
     "url": "https://www.horsemotel.com/Montana.html"
   },
   {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "MT",
-    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�Xms۸\u0011��\u0019��53��DR��\u001dQsv�\\��΍�6�t:7\u0010 ��I�\u0007��uq�{w\u0001I��N�:�L+�\u0004��.v\u001f\u0000�\u0002\u001e�%26ˊCf�\u001c�z��\u0018�V\u0010���� ���9��\\]\u0006��u\u0010t��\u001b��-9K�,�ah�T-�K-��Z����5A�\u001eĮ\u0016y�ߙ��_A�1���\u0016",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileMontanaMountainView.html"
-  },
-  {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NE",
-    "detail": "Nebraska",
-    "url": "https://www.horsemotel.com/Nebraska.html"
+    "state": "NM",
+    "detail": "New Mexico",
+    "url": "https://www.horsemotel.com/NewMexico.html"
   },
   {
     "stage": "mobile",
@@ -82,6 +75,13 @@
     "state": "RI",
     "detail": "Rhode Island",
     "url": "https://www.horsemotel.com/RhodeIsland.html"
+  },
+  {
+    "stage": "desktop",
+    "reason": "state page fetched OK but 0 listings parsed",
+    "state": "SD",
+    "detail": "South Dakota",
+    "url": "https://www.horsemotel.com/SouthDakota.html"
   },
   {
     "stage": "parse_block",
@@ -107,9 +107,9 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "VA",
-    "detail": "Virginia",
-    "url": "https://www.horsemotel.com/Virginia.html"
+    "state": "TX",
+    "detail": "Texas",
+    "url": "https://www.horsemotel.com/Texas.html"
   },
   {
     "stage": "mobile",
