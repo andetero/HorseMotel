@@ -23,9 +23,9 @@
   {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "CA",
-    "detail": "California",
-    "url": "https://www.horsemotel.com/California.html"
+    "state": "CO",
+    "detail": "Colorado",
+    "url": "https://www.horsemotel.com/Colorado.html"
   },
   {
     "stage": "desktop",
@@ -35,25 +35,11 @@
     "url": "https://www.horsemotel.com/Hawaii.html"
   },
   {
-    "stage": "parse_block",
-    "reason": "has contact info but no Facilities/Maps marker",
-    "state": "MT",
-    "detail": "Smith Family Ranch, Laura Smith \n1828 Old Yellowstone Trail South \nEmigrant , MT 59027 \nTel: 406-223-9230 \nE-mail: laurapittssmith@gmail.com \nView Comments Post",
-    "url": "https://www.horsemotel.com/Montana.html"
-  },
-  {
     "stage": "desktop",
     "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NE",
-    "detail": "Nebraska",
-    "url": "https://www.horsemotel.com/Nebraska.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "NC",
-    "detail": "North Carolina",
-    "url": "https://www.horsemotel.com/NorthCarolina.html"
+    "state": "NM",
+    "detail": "New Mexico",
+    "url": "https://www.horsemotel.com/NewMexico.html"
   },
   {
     "stage": "mobile",
@@ -98,11 +84,11 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
+    "stage": "mobile",
+    "reason": "mobile detail missing Facilities/Tel markers",
     "state": "VA",
-    "detail": "Virginia",
-    "url": "https://www.horsemotel.com/Virginia.html"
+    "detail": "�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�X{s۸\u0011�?3�\u000e\u0010���ć(ɒc��g��vnl] ��e�E��CP�XX�\u0002K�\u0007�\u0010�[\u0016Ny��\u000efq\u0016əjz�N�Z��x*\u0002�N�g���\u001a��\u0004V��R�D5�t1�{Qd�d�\u001bLi\u000e\u001d�I��$/\"� ~/*�=\u000f��e\u0006�H(\u001dg˙��q$\"�\u0014�ߍ��\u0000$|N�iKY\u0014q�",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileVirginiaMarriott.html"
   },
   {
     "stage": "mobile",
