@@ -13,6 +13,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: horsemotel-sync
+  cancel-in-progress: true
+
 jobs:
   sync-horsemotel:
     runs-on: ubuntu-latest
@@ -131,6 +135,19 @@ jobs:
 
           python -m py_compile scripts/import_horsemotel.py
 
+      - name: Commit importer repair
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/import_horsemotel.py
+          if git diff --staged --quiet; then
+            echo "Importer already contains the repair."
+          else
+            git commit -m "fix: handle compressed HorseMotel.com pages"
+            git push
+          fi
+
       - name: Import HorseMotel.com listings
         run: |
           set -euo pipefail
@@ -146,12 +163,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add scripts/import_horsemotel.py horsemotel.json horsemotel_dropped.json
+          git add horsemotel.json horsemotel_dropped.json
 
           if git diff --staged --quiet; then
             echo "No HorseMotel.com changes to commit."
             exit 0
           fi
 
-          git commit -m "fix: handle compressed HorseMotel.com pages"
+          git commit -m "chore: sync HorseMotel.com listings"
+          git pull --rebase origin main
           git push
