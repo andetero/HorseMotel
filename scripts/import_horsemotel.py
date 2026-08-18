@@ -15,12 +15,14 @@ Run:
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import html
 import json
 import re
 import sys
 import time
+import zlib
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
@@ -145,12 +147,34 @@ def _safe_url(url: str) -> str:
     ))
 
 
+def _decode_http_body(data: bytes, content_encoding: str) -> bytes:
+    """Decode compressed HTTP response bodies before parsing them as HTML/XML."""
+    encoding = (content_encoding or "").split(",", 1)[0].strip().lower()
+
+    # HorseMotel.com has occasionally returned gzip bytes without a reliable
+    # Content-Encoding header. Detect the gzip magic bytes as a fallback.
+    if encoding == "gzip" or data.startswith(b"\x1f\x8b"):
+        return gzip.decompress(data)
+
+    if encoding == "deflate":
+        try:
+            return zlib.decompress(data)
+        except zlib.error:
+            return zlib.decompress(data, -zlib.MAX_WBITS)
+
+    if encoding not in {"", "identity"}:
+        raise ValueError(f"unsupported HTTP Content-Encoding: {encoding}")
+
+    return data
+
+
 def fetch(url: str) -> str:
     global _last_fetch
     safe = _safe_url(url)
     req = Request(safe, headers={
         "User-Agent": USER_AGENT,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Encoding": "identity",
     })
     last_err: Exception | None = None
     for attempt in range(1, FETCH_RETRIES + 1):
@@ -160,8 +184,10 @@ def fetch(url: str) -> str:
         _last_fetch = time.monotonic()
         try:
             with urlopen(req, timeout=FETCH_TIMEOUT) as r:
+                raw = r.read()
+                raw = _decode_http_body(raw, r.headers.get("Content-Encoding", ""))
                 charset = r.headers.get_content_charset() or "utf-8"
-                return r.read().decode(charset, errors="replace")
+                return raw.decode(charset, errors="replace")
         except HTTPError as e:
             if e.code in {404, 410}:
                 raise
