@@ -1,9 +1,6 @@
 name: Sync HorseMotel.com Listings
 
 on:
-  push:
-    paths:
-      - ".github/workflows/sync-horsemotel.yml"
   schedule:
     # Runs daily at 9a Mountain Time.
     - cron: "0 9 * * *"
@@ -12,10 +9,6 @@ on:
 
 permissions:
   contents: write
-
-concurrency:
-  group: horsemotel-sync
-  cancel-in-progress: true
 
 jobs:
   sync-horsemotel:
@@ -29,124 +22,6 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.11"
-
-      - name: Repair compressed HorseMotel.com page handling
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-
-          path = Path("scripts/import_horsemotel.py")
-          text = path.read_text(encoding="utf-8")
-
-          if "def _decode_http_body(" not in text:
-              text = text.replace("import argparse\nimport hashlib\n", "import argparse\nimport gzip\nimport hashlib\n", 1)
-              text = text.replace("import time\nimport xml.etree.ElementTree as ET\n", "import time\nimport zlib\nimport xml.etree.ElementTree as ET\n", 1)
-
-              old = '''def fetch(url: str) -> str:
-              global _last_fetch
-              safe = _safe_url(url)
-              req = Request(safe, headers={
-                  "User-Agent": USER_AGENT,
-                  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-              })
-              last_err: Exception | None = None
-              for attempt in range(1, FETCH_RETRIES + 1):
-                  elapsed = time.monotonic() - _last_fetch
-                  if elapsed < FETCH_DELAY:
-                      time.sleep(FETCH_DELAY - elapsed)
-                  _last_fetch = time.monotonic()
-                  try:
-                      with urlopen(req, timeout=FETCH_TIMEOUT) as r:
-                          charset = r.headers.get_content_charset() or "utf-8"
-                          return r.read().decode(charset, errors="replace")
-                  except HTTPError as e:
-                      if e.code in {404, 410}:
-                          raise
-                      last_err = e
-                  except Exception as e:
-                      last_err = e
-                  if attempt < FETCH_RETRIES:
-                      delay = FETCH_BACKOFF * attempt
-                      print(f"  Warning: attempt {attempt} failed for {safe}: {last_err}; retrying in {delay:g}s", file=sys.stderr)
-                      time.sleep(delay)
-              raise last_err  # type: ignore[misc]
-          '''
-
-              new = '''def _decode_http_body(data: bytes, content_encoding: str) -> bytes:
-              """Decode compressed HTTP response bodies before parsing them as HTML/XML."""
-              encoding = (content_encoding or "").split(",", 1)[0].strip().lower()
-
-              # HorseMotel.com has occasionally returned gzip bytes without a reliable
-              # Content-Encoding header. Detect the gzip magic bytes as a fallback.
-              if encoding == "gzip" or data.startswith(b"\\x1f\\x8b"):
-                  return gzip.decompress(data)
-
-              if encoding == "deflate":
-                  try:
-                      return zlib.decompress(data)
-                  except zlib.error:
-                      return zlib.decompress(data, -zlib.MAX_WBITS)
-
-              if encoding not in {"", "identity"}:
-                  raise ValueError(f"unsupported HTTP Content-Encoding: {encoding}")
-
-              return data
-
-
-          def fetch(url: str) -> str:
-              global _last_fetch
-              safe = _safe_url(url)
-              req = Request(safe, headers={
-                  "User-Agent": USER_AGENT,
-                  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                  "Accept-Encoding": "identity",
-              })
-              last_err: Exception | None = None
-              for attempt in range(1, FETCH_RETRIES + 1):
-                  elapsed = time.monotonic() - _last_fetch
-                  if elapsed < FETCH_DELAY:
-                      time.sleep(FETCH_DELAY - elapsed)
-                  _last_fetch = time.monotonic()
-                  try:
-                      with urlopen(req, timeout=FETCH_TIMEOUT) as r:
-                          raw = r.read()
-                          raw = _decode_http_body(raw, r.headers.get("Content-Encoding", ""))
-                          charset = r.headers.get_content_charset() or "utf-8"
-                          return raw.decode(charset, errors="replace")
-                  except HTTPError as e:
-                      if e.code in {404, 410}:
-                          raise
-                      last_err = e
-                  except Exception as e:
-                      last_err = e
-                  if attempt < FETCH_RETRIES:
-                      delay = FETCH_BACKOFF * attempt
-                      print(f"  Warning: attempt {attempt} failed for {safe}: {last_err}; retrying in {delay:g}s", file=sys.stderr)
-                      time.sleep(delay)
-              raise last_err  # type: ignore[misc]
-          '''
-
-              if old not in text:
-                  raise SystemExit("Expected fetch() block not found; refusing to patch importer")
-              text = text.replace(old, new, 1)
-              path.write_text(text, encoding="utf-8")
-          PY
-
-          python -m py_compile scripts/import_horsemotel.py
-
-      - name: Commit importer repair
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add scripts/import_horsemotel.py
-          if git diff --staged --quiet; then
-            echo "Importer already contains the repair."
-          else
-            git commit -m "fix: handle compressed HorseMotel.com pages"
-            git push
-          fi
 
       - name: Import HorseMotel.com listings
         run: |
@@ -171,5 +46,4 @@ jobs:
           fi
 
           git commit -m "chore: sync HorseMotel.com listings"
-          git pull --rebase origin main
           git push
