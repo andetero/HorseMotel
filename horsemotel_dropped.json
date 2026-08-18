@@ -1,19 +1,5 @@
 [
   {
-    "stage": "homepage",
-    "reason": "homepage parse failed, using guessed state URLs: no state links found on homepage",
-    "state": "",
-    "detail": "",
-    "url": "https://www.horsemotel.com/"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "AL",
-    "detail": "Alabama",
-    "url": "https://www.horsemotel.com/Alabama.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
     "state": "AZ",
@@ -26,13 +12,6 @@
     "state": "AZ",
     "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileArizonaMcClure.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "CA",
-    "detail": "California",
-    "url": "https://www.horsemotel.com/California.html"
   },
   {
     "stage": "desktop",
@@ -84,13 +63,6 @@
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "TX",
-    "detail": "Texas",
-    "url": "https://www.horsemotel.com/Texas.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "WI",
@@ -103,13 +75,6 @@
     "state": "WI",
     "detail": "Kenosha",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "WY",
-    "detail": "Wyoming",
-    "url": "https://www.horsemotel.com/Wyoming.html"
   },
   {
     "stage": "build_listing",
