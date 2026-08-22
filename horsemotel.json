@@ -10533,25 +10533,6 @@
     "photoURLs": []
   },
   {
-    "id": "horsemotel-59d3565a77",
-    "name": "Greenhill Stables, David Barnum",
-    "location": "2160 Green Hill Rd., Ashtabula , OH 44048",
-    "address": "2160 Green Hill Rd., Ashtabula , OH 44048",
-    "city": "Ashtabula",
-    "state": "OH",
-    "country": "",
-    "latitude": 41.8511664,
-    "longitude": -80.7089083,
-    "hookups": ["Electric"],
-    "accommodations": ["Stalls", "RV Hookups"],
-    "phone": "440-812-6184",
-    "email": "dbarnum@abbasgroups.com",
-    "website": "",
-    "sourceUrl": "https://www.horsemotel.com/Ohio.html",
-    "description": "Turn out stalls hey indoor Arena electric hook ups washbay Location notes: 2160 Greenhill Rd., Ashtabula, OH 44048",
-    "photoURLs": []
-  },
-  {
     "id": "horsemotel-653f656e59",
     "name": "Heath, Ohio, Rolling Hills Farm and Stables, LLC",
     "location": "2495 Seminary Road, Heath , OH 43056",
@@ -10569,6 +10550,25 @@
     "sourceUrl": "https://www.horsemotel.com/Ohio.html",
     "description": "Welcome to our farm! We have 3 stalls available, 2 located in our horse barn and 1 in our arena for short-term rentals and layovers. One of the horse barn stalls opens to a private quarter acre paddock while the other opens to the 2.5 acre pasture around our arena which is shared by the stall in the arena. Both the horse barn and arena have a 30 amp RV hookup. Hay and feed available upon request. Just a 9 minute drive to I-70. Liability waiver signed and proof of negative Coggins prior to arrival. Dogs welcome but must be on a leash. Check in after 3pm, checkout by 10am. Please contact us if you have any questions! Location notes: Great location for Quarter Horse Congress, EOQHA and Equine Affair.",
     "photoURLs": ["https://www.horsemotel.com/ZP-RollingHills1Big.jpg", "https://www.horsemotel.com/ZP-RollingHills2Big.jpg", "https://www.horsemotel.com/ZP-RollingHills3Big.jpg", "https://www.horsemotel.com/ZP-RollingHills4Big.jpg", "https://www.horsemotel.com/ZP-RollingHills5Big.jpg", "https://www.horsemotel.com/ZP-RollingHills6Big.jpg"]
+  },
+  {
+    "id": "horsemotel-067e1ce65d",
+    "name": "Jefferson, Ohio, Greenhill Stables, David Barnum",
+    "location": "2160 Green Hill Rd., Ashtabula , OH 44048",
+    "address": "2160 Green Hill Rd., Ashtabula , OH 44048",
+    "city": "Ashtabula",
+    "state": "OH",
+    "country": "",
+    "latitude": 41.8511664,
+    "longitude": -80.7089083,
+    "hookups": ["110V", "Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly", "WiFi", "Trails"],
+    "phone": "440-812-6184 or 440-201-4122",
+    "email": "dbarnum@abbasgroups.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Ohio.html",
+    "description": "Green Hill Stables would like to offer our beautiful facilty to those traveling and looking for a safe, convenient, comfortable overnight boarding option. Overnight stalls are available for $30 per horse per evening. Stay for a night or multiple. Ample shavings and 2 fresh clean water buckets are provided. Each stall features a soft stall mattress system ensuring maximum comfort for our equine guests. Owners are responsible for grain and hay. Quality 1st ir 2nd cut hay can be provide for an additional cost. Overnight horses will have access to our spacious dust free indoor arena for supervised turn out. Pasture access can be arranged but subject to availability. We also have a hot & cold wash bay. Green Hill Stables features a big rig friendly driveway and parking area. We are easy to get to and located right off of I-90 and route 11. Visit any of the beautiful harbor, local restaurants, beaches, parks, or walking trails all just a short drive from our location. For owners looking to stay overnight in their trailers, we have both 110V and 220V electrical hookups available starting at $25 a night. This includes access to our large upstairs lounge featuring WiFi, a kitchenette with a refrigerator and a rest room. Top quality care and genuine hospitality are our priority. Please contact us anytime and we will gladly answer any questions you may have. Whether you're headed to a show, relocating, or simply need a comfortable overnight stop, we're here to help make your journey easier. Professional haulers welcomed. Schedule your stop today and travel with peace of mind! Location notes: 2160 Greenhill Rd., Ashtabula, OH 44048",
+    "photoURLs": ["https://www.horsemotel.com/ZP-GreenHill1Big.jpg", "https://www.horsemotel.com/ZP-GreenHill2Big.jpg"]
   },
   {
     "id": "horsemotel-64e798f0c4",
@@ -13520,6 +13520,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-TwistedSouth1Big.jpg", "https://www.horsemotel.com/ZP-TwistedSouth2Big.jpg", "https://www.horsemotel.com/ZP-TwistedSouth3Big.jpg"]
   },
   {
+    "id": "horsemotel-fd21427e8f",
+    "name": "Wolf Creek Ranch, 409 Mathis Loop",
+    "location": "Centerville , TN 37033",
+    "address": "",
+    "city": "",
+    "state": "TN",
+    "country": "",
+    "latitude": 35.7974723,
+    "longitude": -87.6715204,
+    "hookups": ["Electric", "Water"],
+    "accommodations": ["Paddocks", "RV Hookups"],
+    "phone": "931-994-3577",
+    "email": "wolfcreekranch120@yahoo.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Tennessee.html",
+    "description": "Genuine working horse & cattle ranch. Large and small arenas, round pens, turn outs, grazing, creek access, multiple hookups, electric/water. Portable restroom, playground area. Lots of back country roads to ride and relax. Brand new electric and water hookups. Horse shows, Rodeos, events and clinics Location notes: Located aprx 7 miles off exit 148 on interstate 40. Half way between Jackson, TN and Nashville, TN",
+    "photoURLs": ["https://www.horsemotel.com/ZP-WolfCreek1Big.jpg", "https://www.horsemotel.com/ZP-WolfCreek2Big.jpg", "https://www.horsemotel.com/ZP-WolfCreek3Big.jpg", "https://www.horsemotel.com/ZP-WolfCreek4Big.jpg"]
+  },
+  {
     "id": "horsemotel-a831918136",
     "name": "13 Points Farm - Horse Motel",
     "location": "2320 Overton Ave., Port Bolivar, TX 77650",
@@ -14828,6 +14847,25 @@
     "website": "https://snowdoniasporthorsecomplex.com/",
     "sourceUrl": "https://www.horsemotel.com/Texas.html",
     "description": "Covered arena , stalls , grass paddocks , round pen , crosscountry course, dressage arena, 40 acres outdoor riding, hookups, Bed and Breakfast. Staff on site 24/7. Very friendly place to stop and enjoy the peaceful countryside. Location notes: Just 15 minures north of I-10 in Pattison, Brookshire Texas. Easy access to Houston, Austin, College Station. Katy.",
+    "photoURLs": []
+  },
+  {
+    "id": "horsemotel-87d855eacd",
+    "name": "Spur S Arena, Shelby Poorman",
+    "location": "7145 N Hwy 36, Jonesboro , TX 76538",
+    "address": "7145 N Hwy 36, Jonesboro , TX 76538",
+    "city": "Jonesboro",
+    "state": "TX",
+    "country": "",
+    "latitude": 31.5674743,
+    "longitude": -97.8258956,
+    "hookups": ["30A", "Electric", "Sewer"],
+    "accommodations": ["Stalls", "RV Hookups"],
+    "phone": "979-221-7720",
+    "email": "spursperformancehorses@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Texas.html",
+    "description": "Covered arena, covered stalls, 30amp RV hookup with water and septic available. Arena availability is on a day to day basis. We sometimes have it rented for day riders. To guarantee access to the arena, message the Spur S Arena Facebook page or text me to reserve a time. It is an additional $30 an hour if you are renting stalls as well or $50 an hour for haul ins. Location notes: Jonesboro, Texas. Located between Gatesville and Hamilton.",
     "photoURLs": []
   },
   {
