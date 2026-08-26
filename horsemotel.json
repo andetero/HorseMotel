@@ -15688,9 +15688,9 @@
   {
     "id": "horsemotel-cbe9214c83",
     "name": "Hidden Meadows Farm, Mary Beth Donnelly",
-    "location": "16239 Chiswell Lane, Scotchtown , VA 23015",
-    "address": "16239 Chiswell Lane, Scotchtown , VA 23015",
-    "city": "Scotchtown",
+    "location": "16239 Chiswell Lane, Beaverdam , VA 23015",
+    "address": "16239 Chiswell Lane, Beaverdam , VA 23015",
+    "city": "Beaverdam",
     "state": "VA",
     "country": "",
     "latitude": 37.849982,
@@ -15701,8 +15701,8 @@
     "email": "booboodonnelly@aol.com",
     "website": "http://www.hiddenmeadowsfarmva.com",
     "sourceUrl": "https://www.horsemotel.com/Virginia.html",
-    "description": "New 8 stall barn offering overnite lodging just 15 minutes off Rte. 95 on the north side of Richmond. 12' x 12' matted box stalls. Turn out if needed. Wash stall, shavings, etc. Large pastures. We are 6 miles from a Surgical veterinary facility. Our farm is 50+ acres with 25 acres of open pasture. Very quiet and secluded. Location notes: Rte. 95 to exit 92 Ashland RT 54 West. Driving directions: We are 11.0 miles. from Ashland, VA . 1). Head west toward US-1 cross US 1, 2). Continue 8.8 miles to Scotchtown Road. 3). Right on Rte.671 Scotchtown Road. 4). Stay right on Scotchtown Road @ church. 5). Continue 0.8 miles to Chiswell Lane. 6). Left on Chiswell Lane 0.5 miles to 16239 Hidden Meadows Farm entrance.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-HiddenMeadows1Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows2Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows3Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows4Big.jpg"]
+    "description": "New 8 stall barn offering overnite lodging just 15 minutes off Rte. 95 on the north side of Richmond. 12' x 12' matted box stalls. Turn out if needed. Wash stall, shavings, etc. Large pastures. We are 6 miles from a Surgical veterinary facility. Our farm is 50+ acres with 25 acres of open pasture. Very quiet and secluded. Location notes: Rte. 95 to exit 92 Ashland RT 54 West. Driving directions: We are 11.0 miles from Ashland, VA. 1). Head west toward US-1 cross US 1, 2). Continue 8.8 miles to Scotchtown Road. 3). Right on Rte.671 Scotchtown Road. 4). Stay right on Scotchtown Road @ church. 5). Continue 0.8 miles to Chiswell Lane. 6). Left on Chiswell Lane 0.5 miles to 16239 Hidden Meadows Farm entrance.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-HiddenMeadows1Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows2Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows3Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows4Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows5Big.jpg", "https://www.horsemotel.com/ZP-HiddenMeadows6Big.jpg"]
   },
   {
     "id": "horsemotel-4e2caa2dda",
@@ -15893,6 +15893,25 @@
     "sourceUrl": "https://www.horsemotel.com/Virginia.html",
     "description": "Enjoy the peaceful surroundings of grassy rolling hills and a hardwood forest. Children and dog friendly environment. Paddock with built in row barn with run-in shed, 12' x 12' matted stalls and tack/feed room storage off each stall. Full electricity, outer perimeter lights and individual lighting for each stall/storage room. Four board fencing with access to self-guided trails. Paddock equipped with water. People lodging available upon request. Location notes: Take US-29 N toward Charlottesville 3.4 miles; Take the Barracks Road exit 0.2 miles; Turn left onto Baracks Road; Continue to follow Barracks Road 0.4 miles; Turn right onto Georgetown Road 0.9 miles; Turn left onto Hydraulic Road 0.3 miles; Turn left onto Lambs Road; Destination will be on the right 0.7 miles.",
     "photoURLs": ["https://www.horsemotel.com/ZP-RustlingMeadows1Big.jpg", "https://www.horsemotel.com/ZP-RustlingMeadows2Big.jpg"]
+  },
+  {
+    "id": "horsemotel-cb9d1a1e0a",
+    "name": "Scotchtown, Virginia, Hidden Meadows Farm",
+    "location": "16239 Chiswell Lane, Scotchtown , VA 23015",
+    "address": "16239 Chiswell Lane, Scotchtown , VA 23015",
+    "city": "Scotchtown",
+    "state": "VA",
+    "country": "",
+    "latitude": 37.849982,
+    "longitude": -77.591957,
+    "hookups": [],
+    "accommodations": ["Stalls", "Paddocks"],
+    "phone": "804-651-8092",
+    "email": "booboodonnelly@aol.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileVirginiaHiddenMeadows.html",
+    "description": "New 8 stall barn offering overnite lodging just 15 minutes off Rte. 95 on the north side of Richmond. 12' x 12' matted box stalls. Turn out if needed. Wash stall, shavings, etc. Large pastures. We are 6 miles from a Surgical veterinary facility. Our farm is 50+ acres with 25 acres of open pasture. Very quiet and secluded. Location notes: Rte. 95 to exit 92 Ashland RT 54 West. Driving directions: We are 11.0 miles. from Ashland, VA . 1). Head west toward US-1 cross US 1, 2). Continue 8.8 miles to Scotchtown Road. 3). Right on Rte.671 Scotchtown Road. 4). Stay right on Scotchtown Road @ church. 5). Continue 0.8 miles to Chiswell Lane. 6). Left on Chiswell Lane 0.5 miles to 16239 Hidden Meadows Farm entrance.",
+    "photoURLs": []
   },
   {
     "id": "horsemotel-914641ebc0",
