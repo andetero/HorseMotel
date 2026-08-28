@@ -4223,6 +4223,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-Moonlight1Big.jpg", "https://www.horsemotel.com/ZP-Moonlight2Big.jpg", "https://www.horsemotel.com/ZP-Moonlight3Big.jpg", "https://www.horsemotel.com/ZP-Moonlight4Big.jpg"]
   },
   {
+    "id": "horsemotel-21017868a0",
+    "name": "Frazier Equine Services, Emily Frazier, 12333 East 101 North",
+    "location": "Idaho Falls , ID 83401",
+    "address": "",
+    "city": "",
+    "state": "ID",
+    "country": "",
+    "latitude": 43.5873177,
+    "longitude": -111.7889928,
+    "hookups": [],
+    "accommodations": ["Paddocks"],
+    "phone": "208-251-8625",
+    "email": "gator2364@hotmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Idaho.html",
+    "description": "We have 2 overnight pens set up for a stay. And plenty of room for you to park your trailer. Location notes: We are just north of Idaho Falls near Ririe.",
+    "photoURLs": []
+  },
+  {
     "id": "horsemotel-45084cc121",
     "name": "Hidden Dove Ranch, John and Julie Franson",
     "location": "5940 East Sublette Road, Lava Hot Springs (Pocatello), ID 83246",
