@@ -4238,7 +4238,7 @@
     "email": "gator2364@hotmail.com",
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/Idaho.html",
-    "description": "We have 2 overnight pens set up for a stay. And plenty of room for you to park your trailer. Location notes: We are just north of Idaho Falls near Ririe.",
+    "description": "We have 2 overnight pens set up for an overnight stay. And plenty of room for you to park your trailer. Location notes: We are just north of Idaho Falls near Ririe.",
     "photoURLs": []
   },
   {
@@ -5036,8 +5036,8 @@
     "email": "regoode@hotmail.com",
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/Indiana.html",
-    "description": "8 RockingJ box stalls with electric in each stall. 4 are 12' x14', 4 are 12' x 12'. Water is available in the barn aisle. Space to ride on our 47 acres. Rig length needs to not exceed 56 ft due to a turn on our drive way. Stalls are $30 each per night. We ask that you pick your stalls before you leave in the morning. Camping without hook up is $25. Camping with 30 or 50 amp is $40. Stable Bunkroom available. $75. Per night. This is an Upstairs room including a queen bed, mini fridge,microwave and Keurig coffee maker. The bathroom and shower are on the main level. Location notes: 9 minutes from I-65, 20 minutes south of Johnson County Horse Park. 30 minutes east of Brown County Horse Camp.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-Goodestock9Big.jpg", "https://www.horsemotel.com/ZP-Goodestock2Big.jpg", "https://www.horsemotel.com/ZP-Goodestock6Big.jpg", "https://www.horsemotel.com/ZP-Goodestock4Big.jpg", "https://www.horsemotel.com/ZP-Goodestock8Big.jpg"]
+    "description": "8 RockingJ box stalls with electric in each stall. 4 are 12' x14', 4 are 12' x 12'. Water is available in the barn aisle. Space to ride on our 47 acres. Rig length needs to not exceed 56 ft due to a turn on our drive way. Stalls are $30 each per night. We ask that you pick your stalls before you leave in the morning. Camping without hook up is $25. Camping with 30 or 50 amp is $40. Stable Bunkroom available, now with Wi-Fi. $95. Per night. This is an Upstairs room including a queen bed, mini fridge,microwave and Keurig coffee maker. The bathroom and shower are on the main level. Location notes: 9 minutes from I-65, 20 minutes south of Johnson County Horse Park. 30 minutes east of Brown County Horse Camp.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-Goodestock9Big.jpg", "https://www.horsemotel.com/ZP-Goodestock2Big.jpg", "https://www.horsemotel.com/ZP-Goodestock6Big.jpg", "https://www.horsemotel.com/ZP-Goodestock4Big.jpg", "https://www.horsemotel.com/ZP-Goodestock8Big.jpg", "https://www.horsemotel.com/ZP-Goodestock10Big.jpg"]
   },
   {
     "id": "horsemotel-9770c10d2c",
@@ -16938,6 +16938,25 @@
     "sourceUrl": "https://www.horsemotel.com/Wyoming.html",
     "description": "Motel rooms with kitchenettes, first floor units with decks facing the Wind River, and horse corrals! We love horses! Location notes: Right on the edge of the town of Dubois on your way to Teton National Park then Jackson Hole!",
     "photoURLs": ["https://www.horsemotel.com/ZP-RockyMountain1Big.jpg", "https://www.horsemotel.com/ZP-RockyMountain2Big.jpg"]
+  },
+  {
+    "id": "horsemotel-4c3d417b24",
+    "name": "Sage and Saddle",
+    "location": "424 State Highway 133, Riverton , WY 82501",
+    "address": "424 State Highway 133, Riverton , WY 82501",
+    "city": "Riverton",
+    "state": "WY",
+    "country": "",
+    "latitude": 43.2119722,
+    "longitude": -108.6959722,
+    "hookups": ["Electric"],
+    "accommodations": ["RV Hookups"],
+    "phone": "757-724-4115",
+    "email": "reininghorsesrule@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Wyoming.html",
+    "description": "Trailer hook ups and horse accommodation. Location notes: Riverton, Wyoming.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-SageSaddleBig.jpg"]
   },
   {
     "id": "horsemotel-7f7ffcfd1c",
