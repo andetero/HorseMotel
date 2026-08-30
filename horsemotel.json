@@ -9564,6 +9564,25 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-TCBRanch6Big.jpg", "https://www.horsemotel.com/ZP-TCBRanch7Big.jpg", "https://www.horsemotel.com/ZP-TCBRanch8Big.jpg", "https://www.horsemotel.com/ZP-TCBRanch9Big.jpg", "https://www.horsemotel.com/ZP-TCBRanch10Big.jpg"]
   },
   {
+    "id": "horsemotel-e81a26eb30",
+    "name": "Enchanted Equestrian Center, Talia Matthews",
+    "location": "821 Watson Lane, Las Cruces , NM 88005",
+    "address": "821 Watson Lane, Las Cruces , NM 88005",
+    "city": "Las Cruces",
+    "state": "NM",
+    "country": "",
+    "latitude": 32.2654245,
+    "longitude": -106.7731044,
+    "hookups": ["30A", "50A", "Electric"],
+    "accommodations": ["Stalls", "RV Hookups", "Big Rig Friendly", "Wash Rack", "WiFi", "Lodging"],
+    "phone": "575-386-3252",
+    "email": "taliamatthews89@gmail.com",
+    "website": "https://www.enchantedequestriancenter.com/",
+    "sourceUrl": "https://www.horsemotel.com/NewMexico.html",
+    "description": "Large, outdoor covered stalls, with complementary shavings. Stalls have clean water buckets filled prior to arrival. We have AZ Alfalfa and Bermuda grass available for purchase, $40 per horse per night. Airbnb fully stocked apartments, laundry/king bed/smart tv available located next to your horses. 50/30 plugs available for trailers, $60 per night. Free Wi-Fi available. We are set up for big rigs more than 5 horses, 24/7 on site security, feed, air bnbs and trailer/rv hook ups, turn out, multi day stays, emergency veterinary, wash rack, farriers. Location notes: Located 1.5 miles from I-10",
+    "photoURLs": ["https://www.horsemotel.com/ZP-EnchantedEquestrian1Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian2Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian3Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian4Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian5Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian6Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian7Big.jpg"]
+  },
+  {
     "id": "horsemotel-ced842c4be",
     "name": "Grants, New Mexico, Slash M Slash Ranch",
     "location": "Grants , NM 87020",
