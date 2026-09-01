@@ -2357,25 +2357,6 @@
     "photoURLs": ["https://www.horsemotel.com/ZP-Aspenwood1Big.jpg", "https://www.horsemotel.com/ZP-Aspenwood2Big.jpg"]
   },
   {
-    "id": "horsemotel-978ce84c61",
-    "name": "Aurora/Watkins, Colorado, Big Iron Ranch, LLC",
-    "location": "34910 E. Alameda Ave., Aurora/Watkins , CO 80137",
-    "address": "34910 E. Alameda Ave., Aurora/Watkins , CO 80137",
-    "city": "Aurora/Watkins",
-    "state": "CO",
-    "country": "",
-    "latitude": 39.7101727,
-    "longitude": -104.5788325,
-    "hookups": [],
-    "accommodations": ["Stalls"],
-    "phone": "303-344-5009",
-    "email": "bigironranch@aol.com",
-    "website": "",
-    "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileColoradoBigIron.html",
-    "description": "Private and secure overnight horse stabling at our family owned and operated boarding and training facility. We also offer Spurs Academy. We have accommodations for living quarter trailers. There's a local motel and other services nearby! Location notes: East of Denver (Aurora) off I-70 to exit 295 Watkins. Then just 3 miles S.E. to the ranch!",
-    "photoURLs": []
-  },
-  {
     "id": "horsemotel-b1e8f65913",
     "name": "Bennett, Colorado, Elevate Ranch",
     "location": "1050 S. Manila Road, Bennett, CO 80102",
@@ -2412,6 +2393,25 @@
     "sourceUrl": "https://www.horsemotel.com/Colorado.html",
     "description": "Lost Creek Acres is a family owned and operated multi-discipline equine facility in Bennett, Colorado. We offer both short term and long term boarding as well as daily trailer-in facility use. Facilities include matted, indoor, heated or unheated stalls, outdoor stalls with runs, and loafing sheds with runs. Outdoor arena, indoor arena, and acres of pastures available for turnout and riding. Wash bay available, as well as a big round pen and hot walker. Overnight horse hotel and trailer hookups available. Ownership, Health certificates and negative Coggins test required. Please call us with any questions. Location notes: We are located east of Denver, just one mile south of I-70 at exit 299, only 24 miles from the National Western Complex and only 10 miles from the I-70 and E-470 intersection.",
     "photoURLs": ["https://www.horsemotel.com/ZP-LostCreek1Big.jpg", "https://www.horsemotel.com/ZP-LostCreek2Big.jpg"]
+  },
+  {
+    "id": "horsemotel-efe5636d7b",
+    "name": "Big Iron Ranch and Spurs Academy",
+    "location": "34910 E. Alameda Ave., Aurora/Watkins , CO 80137",
+    "address": "34910 E. Alameda Ave., Aurora/Watkins , CO 80137",
+    "city": "Aurora/Watkins",
+    "state": "CO",
+    "country": "",
+    "latitude": 39.7101727,
+    "longitude": -104.5788325,
+    "hookups": [],
+    "accommodations": ["Stalls"],
+    "phone": "303-344-5009",
+    "email": "bigironranch@aol.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Colorado.html",
+    "description": "Private and secure overnight horse stabling at our family owned and operated boarding and training facility. We also offer Spurs Academy. We have accommodations for living quarter trailers. There's a local motel and other services nearby! Location notes: East of Denver (Aurora) off I-70 to exit 295 Watkins. Then just 3 miles S.E. to the ranch!",
+    "photoURLs": ["https://www.horsemotel.com/ZP-BigIron1Big.jpg", "https://www.horsemotel.com/ZP-BigIron2Big.jpg"]
   },
   {
     "id": "horsemotel-059f8afcce",
@@ -15893,6 +15893,25 @@
     "sourceUrl": "https://www.horsemotel.com/Virginia.html",
     "description": "12' x 12' stalls, round pen for turnout, outdoor wash rack, arena, and RV hookups. Stalls are $30/night and RV hookups are $20/night. Location notes: Conveniently located just miles from I-81 in Winchester.",
     "photoURLs": ["https://www.horsemotel.com/ZP-NodrogBig.jpg"]
+  },
+  {
+    "id": "horsemotel-f404c38dae",
+    "name": "Pony Pines Farm",
+    "location": "12044 Atlantic Road, Temperanceville , VA 23442",
+    "address": "12044 Atlantic Road, Temperanceville , VA 23442",
+    "city": "Temperanceville",
+    "state": "VA",
+    "country": "",
+    "latitude": 37.877272,
+    "longitude": -75.526218,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Lodging"],
+    "phone": "757-993-0668",
+    "email": "chincoteaguehealth@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Virginia.html",
+    "description": "Stall board, Pasture with run in access board, RV/ LQ trailer hook ups without sewer, Primitive cabins, Tent camping Bed and breakfast/ bed and bale. family farm with live on owners and their animals which include horses, mules, donkeys. goats, cows, dogs and cats All species that travelers can safely care for are welcome with current coggins and vet wellness certificate Location notes: Virginia's easter shore near the Maryland line and within 12 miles of Chincoteague Island.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-PonyPinesBig.jpg"]
   },
   {
     "id": "horsemotel-e8996ae777",
