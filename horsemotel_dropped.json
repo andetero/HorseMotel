@@ -2,7 +2,7 @@
   {
     "listing": "McClure",
     "state": "AZ",
-    "issue": "Mobile listing page is incomplete or malformed",
+    "issue": "Mobile listing page is missing the telephone section",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileArizonaMcClure.html"
   },
   {
@@ -20,7 +20,7 @@
   {
     "listing": "Summit Ridge",
     "state": "OK",
-    "issue": "Mobile listing page is incomplete or malformed",
+    "issue": "Mobile listing page is missing the telephone section",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOklahomaSummitRidge.html"
   },
   {
@@ -32,19 +32,19 @@
   {
     "listing": "MR",
     "state": "OR",
-    "issue": "Mobile listing page is incomplete or malformed",
+    "issue": "Mobile listing page is missing the Facilities section",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOregonMR.html"
   },
   {
     "listing": "Lucky Four",
     "state": "TN",
-    "issue": "Mobile listing page is incomplete or malformed",
+    "issue": "Mobile listing page is missing the Facilities section",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeLuckyFour.html"
   },
   {
     "listing": "Serenity Manor",
     "state": "TN",
-    "issue": "Mobile listing page is incomplete or malformed",
+    "issue": "Mobile listing page is missing the telephone section",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
   },
   {
@@ -56,7 +56,7 @@
   {
     "listing": "Triple Z",
     "state": "WI",
-    "issue": "Mobile listing page is incomplete or malformed",
+    "issue": "Mobile listing page is missing the telephone section",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileWisconsinTripleZ.html"
   }
 ]
