@@ -210,15 +210,10 @@ jobs:
               subject += " (" + ", ".join(changes) + ")"
 
           text_lines = [
-              "Below is the complete current HorseMotel.com website issue list.",
-              "This email can be used as the latest report even if no issues changed since the previous run.",
-              "",
               f"CURRENT ISSUES ({len(current)})",
               "",
           ]
           html_parts = [
-              "<p>Below is the complete current HorseMotel.com website issue list.</p>",
-              "<p>This email can be used as the latest report even if no issues changed since the previous run.</p>",
               f"<h3>Current Issues ({len(current)})</h3>",
           ]
 
@@ -249,9 +244,6 @@ jobs:
                       "</li>"
                   )
               html_parts.append("</ul>")
-
-          text_lines.append("This email was generated automatically by the HorseMotel sync.")
-          html_parts.append("<p><small>This email was generated automatically by the HorseMotel sync.</small></p>")
 
           payload = {
               "Messages": [{
