@@ -833,9 +833,19 @@ def parse_mobile_detail(html_text: str, state_name: str, state_code: str, detail
             combined.extend(block)
             combined.append({"type": "text", "text": "\n"})
     text = block_text(combined)
-    if not text or "Facilities:" not in text or not re.search(r"\bTel\s*:", text, re.IGNORECASE):
-        if text:
-            record_drop("mobile", "mobile detail missing Facilities/Tel markers", state_code, text, detail_url)
+    if not text:
+        return None
+
+    has_facilities = bool(re.search(r"\bFacilities\s*:", text, re.IGNORECASE))
+    has_tel = bool(re.search(r"\bTel\s*:", text, re.IGNORECASE))
+    if not has_facilities or not has_tel:
+        if not has_facilities and not has_tel:
+            reason = "mobile detail missing Facilities and Tel markers"
+        elif not has_facilities:
+            reason = "mobile detail missing Facilities marker"
+        else:
+            reason = "mobile detail missing Tel marker"
+        record_drop("mobile", reason, state_code, text, detail_url)
         return None
     return parse_listing_block(combined, state_name, state_code, detail_url)
 

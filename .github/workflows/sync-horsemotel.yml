@@ -128,6 +128,12 @@ jobs:
                   issue = ""
                   if stage == "mobile" and ("HTTP Error 404" in reason or "HTTP Error 410" in reason):
                       issue = "Broken mobile listing page (404/410)"
+                  elif stage == "mobile" and reason == "mobile detail missing Facilities marker":
+                      issue = "Mobile listing page is missing the Facilities section"
+                  elif stage == "mobile" and reason == "mobile detail missing Tel marker":
+                      issue = "Mobile listing page is missing the telephone section"
+                  elif stage == "mobile" and reason == "mobile detail missing Facilities and Tel markers":
+                      issue = "Mobile listing page is missing both the Facilities and telephone sections"
                   elif stage == "mobile" and reason == "mobile detail missing Facilities/Tel markers":
                       issue = "Mobile listing page is incomplete or malformed"
                   elif stage == "build_listing" and reason == "no coordinates (no Maps link or KML match)":
@@ -169,7 +175,7 @@ jobs:
           previous = previous_raw if previous_is_simplified else []
 
           def key(item):
-              return tuple(clean(item.get(k)) for k in ("listing", "state", "issue", "url"))
+              return tuple(clean(item.get(k)) for k in ("listing", "state", "url"))
 
           previous_by_key = {key(x): x for x in previous if isinstance(x, dict)}
           current_by_key = {key(x): x for x in current}
