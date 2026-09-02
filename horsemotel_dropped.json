@@ -1,86 +1,62 @@
 [
   {
-    "stage": "mobile",
-    "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
+    "listing": "McClure",
     "state": "AZ",
-    "detail": "Cottonwood",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileArizonaRanchatTrailsEnd.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "AZ",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
+    "issue": "Mobile listing page is incomplete or malformed",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileArizonaMcClure.html"
   },
   {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "HI",
-    "detail": "Hawaii",
-    "url": "https://www.horsemotel.com/Hawaii.html"
+    "listing": "Ranch at Trails End (Cottonwood)",
+    "state": "AZ",
+    "issue": "Broken mobile listing page (404/410)",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileArizonaRanchatTrailsEnd.html"
   },
   {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "OK",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOklahomaSummitRidge.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "OR",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOregonMR.html"
-  },
-  {
-    "stage": "desktop",
-    "reason": "state page fetched OK but 0 listings parsed",
-    "state": "RI",
-    "detail": "Rhode Island",
-    "url": "https://www.horsemotel.com/RhodeIsland.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "TN",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeLuckyFour.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "TN",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail missing Facilities/Tel markers",
-    "state": "WI",
-    "detail": "Horse Motels International. Horse motel & overnight stabling directory for the traveling equestrian. We find horse motels, horse hotels, overnight stabling, ove",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileWisconsinTripleZ.html"
-  },
-  {
-    "stage": "mobile",
-    "reason": "mobile detail fetch failed: HTTP Error 404: Not Found",
-    "state": "WI",
-    "detail": "Kenosha",
-    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
-  },
-  {
-    "stage": "build_listing",
-    "reason": "no coordinates (no Maps link or KML match)",
+    "listing": "Woodland Meadows, LLC",
     "state": "IL",
-    "detail": "Marseilles, Illinois, Woodland Meadows, LLC",
+    "issue": "No map coordinates found",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIllinoisWoodland.html"
   },
   {
-    "stage": "build_listing",
-    "reason": "no coordinates (no Maps link or KML match)",
+    "listing": "Summit Ridge",
     "state": "OK",
-    "detail": "Summit Ridge Ranch",
+    "issue": "Mobile listing page is incomplete or malformed",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOklahomaSummitRidge.html"
+  },
+  {
+    "listing": "Summit Ridge Ranch",
+    "state": "OK",
+    "issue": "No map coordinates found",
     "url": "https://www.horsemotel.com/Oklahoma.html"
+  },
+  {
+    "listing": "MR",
+    "state": "OR",
+    "issue": "Mobile listing page is incomplete or malformed",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileOregonMR.html"
+  },
+  {
+    "listing": "Lucky Four",
+    "state": "TN",
+    "issue": "Mobile listing page is incomplete or malformed",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeLuckyFour.html"
+  },
+  {
+    "listing": "Serenity Manor",
+    "state": "TN",
+    "issue": "Mobile listing page is incomplete or malformed",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileTennesseeSerenityManor.html"
+  },
+  {
+    "listing": "Ash and Oak Farm (Kenosha)",
+    "state": "WI",
+    "issue": "Broken mobile listing page (404/410)",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
+  },
+  {
+    "listing": "Triple Z",
+    "state": "WI",
+    "issue": "Mobile listing page is incomplete or malformed",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileWisconsinTripleZ.html"
   }
 ]
