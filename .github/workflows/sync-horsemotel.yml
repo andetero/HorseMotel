@@ -23,13 +23,31 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Import HorseMotel.com listings
+      - name: Import and validate HorseMotel.com listings
         run: |
           set -euo pipefail
+          rm -rf .sync-next
+          mkdir -p .sync-next
+
+          # Seed the candidate with the current feed so the importer can retain
+          # existing IDs while it rebuilds the data.
+          cp horsemotel.json .sync-next/horsemotel.next.json
+
           python scripts/import_horsemotel.py \
             --scrape-site \
             --site-url "https://www.horsemotel.com/" \
-            --output horsemotel.json
+            --output .sync-next/horsemotel.next.json
+
+          # Do not touch the published feed unless the rebuilt candidate passes
+          # regression checks and corrected stable-ID matching.
+          python scripts/validate_horsemotel.py \
+            --current horsemotel.json \
+            --candidate .sync-next/horsemotel.next.json \
+            --dropped .sync-next/horsemotel_dropped.json
+
+          mv .sync-next/horsemotel.next.json horsemotel.json
+          mv .sync-next/horsemotel_dropped.json horsemotel_dropped.json
+          rm -rf .sync-next
 
       - name: Commit output
         run: |
