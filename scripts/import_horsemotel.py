@@ -98,6 +98,32 @@ def clean(value: str) -> str:
     return re.sub(r"[ \t\r\f\v]+", " ", value).strip()
 
 
+def sanitize_plain_text(value: str) -> str:
+    """Return readable text with malformed HTML attributes/tags removed."""
+    text = html.unescape(value or "").replace("\xa0", " ")
+    text = re.sub(r"<\s*(?:style|script|noscript)\b[^>]*>.*?<\s*/\s*(?:style|script|noscript)\s*>", " ", text,
+                  flags=re.IGNORECASE | re.DOTALL)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(
+        r"\s+\b(?:href|src|style|class|onclick|target|rel)\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^\s>]+)\s*>?",
+        " ", text, flags=re.IGNORECASE,
+    )
+    text = re.sub(r"[ \t\r\f\v]+", " ", text)
+    text = re.sub(r" *\n *", "\n", text)
+    return text.strip()
+
+
+_TEXT_LEAK_RE = re.compile(
+    r"(?:<[^>]+>|\b(?:href|src|style|class|onclick)\s*=|:root\s*\{|--[a-z0-9_-]+\s*:|"
+    r"\b(?:box-sizing|font-family|font-size|background|margin|padding|border-radius)\s*:)",
+    re.IGNORECASE,
+)
+
+
+def text_has_markup_leakage(value: str) -> bool:
+    return bool(_TEXT_LEAK_RE.search(value or ""))
+
+
 def normalize_text(value: str) -> str:
     """Lowercase, strip URLs and punctuation — for fuzzy matching."""
     value = html.unescape(value or "").lower()
@@ -118,9 +144,8 @@ def strip_html_tags(value: str) -> str:
 
 def normalize_description(value: str) -> str:
     """Clean HTML artifacts and normalize whitespace in listing descriptions."""
-    text = html.unescape(value or "").replace("\xa0", " ")
+    text = sanitize_plain_text(value)
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"[ \t\f\v]+", " ", text)
     text = re.sub(r" *\n *", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
@@ -249,12 +274,20 @@ class BlockParser(HTMLParser):
         self._href: Optional[str] = None
         self._link_buf: list[str] = []
         self._link_attrs: list[str] = []
+        self._ignored_depth = 0
 
     def _cur(self) -> list[dict[str, str]]:
         return self.blocks[-1]
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, Optional[str]]]) -> None:
         tag = tag.lower()
+        if self._ignored_depth:
+            if tag in {"style", "script", "noscript", "svg", "template"}:
+                self._ignored_depth += 1
+            return
+        if tag in {"style", "script", "noscript", "svg", "template"}:
+            self._ignored_depth = 1
+            return
         d = dict(attrs)
         if tag == "a":
             self._href = d.get("href")
@@ -274,6 +307,8 @@ class BlockParser(HTMLParser):
             self._cur().append({"type": "text", "text": "\n"})
 
     def handle_data(self, data: str) -> None:
+        if self._ignored_depth:
+            return
         if self._href is not None:
             self._link_buf.append(data)
         else:
@@ -281,6 +316,10 @@ class BlockParser(HTMLParser):
 
     def handle_endtag(self, tag: str) -> None:
         tag = tag.lower()
+        if self._ignored_depth:
+            if tag in {"style", "script", "noscript", "svg", "template"}:
+                self._ignored_depth -= 1
+            return
         if tag == "a" and self._href is not None:
             self._cur().append({
                 "type": "link",
@@ -591,7 +630,9 @@ _SITE_TITLE_RE = re.compile(
 
 
 def clean_name(value: str) -> str:
-    value = _SITE_TITLE_RE.sub("", html.unescape(value or "").replace("\xa0", " "))
+    value = sanitize_plain_text(value)
+    value = re.sub(r"(?:https?://|www\.)\S+", "", value, flags=re.IGNORECASE)
+    value = _SITE_TITLE_RE.sub("", value)
     value = re.sub(r"^Horse\s+Motels\s+International\.?,?\s*", "", value, flags=re.IGNORECASE)
     value = re.sub(r"^[\'\"`]+|[\'\"`]+$", "", value)
     value = re.sub(r"\s*,\s*,+", ", ", value)
@@ -682,9 +723,16 @@ def _website_from_block(block: list[dict[str, str]], base_url: str) -> str:
     return ""
 
 
+def source_is_verified(text: str) -> bool:
+    """Use HorseMotel's explicit map-location confirmation marker."""
+    if re.search(r"Location on Google Maps[^\n]{0,80}\(\s*Not\s+Confirmed\s*\)", text, re.IGNORECASE):
+        return False
+    return bool(re.search(r"Location on Google Maps[^\n]{0,80}\(\s*Confirmed\s*\)", text, re.IGNORECASE))
+
+
 def parse_listing_block(block: list[dict[str, str]], state_name: str, state_code: str, page_url: str) -> Optional[dict[str, Any]]:
     """Parse one <hr>-delimited block from a HorseMotel.com state page into a raw listing dict."""
-    text = block_text(block)
+    text = sanitize_plain_text(block_text(block))
     if not text or "no horse motel listings" in text.lower():
         return None
     if "Location on Google Maps" not in text and "Facilities:" not in text:
@@ -765,6 +813,7 @@ def parse_listing_block(block: list[dict[str, str]], state_name: str, state_code
         "source_url": page_url,
         "description": description or FALLBACK_DESCRIPTION,
         "status_notice": " ".join(notices),
+        "is_verified": source_is_verified(text),
         "photos": extract_photos(block, page_url),
     }
 
@@ -956,6 +1005,11 @@ def _kml_location(name: str) -> tuple[str, str, str]:
         country = clean(m.group(1).replace("Argenttina", "Argentina"))
         return clean(m.group(2)), country, country
 
+    m = re.match(r"^Z\s*-\s*(.+)$", text, re.IGNORECASE)
+    if m:
+        country = clean(m.group(1).replace("Argenttina", "Argentina"))
+        return "", country, country
+
     m = re.match(r"^(.+?)\s*-\s*(.+)$", text)
     if m:
         return clean(m.group(2)), clean(m.group(1)), ""
@@ -1018,6 +1072,7 @@ def parse_kml(kml_text: str) -> list[dict[str, Any]]:
             "source_url": url,
             "description": normalize_description(" ".join(desc_parts)) or FALLBACK_DESCRIPTION,
             "status_notice": "",
+            "is_verified": False,
             "photos": [],
             "_placemark": placemark_name,
             "_kml_only": True,
@@ -1057,23 +1112,46 @@ def load_kml(path: Path, url: str) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 def _phone_tails(value: str) -> set[str]:
-    raw = digits(value)
+    """Return last-seven keys for each individual phone number in a contact string."""
     result: set[str] = set()
-    if len(raw) >= 7:
-        for m in re.finditer(r"\d{7,}", raw):
-            result.add(m.group(0)[-7:])
-        result.add(raw[-7:])
+    for candidate in re.findall(r"(?:\+?1[ .()-]*)?(?:\(?\d{3}\)?[ .()-]*)?\d{3}[ .()-]*\d{4}", value or ""):
+        raw = digits(candidate)
+        if len(raw) >= 7:
+            result.add(raw[-7:])
+    if not result:
+        raw = digits(value)
+        if 7 <= len(raw) <= 11:
+            result.add(raw[-7:])
     return result
+
+
+def _site_key(value: str) -> str:
+    raw = clean(value).strip()
+    if not raw:
+        return ""
+    if not re.match(r"^[a-z]+://", raw, re.IGNORECASE):
+        raw = "https://" + raw
+    try:
+        parts = urlsplit(raw)
+        host = (parts.hostname or "").lower()
+        if host.startswith("www."):
+            host = host[4:]
+        path = re.sub(r"/+", "/", parts.path or "").rstrip("/").lower()
+        return host + path if host else ""
+    except Exception:
+        return ""
 
 
 def _contact_keys(row: dict[str, Any]) -> set[str]:
     keys: set[str] = set()
     for tail in _phone_tails(str(row.get("phone", ""))):
         keys.add(f"p:{tail}")
-    email = normalize_text(str(row.get("email", "")))
-    if email: keys.add(f"e:{email}")
-    site = normalize_text(str(row.get("website", "")))
-    if site: keys.add(f"w:{site}")
+    email = clean(str(row.get("email", ""))).lower()
+    if email:
+        keys.add(f"e:{email}")
+    site = _site_key(str(row.get("website", "")))
+    if site:
+        keys.add(f"w:{site}")
     return keys
 
 
@@ -1085,18 +1163,39 @@ def _coords_near(a: dict[str, Any], b: dict[str, Any], tol: float = 0.02) -> boo
         return False
 
 
+def _name_overlap(a: str, b: str) -> float:
+    at = {t for t in normalize_text(clean_name(a)).split() if len(t) >= 2}
+    bt = {t for t in normalize_text(clean_name(b)).split() if len(t) >= 2}
+    if not at or not bt:
+        return 0.0
+    return len(at & bt) / max(1, min(len(at), len(bt)))
+
+
 def is_same_listing(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    """Return True when two scraped rows are clearly the same real-world facility."""
+    """Return True only when independent evidence identifies the same facility.
+
+    Exact coordinates alone are never enough. This intentionally preserves separate
+    businesses that happen to share a map pin.
+    """
     if normalize_text(str(a.get("state", ""))) != normalize_text(str(b.get("state", ""))):
         return False
-    if not (_contact_keys(a) & _contact_keys(b)):
+    contacts = _contact_keys(a) & _contact_keys(b)
+    if not contacts:
         return False
+
+    exact_coords = _coords_near(a, b, tol=0.00001)
+    overlap = _name_overlap(str(a.get("name", "")), str(b.get("name", "")))
     name_a = normalize_text(clean_name(str(a.get("name", ""))))
     name_b = normalize_text(clean_name(str(b.get("name", ""))))
-    if name_a and name_a == name_b and _coords_near(a, b):
-        return True
     addr_a = normalize_text(str(a.get("location", "")))
     addr_b = normalize_text(str(b.get("location", "")))
+
+    # Reviewed desktop/mobile duplicates generally share the exact map pin plus
+    # either multiple independent contacts or a clearly overlapping business name.
+    if exact_coords and (len(contacts) >= 2 or overlap >= 0.5):
+        return True
+    if name_a and name_a == name_b and _coords_near(a, b):
+        return True
     if addr_a and addr_a == addr_b and re.search(r"\d", addr_a):
         return True
     return False
@@ -1269,12 +1368,66 @@ def build_listing(row: dict[str, Any]) -> Optional[dict[str, Any]]:
         "sourceUrl": clean(str(row.get("source_url", ""))) or DEFAULT_SITE_URL,
         "description": desc,
         "photoURLs": list(row.get("photos", [])),
+        "isVerified": bool(row.get("is_verified", False)),
     }
 
     if status_notice:
         listing["statusNotice"] = status_notice
 
     return listing
+
+
+
+_TEXT_OUTPUT_FIELDS = ("name", "location", "address", "city", "state", "country", "phone", "email", "description", "statusNotice")
+
+
+def validate_listing_text(listing: dict[str, Any]) -> None:
+    for field in _TEXT_OUTPUT_FIELDS:
+        value = listing.get(field)
+        if isinstance(value, str) and text_has_markup_leakage(value):
+            raise ValueError(f"{listing.get('id', '<no-id>')} field {field} contains HTML/CSS leakage: {value[:160]}")
+
+
+def _published_identity_score(new: dict[str, Any], old: dict[str, Any]) -> int:
+    score = 0
+    if clean(str(new.get("phone", ""))) and digits(str(new.get("phone", ""))) == digits(str(old.get("phone", ""))): score += 80
+    if clean(str(new.get("email", ""))) and normalize_text(str(new.get("email", ""))) == normalize_text(str(old.get("email", ""))): score += 90
+    if clean(str(new.get("website", ""))) and normalize_text(str(new.get("website", ""))) == normalize_text(str(old.get("website", ""))): score += 70
+    try:
+        if abs(float(new.get("latitude", 0))-float(old.get("latitude", 0))) <= 0.00001 and abs(float(new.get("longitude", 0))-float(old.get("longitude", 0))) <= 0.00001: score += 55
+    except (TypeError, ValueError): pass
+    nn = normalize_text(clean_name(str(new.get("name", ""))))
+    on = normalize_text(clean_name(str(old.get("name", ""))))
+    if nn and on:
+        if nn == on: score += 60
+        else:
+            nt = {t for t in nn.split() if len(t) >= 3}; ot = {t for t in on.split() if len(t) >= 3}
+            if nt and ot and len(nt & ot) / max(1, min(len(nt), len(ot))) >= 0.75: score += 35
+    na = normalize_text(str(new.get("address", ""))); oa = normalize_text(str(old.get("address", "")))
+    if na and na == oa: score += 55
+    return score
+
+
+def preserve_existing_ids(listings: list[dict[str, Any]], existing: list[dict[str, Any]]) -> int:
+    changed = 0; used: set[str] = set()
+    for listing in listings:
+        ranked = sorted(((_published_identity_score(listing, old), old) for old in existing if isinstance(old, dict)), key=lambda item:item[0], reverse=True)
+        if not ranked or ranked[0][0] < 110: continue
+        best_score, best = ranked[0]
+        if len(ranked) > 1 and ranked[1][0] == best_score: continue
+        old_id = clean(str(best.get("id", "")))
+        if not old_id or old_id in used: continue
+        used.add(old_id)
+        if listing["id"] != old_id:
+            listing["id"] = old_id; changed += 1
+    return changed
+
+
+def load_existing_feed(path: Path) -> list[dict[str, Any]]:
+    if not path.exists(): return []
+    try:
+        value = json.loads(path.read_text(encoding="utf-8")); return value if isinstance(value, list) else []
+    except Exception: return []
 
 
 # ---------------------------------------------------------------------------
@@ -1311,6 +1464,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
 
+    existing_feed = load_existing_feed(args.output)
     raw_rows: list[dict[str, Any]] = []
 
     if args.scrape_site:
@@ -1342,6 +1496,13 @@ def main() -> int:
     print(f"Dedup: {len(raw_rows)} raw rows → {len(deduped)} unique listings")
 
     listings = [l for row in deduped for l in [build_listing(row)] if l]
+    preserved = preserve_existing_ids(listings, existing_feed)
+    if preserved:
+        print(f"Preserved {preserved} published listing IDs")
+    for listing in listings:
+        validate_listing_text(listing)
+    if len({str(l.get("id", "")) for l in listings}) != len(listings):
+        raise RuntimeError("Refusing to publish duplicate listing IDs")
     listings.sort(key=lambda l: (l.get("state", ""), l.get("name", "")))
 
     write_json(args.output, listings)

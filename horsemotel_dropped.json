@@ -42,13 +42,6 @@
     "url": "https://www.horsemotel.com/RhodeIsland.html"
   },
   {
-    "stage": "parse_block",
-    "reason": "listing-like block with no phone/email",
-    "state": "TN",
-    "detail": "Serenity Manor Stables \nLebanon , TN \nWeb Site: http://www.SerenityManorStables.com \nLocation on Google Maps (Town of Lebanon) \nFacilities: Pasture or stall boa",
-    "url": "https://www.horsemotel.com/Tennessee.html"
-  },
-  {
     "stage": "mobile",
     "reason": "mobile detail missing Facilities/Tel markers",
     "state": "TN",
@@ -75,6 +68,13 @@
     "state": "WI",
     "detail": "Kenosha",
     "url": "https://www.horsemotel.com/A1MobilePages/A3MobileAshandOakFarm.html"
+  },
+  {
+    "stage": "build_listing",
+    "reason": "no coordinates (no Maps link or KML match)",
+    "state": "IL",
+    "detail": "Marseilles, Illinois, Woodland Meadows, LLC",
+    "url": "https://www.horsemotel.com/A1MobilePages/A3MobileIllinoisWoodland.html"
   },
   {
     "stage": "build_listing",
