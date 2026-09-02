@@ -159,8 +159,7 @@ jobs:
           current_path.write_text(json.dumps(current, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
           # The old technical schema is intentionally treated as having no prior
-          # actionable issues so the first run after this migration sends one
-          # complete test/report email. Future runs compare simplified reports.
+          # actionable issues so the first run after this migration compares cleanly.
           previous_is_simplified = (
               isinstance(previous_raw, list)
               and all(isinstance(x, dict) and {"listing", "state", "issue", "url"}.issubset(x) for x in previous_raw)
@@ -177,10 +176,8 @@ jobs:
           new_keys = {key(x) for x in new_items}
 
           print(f"Actionable source issues: {len(current)} total, {len(new_items)} new, {len(resolved_items)} resolved")
-
           if not new_items and not resolved_items:
-              print("No source issue changes; no email sent.")
-              raise SystemExit(0)
+              print("No source issue changes; sending the complete current issue list anyway.")
 
           api_key = os.environ.get("MAILJET_API_KEY", "").strip()
           secret_key = os.environ.get("MAILJET_SECRET_KEY", "").strip()
@@ -200,15 +197,15 @@ jobs:
               subject += " (" + ", ".join(changes) + ")"
 
           text_lines = [
-              "The nightly HorseMotel.com sync found a change in website issues.",
-              "Below is the complete current issue list so this email can be used as the latest report.",
+              "Below is the complete current HorseMotel.com website issue list.",
+              "This email can be used as the latest report even if no issues changed since the previous run.",
               "",
               f"CURRENT ISSUES ({len(current)})",
               "",
           ]
           html_parts = [
-              "<p>The nightly HorseMotel.com sync found a change in website issues.</p>",
-              "<p>Below is the complete current issue list so this email can be used as the latest report.</p>",
+              "<p>Below is the complete current HorseMotel.com website issue list.</p>",
+              "<p>This email can be used as the latest report even if no issues changed since the previous run.</p>",
               f"<h3>Current Issues ({len(current)})</h3>",
           ]
 
