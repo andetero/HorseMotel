@@ -176,6 +176,9 @@ jobs:
           new_keys = {key(x) for x in new_items}
 
           print(f"Actionable source issues: {len(current)} total, {len(new_items)} new, {len(resolved_items)} resolved")
+          if not current:
+              print("No actionable source issues; no email sent.")
+              raise SystemExit(0)
           if not new_items and not resolved_items:
               print("No source issue changes; sending the complete current issue list anyway.")
 
@@ -209,23 +212,19 @@ jobs:
               f"<h3>Current Issues ({len(current)})</h3>",
           ]
 
-          if current:
-              html_parts.append("<ul>")
-              for item in current:
-                  is_new = key(item) in new_keys
-                  marker = " [NEW]" if is_new else ""
-                  label = f"{item['state']} - {item['listing']}" if item["state"] else item["listing"]
-                  text_lines.extend([label + marker, f"Issue: {item['issue']}", item["url"], ""])
-                  html_parts.append(
-                      "<li><strong>" + html.escape(label) + (" [NEW]" if is_new else "") + "</strong><br>" +
-                      html.escape(item["issue"]) + "<br>" +
-                      (f'<a href="{html.escape(item["url"], quote=True)}">{html.escape(item["url"])}</a>' if item["url"] else "") +
-                      "</li>"
-                  )
-              html_parts.append("</ul>")
-          else:
-              text_lines.extend(["None", ""])
-              html_parts.append("<p>None.</p>")
+          html_parts.append("<ul>")
+          for item in current:
+              is_new = key(item) in new_keys
+              marker = " [NEW]" if is_new else ""
+              label = f"{item['state']} - {item['listing']}" if item["state"] else item["listing"]
+              text_lines.extend([label + marker, f"Issue: {item['issue']}", item["url"], ""])
+              html_parts.append(
+                  "<li><strong>" + html.escape(label) + (" [NEW]" if is_new else "") + "</strong><br>" +
+                  html.escape(item["issue"]) + "<br>" +
+                  (f'<a href="{html.escape(item["url"], quote=True)}">{html.escape(item["url"])}</a>' if item["url"] else "") +
+                  "</li>"
+              )
+          html_parts.append("</ul>")
 
           if resolved_items:
               text_lines.extend([f"RESOLVED SINCE LAST REPORT ({len(resolved_items)})", ""])
