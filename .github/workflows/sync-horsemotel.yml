@@ -29,8 +29,8 @@ jobs:
           rm -rf .sync-next
           mkdir -p .sync-next
 
-          # Seed the candidate with the current feed so the importer can retain
-          # existing IDs while it rebuilds the data.
+          # Seed the temporary output with the current feed. The importer uses
+          # it as the last-known-good baseline for stable IDs and safety checks.
           cp horsemotel.json .sync-next/horsemotel.next.json
 
           python scripts/import_horsemotel.py \
@@ -38,13 +38,8 @@ jobs:
             --site-url "https://www.horsemotel.com/" \
             --output .sync-next/horsemotel.next.json
 
-          # Do not touch the published feed unless the rebuilt candidate passes
-          # regression checks and corrected stable-ID matching.
-          python scripts/validate_horsemotel.py \
-            --current horsemotel.json \
-            --candidate .sync-next/horsemotel.next.json \
-            --dropped .sync-next/horsemotel_dropped.json
-
+          # The importer only writes these files after the rebuilt feed passes
+          # its safety checks, so production stays untouched on a failed crawl.
           mv .sync-next/horsemotel.next.json horsemotel.json
           mv .sync-next/horsemotel_dropped.json horsemotel_dropped.json
           rm -rf .sync-next

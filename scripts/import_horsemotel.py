@@ -19,11 +19,13 @@ import gzip
 import hashlib
 import html
 import json
+import math
 import re
 import sys
 import time
 import zlib
 import xml.etree.ElementTree as ET
+from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Optional
@@ -1377,7 +1379,6 @@ def build_listing(row: dict[str, Any]) -> Optional[dict[str, Any]]:
     return listing
 
 
-
 _TEXT_OUTPUT_FIELDS = ("name", "location", "address", "city", "state", "country", "phone", "email", "description", "statusNotice")
 
 
@@ -1390,44 +1391,124 @@ def validate_listing_text(listing: dict[str, Any]) -> None:
 
 def _published_identity_score(new: dict[str, Any], old: dict[str, Any]) -> int:
     score = 0
-    if clean(str(new.get("phone", ""))) and digits(str(new.get("phone", ""))) == digits(str(old.get("phone", ""))): score += 80
-    if clean(str(new.get("email", ""))) and normalize_text(str(new.get("email", ""))) == normalize_text(str(old.get("email", ""))): score += 90
-    if clean(str(new.get("website", ""))) and normalize_text(str(new.get("website", ""))) == normalize_text(str(old.get("website", ""))): score += 70
+    if clean(str(new.get("phone", ""))) and digits(str(new.get("phone", ""))) == digits(str(old.get("phone", ""))):
+        score += 80
+    if clean(str(new.get("email", ""))) and normalize_text(str(new.get("email", ""))) == normalize_text(str(old.get("email", ""))):
+        score += 90
+    new_site = _site_key(str(new.get("website", "")))
+    old_site = _site_key(str(old.get("website", "")))
+    if new_site and new_site == old_site:
+        score += 70
     try:
-        if abs(float(new.get("latitude", 0))-float(old.get("latitude", 0))) <= 0.00001 and abs(float(new.get("longitude", 0))-float(old.get("longitude", 0))) <= 0.00001: score += 55
-    except (TypeError, ValueError): pass
+        if abs(float(new.get("latitude", 0)) - float(old.get("latitude", 0))) <= 0.00001 and abs(float(new.get("longitude", 0)) - float(old.get("longitude", 0))) <= 0.00001:
+            score += 55
+    except (TypeError, ValueError):
+        pass
     nn = normalize_text(clean_name(str(new.get("name", ""))))
     on = normalize_text(clean_name(str(old.get("name", ""))))
     if nn and on:
-        if nn == on: score += 60
+        if nn == on:
+            score += 60
         else:
-            nt = {t for t in nn.split() if len(t) >= 3}; ot = {t for t in on.split() if len(t) >= 3}
-            if nt and ot and len(nt & ot) / max(1, min(len(nt), len(ot))) >= 0.75: score += 35
-    na = normalize_text(str(new.get("address", ""))); oa = normalize_text(str(old.get("address", "")))
-    if na and na == oa: score += 55
+            nt = {t for t in nn.split() if len(t) >= 3}
+            ot = {t for t in on.split() if len(t) >= 3}
+            if nt and ot and len(nt & ot) / max(1, min(len(nt), len(ot))) >= 0.75:
+                score += 35
+    na = normalize_text(str(new.get("address", "")))
+    oa = normalize_text(str(old.get("address", "")))
+    if na and na == oa:
+        score += 55
     return score
 
 
 def preserve_existing_ids(listings: list[dict[str, Any]], existing: list[dict[str, Any]]) -> int:
-    changed = 0; used: set[str] = set()
+    changed = 0
+    used: set[str] = set()
     for listing in listings:
-        ranked = sorted(((_published_identity_score(listing, old), old) for old in existing if isinstance(old, dict)), key=lambda item:item[0], reverse=True)
-        if not ranked or ranked[0][0] < 110: continue
+        ranked = sorted(
+            ((_published_identity_score(listing, old), old) for old in existing if isinstance(old, dict)),
+            key=lambda item: item[0], reverse=True,
+        )
+        if not ranked or ranked[0][0] < 110:
+            continue
         best_score, best = ranked[0]
-        if len(ranked) > 1 and ranked[1][0] == best_score: continue
+        if len(ranked) > 1 and ranked[1][0] == best_score:
+            continue
         old_id = clean(str(best.get("id", "")))
-        if not old_id or old_id in used: continue
+        if not old_id or old_id in used:
+            continue
         used.add(old_id)
         if listing["id"] != old_id:
-            listing["id"] = old_id; changed += 1
+            listing["id"] = old_id
+            changed += 1
     return changed
 
 
 def load_existing_feed(path: Path) -> list[dict[str, Any]]:
-    if not path.exists(): return []
+    if not path.exists():
+        return []
     try:
-        value = json.loads(path.read_text(encoding="utf-8")); return value if isinstance(value, list) else []
-    except Exception: return []
+        value = json.loads(path.read_text(encoding="utf-8"))
+        return value if isinstance(value, list) else []
+    except Exception:
+        return []
+
+
+def validate_publish_safety(current: list[dict[str, Any]], candidate: list[dict[str, Any]], dropped: list[dict[str, str]]) -> None:
+    """Refuse to overwrite a healthy published feed with a suspicious crawl."""
+    errors: list[str] = []
+    old_count = len(current)
+    new_count = len(candidate)
+
+    if old_count:
+        if new_count < math.floor(old_count * 0.90):
+            errors.append(f"listing count fell from {old_count} to {new_count} (>10%)")
+        if new_count > math.ceil(old_count * 1.25):
+            errors.append(f"listing count rose from {old_count} to {new_count} (>25%)")
+
+    old_states = Counter(clean(str(r.get("state", ""))) for r in current)
+    new_states = Counter(clean(str(r.get("state", ""))) for r in candidate)
+    for state, old_state_count in old_states.items():
+        if state and old_state_count >= 5 and new_states[state] < math.floor(old_state_count * 0.50):
+            errors.append(f"state/region {state!r} fell from {old_state_count} to {new_states[state]} (>50%)")
+
+    old_photos = sum(len(r.get("photoURLs") or []) for r in current)
+    new_photos = sum(len(r.get("photoURLs") or []) for r in candidate)
+    if old_photos >= 50 and new_photos < math.floor(old_photos * 0.60):
+        errors.append(f"photo count fell from {old_photos} to {new_photos} (>40%)")
+
+    drop_limit = max(50, math.ceil(max(old_count, 1) * 0.05))
+    if len(dropped) > drop_limit:
+        errors.append(f"drop report has {len(dropped)} entries (limit {drop_limit})")
+
+    ids: list[str] = []
+    for idx, row in enumerate(candidate):
+        ident = clean(str(row.get("id", "")))
+        ids.append(ident)
+        if not ident:
+            errors.append(f"candidate row {idx} has no id")
+        if not clean(str(row.get("name", ""))):
+            errors.append(f"candidate {ident or idx} has no name")
+        try:
+            lat = float(row.get("latitude"))
+            lng = float(row.get("longitude"))
+            if not (-90 <= lat <= 90 and -180 <= lng <= 180) or (lat == 0 and lng == 0):
+                errors.append(f"candidate {ident or idx} has invalid coordinates {lat},{lng}")
+        except (TypeError, ValueError):
+            errors.append(f"candidate {ident or idx} has non-numeric coordinates")
+        if not isinstance(row.get("isVerified"), bool):
+            errors.append(f"candidate {ident or idx} is missing boolean isVerified")
+
+    if len(set(ids)) != len(ids):
+        errors.append("candidate contains duplicate listing IDs")
+
+    if errors:
+        raise RuntimeError("Refusing to publish candidate feed:\n- " + "\n- ".join(errors[:30]))
+
+    print(
+        f"Safety gate passed: {old_count} -> {new_count} listings, "
+        f"{old_photos} -> {new_photos} photos, {len(dropped)} dropped"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -1504,6 +1585,10 @@ def main() -> int:
     if len({str(l.get("id", "")) for l in listings}) != len(listings):
         raise RuntimeError("Refusing to publish duplicate listing IDs")
     listings.sort(key=lambda l: (l.get("state", ""), l.get("name", "")))
+
+    # Validate the rebuilt feed against the last-known-good feed before touching
+    # either published JSON file. A failed crawl therefore leaves production intact.
+    validate_publish_safety(existing_feed, listings, DROPPED)
 
     write_json(args.output, listings)
     print(f"Wrote {len(listings)} listings to {args.output}")
