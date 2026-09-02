@@ -147,9 +147,9 @@ jobs:
                       "issue": issue,
                       "url": url,
                   }
-                  key = tuple(item[k] for k in ("listing", "state", "issue", "url"))
-                  if key not in seen:
-                      seen.add(key)
+                  item_key = tuple(item[k] for k in ("listing", "state", "issue", "url"))
+                  if item_key not in seen:
+                      seen.add(item_key)
                       issues.append(item)
 
               issues.sort(key=lambda x: (x["state"], x["listing"].lower(), x["issue"], x["url"]))
@@ -174,6 +174,7 @@ jobs:
           current_by_key = {key(x): x for x in current}
           new_items = [current_by_key[k] for k in sorted(current_by_key.keys() - previous_by_key.keys())]
           resolved_items = [previous_by_key[k] for k in sorted(previous_by_key.keys() - current_by_key.keys())]
+          new_keys = {key(x) for x in new_items}
 
           print(f"Actionable source issues: {len(current)} total, {len(new_items)} new, {len(resolved_items)} resolved")
 
@@ -194,34 +195,55 @@ jobs:
               changes.append(f"{len(new_items)} new")
           if resolved_items:
               changes.append(f"{len(resolved_items)} resolved")
-          subject = "HorseMotel.com source issues: " + ", ".join(changes)
+          subject = f"HorseMotel.com current issue list: {len(current)} current"
+          if changes:
+              subject += " (" + ", ".join(changes) + ")"
 
           text_lines = [
-              "The nightly HorseMotel.com sync found changes to website issues that may need attention.",
+              "The nightly HorseMotel.com sync found a change in website issues.",
+              "Below is the complete current issue list so this email can be used as the latest report.",
+              "",
+              f"CURRENT ISSUES ({len(current)})",
               "",
           ]
           html_parts = [
-              "<p>The nightly HorseMotel.com sync found changes to website issues that may need attention.</p>"
+              "<p>The nightly HorseMotel.com sync found a change in website issues.</p>",
+              "<p>Below is the complete current issue list so this email can be used as the latest report.</p>",
+              f"<h3>Current Issues ({len(current)})</h3>",
           ]
 
-          def add_section(title, items):
-              if not items:
-                  return
-              text_lines.extend([title, ""])
-              html_parts.append(f"<h3>{html.escape(title.title())}</h3><ul>")
-              for item in items:
+          if current:
+              html_parts.append("<ul>")
+              for item in current:
+                  is_new = key(item) in new_keys
+                  marker = " [NEW]" if is_new else ""
                   label = f"{item['state']} - {item['listing']}" if item["state"] else item["listing"]
-                  text_lines.extend([label, f"Issue: {item['issue']}", item["url"], ""])
+                  text_lines.extend([label + marker, f"Issue: {item['issue']}", item["url"], ""])
                   html_parts.append(
-                      "<li><strong>" + html.escape(label) + "</strong><br>" +
+                      "<li><strong>" + html.escape(label) + (" [NEW]" if is_new else "") + "</strong><br>" +
                       html.escape(item["issue"]) + "<br>" +
                       (f'<a href="{html.escape(item["url"], quote=True)}">{html.escape(item["url"])}</a>' if item["url"] else "") +
                       "</li>"
                   )
               html_parts.append("</ul>")
+          else:
+              text_lines.extend(["None", ""])
+              html_parts.append("<p>None.</p>")
 
-          add_section("NEW ISSUES", new_items)
-          add_section("RESOLVED", resolved_items)
+          if resolved_items:
+              text_lines.extend([f"RESOLVED SINCE LAST REPORT ({len(resolved_items)})", ""])
+              html_parts.append(f"<h3>Resolved Since Last Report ({len(resolved_items)})</h3><ul>")
+              for item in resolved_items:
+                  label = f"{item['state']} - {item['listing']}" if item["state"] else item["listing"]
+                  text_lines.extend([label, f"Previously: {item['issue']}", item["url"], ""])
+                  html_parts.append(
+                      "<li><strong>" + html.escape(label) + "</strong><br>" +
+                      "Previously: " + html.escape(item["issue"]) + "<br>" +
+                      (f'<a href="{html.escape(item["url"], quote=True)}">{html.escape(item["url"])}</a>' if item["url"] else "") +
+                      "</li>"
+                  )
+              html_parts.append("</ul>")
+
           text_lines.append("This email was generated automatically by the HorseMotel sync.")
           html_parts.append("<p><small>This email was generated automatically by the HorseMotel sync.</small></p>")
 
