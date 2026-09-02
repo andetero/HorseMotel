@@ -5024,6 +5024,26 @@
     "isVerified": false
   },
   {
+    "id": "horsemotel-1e842a3a4e",
+    "name": "3-2-1 Ranch, Ryan Seger",
+    "location": "9340 N County Rd 250 E, Chrisney , IN 47611",
+    "address": "9340 N County Rd 250 E, Chrisney , IN 47611",
+    "city": "Chrisney",
+    "state": "IN",
+    "country": "",
+    "latitude": 38.022124,
+    "longitude": -87.008406,
+    "hookups": ["Electric", "Water"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
+    "phone": "702-757-8146",
+    "email": "segera_96@yahoo.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Indiana.html",
+    "description": "Small Private facility with 12' x 12' indoor stalls in a barn. Lighted arena for riding or turnout. Convenient to US Highway 231 and Interstate 64. Friendly dogs are welcome. We have dogs, cats, and rabbits, so please no aggressive dogs. $25 per horse per night and $25 for electric/water hook ups per night. 1 mile east of US Highway 231 and 12 miles south of Interstate 64. We welcome all traveling equestrians. Current Health Papers and Negative Coggins are required. We accept Venmo, PayPal, CashApp, and Cash. We look forward to meeting you and your horses. Location notes: East of Evansville and convenient to Route Route 231.",
+    "photoURLs": [],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-bf3c3636ad",
     "name": "Alliance Equestrian Center",
     "location": "2400 N County Road 725 W, Yorktown , IN 47396",
@@ -5122,26 +5142,6 @@
     "description": "We offer overnight stalls at $30.00 per stall and camping hookups for $40.00 per night. Check out our web page for details. Location notes: 1.5 miles off I-70 in Cloverdale, Indiana. From 70 take 231 south to Stardust Road, turn right (at Motel 6) then 1 mile on the right.",
     "photoURLs": ["https://www.horsemotel.com/ZP-CBarC1Big.jpg", "https://www.horsemotel.com/ZP-CBarC2Big.jpg", "https://www.horsemotel.com/ZP-CBarC3Big.jpg", "https://www.horsemotel.com/ZP-CBarC4Big.jpg", "https://www.horsemotel.com/ZP-CBarC5Big.jpg", "https://www.horsemotel.com/ZP-CBarC6Big.jpg"],
     "isVerified": true
-  },
-  {
-    "id": "horsemotel-1e842a3a4e",
-    "name": "Chrisney, Indiana, 3-2-1 Ranch",
-    "location": "9340 N County Rd 250 E, Chrisney , IN 47611",
-    "address": "9340 N County Rd 250 E, Chrisney , IN 47611",
-    "city": "Chrisney",
-    "state": "IN",
-    "country": "",
-    "latitude": 38.022124,
-    "longitude": -87.008406,
-    "hookups": ["Electric", "Water"],
-    "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
-    "phone": "702-757-8146",
-    "email": "segera_96@yahoo.com",
-    "website": "",
-    "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileIndianaThreeTwoOne.html",
-    "description": "Small Private facility with 12' x 12' indoor stalls in a barn. Lighted arena for riding or turnout. Convenient to US Highway 231 and Interstate 64. Friendly dogs are welcome. We have dogs, cats, and rabbits, so please no aggressive dogs. $25 per horse per night and $25 for electric/water hook ups per night. 1 mile east of US Highway 231 and 12 miles south of Interstate 64. We welcome all traveling equestrians. Current Health Papers and Negative Coggins are required. We accept Venmo, PayPal, CashApp, and Cash. We look forward to meeting you and your horses. Location notes: East of Evansville and convenient to Route Route 231.",
-    "photoURLs": [],
-    "isVerified": false
   },
   {
     "id": "horsemotel-ee6a81056e",
