@@ -201,8 +201,9 @@ jobs:
           api_key = os.environ.get("MAILJET_API_KEY", "").strip()
           secret_key = os.environ.get("MAILJET_SECRET_KEY", "").strip()
           from_email = os.environ.get("MAILJET_FROM_EMAIL", "").strip()
-          to_email = os.environ.get("MAILJET_TO_EMAIL", "").strip()
-          if not all((api_key, secret_key, from_email, to_email)):
+          to_value = os.environ.get("MAILJET_TO_EMAIL", "").strip()
+          to_emails = list(dict.fromkeys(email.strip() for email in to_value.split(",") if email.strip()))
+          if not all((api_key, secret_key, from_email)) or not to_emails:
               print("Mailjet secrets are incomplete; skipping email notification.")
               raise SystemExit(0)
 
@@ -254,7 +255,7 @@ jobs:
           payload = {
               "Messages": [{
                   "From": {"Email": from_email, "Name": "HorseMotel Sync"},
-                  "To": [{"Email": to_email}],
+                  "To": [{"Email": email} for email in to_emails],
                   "Subject": subject,
                   "TextPart": "\n".join(text_lines),
                   "HTMLPart": "".join(html_parts),
@@ -271,7 +272,7 @@ jobs:
           try:
               with urlopen(request, timeout=30) as response:
                   response.read()
-                  print(f"Mailjet notification sent to {to_email} (HTTP {response.status}).")
+                  print(f"Mailjet notification sent to {len(to_emails)} recipient(s) (HTTP {response.status}).")
           except Exception as exc:
               # An email outage must not block publication of an otherwise valid feed.
               print(f"Warning: Mailjet notification failed: {exc}")
