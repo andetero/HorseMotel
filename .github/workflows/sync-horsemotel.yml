@@ -32,14 +32,227 @@ jobs:
           # Seed the temporary output with the current feed. The importer uses
           # it as the last-known-good baseline for stable IDs and safety checks.
           cp horsemotel.json .sync-next/horsemotel.next.json
+          cp horsemotel_dropped.json .sync-next/horsemotel.previous-dropped.json 2>/dev/null || echo '[]' > .sync-next/horsemotel.previous-dropped.json
 
           python scripts/import_horsemotel.py \
             --scrape-site \
             --site-url "https://www.horsemotel.com/" \
             --output .sync-next/horsemotel.next.json
 
-          # The importer only writes these files after the rebuilt feed passes
-          # its safety checks, so production stays untouched on a failed crawl.
+      - name: Simplify source issues and send Mailjet notification
+        env:
+          MAILJET_API_KEY: ${{ secrets.MAILJET_API_KEY }}
+          MAILJET_SECRET_KEY: ${{ secrets.MAILJET_SECRET_KEY }}
+          MAILJET_FROM_EMAIL: ${{ secrets.MAILJET_FROM_EMAIL }}
+          MAILJET_TO_EMAIL: ${{ secrets.MAILJET_TO_EMAIL }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64
+          import html
+          import json
+          import os
+          import re
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          from urllib.request import Request, urlopen
+
+          current_path = Path(".sync-next/horsemotel_dropped.json")
+          previous_path = Path(".sync-next/horsemotel.previous-dropped.json")
+
+          current_raw = json.loads(current_path.read_text(encoding="utf-8"))
+          previous_raw = json.loads(previous_path.read_text(encoding="utf-8")) if previous_path.exists() else []
+
+          state_names = {
+              "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California",
+              "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "FL": "Florida", "GA": "Georgia",
+              "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa",
+              "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+              "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri",
+              "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey",
+              "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio",
+              "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina",
+              "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah", "VT": "Vermont",
+              "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming",
+          }
+
+          def clean(value):
+              return re.sub(r"\s+", " ", str(value or "")).strip()
+
+          def mobile_listing_name(url, state):
+              stem = Path(urlsplit(url).path).stem
+              stem = re.sub(r"^A3Mobile", "", stem, flags=re.I)
+              state_name = state_names.get(state, "").replace(" ", "")
+              if state_name and stem.lower().startswith(state_name.lower()):
+                  stem = stem[len(state_name):]
+              stem = re.sub(r"(?<=[a-z])(and|at|of|the|to)(?=[A-Z])", r" \1 ", stem)
+              stem = re.sub(r"(?<=[a-z0-9])(?=[A-Z])", " ", stem)
+              stem = re.sub(r"(?<=[A-Z])(?=[A-Z][a-z])", " ", stem)
+              stem = re.sub(r"\bMc ([A-Z])", r"Mc\1", stem)
+              return clean(stem)
+
+          def build_listing_name(entry):
+              state = clean(entry.get("state"))
+              detail = clean(entry.get("detail"))
+              stage = clean(entry.get("stage"))
+              url = clean(entry.get("url"))
+
+              if stage == "build_listing" and detail:
+                  parts = [p.strip() for p in detail.split(",")]
+                  full_state = state_names.get(state, "")
+                  if len(parts) >= 3 and full_state and parts[1].lower() == full_state.lower():
+                      return ", ".join(parts[2:])
+                  return detail
+
+              derived = mobile_listing_name(url, state) if "A3Mobile" in url else ""
+              reason = clean(entry.get("reason"))
+              if "404" in reason and derived and detail and detail.lower() not in derived.lower():
+                  return f"{derived} ({detail})"
+              if derived:
+                  return derived
+              return detail or state or "Unknown listing"
+
+          def simplify(entries):
+              issues = []
+              seen = set()
+              for entry in entries if isinstance(entries, list) else []:
+                  if not isinstance(entry, dict):
+                      continue
+                  stage = clean(entry.get("stage"))
+                  reason = clean(entry.get("reason"))
+                  state = clean(entry.get("state"))
+                  url = clean(entry.get("url"))
+
+                  issue = ""
+                  if stage == "mobile" and ("HTTP Error 404" in reason or "HTTP Error 410" in reason):
+                      issue = "Broken mobile listing page (404/410)"
+                  elif stage == "mobile" and reason == "mobile detail missing Facilities/Tel markers":
+                      issue = "Mobile listing page is incomplete or malformed"
+                  elif stage == "build_listing" and reason == "no coordinates (no Maps link or KML match)":
+                      issue = "No map coordinates found"
+                  elif stage == "parse_block" and reason == "has contact info but no Facilities/Maps marker":
+                      issue = "Listing formatting is incomplete or malformed"
+                  elif stage == "parse_block" and reason == "listing-like block with no phone/email":
+                      issue = "Listing is missing phone/email information"
+                  elif stage == "parse_block" and reason == "no usable name lines after notice cleanup":
+                      issue = "Listing formatting prevents the business name from being read"
+                  else:
+                      # Transient fetch errors, empty state pages, and other importer
+                      # diagnostics stay in the Actions log instead of emailing the site owner.
+                      continue
+
+                  item = {
+                      "listing": build_listing_name(entry),
+                      "state": state,
+                      "issue": issue,
+                      "url": url,
+                  }
+                  key = tuple(item[k] for k in ("listing", "state", "issue", "url"))
+                  if key not in seen:
+                      seen.add(key)
+                      issues.append(item)
+
+              issues.sort(key=lambda x: (x["state"], x["listing"].lower(), x["issue"], x["url"]))
+              return issues
+
+          current = simplify(current_raw)
+          current_path.write_text(json.dumps(current, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+          # The old technical schema is intentionally treated as having no prior
+          # actionable issues so the first run after this migration sends one
+          # complete test/report email. Future runs compare simplified reports.
+          previous_is_simplified = (
+              isinstance(previous_raw, list)
+              and all(isinstance(x, dict) and {"listing", "state", "issue", "url"}.issubset(x) for x in previous_raw)
+          )
+          previous = previous_raw if previous_is_simplified else []
+
+          def key(item):
+              return tuple(clean(item.get(k)) for k in ("listing", "state", "issue", "url"))
+
+          previous_by_key = {key(x): x for x in previous if isinstance(x, dict)}
+          current_by_key = {key(x): x for x in current}
+          new_items = [current_by_key[k] for k in sorted(current_by_key.keys() - previous_by_key.keys())]
+          resolved_items = [previous_by_key[k] for k in sorted(previous_by_key.keys() - current_by_key.keys())]
+
+          print(f"Actionable source issues: {len(current)} total, {len(new_items)} new, {len(resolved_items)} resolved")
+
+          if not new_items and not resolved_items:
+              print("No source issue changes; no email sent.")
+              raise SystemExit(0)
+
+          api_key = os.environ.get("MAILJET_API_KEY", "").strip()
+          secret_key = os.environ.get("MAILJET_SECRET_KEY", "").strip()
+          from_email = os.environ.get("MAILJET_FROM_EMAIL", "").strip()
+          to_email = os.environ.get("MAILJET_TO_EMAIL", "").strip()
+          if not all((api_key, secret_key, from_email, to_email)):
+              print("Mailjet secrets are incomplete; skipping email notification.")
+              raise SystemExit(0)
+
+          changes = []
+          if new_items:
+              changes.append(f"{len(new_items)} new")
+          if resolved_items:
+              changes.append(f"{len(resolved_items)} resolved")
+          subject = "HorseMotel.com source issues: " + ", ".join(changes)
+
+          text_lines = [
+              "The nightly HorseMotel.com sync found changes to website issues that may need attention.",
+              "",
+          ]
+          html_parts = [
+              "<p>The nightly HorseMotel.com sync found changes to website issues that may need attention.</p>"
+          ]
+
+          def add_section(title, items):
+              if not items:
+                  return
+              text_lines.extend([title, ""])
+              html_parts.append(f"<h3>{html.escape(title.title())}</h3><ul>")
+              for item in items:
+                  label = f"{item['state']} - {item['listing']}" if item["state"] else item["listing"]
+                  text_lines.extend([label, f"Issue: {item['issue']}", item["url"], ""])
+                  html_parts.append(
+                      "<li><strong>" + html.escape(label) + "</strong><br>" +
+                      html.escape(item["issue"]) + "<br>" +
+                      (f'<a href="{html.escape(item["url"], quote=True)}">{html.escape(item["url"])}</a>' if item["url"] else "") +
+                      "</li>"
+                  )
+              html_parts.append("</ul>")
+
+          add_section("NEW ISSUES", new_items)
+          add_section("RESOLVED", resolved_items)
+          text_lines.append("This email was generated automatically by the HorseMotel sync.")
+          html_parts.append("<p><small>This email was generated automatically by the HorseMotel sync.</small></p>")
+
+          payload = {
+              "Messages": [{
+                  "From": {"Email": from_email, "Name": "HorseMotel Sync"},
+                  "To": [{"Email": to_email}],
+                  "Subject": subject,
+                  "TextPart": "\n".join(text_lines),
+                  "HTMLPart": "".join(html_parts),
+              }]
+          }
+
+          auth = base64.b64encode(f"{api_key}:{secret_key}".encode("utf-8")).decode("ascii")
+          request = Request(
+              "https://api.mailjet.com/v3.1/send",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={"Authorization": f"Basic {auth}", "Content-Type": "application/json"},
+              method="POST",
+          )
+          try:
+              with urlopen(request, timeout=30) as response:
+                  response.read()
+                  print(f"Mailjet notification sent to {to_email} (HTTP {response.status}).")
+          except Exception as exc:
+              # An email outage must not block publication of an otherwise valid feed.
+              print(f"Warning: Mailjet notification failed: {exc}")
+          PY
+
+          # The importer and report step only reach here after the rebuilt feed
+          # passes safety checks, so production stays untouched on a failed crawl.
           mv .sync-next/horsemotel.next.json horsemotel.json
           mv .sync-next/horsemotel_dropped.json horsemotel_dropped.json
           rm -rf .sync-next
