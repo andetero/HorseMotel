@@ -189,14 +189,14 @@ jobs:
               raise SystemExit(0)
 
           manual_run = os.environ.get("GITHUB_EVENT_NAME", "") == "workflow_dispatch"
-          is_monday = datetime.now(ZoneInfo("America/Denver")).weekday() == 0
-          if not manual_run and not is_monday:
-              print("Weekly source issue email is sent Mondays only; no email sent.")
+          is_saturday = datetime.now(ZoneInfo("America/Denver")).weekday() == 5
+          if not manual_run and not is_saturday:
+              print("Weekly source issue email is sent Saturdays only; no email sent.")
               raise SystemExit(0)
           if manual_run:
               print("Manual workflow run; sending the complete current issue list.")
           else:
-              print("Monday weekly report; sending the complete current issue list.")
+              print("Saturday weekly report; sending the complete current issue list.")
 
           api_key = os.environ.get("MAILJET_API_KEY", "").strip()
           secret_key = os.environ.get("MAILJET_SECRET_KEY", "").strip()
