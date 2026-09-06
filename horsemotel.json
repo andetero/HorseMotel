@@ -7424,6 +7424,26 @@
     "isVerified": true
   },
   {
+    "id": "horsemotel-aaa7ac4154",
+    "name": "Sterkel K Family Farm, Angel Sterkel",
+    "location": "17627 State Hwy B, Wheatland , MO 65779",
+    "address": "17627 State Hwy B, Wheatland , MO 65779",
+    "city": "Wheatland",
+    "state": "MO",
+    "country": "",
+    "latitude": 37.9607981,
+    "longitude": -93.3998182,
+    "hookups": [],
+    "accommodations": ["Stalls", "Paddocks"],
+    "phone": "417-430-7480",
+    "email": "angelcwhite2020@gmail.com",
+    "website": "https://brand.site/sterkelkfamilyfarm",
+    "sourceUrl": "https://www.horsemotel.com/Missouri.html",
+    "description": "NOW OFFERING OVERNIGHT STAYS FOR YOU & YOUR HORSE(S). Great for Rodeo Travelers, performers, Show Horses, ETC. $30 per horse per night. Horses will be in our outdoor grass/dry lot arena with the barn open for shelter. You also have the option to keep them in the 40 ft. round pen overnight. Camper/Trailer parking on site (you are welcome to stay in your trailer). $5 per square bale of my hay or use your own You must provide your own grain/feed. Water provided. All horses on the property MUST have proof of a negative coggins & vaccinations within the last 12 months BEFORE they are unloaded off the trailer. Must call ahead. Thank you and God Bless! Location notes: When arriving in Wheatland, From the Casey's, go one mile north on highway B, we are on the right side of the road. Grey house.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-SterkelK1Big.jpg", "https://www.horsemotel.com/ZP-SterkelK2Big.jpg", "https://www.horsemotel.com/ZP-SterkelK3Big.jpg"],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-67e76ed68f",
     "name": "Story's Creek Campground, Candi Birdsong",
     "location": "19133 CR 305, Eminence , MO 65466",
@@ -15188,6 +15208,26 @@
     "description": "536 covered 12' x 12' wood stalls with dirt floors: $35/night. RV Hook Ups (30 & 50 amp) with water and electric: $30/night, Shavings: $12/bag. Late check in ok. Send a text message to 830-446-9312 . Make reservations via phone/text and pay invoice online. Shavings will be delivered prior to your arrival. Location notes: Just 3 miles off IH-10W near Fiesta, Texas/La Cantera/The Rim between Boerne and San Antonio. Bar open with live music most Friday nights!",
     "photoURLs": [],
     "isVerified": true
+  },
+  {
+    "id": "horsemotel-7613796a08",
+    "name": "Sarah's Ranch Retreat, 1600 Hcr 2302 S",
+    "location": "Abbott, TX 76621",
+    "address": "",
+    "city": "",
+    "state": "TX",
+    "country": "",
+    "latitude": 31.8486411,
+    "longitude": -97.1600047,
+    "hookups": [],
+    "accommodations": ["Paddocks"],
+    "phone": "936-545-7524",
+    "email": "sarahsranchretreat@gmail.com",
+    "website": "http://www.sarahsranchretreat.net//",
+    "sourceUrl": "https://www.horsemotel.com/Texas.html",
+    "description": "Spacious half-acre pasture for stretching legs, alongside a secure outdoor pen with excellent natural tree shade.24/7 camera surveillance and owners living on-site. We accommodate any time of day arrival. Fresh water and feed storage are provided. To ensure safety, all dogs must be kept on a leash (we have cats), and we require a current negative Coggins. While we do not have hookups yet, travelers are welcome to dry camp overnight in their trailers. Location notes: 10 min from I-35, gas station and dog park with motels and RV parks located 10 minutes away in West. Buc-ee's in Hillsboro about 20 min away.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-SarahRanch1Big.jpg", "https://www.horsemotel.com/ZP-SarahRanch2Big.jpg", "https://www.horsemotel.com/ZP-SarahRanch3Big.jpg"],
+    "isVerified": false
   },
   {
     "id": "horsemotel-2cbcde690b",
