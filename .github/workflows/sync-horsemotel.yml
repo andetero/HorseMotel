@@ -2,7 +2,7 @@ name: Sync HorseMotel.com Listings
 
 on:
   schedule:
-    - cron: "54 3 * * *"
+    - cron: "17 12 * * *"
       timezone: "America/Denver"
   workflow_dispatch:
 
