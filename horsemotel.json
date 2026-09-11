@@ -40,6 +40,26 @@
     "isVerified": false
   },
   {
+    "id": "horsemotel-89c8ef6606",
+    "name": "45 RANCH",
+    "location": "4753 Lower Wetumpka Road, Montgomery , AL 36110",
+    "address": "4753 Lower Wetumpka Road, Montgomery , AL 36110",
+    "city": "Montgomery",
+    "state": "AL",
+    "country": "",
+    "latitude": 32.4459195,
+    "longitude": -86.2651963,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Wash Rack"],
+    "phone": "903-707-5332",
+    "email": "45boardingranch@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Alabama.html",
+    "description": "17 stalls, RV hookup, wash rack, turn out pens, arena, 2 ponds, plenty of room to enjoy and rest up. Horses happiness is priority and if there’s something you need, let us know. This is our horse HAPPY place! Location notes: Montgomery Al - just about 5 miles off I-65.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-fourfive4Big.jpg", "https://www.horsemotel.com/ZP-fourfive1Big.jpg", "https://www.horsemotel.com/ZP-fourfive3Big.jpg", "https://www.horsemotel.com/ZP-fourfive2Big.jpg", "https://www.horsemotel.com/ZP-fourfive5Big.jpg"],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-6ed318445c",
     "name": "Altoona, Alabama, Stable Stay: Horse Hotel & AirBnB",
     "location": "310 Broom Drive, Altoona , AL 35952, Located in the Town Limits of Snead, AL",
@@ -1777,7 +1797,7 @@
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/California.html",
     "description": "Welcome to JKC Horse Motel and Mare Motel designed for horse/guest comfort and convenience. Located in a quiet, safe and private area, our facility offers peace of mind for both you and your horses. We feature three large 1/3 acre pastures along with sandy paddocks and well-maintained stalls. Each space includes 65-gallon waterers/automatic waterers to keep your horses refreshed and happy. For overnight guests, a comfortable room and bath available for $70 make your stay easy and relaxing. LQ power is available on site, and there is a $35 charge for each horse. With easy access and directions from I-5 or 99, our horse motel is the perfect stop on your journey! Location notes: 10 miles east of I-5 near Buttonwillow, CA. 100 miles north of LAX, 100 miles south of Fresno, CA. 5 miles west of numerous restaurants, Walmart, motels.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-JKCBig.jpg"],
+    "photoURLs": ["https://www.horsemotel.com/ZP-JKC1Big.jpg", "https://www.horsemotel.com/ZP-JKC3Big.jpg", "https://www.horsemotel.com/ZP-JKC2Big.jpg"],
     "isVerified": false
   },
   {
@@ -2857,7 +2877,7 @@
     "website": "http://www.saltoftheearthranch.com/",
     "sourceUrl": "https://www.horsemotel.com/Colorado.html",
     "description": "We offer a 3 bed/3 bath one level home (Airbnb). Fully stocked kitchen, dining room, laundry appliances, woodstove, garage, and back patio overlooking the La Plata Mountains. Two paddocks available with LQ/RV hookups, water, shelter. Nightly layovers or short term boarding. 5th wheel rental next to paddocks available to rent. One queen, twin xl bunkbeds, one sofa pull out floor mattress. Small kitchen/dining/ shower-bath combo. Outdoor picnic area, fire pit, steps away from horse paddocks. I require a negative coggins test and health certificates. Equine Salt & Light wellness trailer on site: certified halotherapy, red light therapy, and photo-patch therapy. Location notes: Location: Minutes from 160 and 170. 30 minutes from downtown Durango. Mancos, Cortez, Pagosa Springs, New Mexico all within a short haul. San Juan National Forest and La Plata Canyon nearby. Private and quiet gaited ranch.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-Salt1Big.jpg", "https://www.horsemotel.com/ZP-Salt2Big.jpg", "https://www.horsemotel.com/ZP-Salt3Big.jpg", "https://www.horsemotel.com/ZP-Salt8Big.jpg", "https://www.horsemotel.com/ZP-Salt5Big.jpg", "https://www.horsemotel.com/ZP-Salt6Big.jpg", "https://www.horsemotel.com/ZP-Salt7Big.jpg", "https://www.horsemotel.com/ZP-Salt4Big.jpg"],
+    "photoURLs": ["https://www.horsemotel.com/ZP-Salt10Big.jpg", "https://www.horsemotel.com/ZP-Salt7Big.jpg", "https://www.horsemotel.com/ZP-Salt4Big.jpg", "https://www.horsemotel.com/ZP-Salt1Big.jpg", "https://www.horsemotel.com/ZP-Salt8Big.jpg"],
     "isVerified": true
   },
   {
