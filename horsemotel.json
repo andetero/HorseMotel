@@ -1261,6 +1261,26 @@
     "isVerified": true
   },
   {
+    "id": "horsemotel-adfc5e12d8",
+    "name": "Unstable Ranch, LeAnn Killa",
+    "location": "2106 Cochise Street, Chino Valley , AZ 86323",
+    "address": "2106 Cochise Street, Chino Valley , AZ 86323",
+    "city": "Chino Valley",
+    "state": "AZ",
+    "country": "",
+    "latitude": 34.7764131,
+    "longitude": -112.4712659,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "WiFi", "Lodging"],
+    "phone": "602-478-4198",
+    "email": "Leann.Killa@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Arizona.html",
+    "description": "One mile off SR-89 in Chino Valley. Grass pasture and separate dirt paddock. Gated property that is quiet and peaceful. Studio apartment above the barn: A/C and heat, free wi-fi, queen size bed, fridge/freezer, microwave, Keurig K-cup machine, electric kettle, wardrobe cabinet, t.v. with access to streaming services. An on-site pub for entertainment or relaxation. $100 per night for one horse; you turn out, clean up and feed. Location notes: Chino Valley, AZ.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-Unstable5Big.jpg", "https://www.horsemotel.com/ZP-Unstable2Big.jpg", "https://www.horsemotel.com/ZP-Unstable3Big.jpg", "https://www.horsemotel.com/ZP-Unstable4Big.jpg", "https://www.horsemotel.com/ZP-Unstable1Big.jpg", "https://www.horsemotel.com/ZP-Unstable6Big.jpg"],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-74debd2711",
     "name": "Wickenburg Horse Motel, Bob Harvey",
     "location": "42702 N US Hwy. 60, Morristown , AZ 85342",
@@ -2377,7 +2397,7 @@
     "website": "",
     "sourceUrl": "https://www.horsemotel.com/Colorado.html",
     "description": "Indoor box stalls 12' x 14', we will provide first bedding and have water ready. We also have roomy outdoor pens with shelters. Round pens, indoor and outdoor arenas for exercise. Indoor wash rack with hot water. Trailer parking and plug in available. Location notes: We are just off of I-25, just 20 miles north of Denver. Hotels, restaurants and gas stations all within 10 minutes.",
-    "photoURLs": [],
+    "photoURLs": ["https://www.horsemotel.com/ZP-AndersenBig.jpg"],
     "isVerified": true
   },
   {
@@ -6381,6 +6401,26 @@
     "sourceUrl": "https://www.horsemotel.com/Massachusetts.html",
     "description": "We have (3) 10' x 12' traveling horse stalls and a paddock available if desired. All fencing is electric wire. Many natural barriers (stone walls and trees) surround the paddock, so horses understand the boundaries well. We are also a B&B and can accommodate horse owners/grooms. Location notes: 460 Front Street, Marion, MA 02738.",
     "photoURLs": [],
+    "isVerified": false
+  },
+  {
+    "id": "horsemotel-a803a0fedf",
+    "name": "Craig Higgs",
+    "location": "210 Garrettson Lane, Marydel , MD 21649",
+    "address": "210 Garrettson Lane, Marydel , MD 21649",
+    "city": "Marydel",
+    "state": "MD",
+    "country": "",
+    "latitude": 39.1412409,
+    "longitude": -75.7930413,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly"],
+    "phone": "443-496-2040",
+    "email": "dcraighiggs@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Maryland.html",
+    "description": "12x12 Stalls, Runs, Outside Pens, Large Rig Access, Rv hookups, Large Rig access, Close to Highway, Easy access. Location notes: Just Off of Route 301 a major North South route.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-CraigHiggs1Big.jpg", "https://www.horsemotel.com/ZP-CraigHiggs3Big.jpg", "https://www.horsemotel.com/ZP-CraigHiggs4Big.jpg"],
     "isVerified": false
   },
   {
