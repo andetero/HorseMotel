@@ -11688,6 +11688,26 @@
     "isVerified": true
   },
   {
+    "id": "horsemotel-314dcfa916",
+    "name": "Cowgirls Unlimited Ranch, Karissa Dean",
+    "location": "15368 S Herman Road, Molalla , OR 97038",
+    "address": "15368 S Herman Road, Molalla , OR 97038",
+    "city": "Molalla",
+    "state": "OR",
+    "country": "",
+    "latitude": 45.1091317,
+    "longitude": -122.552044,
+    "hookups": [],
+    "accommodations": ["Stalls"],
+    "phone": "",
+    "email": "hello@cu-ranch.com",
+    "website": "https://cowgirlsunlimitedranch.com",
+    "sourceUrl": "https://www.horsemotel.com/Oregon.html",
+    "description": "A simple, safe, and supportive space for you and your horse. Whether you’re passing through or planning to stay and ride, we’ve created an easy, no-fuss setup with optional support if you need it. CU Ranch is a real working ranch, and that's exactly what makes it special. We're always building, improving, and creating an even better experience for our guests. You'll find horses, hay, dust, fresh air, and Mother Nature doing her thing. We believe in progress over perfection and appreciate you being part of our journey. We offer five large horse stalls, four with outdoor runs and one without, as well as human accommodations. Our human guests can stay in their horse trailers on site or you can stay in our barn! Our barn hosts up to 6 guests. CU Ranch was created with you in mind. Not for everyone— but for those who are ready to remember. To reconnect. To slow down. To step back into something real. This ranch isn’t about perfection. It’s about presence. Owner and operator Karissa Dean moved to Molalla in 2025 to reset her life. Taking on a century-old property wasn’t for the faint of heart. It required grit, vision, and a willingness to build something from the ground up—without having it all figured out. And that’s exactly what CU Ranch is",
+    "photoURLs": ["https://www.horsemotel.com/ZP-CowgirlsUnlimited1Big.jpg", "https://www.horsemotel.com/ZP-CowgirlsUnlimited4Big.jpg", "https://www.horsemotel.com/ZP-CowgirlsUnlimited3Big.jpg", "https://www.horsemotel.com/ZP-CowgirlsUnlimited2Big.jpg", "https://www.horsemotel.com/ZP-CowgirlsUnlimited5Big.jpg", "https://www.horsemotel.com/ZP-CowgirlsUnlimited6Big.jpg"],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-9d8678a40c",
     "name": "Creswell, Oregon, Strawberry Hill Stables",
     "location": "83145 Mickelson Road, Creswell , OR 97426",
@@ -16908,6 +16928,26 @@
     "description": "Indoor 12' x 12' matted stalls. (Shavings eavailable for purchase). 12' x 24' outdoor wood paddocks. Farmhouse onsite available for overnight rental. Onsite camping and parking OK, but no hookups available. Large entrance and turnaround area. All arrangements and reservations must be made in advance. Please plan to arrive before 8PM (Arrivals between 8PM and 6AM are subject to $50 surcharge). Please refer to my website for more information about the farm and the area. Location notes: Approximately 10 minutes from major highways (395, 397, or 82). From Carlson Road, turn left into the driveway just as the pavement ends and before the gravel begins.",
     "photoURLs": ["https://www.horsemotel.com/ZP-TulipspringsBig.jpg"],
     "isVerified": true
+  },
+  {
+    "id": "horsemotel-b93c0cd548",
+    "name": "Wild Brothers Farm, Joan Fleming",
+    "location": "6291 Reecer Creek Rd, Ellensburg , WA 98926",
+    "address": "6291 Reecer Creek Rd, Ellensburg , WA 98926",
+    "city": "Ellensburg",
+    "state": "WA",
+    "country": "",
+    "latitude": 46.9965144,
+    "longitude": -120.5478474,
+    "hookups": [],
+    "accommodations": ["Paddocks"],
+    "phone": "206-353-3123",
+    "email": "jds07dvm@yahoo.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Washington.html",
+    "description": "We have a large corral/outdoor arena that allows horses near your RV space and also seperate corral space available. We host both overnight RV guests and others with horses. We are just a small family farm AND NOT professional hosts. We have space and enjoy sharing it. Location notes: Ellensburg WA about 4 miles from the I -90 interchange.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-Wildbrothers1Big.jpg", "https://www.horsemotel.com/ZP-Wildbrothers2Big.jpg"],
+    "isVerified": false
   },
   {
     "id": "horsemotel-4ac7c0d2e9",
