@@ -2897,7 +2897,7 @@
     "website": "http://www.saltoftheearthranch.com/",
     "sourceUrl": "https://www.horsemotel.com/Colorado.html",
     "description": "We offer a 3 bed/3 bath one level home (Airbnb). Fully stocked kitchen, dining room, laundry appliances, woodstove, garage, and back patio overlooking the La Plata Mountains. Two paddocks available with LQ/RV hookups, water, shelter. Nightly layovers or short term boarding. 5th wheel rental next to paddocks available to rent. One queen, twin xl bunkbeds, one sofa pull out floor mattress. Small kitchen/dining/ shower-bath combo. Outdoor picnic area, fire pit, steps away from horse paddocks. I require a negative coggins test and health certificates. Equine Salt & Light wellness trailer on site: certified halotherapy, red light therapy, and photo-patch therapy. Location notes: Location: Minutes from 160 and 170. 30 minutes from downtown Durango. Mancos, Cortez, Pagosa Springs, New Mexico all within a short haul. San Juan National Forest and La Plata Canyon nearby. Private and quiet gaited ranch.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-Salt10Big.jpg", "https://www.horsemotel.com/ZP-Salt7Big.jpg", "https://www.horsemotel.com/ZP-Salt4Big.jpg", "https://www.horsemotel.com/ZP-Salt1Big.jpg", "https://www.horsemotel.com/ZP-Salt8Big.jpg"],
+    "photoURLs": ["https://www.horsemotel.com/ZP-Salt10Big.jpg", "https://www.horsemotel.com/ZP-Salt7Big.jpg", "https://www.horsemotel.com/ZP-Salt14Big.jpg", "https://www.horsemotel.com/ZP-Salt12Big.jpg", "https://www.horsemotel.com/ZP-Salt1Big.jpg", "https://www.horsemotel.com/ZP-Salt13Big.jpg", "https://www.horsemotel.com/ZP-Salt11Big.jpg"],
     "isVerified": true
   },
   {
@@ -4642,6 +4642,26 @@
     "description": "Private, 4-stall barn located on the same fenced ranch property as our Warren Wagon Ranch Airbnb. It is available exclusively to registered Airbnb guests - we do not offer standalone boarding. Designed for traveling riders, this setup allows you to stay on-site with your horses in a clean, functional, and secure environment just minutes from downtown McCall. Barn Features: - Four fully enclosed 12' x 12' stalls - Rubber mats in each stall - Attached dry lot accessible from the barn - Insulated barn with electricity - Enclosed tack/feed room - Wash rack with hot and cold water - Maximum of 4 horses. Turnout Options - Guests may use: - Attached dry lot - 3-acre pasture - 0.5-acre pasture All turnout is use-at-your-own-risk. Primary fencing is post and rail. What to Bring: - Hay and feed (not provided) - Water buckets (general-use trough available) - Shavings (if desired) - Basic stall-cleaning tools. Guests are responsible for daily stall cleaning and manure disposal during their stay. Location notes: The property sits in open valley with mountain views, fenced perimeter, and ample trailer turnaround space, making it ideal for riders hauling in for trail riding, events, or extended McCall stays.",
     "photoURLs": ["https://www.horsemotel.com/ZP-WarrenWagon1Big.jpg", "https://www.horsemotel.com/ZP-WarrenWagon2Big.jpg", "https://www.horsemotel.com/ZP-WarrenWagon3Big.jpg", "https://www.horsemotel.com/ZP-WarrenWagon4Big.jpg"],
     "isVerified": false
+  },
+  {
+    "id": "horsemotel-af17e9e7dc",
+    "name": "Winding River Ranch, Silas Wilbur, 4043 US 95, PO 929",
+    "location": "New Meadows , ID 83654",
+    "address": "",
+    "city": "",
+    "state": "ID",
+    "country": "",
+    "latitude": 45.0276957,
+    "longitude": -116.2825213,
+    "hookups": ["Electric", "Water"],
+    "accommodations": ["Paddocks", "RV Hookups", "Big Rig Friendly"],
+    "phone": "208-921-7366",
+    "email": "silas@ultrainventory.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Idaho.html",
+    "description": "Pasture boarding from 1+ acres to 60+ acres. Electric and Water hook ups for overnighters staying with their horses. Big Rig and Trailer parking available. Location notes: New Meadows, Idaho.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-WindingRiverBig.jpg"],
+    "isVerified": true
   },
   {
     "id": "horsemotel-c192a1bf04",
@@ -9383,6 +9403,26 @@
     "sourceUrl": "https://www.horsemotel.com/Nebraska.html",
     "description": "Up to 6 stalls available, outdoor pens with automatic water. Indoor Arena 120' x 60'. Outdoor arena 200' x 100' with lights, roping sled also anvailable. Easy access for large trailers. 20/30 amp electrical hook ups. Easy water access. Sleeping arrangements can be available in the main house. Summertime access to in-ground pool and shower in pool house. Restroom is available in the indoor arena. All horses must he current on vaccines and coggins. May ask for paperwork/health papers. Location notes: Located 5 miles from exit 409 off of interstate 80. Or 15 miles from exit 420 off of interstate 80. 10 minutes to Sandhills Global (previously Lancaster event center). All pavement to our property. 1 mile east of Waverly.",
     "photoURLs": ["https://www.horsemotel.com/ZP-I-80Equine1Big.jpg", "https://www.horsemotel.com/ZP-I-80Equine2Big.jpg", "https://www.horsemotel.com/ZP-I-80Equine3Big.jpg", "https://www.horsemotel.com/ZP-I-80Equine4Big.jpg", "https://www.horsemotel.com/ZP-I-80Equine5Big.jpg"],
+    "isVerified": false
+  },
+  {
+    "id": "horsemotel-0ba5d13b4c",
+    "name": "J Lazy S Equestrian Center, Carla Jensen",
+    "location": "3494 S Shady Bend Rd, Grand Island , NE 68845",
+    "address": "3494 S Shady Bend Rd, Grand Island , NE 68845",
+    "city": "Grand Island",
+    "state": "NE",
+    "country": "",
+    "latitude": 41.021594777804886,
+    "longitude": -98.97231427501393,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
+    "phone": "308-750-3416",
+    "email": "jlazysquarterhorses@gmail.com",
+    "website": "http://www.jlazysquarterhorses.com",
+    "sourceUrl": "https://www.horsemotel.com/Nebraska.html",
+    "description": "Indoor stalls with runs, Indoor riding arena, outdoor riding arena, indoor and outdoor round pens, camper hook-ups. showers. Dry lot pens with shelters (limited availability). Location notes: Grand Island, NE trailers.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-JLazySBig.jpg"],
     "isVerified": false
   },
   {
