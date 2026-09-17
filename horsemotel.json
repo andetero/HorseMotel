@@ -2261,6 +2261,26 @@
     "isVerified": true
   },
   {
+    "id": "horsemotel-dba62d80e8",
+    "name": "Shadow Ranch",
+    "location": "13860 Beskeen Rd., Herald , CA 95638",
+    "address": "13860 Beskeen Rd., Herald , CA 95638",
+    "city": "Herald",
+    "state": "CA",
+    "country": "",
+    "latitude": 38.3210093,
+    "longitude": -121.1470197,
+    "hookups": [],
+    "accommodations": ["Paddocks", "Trails"],
+    "phone": "530-412-0914",
+    "email": "alannalungren23@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/California.html",
+    "description": "48’ x 85’ corral with access to 300gal water trough. Bring your own feed. $10/horse. 70’ round pen. Hitching rail. Stay on site in the clean fully hooked up RV trailer, sleeps 4. One queen bed, dinette converts to a bed. Kitchen amenities in the RV. RV is $130/night and includes up to 4 horse overnight spaces. Dry camping available. Roping lessons available, cattle at a fee. Inquire for current pricing. Located in southeast Sacramento County. Location notes: 10 minutes east of Galt/Hwy 99. 20 minutes east of I-5. 25 minutes to Rancho Murieta Equestrian Center. Trails at Camanche Lake, Pardee Lake, Campo Seco, nearby.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-ShadowRanch1Big.jpg", "https://www.horsemotel.com/ZP-ShadowRanch2Big.jpg", "https://www.horsemotel.com/ZP-ShadowRanch4Big.jpg", "https://www.horsemotel.com/ZP-ShadowRanch3Big.jpg", "https://www.horsemotel.com/ZP-ShadowRanch5Big.jpg", "https://www.horsemotel.com/ZP-ShadowRanch6Big.jpg"],
+    "isVerified": true
+  },
+  {
     "id": "horsemotel-a47b431b87",
     "name": "Silver Glen Stables, Craig & Linda Van Kirk",
     "location": "8175 W Ashlan Ave., Fresno , CA 93723-9659",
@@ -14888,6 +14908,26 @@
     "description": "Two 50 amp RV hookups, and one 30amp; includes water, power and WiFi. Property is well lit. Easy in and out facility. Large paddocks with loafing sheds and water. May have availability in the barn. Groomed riding area as weather permits. Call/text for more information. Location notes: Horse Country USA. We are located in the heart of it all. Less than 1.5 hours from Ft. Worth, 2.5 hours from OKC. A little over an hour from both major airports. We are in a quiet location of horse and cattle farms.",
     "photoURLs": ["https://www.horsemotel.com/ZP-LaChula5Big.jpg", "https://www.horsemotel.com/ZP-LaChula6Big.jpg"],
     "isVerified": true
+  },
+  {
+    "id": "horsemotel-eb5793ebf1",
+    "name": "Lantern Lane Venue, LLC. Temperance Taylor",
+    "location": "176 El Dorado St, Decatur , TX 76234",
+    "address": "176 El Dorado St, Decatur , TX 76234",
+    "city": "Decatur",
+    "state": "TX",
+    "country": "",
+    "latitude": 33.4123763,
+    "longitude": -97.415315,
+    "hookups": [],
+    "accommodations": [],
+    "phone": "817-733-9899",
+    "email": "7temperance.taylor@gmail.com",
+    "website": "https://www.airbnb.com/l/7oTZo6df?__LISTING_ID__=1720337927363989488&unique_share_id=5df1b5dc-e6d2-452e-89c6-1e6378271c17&viralityEntryPoint=1&s=76",
+    "sourceUrl": "https://www.horsemotel.com/Texas.html",
+    "description": "Dog and horse friendly 408 sq ft Tiny House fully fenced. Full Kitchen, full bathroom and queen size bed. Turn out paddock with 150 gallon water. ( no shelter or stall available in paddock)",
+    "photoURLs": ["https://www.horsemotel.com/ZP-llvllc1Big.jpg", "https://www.horsemotel.com/ZP-llvllc3Big.jpg", "https://www.horsemotel.com/ZP-llvllc2Big.jpg", "https://www.horsemotel.com/ZP-llvllc5Big.jpg", "https://www.horsemotel.com/ZP-llvllc4Big.jpg", "https://www.horsemotel.com/ZP-llvllc6Big.jpg"],
+    "isVerified": false
   },
   {
     "id": "horsemotel-2ac1027d36",
