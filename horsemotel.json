@@ -7144,6 +7144,26 @@
     "isVerified": false
   },
   {
+    "id": "horsemotel-3167220a4f",
+    "name": "Broken Oak Ranch, Larry Heck, 19665 Deer Run Estates",
+    "location": "Warrenton , MO 63383",
+    "address": "",
+    "city": "",
+    "state": "MO",
+    "country": "",
+    "latitude": 38.7471229,
+    "longitude": -91.144489,
+    "hookups": ["Electric"],
+    "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Trails"],
+    "phone": "636-633-2803",
+    "email": "ljh4me@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Missouri.html",
+    "description": "Six matted box stalls 12’ x 12’ each with fans, indoor riding arena 96’ x 80’, outdoor round exercise pen, outdoor riding arena 130’’ x 80’’, pastures, trail riding, horse wash bay, water, grass hay and shavings for sale, trailer friendly camping with electric, turn-a-round space, circle drive, easy pull-out. Up to date Coggins and current health papers are required. Cash only. Call or email in advance for reservation confirmation. Location notes: Only 5 miles off of Interstate 70 south on Hwy 47, all on pavement, in quiet country horse area. Look for the white fencing, white 2-story house, and large barn with blue roof.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-BrokenOak1Big.jpg", "https://www.horsemotel.com/ZP-BrokenOak2Big.jpg", "https://www.horsemotel.com/ZP-BrokenOak3Big.jpg", "https://www.horsemotel.com/ZP-BrokenOak4Big.jpg", "https://www.horsemotel.com/ZP-BrokenOak6Big.jpg", "https://www.horsemotel.com/ZP-BrokenOak5.jpg"],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-25c62b33f3",
     "name": "Buckner, Missouri, Kirkland Performance Horses",
     "location": "Buckner , MO 64016",
