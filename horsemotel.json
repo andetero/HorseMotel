@@ -861,26 +861,6 @@
     "isVerified": true
   },
   {
-    "id": "horsemotel-1f661c31aa",
-    "name": "Lazy Horse Ranch, Rebecca Bassett",
-    "location": "3651 E Doe Ranch Road, Pearce , AZ 85625",
-    "address": "3651 E Doe Ranch Road, Pearce , AZ 85625",
-    "city": "Pearce",
-    "state": "AZ",
-    "country": "",
-    "latitude": 31.9307768,
-    "longitude": -109.7559641,
-    "hookups": ["Electric", "Water", "Sewer", "Full Hookups"],
-    "accommodations": ["Paddocks", "RV Hookups", "Big Rig Friendly", "WiFi", "Trails"],
-    "phone": "602-620-0247",
-    "email": "becky@lazyhorseranch.com",
-    "website": "https://lazyhorseranch.com/",
-    "sourceUrl": "https://www.horsemotel.com/Arizona.html",
-    "description": "6 RV Sites with full hookups. Picnic Tables. Big rig friendly. 16 20' x 20' Horse corrals. Round pen, 110' x 200' Riding arena. Free use of stock trailers to get to trail heads. Fire pit, pavilion, gas grill. Guest lounge with Wi-Fi and DISH TV. Laundry facilities, feed store and restaurants nearby. Lazy Horse Ranch is a vacation hot spot for equine campground enthusiasts pursuing Bucket List horseback riding in southeastern Arizona. We have a campground in Arizona with all the amenities you need for your stay. Location notes: Southeastern Arizona, From Willcox we are 20 miles south of I-10, also easy access from Hwy. 191 via Kansas Settlement Road.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-LazyHorse1Big.jpg", "https://www.horsemotel.com/ZP-LazyHorse2Big.jpg", "https://www.horsemotel.com/ZP-LazyHorse3Big.jpg", "https://www.horsemotel.com/ZP-LazyHorse4Big.jpg"],
-    "isVerified": true
-  },
-  {
     "id": "horsemotel-821be6bea1",
     "name": "Lost Cowboy Ranch, Brian and Susan Bowers",
     "location": "29917 N. 160th Street, Scottsdale , AZ 85262",
@@ -978,6 +958,26 @@
     "sourceUrl": "https://www.horsemotel.com/Arizona.html",
     "description": "Arenas, hay available, RV electrical hook up, round pen, pasture. Location notes: 45 miles north of Prescott--50 miles west of Flagstaff, 73 miles from the Grand Canyon.",
     "photoURLs": ["https://www.horsemotel.com/ZP-ShiftyJack1Big.jpg", "https://www.horsemotel.com/ZP-ShiftyJack2Big.jpg"],
+    "isVerified": true
+  },
+  {
+    "id": "horsemotel-1f661c31aa",
+    "name": "Pearce, Arizona, Lazy Horse Ranch",
+    "location": "3651 E Doe Ranch Road, Pearce , AZ 85625",
+    "address": "3651 E Doe Ranch Road, Pearce , AZ 85625",
+    "city": "Pearce",
+    "state": "AZ",
+    "country": "",
+    "latitude": 31.9307768,
+    "longitude": -109.7559641,
+    "hookups": ["Electric", "Water", "Sewer", "Full Hookups"],
+    "accommodations": ["Paddocks", "RV Hookups", "Big Rig Friendly", "WiFi", "Trails"],
+    "phone": "602-620-0247",
+    "email": "becky@peaceandplentyranch.com",
+    "website": "https://www.peaceandplentyranch.com",
+    "sourceUrl": "https://www.horsemotel.com/Arizona.html",
+    "description": "6 RV Sites with full hookups. Picnic Tables. Big rig friendly. 16 20' x 20' Horse corrals. Round pen, 110' x 200' Riding arena. Stock trailers available to rent to get to trail heads. Fire pit, pavilion, gas grill. Guest lounge with Wi-Fi and DISH TV. Laundry facilities, feed store and restaurants nearby. Lazy Horse Ranch is a vacation hot spot for equine campground enthusiasts pursuing Bucket List horseback riding in southeastern Arizona. We have a campground in Arizona with all the amenities you need for your stay. Location notes: Southeastern Arizona, From Willcox we are 20 miles south of I-10, also easy access from Hwy. 191 via Kansas Settlement Road.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-LazyHorse1Big.jpg", "https://www.horsemotel.com/ZP-LazyHorse2Big.jpg", "https://www.horsemotel.com/ZP-LazyHorse3Big.jpg", "https://www.horsemotel.com/ZP-LazyHorse4Big.jpg"],
     "isVerified": true
   },
   {
