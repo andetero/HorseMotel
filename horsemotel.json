@@ -15270,26 +15270,6 @@
     "isVerified": false
   },
   {
-    "id": "horsemotel-cc13b812f5",
-    "name": "Quarter Circle Spade Ranch, Devon Peratt",
-    "location": "9895 Old Agnes Road, Springtown , TX 76082",
-    "address": "9895 Old Agnes Road, Springtown , TX 76082",
-    "city": "Springtown",
-    "state": "TX",
-    "country": "",
-    "latitude": 32.973784,
-    "longitude": -97.789054,
-    "hookups": ["30A", "50A", "Electric", "Sewer"],
-    "accommodations": ["Stalls", "RV Hookups", "Big Rig Friendly"],
-    "phone": "817-550-2241",
-    "email": "devon8559@gmail.com",
-    "website": "",
-    "sourceUrl": "https://www.horsemotel.com/Texas.html",
-    "description": "Private RV pad with 30/50 amp electric hookup, water, sewer connections. Scenic, quiet setting with views. Includes 2 barn stalls, turnout pasture (shavings available for purchase). Perfect for short term or long term layovers, welcoming management and dog friendly. Avoid crowded parks and enjoy a peaceful stay with your family or layover with your horses in complete comfort with barn stalls and turnout. Covered arena may be available. Location notes: Perfectly located just 45 minutes from the Will Rogers Complex in Fort Worth and only 1/2 mile off Highway 199. Easy access through wide double gates and pull through for big rigs.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-QuarterCircleBig.jpg"],
-    "isVerified": true
-  },
-  {
     "id": "horsemotel-b7c985402f",
     "name": "R&R Horse Hacienda, LLC, Lisa Rivera",
     "location": "6735 Hwy. 173 N/464 Watering Hole Tr., Bandera , TX 78003",
@@ -15548,6 +15528,26 @@
     "description": "Covered arena , stalls , grass paddocks , round pen , crosscountry course, dressage arena, 40 acres outdoor riding, hookups, Bed and Breakfast. Staff on site 24/7. Very friendly place to stop and enjoy the peaceful countryside. Location notes: Just 15 minures north of I-10 in Pattison, Brookshire Texas. Easy access to Houston, Austin, College Station. Katy.",
     "photoURLs": [],
     "isVerified": false
+  },
+  {
+    "id": "horsemotel-cc13b812f5",
+    "name": "Springtown, Texas, Quarter Circle Spade Ranch",
+    "location": "9895 Old Agnes Road, Springtown , TX 76082",
+    "address": "9895 Old Agnes Road, Springtown , TX 76082",
+    "city": "Springtown",
+    "state": "TX",
+    "country": "",
+    "latitude": 32.973784,
+    "longitude": -97.789054,
+    "hookups": ["30A", "50A", "Electric", "Sewer"],
+    "accommodations": ["Stalls", "RV Hookups", "Big Rig Friendly"],
+    "phone": "817-550-2241",
+    "email": "devon8559@gmail.com",
+    "website": "",
+    "sourceUrl": "https://www.horsemotel.com/Texas.html",
+    "description": "Private RV pad with 30/50-amp electrical service, water and sewer hookups in a quiet, scenic ranch setting. Enjoy wide double-gate access and convenient pull-through space for large rigs. Your stay includes two private barn stalls, turnout pasture, and dedicated hay and tack storage. Shavings are available for purchase, and use of the covered arena may also be available. Dog-friendly accommodations and welcoming, onsite management make this an ideal choice for overnight layovers, extended stays, horse-show travelers, or equestrians relocating to Texas. Avoid crowded RV parks and relax in comfort with your family, dogs, and horses. Location notes: Conveniently located just ½ mile off Highway 199 and approximately 45 minutes from the Will Rogers Memorial Center in Fort Worth.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-QuarterCircle2Big.jpg"],
+    "isVerified": true
   },
   {
     "id": "horsemotel-87d855eacd",
