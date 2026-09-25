@@ -427,7 +427,7 @@ def extract_photos(block: list[dict[str, str]], base_url: str) -> list[str]:
 STREET_RE = re.compile(
     r"\b\d{1,6}\b.*\b(?:street|st|road|rd|avenue|ave|drive|dr|lane|ln|court|ct|"
     r"circle|cir|trail|trl|way|highway|hwy|route|rte|county\s+road|cr|place|pl|"
-    r"boulevard|blvd|pike|parkway|pkwy)\b",
+    r"boulevard|blvd|pike|parkway|pkwy|calle)\b",
     re.IGNORECASE,
 )
 
