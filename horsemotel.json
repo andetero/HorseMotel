@@ -941,6 +941,26 @@
     "isVerified": true
   },
   {
+    "id": "horsemotel-12fef4f5b1",
+    "name": "Moody Ranch",
+    "location": "5348 W Calle Maverick, Tucson , AZ 85741",
+    "address": "5348 W Calle Maverick, Tucson , AZ 85741",
+    "city": "Tucson",
+    "state": "AZ",
+    "country": "",
+    "latitude": 32.356628,
+    "longitude": -111.079385,
+    "hookups": ["30A", "50A", "Electric"],
+    "accommodations": ["Stalls", "RV Hookups", "Big Rig Friendly"],
+    "phone": "520-405-6041",
+    "email": "jeannieoftucson@aol.com",
+    "website": "https://xkxwd8fl17.c24.airoapp.ai/",
+    "sourceUrl": "https://www.horsemotel.com/Arizona.html",
+    "description": "We offer overnight boarding right off 1-10, northwest Tucson. Plenty of room for big rigs, 30ft gate, two 20 ft gates for easy entrance and exit. 3 stall MD barn, 2 turn outs, 30amp and 50amp full RV hookkups available. Small house for rent also. All in washer and dryer. Private acre, fully fenced. Please call to check for availability. Location notes: Northwest Tucson.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-JeannieMoody3Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody4Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody7Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody6Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody5Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody1Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody2Big.jpg"],
+    "isVerified": false
+  },
+  {
     "id": "horsemotel-95b4b5b449",
     "name": "Nicolls Country Ranch",
     "location": "1158 W Valley Circle, P.O. Box 482, Ash Fork , AZ 86320",
@@ -1199,26 +1219,6 @@
     "description": "Open from October through April. The China Cabinet Ranch is situated on 5 pristine acres adjacent to the Saguaro National Park's West District, less than 10 miles from I-10 and Twin Peaks Road in northwest Tucson. Your horses can share a 24' x 24' semi-covered pen that can be closed off from the 60' round pen by a gate (or left open if they get along). There is also one stand-alone 24' x 12' uncovered pen. Horses are $15/night each with guests providing feed and mucking. There is a room for rent ( https://www.airbnb.com/rooms/49575374 ), dry camping for up to three trailers at $20/night/rig. Two feed stores and two veterinarians are within 8 miles, and \"town\" is less than 10 miles away. The host is a professional wrangler and can accompany riders if she's not working. A 2-horse gooseneck slant is available so guests can access other local trailheads for $20/day (please call before arrival). There are 4 nice rides right off the property. We accept cash, checks, Zelle, and Venmo once we've talked and finalized your dates. A 50% deposit and reservations are required. Link to Saguaro National Park Maps (we are located in the West, Tucson Mountains, District): https://www.nps.gov/sagu/planyourvisit/maps.htm Location notes: Directions to the China Cabinet Ranch: Use the link to Google Maps because other mapping apps will get you lost once you exit the park. Best to arrive during daylight.",
     "photoURLs": ["https://www.horsemotel.com/ZP-ChinaCabinetBig.jpg"],
     "isVerified": true
-  },
-  {
-    "id": "horsemotel-12fef4f5b1",
-    "name": "Tucson, Arizona, Moody Ranch",
-    "location": "Tucson , AZ 85741",
-    "address": "",
-    "city": "",
-    "state": "AZ",
-    "country": "",
-    "latitude": 32.356628,
-    "longitude": -111.079385,
-    "hookups": ["30A", "50A", "Electric"],
-    "accommodations": ["Stalls", "RV Hookups", "Big Rig Friendly"],
-    "phone": "520-405-6041",
-    "email": "jeannieoftucson@aol.com",
-    "website": "https://xkxwd8fl17.c24.airoapp.ai/",
-    "sourceUrl": "https://www.horsemotel.com/Arizona.html",
-    "description": "We offer overnight boarding right off 1-10, northwest Tucson. Plenty of room for big rigs, 30ft gate, two 20 ft gates for easy entrance and exit. 3 stall MD barn, 2 turn outs, 30amp and 50amp full RV hookkups available. Small house for rent also. All in washer and dryer. Private acre, fully fenced. Please call to check for availability. Location notes: Northwest Tucson.",
-    "photoURLs": ["https://www.horsemotel.com/ZP-JeannieMoody3Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody4Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody7Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody6Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody5Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody1Big.jpg", "https://www.horsemotel.com/ZP-JeannieMoody2Big.jpg"],
-    "isVerified": false
   },
   {
     "id": "horsemotel-c3d58ff473",
