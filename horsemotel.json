@@ -11066,6 +11066,26 @@
     "isVerified": true
   },
   {
+    "id": "horsemotel-62b3d55416",
+    "name": "Hathaway Hill, Tina Votel",
+    "location": "1834 Oregonia Road, Lebanon , OH 45036",
+    "address": "1834 Oregonia Road, Lebanon , OH 45036",
+    "city": "Lebanon",
+    "state": "OH",
+    "country": "",
+    "latitude": 39.436303,
+    "longitude": -84.170407,
+    "hookups": [],
+    "accommodations": ["Stalls", "Big Rig Friendly", "Lodging"],
+    "phone": "513-623-2289",
+    "email": "hathawayhill@yahoo.com",
+    "website": "https://www.hathawayhill.com/",
+    "sourceUrl": "https://www.horsemotel.com/Ohio.html",
+    "description": "12' x 12' matted stalls with fans, indoor and outdoor arena, heated wash bays. Grass paddocks, up to 31 stalls available. We also have a two bedroom, two full bathroom home for rent on-site (attached to the barn). Timothy and orchard hay are available, trailer parking. Plenty of room for big rigs. Health certificates and negative Coggins test required. Prices are as follows: $75 per night per horse for the main barn (includes shavings, water, and turnout pasture if needed), $50 per horse per night for pasture turnout only, $185 per night Airbnb. Location notes: Located in historical Lebanon, Ohio. In-between Cincinnati and Dayton, OH.",
+    "photoURLs": ["https://www.horsemotel.com/ZP-Hathaway1Big.jpg", "https://www.horsemotel.com/ZP-Hathaway2Big.jpg"],
+    "isVerified": true
+  },
+  {
     "id": "horsemotel-653f656e59",
     "name": "Heath, Ohio, Rolling Hills Farm and Stables, LLC",
     "location": "2495 Seminary Road, Heath , OH 43056",
