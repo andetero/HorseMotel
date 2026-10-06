@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05T18:35:20Z",
+  "generated": "2026-10-06T16:05:11Z",
   "count": 896,
   "listings": [
     {
@@ -6007,26 +6007,6 @@
       "isVerified": false
     },
     {
-      "id": "horsemotel-7cbdb7ea88",
-      "name": "Lazy Oaks Farm Horse Hotel, Pam Hayden",
-      "location": "2630 Oaks Road, Paducah , KY 42003",
-      "address": "2630 Oaks Road, Paducah , KY 42003",
-      "city": "Paducah",
-      "state": "KY",
-      "country": "",
-      "latitude": 37.001755,
-      "longitude": -88.564774,
-      "hookups": ["Electric"],
-      "accommodations": ["Stalls", "RV Hookups"],
-      "phone": "270-994-7583",
-      "email": "lazyoaksfarm@comcast.net",
-      "website": "",
-      "sourceUrl": "https://www.horsemotel.com/Kentucky.html",
-      "description": "We have 11' x 12' Stalls. We keep them cleaned and ready with fresh bedding for a comfortable night's rest for your horse. Water buckets filled with fresh water, feed trough cleaned and ready, and a fleck of hay in the manger. Our arena is available to exercise if you want. We have a grooming station, wash bay, small turn out area. And for your convenience we have an indoor bathroom. We also offer 1 RV hook-up. Nestled a half mile off the road, the property offers a peaceful and private setting. Perfect for a quiet worry-free stop-over. A great place to hang your hat for a night or two. There is a hotel close by. If needed, I can give you info. Location notes: We are conveniently located approximately 3 miles off I-24, exit 11.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-LazyOaksBig.jpg"],
-      "isVerified": true
-    },
-    {
       "id": "horsemotel-ac1524f1fb",
       "name": "Muhlenberg County Agriculture Center, Alivia Burns",
       "location": "3705 State Route 1380, Greenville, KY 42345",
@@ -6044,6 +6024,26 @@
       "sourceUrl": "https://www.horsemotel.com/Kentucky.html",
       "description": "Our facility offers 125 stalls, 75 hookups (50 amp, 30 amp, 110v), and an indoor riding facility. There is a shower house on the property. The facility sits on 40 acres of land offering plenty of room for any size rig. We are located in between two towns that serve delicious food and drinks. Available at all hours, please just call ahead at 270-820-7246 . Location notes: Located 4 miles off of the Western Kentucky Parkway and in between Greenville and Central City.",
       "photoURLs": ["https://www.horsemotel.com/ZP-Muhlenberg1Big.jpg", "https://www.horsemotel.com/ZP-Muhlenberg2Big.jpg"],
+      "isVerified": true
+    },
+    {
+      "id": "horsemotel-7cbdb7ea88",
+      "name": "Paducah, Kentucky, Lazy Oaks Farm Horse Hotel",
+      "location": "2630 Oaks Road, Paducah , KY 42003",
+      "address": "2630 Oaks Road, Paducah , KY 42003",
+      "city": "Paducah",
+      "state": "KY",
+      "country": "",
+      "latitude": 37.001755,
+      "longitude": -88.564774,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
+      "phone": "270-994-7583",
+      "email": "lazyoaksfarm@comcast.net",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Kentucky.html",
+      "description": "We have 11'x12' Stalls. We keep them cleaned, sanitized and ready with fresh bedding for a comfortable nights rest for your horse. Water Buckets filled with fresh water, feed trough cleaned and ready and a fleck of hay in the manger. Our arena is available to exercise if you want. We have a grooming station, wash bay, and a small turnout area if desired. And for your convenience we have an indoor bathroom. We also have 2 RV hook-ups to offer with electricity and water. Nestled a half mile off the road, the property offers a peaceful and private setting. Perfect for a worry-free stop-over. A great place to hang your hat fir a night or two. There is a hotel close by (approx. 4 miles). I have all the information if you need a place to stay. Location notes: We are conveniently located approximately 3 miles off I-24, exit 11.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-LazyOaksBig.jpg", "https://www.horsemotel.com/ZP-LazyOaksBig2.jpg", "https://www.horsemotel.com/ZP-LazyOaks2.jpg", "https://www.horsemotel.com/ZP-LazyOaksBig3.jpg", "https://www.horsemotel.com/ZP-LazyOaks3.jpg"],
       "isVerified": true
     },
     {
