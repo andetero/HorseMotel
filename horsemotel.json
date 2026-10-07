@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-06T16:05:11Z",
-  "count": 896,
+  "generated": "2026-10-07T16:35:57Z",
+  "count": 897,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -260,6 +260,26 @@
       "sourceUrl": "https://www.horsemotel.com/Arkansas.html",
       "description": "Nice 12' x 12' stalls with fans, small pasture for turnout if desired, and free trailer parking. Rates: starting at $15.00 per horse. 2-30amp RV hook-ups for an additional $10.00 each. A reasonably priced upstairs, studio style, bunkhouse is also available (small crated pets only). Location notes: Only 6.6 miles from the interstate with nice paved road all the way to the farm. We are located between Fort Smith and Little Rock, AR. Directions: Use your GPS to find our facility easily (you can not put in a GPS until exit 83 off I-40) or follow these directions: Take exit 83 off I-40 (Weir Rd/ Hwy124). Go north and stay on Hwy 124 for approximately 6.6 miles. Look for a mailbox on the right number 9645 then turn immediately to the right and we are the first visible house on the left 108 Upper Pine Ridge Road. The barn is the fourth driveway. We have a very clean and safe (hazard free) facility. Your satisfaction is guaranteed or a full refund will be given. Text is best for a quicker response (479) 970-1915. Thank you for considering our facility and have a safe trip!",
       "photoURLs": ["https://www.horsemotel.com/ZP-2BFarms.jpg"],
+      "isVerified": true
+    },
+    {
+      "id": "horsemotel-9464d5da3b",
+      "name": "Buckaroo Ranch, Greg Anderson",
+      "location": "210 Old Baptist Cemetery Road, Russellville , AR 72802",
+      "address": "210 Old Baptist Cemetery Road, Russellville , AR 72802",
+      "city": "Russellville",
+      "state": "AR",
+      "country": "",
+      "latitude": 35.3331397,
+      "longitude": -93.0835048,
+      "hookups": ["30A", "Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly", "Lodging"],
+      "phone": "479-264-3554",
+      "email": "ganders61@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Arkansas.html",
+      "description": "30-acre Ranch conveniently located 3 miles north of I-40. Accommodations include 11 covered 12' x 12' stalls that come equipped with fans, shavings, water, and feed buckets. Also take advantage of our outdoor arena and adjoining covered arena with pasture or grass runs available. 2 - 30 Amp LQ/RV electric site hookups. Fully furnished 1,600 sq ft house available, 2 bedrooms, 2 bath with loft, sleeps up to 10. Large gravel lot for large trailers and parking. We are family owned and operated and conveniently live on site. Location notes: Take exit 83 off of Interstate 40 in Arkansas. We're just 3 miles off of the Interstate.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-Buckaroo1Big.jpg", "https://www.horsemotel.com/ZP-Buckaroo2Big.jpg", "https://www.horsemotel.com/ZP-Buckaroo3Big.jpg"],
       "isVerified": true
     },
     {
@@ -9029,26 +9049,6 @@
       "isVerified": true
     },
     {
-      "id": "horsemotel-e9f927919e",
-      "name": "Holbel Farm, Stacie Holbel",
-      "location": "4390 Old River Road, Waynesville, NC 28786",
-      "address": "4390 Old River Road, Waynesville, NC 28786",
-      "city": "Waynesville",
-      "state": "NC",
-      "country": "",
-      "latitude": 35.488637,
-      "longitude": -82.988373,
-      "hookups": ["Electric", "Water"],
-      "accommodations": ["Paddocks", "RV Hookups"],
-      "phone": "231-350-0838",
-      "email": "slholbel@gmail.com",
-      "website": "",
-      "sourceUrl": "https://www.horsemotel.com/NorthCarolina.html",
-      "description": "1.5 acre of grass flat pasture ( fescue), maintained, with 12' x 24' shelter, enclosed with 4 strand electric rope fencing, automatic Ritchie waterer. No Stalls available. $45.00 per night. Overnight only, no long term boarding offered. Price includes pasture, electric and water. Location notes: Roughly 7 miles off I-40 and 6 miles from 23.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-Holbel1Big.jpg", "https://www.horsemotel.com/ZP-Holbel2Big.jpg", "https://www.horsemotel.com/ZP-Holbel3Big.jpg", "https://www.horsemotel.com/ZP-Holbel4Big.jpg", "https://www.horsemotel.com/ZP-Holbel5Big.jpg", "https://www.horsemotel.com/ZP-Holbel6Big.jpg"],
-      "isVerified": false
-    },
-    {
       "id": "horsemotel-c9b9c2f396",
       "name": "Hollister, North Carolina, Double Lee Farm",
       "location": "1002 Capps Farm Road, Hollister , NC 27844",
@@ -9347,6 +9347,26 @@
       "description": "2 - 30 amp hookups with water, no sewer. (Rest room available in the barn) * 6 Stalls and/or 1 available 3-strand electric paddock with run-in for turn out. (2 horse limit in a paddock) * Each stall comes with 2 bags of Queens easy sift, additional shavings available for $8.00 each. * Wash rack, arena, round-pen available. * Offering short term layover. Low-key, safe, & easy. * Arrive to a stall that's ready for your horse! * Clean health certificates required for out out state horses, and negative Coggins required. Location notes: Conveniently located off I-26 at the NC/SC boarder. 10 easy minuets from I-26 & I-74. 15 minuets from FENCE & Tyron International Equestrian Center.",
       "photoURLs": ["https://www.horsemotel.com/ZP-WWFarms1Big.jpg", "https://www.horsemotel.com/ZP-WWFarms2Big.jpg", "https://www.horsemotel.com/ZP-WWFarms3Big.jpg", "https://www.horsemotel.com/ZP-WWFarms4Big.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-e9f927919e",
+      "name": "Waynesville, North Carolina, Holbel Farm",
+      "location": "4390 Old River Road, Waynesville, NC 28786",
+      "address": "4390 Old River Road, Waynesville, NC 28786",
+      "city": "Waynesville",
+      "state": "NC",
+      "country": "",
+      "latitude": 35.488637,
+      "longitude": -82.988373,
+      "hookups": ["Electric", "Water"],
+      "accommodations": ["Paddocks", "RV Hookups"],
+      "phone": "231-350-0838",
+      "email": "slholbel@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileNorthCarolinaHolbel.html",
+      "description": "1.5 acre of grass flat pasture ( fescue), maintained, with 12' x 24' shelter, enclosed with 4 strand electric rope fencing, automatic Ritchie waterer. No Stalls available. $45.00 per night. Overnight only, no long term boarding offered. Price includes pasture, electric and water. Location notes: Roughly 7 miles off I-40 and 6 miles from 23.",
+      "photoURLs": [],
+      "isVerified": false
     },
     {
       "id": "horsemotel-167c0daf45",
@@ -10449,26 +10469,6 @@
       "isVerified": false
     },
     {
-      "id": "horsemotel-e20b468998",
-      "name": "Hearts & Stars Ranch",
-      "location": "6180 Donald Nelson Ave., Las Vegas , NV 89131",
-      "address": "6180 Donald Nelson Ave., Las Vegas , NV 89131",
-      "city": "Las Vegas",
-      "state": "NV",
-      "country": "",
-      "latitude": 36.2996417,
-      "longitude": -115.2280929,
-      "hookups": ["Electric"],
-      "accommodations": ["Stalls", "RV Hookups", "Wash Rack"],
-      "phone": "Tel: 310-704-7101",
-      "email": "HeartsandStarsRanchLLC@gmail.com",
-      "website": "",
-      "sourceUrl": "https://www.horsemotel.com/Nevada.html",
-      "description": "$25/night per horse - Individual outdoor stalls: 12' x 16' fully covered, or 12' x 20' front practically covered stalls. Large, lighted arena with water for riding, turn out and covered wash rack with lights. $30/night RV Hook-UP (no sewer). $20/night dry camp or trailer drop. Coggins & Health Certificate required with signed waiver. Cash or Zelle preferred, PayPal & Venmo options. NFR Boarding available - rates subject to change. No Check In's after 9pm. Location notes: Northwest side of town - right off the 215 & 95.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-HeartsStars1Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars2Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars3Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars4Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars5Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars6Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars7Big.jpg", "https://www.horsemotel.com/ZP-HeartsStars8Big.jpg"],
-      "isVerified": true
-    },
-    {
       "id": "horsemotel-d514b7a803",
       "name": "Kingston Ranch, Silke Ortloff",
       "location": "2500 Kingston Rd, Sandy Valley , NV 89019",
@@ -10506,6 +10506,26 @@
       "sourceUrl": "https://www.horsemotel.com/Nevada.html",
       "description": "Welcome to KaiseRosa Ranch, offering overnight horse boarding and self-service horse stalls. We provide a safe, convenient, and horse-friendly stop for travelers, competitors, rodeo participants, and horses passing through Southern Nevada. Whether you are hauling across the country, attending an event, or simply need a reliable overnight horse motel near Las Vegas, our facility offers clean stalls, trailer access, and flexible accommodations for short-term stays. Our overnight boarding options are designed for traveling horses and riders who need a comfortable place to stop and rest. Self-service stalls are available, making it easy for horse owners to care for their horses on their own schedule. We strive to provide a quiet, clean, and dependable environment for both horses and riders during overnight stays. Location notes: Less than a mile from South Point Casino and Arena",
       "photoURLs": ["https://www.horsemotel.com/ZP-KaiseRosaBig.jpg"],
+      "isVerified": true
+    },
+    {
+      "id": "horsemotel-e20b468998",
+      "name": "Las Vegas, Nevada, Hearts & Stars Ranch",
+      "location": "6180 Donald Nelson Ave., Las Vegas , NV 89131",
+      "address": "6180 Donald Nelson Ave., Las Vegas , NV 89131",
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "",
+      "latitude": 36.2996417,
+      "longitude": -115.2280929,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "RV Hookups", "Wash Rack"],
+      "phone": "Tel: 310-704-7101",
+      "email": "HeartsandStarsRanchLLC@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileNevadaHeartsStars.html",
+      "description": "$25/night per horse - Individual outdoor stalls: 12' x 16' fully covered, or 12' x 20' front practically covered stalls. Large, lighted arena with water for riding, turn out and covered wash rack with lights. $30/night RV Hook-UP (no sewer). $20/night dry camp or trailer drop. Coggins & Health Certificate required with signed waiver. Cash or Zelle preferred, PayPal & Venmo options. NFR Boarding available - rates subject to change. No Check In's after 9pm. Location notes: Northwest side of town - right off the 215 & 95.",
+      "photoURLs": [],
       "isVerified": true
     },
     {
@@ -12126,9 +12146,9 @@
       "phone": "208-602-1213",
       "email": "hmgable@gmail.com",
       "website": "",
-      "sourceUrl": "https://www.horsemotel.com/Oregon.html",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileOregonGable.html",
       "description": "14 acres with pressurized irrigation. 8 dry lots with 12' x 16' shelters and auto waterers. Also secured, separate, older barn with 2 12' x 16' stalls with small runs off the stalls. Smal 70' x 70' indoor arena, old style 70' x 70' squat round pen or other boarding option right off the barn. 200' x 300' outdoor arena with bright LED lights. 30 or 50 amp power and I have sewer hook up. Hot tub, fire pit, volleyball net and basketball hoop. Hotels within 5 minutes. 3,000 sq. home could by air B and B if wanted. Clean facility. Clean home with secluded but only 2 minutes from the freeway with turn around driveway for easy in and out. 5 minutes from town, hotels, restaurants, etc. 1 hour from Boise. Fun, low key environment for your horses, dogs, or whatever you have. Lots of options for horses and humans. Rent the RV space or rent the whole 5 bedroom, 3000 sq foot home. Host services available as well. Hotels available only 5 minutes from our facility. $25 per horse and $25 a night for RV hook up. Manure services available. Hay available at affordable rates Location notes: Right off the freeway. Big turn around driveway with parking. Lots of options from horse safe electric fencing to panels and wood corrals. We are an hour from Boise Idaho. Located right on the OR/ ID border.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-Gable1Big.jpg", "https://www.horsemotel.com/ZP-Gable2Big.jpg", "https://www.horsemotel.com/ZP-Gable3Big.jpg", "https://www.horsemotel.com/ZP-Gable4Big.jpg", "https://www.horsemotel.com/ZP-Gable5Big.jpg", "https://www.horsemotel.com/ZP-Gable6Big.jpg"],
+      "photoURLs": [],
       "isVerified": true
     },
     {
