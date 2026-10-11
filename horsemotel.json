@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-10T15:29:50Z",
-  "count": 898,
+  "generated": "2026-10-11T15:48:25Z",
+  "count": 899,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -3123,6 +3123,26 @@
       "description": "Pasture, 60' roundpen (summers), or lot; grass hay and water provided. Trailer parking available. Health certificate(s) and negative Coggins test required. Location notes: Located 18.5 miles northwest of Steamboat Springs off hwy 129. There are 8.5 miles of gravel to travel. In the winter, a 4WD vehicle is recommended.",
       "photoURLs": ["https://www.horsemotel.com/ZP-ThorsBig.jpg"],
       "isVerified": false
+    },
+    {
+      "id": "horsemotel-9b1c082d34",
+      "name": "Triangle T Arena LLC",
+      "location": "2101 County Road 245, New Castle, CO 81647",
+      "address": "2101 County Road 245, New Castle, CO 81647",
+      "city": "New Castle",
+      "state": "CO",
+      "country": "",
+      "latitude": 39.590823,
+      "longitude": -107.5609401,
+      "hookups": ["30A", "50A", "Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
+      "phone": "970-456-8415",
+      "email": "triangletarena00@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Colorado.html",
+      "description": "12'x30' runs with shelter ($30) -12'x12' indoor stalls with run ($40) -Shared turn out pens (6 horses per) ($10/ horse) -Onsite Veterinarian -Programmable Hot walker -Indoor Arena -Outdoor Arena -30/50-amp RV Electric Hookups ($20) -Dry Camping ($10). We provide self and full care options for all of our amenities offered. Fully accessible for full tractor/ trailer set-ups, out of city limits, and a world of friendly faces. We have lots of room and a beautiful view to share. We would love to accommodate you and your 4-legged companions! Location notes: 2101 County Rd 245, New Castle, CO 81647",
+      "photoURLs": ["https://www.horsemotel.com/ZP-ttallc6Big.jpg", "https://www.horsemotel.com/ZP-ttallc2Big.jpg", "https://www.horsemotel.com/ZP-ttallc4Big.jpg", "https://www.horsemotel.com/ZP-ttallc5Big.jpg", "https://www.horsemotel.com/ZP-ttallc3Big.jpg"],
+      "isVerified": true
     },
     {
       "id": "horsemotel-58a613d144",
