@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-13T17:03:55Z",
-  "count": 899,
+  "generated": "2026-10-14T14:37:49Z",
+  "count": 900,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -6327,6 +6327,26 @@
       "isVerified": false
     },
     {
+      "id": "horsemotel-d89bdfec53",
+      "name": "Agape Acres, Britney Duke, 42419 Pleasant Ridge Ext",
+      "location": "Ponchatoula , LA 70454",
+      "address": "",
+      "city": "",
+      "state": "LA",
+      "country": "",
+      "latitude": 30.4672198,
+      "longitude": -90.4297597,
+      "hookups": [],
+      "accommodations": ["Paddocks"],
+      "phone": "985-507-5914",
+      "email": "Britney@bdukelaw.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Louisiana.html",
+      "description": "4 acre paddock.Lots of Space. Location notes: 1.5 miles off of I-12",
+      "photoURLs": [],
+      "isVerified": false
+    },
+    {
       "id": "horsemotel-b12b09f1ed",
       "name": "Dubach, Louisiana, Cypress Creek Farm",
       "location": "206 Rockshop Road, Dubach , LA 71235",
@@ -6428,7 +6448,7 @@
     },
     {
       "id": "horsemotel-188742ff28",
-      "name": "Rockin R Cattle Co ,Rachel Deaton",
+      "name": "Rockin R Cattle Co, Rachel Deaton",
       "location": "38704 Mullers Lane, Ponchatoula , LA 70454",
       "address": "38704 Mullers Lane, Ponchatoula , LA 70454",
       "city": "Ponchatoula",
