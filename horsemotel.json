@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-14T14:37:49Z",
-  "count": 900,
+  "generated": "2026-10-15T14:17:10Z",
+  "count": 901,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -641,6 +641,26 @@
       "description": "Safe and secure stalls adjacent to arena or close to 50' round pen. Bermuda or alfalfa hay available. Trail access without hauling. Dry camping only with room for big rigs. Walk to Dutchman's Country BBQ. Health certificates and negative Coggins test required.",
       "photoURLs": ["https://www.horsemotel.com/ZP-BobbieMcGhee1Big.jpg", "https://www.horsemotel.com/ZP-BobbieMcGhee2Big.jpg", "https://www.horsemotel.com/ZP-BobbieMcGhee3Big.jpg"],
       "isVerified": false
+    },
+    {
+      "id": "horsemotel-e90d5edced",
+      "name": "Bottoms Up Arena, RV Sites and Stalls, Melinda Kowalski",
+      "location": "4309 E Laughlin Ave., Casa Grande , AZ 85194",
+      "address": "4309 E Laughlin Ave., Casa Grande , AZ 85194",
+      "city": "Casa Grande",
+      "state": "AZ",
+      "country": "",
+      "latitude": 32.872165,
+      "longitude": -111.521323,
+      "hookups": ["30A", "50A", "Electric", "Sewer"],
+      "accommodations": ["Paddocks", "RV Hookups", "Big Rig Friendly"],
+      "phone": "480-570-0614",
+      "email": "info@bottomsuparenaaz.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Arizona.html",
+      "description": "Bottoms Up Arena & RV Camp — an 11-acre equestrian and RV property where you can keep your rig and your horses at the same location. Two large outdoor arenas, one a roping arena with lighted announcer stand and a sound system in both the barn and roping arena. Two large round pens, a large cattle pen (bring your own cattle with prior approval — we do not supply cattle). 28-stall barn with large covered stalls, approximately 16' x 40', automatic waterers, full care or self care available. Six full-hookup RV sites, 30/50 amp, with water, sewer and electricity, plus dry camping. Three large irrigated pastures and a large hay barn on site. Good for a one-night layover, a winter season, or year-round boarding. Bottoms Up is locally owned and hands-on — we're happy to help first-time visitors get settled, especially if you're new to hauling long distances. Big rigs and LQ trailers are no problem; there's plenty of room to turn around. Coggins and health certificate required. Leashed dogs are welcome. We're a working arena, not a resort, so expect a relaxed, western, practical setup rather than anything fancy. Long-term boarders, trainers, and local riders are also welcome — we're not just a stopover. Feel free to call or text ahead with questions about space or timing; we'll do what we can to make it work. Location notes: South of Phoenix and convenient to I-10 and Routes 87 and 287.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-BottomsUp3Big.jpg"],
+      "isVerified": true
     },
     {
       "id": "horsemotel-d21eefbf6c",
