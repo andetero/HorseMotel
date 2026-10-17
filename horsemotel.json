@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-16T14:04:47Z",
-  "count": 901,
+  "generated": "2026-10-17T13:04:50Z",
+  "count": 902,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -11649,6 +11649,26 @@
       "isVerified": false
     },
     {
+      "id": "horsemotel-75777447aa",
+      "name": "Guthrie, Oklahoma, Suncatcher Ranch, LLC",
+      "location": "9301 S Westminster Road, Guthrie, OK 73044",
+      "address": "9301 S Westminster Road, Guthrie, OK 73044",
+      "city": "Guthrie",
+      "state": "OK",
+      "country": "",
+      "latitude": 35.782207,
+      "longitude": -97.336137,
+      "hookups": ["50A"],
+      "accommodations": ["Stalls", "RV Hookups"],
+      "phone": "405-517-2979",
+      "email": "nsmith555@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileOklahomaSuncatcher.html",
+      "description": "Four (4) 11' x 11' indoor stalls with fans and 24 hour camera surveillance. Access to an indoor arena for light work (extra fees apply). 50 amp service and water for one (1) RV/LQ on site. A mile and a half from the Lazy E in Guthrie. Whether traveling across country or attending a show at the Lazy E Arena, we offer a cozy, quiet environment to house your horses temporarily. Our property is gated and we reside onsite. Stalls are disinfected before use and bedded with pine shavings. Use of an indoor 60' x 120' arena for light work is available for an extra fee per day. All horses must have a current negative Coggins and a current health certificate. Dogs are welcome, but must be kept on a leash or placed in one of our available 20' x 20' dog runs. Location notes: 1-1/2 miles east of The Lazy E Arena in Guthrie, OK.",
+      "photoURLs": [],
+      "isVerified": true
+    },
+    {
       "id": "horsemotel-c02625d373",
       "name": "Henryetta, Oklahoma, Johnson Ranch Horse Motel",
       "location": "10400 Leonard Lane, Henryetta , OK 74437",
@@ -11767,6 +11787,26 @@
       "sourceUrl": "https://www.horsemotel.com/Oklahoma.html",
       "description": "We are conveniently located off I-35 between Edmond and Guthrie, Oklahoma (exit 151). We are located near the Lazy E arena. We have 8 RV sites with electric (50A, 30A, 110v) and water hookups. Horse pens are covered and are 32' x 12' with a two horse maximum per pen. There are four dog kennels for your convenience. Location notes: Near the Lazy E Arena and convenient to I-35.",
       "photoURLs": ["https://www.horsemotel.com/ZP-KKsHorseHotel1Big.jpg", "https://www.horsemotel.com/ZP-KKsHorseHotel2Big.jpg", "https://www.horsemotel.com/ZP-KKsHorseHotel3Big.jpg"],
+      "isVerified": true
+    },
+    {
+      "id": "horsemotel-f33707f415",
+      "name": "Lone Star Bunkhouses Boarding",
+      "location": "14505 S. 353rd E. Ave., Coweta, OK 74429",
+      "address": "14505 S. 353rd E. Ave., Coweta, OK 74429",
+      "city": "Coweta",
+      "state": "OK",
+      "country": "",
+      "latitude": 35.956709,
+      "longitude": -95.582552,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Lodging"],
+      "phone": "918-361-4726",
+      "email": "tami@swingindhorserescue.com",
+      "website": "https://www.horsemotel.com/www.Lonestarpavilion.com",
+      "sourceUrl": "https://www.horsemotel.com/Oklahoma.html",
+      "description": "Stalls, loafing sheds, round pen, arena, pasture, RV hookup, cabins. Location notes: Coweta, OK",
+      "photoURLs": ["https://www.horsemotel.com/ZP-LoneStarBunk2Big.jpg", "https://www.horsemotel.com/ZP-LoneStarBunk4Big.jpg", "https://www.horsemotel.com/ZP-LoneStarBunk3Big.jpg", "https://www.horsemotel.com/ZP-LoneStarBunk1Big.jpg"],
       "isVerified": true
     },
     {
@@ -11907,26 +11947,6 @@
       "sourceUrl": "https://www.horsemotel.com/Oklahoma.html",
       "description": "Horse boarding on a daily or monthly basis in a peaceful ranch setting featuring rolling hills, shade trees, and a 5-acre stocked lake. The barn includes 10 box stalls and a wash rack, along with six large pens suitable for multiple horses. Guests have access to a large sand arena and expansive open acreage for horseback riding. The property has pull-through RV sites with 30 and 50-amp hookups, with easy access for large RVs. The ranch also has 24-hour video surveillance. We are located just 6 miles from the Shawnee Expo Center and immediately off I-40. Lodging is available on the ranch. Call, email, or visit our website to book your spot today! Location notes: I-40 to exit 192 (Earlsboro), head north 1/8 mile to the first gravel road on the left. Take the gravel road west 2¼ miles- Rolling Stone Stables & RV Park will be on the right. GPS systems will take you to the correct location",
       "photoURLs": ["https://www.horsemotel.com/ZP-RollingStone1.jpg", "https://www.horsemotel.com/ZP-RollingStoneBig1.jpg", "https://www.horsemotel.com/ZP-RollingStone2.jpg", "https://www.horsemotel.com/ZP-RollingStoneBig2.jpg"],
-      "isVerified": true
-    },
-    {
-      "id": "horsemotel-75777447aa",
-      "name": "Suncatcher Ranch, LLC, Nicki Smith",
-      "location": "9301 S Westminster Road, Guthrie, OK 73044",
-      "address": "9301 S Westminster Road, Guthrie, OK 73044",
-      "city": "Guthrie",
-      "state": "OK",
-      "country": "",
-      "latitude": 35.782207,
-      "longitude": -97.336137,
-      "hookups": ["50A"],
-      "accommodations": ["Stalls", "RV Hookups"],
-      "phone": "572-239-6775",
-      "email": "nsmith555@gmail.com",
-      "website": "",
-      "sourceUrl": "https://www.horsemotel.com/Oklahoma.html",
-      "description": "Four (4) 11' x 11' indoor stalls with fans and 24 hour camera surveillance. Access to an indoor arena for light work (extra fees apply). 50 amp service and water for one (1) RV/LQ on site. A mile and a half from the Lazy E in Guthrie. Whether traveling across country or attending a show at the Lazy E Arena, we offer a cozy, quiet environment to house your horses temporarily. Our property is gated and we reside onsite. Stalls are disinfected before use and bedded with pine shavings. Use of an indoor 60' x 120' arena for light work is available for an extra fee per day. All horses must have a current negative Coggins and a current health certificate. Dogs are welcome, but must be kept on a leash or placed in one of our available 20' x 20' dog runs. Location notes: 1-1/2 miles east of The Lazy E Arena in Guthrie, OK.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-Suncatcher1Big.jpg", "https://www.horsemotel.com/ZP-Suncatcher2Big.jpg", "https://www.horsemotel.com/ZP-Suncatcher3Big.jpg"],
       "isVerified": true
     },
     {
