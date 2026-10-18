@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-17T13:04:50Z",
-  "count": 902,
+  "generated": "2026-10-18T13:25:13Z",
+  "count": 903,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -8426,6 +8426,26 @@
       "description": "0 - Indoor or outdoor paddocks for overnight horse boarding, running well-water in each. - o - hay if requested o - 30 AMP plug-ins available - can easily handle large rigs - 0 - Outdoor arena available (if it's NOT muddy) - Extra charges to accommodate draft horses and/or stallions 0 - Check out time 10 a.m. unless other arrangements are made. No matter what GPS says, STAY ON Becraft Lane until you see our mailbox and sign pointing to big red barn. Cash payment preferred but can accept credit cards with 5% admin fee. Location notes: Southeastern Montana, Yellowstone County, convenient access just off of I-90, Exit 455 (Johnson Lane). Close to ALL amenities.",
       "photoURLs": ["https://www.horsemotel.com/ZP-EquineMotel1Big.jpg", "https://www.horsemotel.com/ZP-EquineMotel2Big.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-0f7db3101f",
+      "name": "Falls Creek Horse Motel",
+      "location": "158 Falls Creek Road, Troy, MT 59935",
+      "address": "158 Falls Creek Road, Troy, MT 59935",
+      "city": "Troy",
+      "state": "MT",
+      "country": "",
+      "latitude": 48.4135647,
+      "longitude": -115.8180325,
+      "hookups": ["Water"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Lodging", "Trails"],
+      "phone": "208-880-7483",
+      "email": "jorichey@ymail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Montana.html",
+      "description": "Covered stalls available for 2 or 3 horses. Uncovered outdoor 12 x 12 panel pens can be set up for additional horses if needed. Water available. Overnight parking for your rig and dry camping. Please keep dogs leashed as we are a working farm. A small dry cabin is available on request. Easy access paved road to the property. Miles of riding trails from the property. Falls Creek is an easy ride with views, scenery and abundant wildlife. Location notes: Troy, Montana",
+      "photoURLs": ["https://www.horsemotel.com/ZP-FallsCreekBig.jpg"],
+      "isVerified": false
     },
     {
       "id": "horsemotel-6c8cef42bd",
