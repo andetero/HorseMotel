@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-19T16:34:52Z",
-  "count": 903,
+  "generated": "2026-10-20T14:25:49Z",
+  "count": 904,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -721,6 +721,26 @@
       "description": "Top of the line stalls, large individual runs, round pen, 1/2 acre turnout, wash station, large rig accessible, room for RV's - water and electricity available. Current Coggins and Health certificate required. Within riding distance of the beautiful Sonoran Desert Preserve and Maricopa Trail. Horse boarding: Overnight - $25 Weekly - $120 Monthly - $425 Feeding and cleanup extra RV overnight stay - $30 RV weekly - $140 Location notes: Located in Desert Hills - 10 minutes from I-17 and Carefree Highway. Conveniently situated in North Phoenix, near Cave Creek, Carefree and Anthem Areas.",
       "photoURLs": ["https://www.horsemotel.com/ZP-CloverEquine1Big.jpg", "https://www.horsemotel.com/ZP-CloverEquine2Big.jpg", "https://www.horsemotel.com/ZP-CloverEquine3Big.jpg", "https://www.horsemotel.com/ZP-CloverEquine4Big.jpg", "https://www.horsemotel.com/ZP-CloverEquine5Big.jpg", "https://www.horsemotel.com/ZP-CloverEquine6Big.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-e9ae9720b3",
+      "name": "Dos Lomas Wild Ranch",
+      "location": "8190 Rockin R Ranch Trl., Snowflake , AZ 85937",
+      "address": "8190 Rockin R Ranch Trl., Snowflake , AZ 85937",
+      "city": "Snowflake",
+      "state": "AZ",
+      "country": "",
+      "latitude": 34.583243,
+      "longitude": -110.01167,
+      "hookups": [],
+      "accommodations": ["Paddocks", "Big Rig Friendly", "Trails"],
+      "phone": "760-981-3018",
+      "email": "iehorsemanship@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Arizona.html",
+      "description": "We have 16 - 24'x24' pipe corrals with shade, 2 - 24'x36' pipe corrals with shade, 1-36' x 60' pipe corral pen with shade. We are able to house wild mustangs/feral horses and safely load and unload them as well. Arena may be used for lunging only and you can ride off property for miles in the open high desert. Tent rental available with cots for a small fee. Dry camping with RV or LQ also available for small fee and a portapotty is available for guest use. Excellent spot to stop off from Hwy 40 on your travels or to stay and enjoy the beautiful trails we have in the area. We can accommodate fairly large rigs but no semi's. You will have to drive on 1.7 miles on a dirt road to get to the ranch. We provide a water trough with clean water and everything to clean your pen. Hay is available for purchase if needed (Bermuda and alfalfa). Location notes: Snowflake, AZ.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-DosLomas1Big.jpg"],
+      "isVerified": false
     },
     {
       "id": "horsemotel-5a19d25f9e",
