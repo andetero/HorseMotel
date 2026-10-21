@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-20T14:25:49Z",
-  "count": 904,
+  "generated": "2026-10-21T14:36:05Z",
+  "count": 906,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -3247,8 +3247,8 @@
     {
       "id": "horsemotel-cb134d28a3",
       "name": "S & A Farm, LLC, Sandy Turmel",
-      "location": "59 Pope Road, Oxford , CT 06478",
-      "address": "59 Pope Road, Oxford , CT 06478",
+      "location": "61 Pope Road, Oxford , CT 06478",
+      "address": "61 Pope Road, Oxford , CT 06478",
       "city": "Oxford",
       "state": "CT",
       "country": "",
@@ -14513,6 +14513,26 @@
       "isVerified": true
     },
     {
+      "id": "horsemotel-001061efd2",
+      "name": "A and W Horse/ Livestock Facilities, Andrew Sprague",
+      "location": "2604 Dana St, Lubbock , TX 79415",
+      "address": "2604 Dana St, Lubbock , TX 79415",
+      "city": "Lubbock",
+      "state": "TX",
+      "country": "",
+      "latitude": 33.671423,
+      "longitude": -101.873428,
+      "hookups": ["Electric", "Water"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Wash Rack", "Lodging"],
+      "phone": "806-202-6417",
+      "email": "andrew.sprague.ag@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Texas.html",
+      "description": "7 lean-to barn stalls, multiple small pens w/ loafing sheds, 4 large 2-horse pens w/ loafing sheds. Includes heated automatic waterers, outdoor wash rack, and riding arena. Hookups & Lodging: 3 trailer hookups (water & electric) + on-site guest apartment rental. Rates: $20/horse/night | $30/trailer hookup | $65/apartment rental. Location notes: Just 3½ miles off I-27, minutes north of Lubbock. Easy access & turnaround for rigs.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-AWHorse1Big.jpg", "https://www.horsemotel.com/ZP-AWHorse2Big.jpg"],
+      "isVerified": false
+    },
+    {
       "id": "horsemotel-d05a86ac32",
       "name": "Adkins, Texas, Texas TDY",
       "location": "187 Oak Park Road, Adkins , TX 78101",
@@ -15513,6 +15533,26 @@
       "isVerified": false
     },
     {
+      "id": "horsemotel-94380b6a95",
+      "name": "Pine Meadow Farm, Celeste Brown, 5154 FM 2484",
+      "location": "Salado , TX 76571",
+      "address": "",
+      "city": "",
+      "state": "TX",
+      "country": "",
+      "latitude": 30.9724054,
+      "longitude": -97.5567303,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Lodging"],
+      "phone": "254-444-1989",
+      "email": "pnemdw@aol.com",
+      "website": "http://www.pinemeadowfarm.org/",
+      "sourceUrl": "https://www.horsemotel.com/Texas.html",
+      "description": "High-end facility with all the amenities. 12x12 stalls with attached individual pens. Regulation Dressage covered arena, round pen, jump course, separate Airbnb on farm, easy access from I35, trailer friendly, RV hookup. USEF Dressage judge - trainer, owner on site. See website for more photos & details. Location notes: 5154 FM 2484, Salado, Texas",
+      "photoURLs": ["https://www.horsemotel.com/ZP-PineMeadow1Big.jpg", "https://www.horsemotel.com/ZP-PineMeadow2Big.jpg"],
+      "isVerified": false
+    },
+    {
       "id": "horsemotel-89fae2595b",
       "name": "Pittsburg, Texas, Double RR Ranch",
       "location": "908 CR 1264, Pittsburg , TX 75686",
@@ -15928,7 +15968,7 @@
       "email": "beccaguilbeau@gmail.com",
       "website": "https://www.airbnb.ca/rooms/40143564?check_in=2026-06-17&check_out=2026-06-19&guests=1&adults=1&s=67&unique_share_id=1bafebcb-3b4b-4e2a-9f74-df628c3612c3",
       "sourceUrl": "https://www.horsemotel.com/Texas.html",
-      "description": "50 and 30 amp, water, no sewer hook up for $30/night. Covered/uncovered paddocks for $25 per horse/night. Small cabin with microwave, fridge and coffee maker with outdoor kitchen sink, outdEscape to the charm of country living just minutes from downtown Bellville. Nestled on 12 private acres, this spacious two-story farmhouse retreat offers the perfect blend of peaceful seclusion and convenient access to town. Wake up to scenic pond views, friendly farm animals, and fresh eggs from our free-range chickens. The home comfortably ccommodates families and groups with three queen bedrooms, multiple additional sleeping spaces, and a warm farmhouse-lodge atmosphere. Children and pets are welcomeâ€”including horses. Guests can enjoy the fully fenced dog yard, stocked fishing pond with dock, complimentary kayak, picnic areas, outdoor games, BBQ, and fire pit. Stroll the property and meet the farm's beloved residents, including mini donkeys, dwarf goats, horses, peacocks, chickens, friendly farm dogs and cats. Negative Coggins required for horses. Pasture available and plenty of room for trailer parking. 30A RV dry-dock also available Location notes: Bellville, TX",
+      "description": "50 and 30 amp, water, no sewer hook up for $30/night. Covered/uncovered paddocks for $25 per horse/night. Small cabin with microwave, fridge and coffee maker with outdoor kitchen sink, outdEscape to the charm of country living just minutes from downtown Bellville. Nestled on 12 private acres, this spacious two-story farmhouse retreat offers the perfect blend of peaceful seclusion and convenient access to town. Wake up to scenic pond views, friendly farm animals, and fresh eggs from our free-range chickens. The home comfortably ccommodates families and groups with three queen bedrooms, multiple additional sleeping spaces, and a warm farmhouse-lodge atmosphere. Children and pets are welcome—including horses. Guests can enjoy the fully fenced dog yard, stocked fishing pond with dock, complimentary kayak, picnic areas, outdoor games, BBQ, and fire pit. Stroll the property and meet the farm's beloved residents, including mini donkeys, dwarf goats, horses, peacocks, chickens, friendly farm dogs and cats. Negative Coggins required for horses. Pasture available and plenty of room for trailer parking. 30A RV dry-dock also available . Location notes: Bellville, TX",
       "photoURLs": ["https://www.horsemotel.com/ZP-Sunnybrook2Big.jpg", "https://www.horsemotel.com/ZP-Sunnybrook1Big.jpg", "https://www.horsemotel.com/ZP-Sunnybrook3Big.jpg", "https://www.horsemotel.com/ZP-Sunnybrook4Big.jpg"],
       "isVerified": false
     },
@@ -16650,7 +16690,7 @@
       "sourceUrl": "https://www.horsemotel.com/Virginia.html",
       "description": "We are a 30.5 acre horse farm in scenic SW Virginia. We have six grass pasture paddocks with county water in water troughs as follows : one 2.5 acres with a four horse run in shed with rubber matts, one 3 acres, one 2 acres, one 1.5 acres, one 1/2 acre and one 1/8 th acre .A good stand of grass in our paddocks with water troughs. A 60 ft. oak board round pen. Seven stalls with lights, sliding doors, rubber mats, bedding, bars on windows, Two 5 gal water buckets, one feed bucket . Insulated outside walls with lights. $45. for 1 horse stall , $ 50. for Mare & Foal stall. Our farm has an easy access entrance for transports and campers. Paddocks are $35.00 a horse or mule per day. $35.00 per night for a camper /truck /live-in trailer electric hook up. Equine travelers without horses with a Live In trailer are welcome to layover for the night for $ 40.00. We can accommodate up to three RV & live-in Trailer electric hook ups a night. There is no charge for horse trailer parking while at a local motel. We can accommodate 20 polo ponies in our nice grass paddocks on the same day/night. Current coggins and health papers on all horses are required with a short release of liability. We are a friendly, clean and ethical farm. Call for reservations. Location notes: Located in Bristol, VA 4 miles from exits 5 and 7 on Interstate 81. Exit 7 has a Super Walmart, Sams Club, Dollar Tree, Tractor Supply, Motel 6, Marriott, Holiday Inn, Outback Steak House, O'Charley's Restaurant and a Perkins Family Restaurant. We are 2 hours driving from Roanoke,VA, Knoxville,TN, and Asheville, NC. Take exit 7, I-81 If traveling North, make a left at end of Exit Ramp, and if traveling South make a right at end of Exit ramp. Then proceed straight through all lights on Clear Creek Road past the Motel 6 for about 1 mile. After you cross the railroad tracks, make a left onto Wallace Pike and go about 1/2 a mile past Wallace Meadows Homes & make a right at Goose Creek Road ( Rt. 657 ). Then go about 1 mile and when the road forks make a left ( Rt. 656 ) at the Jackson Memorial Church sign. You'll still be on Goose Creek Road. Go past the Jackson Memorial Church and you'll see a Goose Creek Farm sign with a jumping horse on the left side by our entrance. Make a left and pull down to the barn area. We have plenty of room to park. Security with legal armed live in Owner and locked gate at night. Have a safe trip.",
       "photoURLs": ["https://www.horsemotel.com/ZP-GooseCreek2Big.jpg", "https://www.horsemotel.com/ZP-GooseCreek5Big.jpg", "https://www.horsemotel.com/ZP-GooseCreek3Big.jpg", "https://www.horsemotel.com/ZP-GooseCreek6Big.jpg"],
-      "isVerified": false
+      "isVerified": true
     },
     {
       "id": "horsemotel-cbe9214c83",
