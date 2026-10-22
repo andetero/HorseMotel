@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-21T14:36:05Z",
-  "count": 906,
+  "generated": "2026-10-22T14:37:42Z",
+  "count": 907,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -16591,6 +16591,26 @@
       "description": "Rodeo / Horse people - For Rent - Stalls & Basement Available in South Jordan, UT. 3 Indoor stalls with runs and/or 2 bedroom furnished basement. Across the street from the USU Bastian Agricultural Center Equestrian Park, South Jordan, UT. 2 bedroom, furnished basement, one king bed, one queen, Wi-Fi, TV, coffee pot, microwave. $200 a night for basement. $25 per night for stalls including shavings. No dogs in the house. RV Parking available but limited. Call or text me. Location notes: Literally less than 2 minute walk to the equestrian center.",
       "photoURLs": ["https://www.horsemotel.com/ZP-SteveMcIntyre1Big.jpg", "https://www.horsemotel.com/ZP-SteveMcIntyre2Big.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-ca65693d33",
+      "name": "The Rough Stone Shining, Lacey Yama",
+      "location": "498 W 200 N, Nephi, UT 84648",
+      "address": "",
+      "city": "Nephi",
+      "state": "UT",
+      "country": "",
+      "latitude": 39.7118536,
+      "longitude": -111.8454323,
+      "hookups": [],
+      "accommodations": ["Big Rig Friendly"],
+      "phone": "435-979-2089",
+      "email": "thecowboybarneventsandstay@gmail.com",
+      "website": "https://www.horsemotel.com/Utah.html",
+      "sourceUrl": "https://www.horsemotel.com/Utah.html",
+      "description": "Traveling with your horses? We've got a place for you AND your horses to stay! Whether you're passing through, traveling to a competition, or looking for a comfortable overnight stop, The Cowboy Barn offers spacious horse accommodations and lodging for the whole crew! 🐴 Horse Motel Amenities - Spacious 24' × 14' stalls - 24-foot outdoor runs - Access to a 90' × 90' riding arena - Arena lighting for evening riding - Use of barn facilities - Plenty of parking for big rigs, large horse trailers, and trucks - Convenient, easy-to-access location right across the street from Juab County Fairgrounds Overnight Lodging for People The Pink Hay Loft - Sleeps up to 8 people The Chicken Coop - Sleeps up to 4 people Bring your horses, bring your family, and enjoy having a place for everyone to stay! Location notes: The Cowboy Barn 498 West 200 North Nephi, Utah",
+      "photoURLs": ["https://www.horsemotel.com/ZP-RoughStone1Big.jpg", "https://www.horsemotel.com/ZP-RoughStone2Big.jpg"],
+      "isVerified": false
     },
     {
       "id": "horsemotel-72f7116482",
