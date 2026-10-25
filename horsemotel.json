@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-24T13:26:32Z",
-  "count": 907,
+  "generated": "2026-10-25T13:49:47Z",
+  "count": 908,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -561,6 +561,26 @@
       "description": "3 inside stalls and 2 outdoor pens. Bunkhouse has 2 queen bedrooms, bath with handicapped tub & toilet, living room with smart TV, lots of sitting area, kitchen has frig, stove. Barn doors on rooms, central heat/air. Also has 30 amp hookup outside for additional charge. Big yard to exercise the horses with hitching post. Barn has radio or bluetooth in the lights. Big circle driveway, I've had 6 horse trailers pull thru with no trouble. Location notes: Take exit 57 off I-40, go north to Main Street, turn right and go to College Ave. and turn left there at the stop light. Go through the 4way up hill past the university, go right at the fork onto North College Ave. Go about 2 miles and turn left on the 1st dirt road, CR 3436, 1/2 mile on right. Close enough to town for pizza delivery. DoorDash",
       "photoURLs": ["https://www.horsemotel.com/ZP-Bunkhouse1Big.jpg", "https://www.horsemotel.com/ZP-Bunkhouse3Big.jpg", "https://www.horsemotel.com/ZP-Bunkhouse2Big.jpg", "https://www.horsemotel.com/ZP-Bunkhouse4Big.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-41b44b6d41",
+      "name": "West Family Farm Adventure, Inc, Allen West",
+      "location": "142 John Smith Rd, Beebe, AR 72012",
+      "address": "142 John Smith Rd, Beebe, AR 72012",
+      "city": "Beebe",
+      "state": "AR",
+      "country": "",
+      "latitude": 35.0952356,
+      "longitude": -92.0205752,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
+      "phone": "501-796-1416",
+      "email": "westfamilyfarm@yahoo.com",
+      "website": "https://www.horsemotel.com/www.westfamilyfarmadventure.com",
+      "sourceUrl": "https://www.horsemotel.com/Arkansas.html",
+      "description": "Large Round Pen, Outdoor Arena, Fire Pit, Grill, 10x10 Stalls with 20x50 Pen, turn out area, Trailer hook ups, no sewer dump. Location notes: 8.3 miles from interstate 57, 35 miles from interstate 40 off of Hwy 64.",
+      "photoURLs": [],
+      "isVerified": false
     },
     {
       "id": "horsemotel-7513eb5918",
@@ -2644,6 +2664,26 @@
       "isVerified": true
     },
     {
+      "id": "horsemotel-0d2823f203",
+      "name": "Colorado Springs, Colorado, Indigo Winds Farm",
+      "location": "10025 Milne Road, Colorado Springs, CO 80928",
+      "address": "10025 Milne Road, Colorado Springs, CO 80928",
+      "city": "Colorado Springs",
+      "state": "CO",
+      "country": "",
+      "latitude": 38.683659,
+      "longitude": -104.478059,
+      "hookups": [],
+      "accommodations": ["Stalls", "Paddocks", "Lodging"],
+      "phone": "719-717-0202",
+      "email": "indigowindsfarmcenter@gmail.com",
+      "website": "https://indigowindsfarm.com/",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileColoradoIndigo.html",
+      "description": "Private turn out paddock with stall, indoor stalls. Queen sized bed in a private bedroom in home. Kennel outside with a dog house for up to 3 dogs. Can accommodate RV/horse trailer but there are no septic hook ups. Extended stays & camping options are now available & owners often ride in the mountains. Come joins us!!” “Spring/summer stay option available, trainer available - build client list or bring your clients. Location notes: Southeast of Colorado Springs.",
+      "photoURLs": [],
+      "isVerified": true
+    },
+    {
       "id": "horsemotel-bd8adbd7b8",
       "name": "Double Check Arena",
       "location": "37440 County Road 43, Eaton, CO 80615",
@@ -2761,26 +2801,6 @@
       "sourceUrl": "https://www.horsemotel.com/Colorado.html",
       "description": "Lots of parking, horse panels to make a corral, water, electricity, great housing, dogs on leash allowed. Book us through Airbnb also. Location notes: Right at Highway 92, lots of space for big trailers, 3 miles away from the fairground in Hotchkiss.",
       "photoURLs": ["https://www.horsemotel.com/ZP-UnitedCountry1Big.jpg", "https://www.horsemotel.com/ZP-UnitedCountry2Big.jpg", "https://www.horsemotel.com/ZP-UnitedCountry3Big.jpg", "https://www.horsemotel.com/ZP-UnitedCountry4Big.jpg", "https://www.horsemotel.com/ZP-UnitedCountry5Big.jpg", "https://www.horsemotel.com/ZP-UnitedCountry6Big.jpg"],
-      "isVerified": true
-    },
-    {
-      "id": "horsemotel-0d2823f203",
-      "name": "Indigo Winds Farm",
-      "location": "10025 Milne Road, Colorado Springs, CO 80928",
-      "address": "10025 Milne Road, Colorado Springs, CO 80928",
-      "city": "Colorado Springs",
-      "state": "CO",
-      "country": "",
-      "latitude": 38.683659,
-      "longitude": -104.478059,
-      "hookups": [],
-      "accommodations": ["Stalls", "Paddocks", "Lodging"],
-      "phone": "719-717-0202",
-      "email": "indigowindsfarmcenter@gmail.com",
-      "website": "https://indigowindsfarm.com/",
-      "sourceUrl": "https://www.horsemotel.com/Colorado.html",
-      "description": "Private turn out paddock with stall, indoor stalls. Queen sized bed in a private bedroom in home. Kennel outside with a dog house for up to 3 dogs. Can accommodate RV/horse trailer but there are no septic hook ups. Extended stays & camping options are now available & owners often ride in the mountains. Come joins us!!” “Spring/summer stay option available, trainer available - build client list or bring your clients. Location notes: Southeast of Colorado Springs.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-Indigo1Big.jpg", "https://www.horsemotel.com/ZP-Indigo2Big.jpg", "https://www.horsemotel.com/ZP-Indigo3Big.jpg", "https://www.horsemotel.com/ZP-Indigo4Big.jpg"],
       "isVerified": true
     },
     {
@@ -14068,8 +14088,8 @@
       "email": "jvillhau@gmail.com",
       "website": "",
       "sourceUrl": "https://www.horsemotel.com/Tennessee.html",
-      "description": "Facilities : 15 acre property completely enclosed and gated just 6 miles off of Interstate 40 on the Cumberland Plateau near Crossville, TN with a beautiful view of the Smoky Mountains. We offer 2 boarding options : 1) boarding in a private 100' x 60' corral with 8' x 12' loafing shelter for up to 4 horses. 2) boarding in a large round pen near barn. We have a large gravel lot for parking trailer/RV with 30 and 50 amp electrical hookup. Reasonable prices for overnight boarding. Hay and bedding available for an additional charge. Valid Coggins test required. No parties or other visitors. Quiet time from 9 pm â€“ 6 am. We also have a nice 2 bedroom house on the property available to rent. Our policies and prices will be sent to potential boarders. Location notes: We are located just 6 miles off of I-40. On Cumberland Plateau near Crossville, TN with views of the Smokey Mountains.",
-      "photoURLs": ["https://www.horsemotel.com/J1Big.jpg", "https://www.horsemotel.com/ZP-H&J1.jpg"],
+      "description": "Facilities : Facilities : 15 acre property completely enclosed and gated just 6 miles off of Interstate 40 on the Cumberland Plateau near Crossville, TN with a beautiful view of the Smoky Mountains. We offer 3 boarding options : 1) 3 stalls, 10 X 15 feet 2) a private 100' x 60' corral with 8' x 12' loafing shelter for up to 4 horses. 3) a large round pen near the barn. We have a large gravel lot for parking trailer/RV with 30 and 50 amp electrical hookup. Reasonable prices for overnight boarding. Hay and bedding are available for an additional charge. A valid Coggins test is required. No parties or other visitors. Quiet time is from 9 pm – 6 am. *** We also have a nice 2 bedroom house on the property available to rent. *** (Our policies and prices will be sent to potential boarders.) Location notes: We are located just 6 miles off of I-40. On Cumberland Plateau near Crossville, TN with views of the Smokey Mountains.",
+      "photoURLs": ["https://www.horsemotel.com/J1Big.jpg", "https://www.horsemotel.com/ZP-H&J1.jpg", "https://www.horsemotel.com/ZP-HandJ2Big.jpg", "https://www.horsemotel.com/ZP-HandJ3Big.jpg", "https://www.horsemotel.com/ZP-HandJ4Big.jpg"],
       "isVerified": true
     },
     {
