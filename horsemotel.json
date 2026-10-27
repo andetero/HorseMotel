@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-26T16:14:24Z",
-  "count": 909,
+  "generated": "2026-10-27T15:28:34Z",
+  "count": 910,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -12008,6 +12008,26 @@
       "description": "Horse boarding on a daily or monthly basis in a peaceful ranch setting featuring rolling hills, shade trees, and a 5-acre stocked lake. The barn includes 10 box stalls and a wash rack, along with six large pens suitable for multiple horses. Guests have access to a large sand arena and expansive open acreage for horseback riding. The property has pull-through RV sites with 30 and 50-amp hookups, with easy access for large RVs. The ranch also has 24-hour video surveillance. We are located just 6 miles from the Shawnee Expo Center and immediately off I-40. Lodging is available on the ranch. Call, email, or visit our website to book your spot today! Location notes: I-40 to exit 192 (Earlsboro), head north 1/8 mile to the first gravel road on the left. Take the gravel road west 2¼ miles- Rolling Stone Stables & RV Park will be on the right. GPS systems will take you to the correct location",
       "photoURLs": ["https://www.horsemotel.com/ZP-RollingStone1.jpg", "https://www.horsemotel.com/ZP-RollingStoneBig1.jpg", "https://www.horsemotel.com/ZP-RollingStone2.jpg", "https://www.horsemotel.com/ZP-RollingStoneBig2.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-beed50a712",
+      "name": "Triple F Ranch, Marissa Ferguson",
+      "location": "980539 S Hwy 99, Prague, OK 74864",
+      "address": "980539 S Hwy 99, Prague, OK 74864",
+      "city": "Prague",
+      "state": "OK",
+      "country": "",
+      "latitude": 35.5858611111111,
+      "longitude": -96.663,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "RV Hookups"],
+      "phone": "405-368-4900",
+      "email": "Msferguson1018@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Oklahoma.html",
+      "description": "4, 15X20 stalls matted with shavings and 12X12 paddocks off of each stall RV Hookup, with water. No sewage connection, but sewage disposal offered at additional cost of $15 2 Large turnout paddocks available, one with run in shed access. Location notes: Prague Oklahoma close to historical Route 66 7 miles South of I-44, Turner Turnpike, Exit 179 8 miles North of I-40 exit 200",
+      "photoURLs": [],
+      "isVerified": false
     },
     {
       "id": "horsemotel-e757fa14c6",
