@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-29T16:14:02Z",
+  "generated": "2026-10-30T16:02:33Z",
   "count": 911,
   "listings": [
     {
@@ -455,8 +455,8 @@
       "hookups": ["Electric", "Water", "Sewer"],
       "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Lodging"],
       "phone": "501-425-3507",
-      "email": "ROCKINCRANCH@YAHOO.COMm",
-      "website": "",
+      "email": "ROCKINCRANCH@YAHOO.COM",
+      "website": "https://therockincranch.com/",
       "sourceUrl": "https://www.horsemotel.com/Arkansas.html",
       "description": "Our property offers a fully furnished 3-bedroom, 2-bath home, perfect for families, travelers, and equestrians alike. The home is available to book through Airbnb. If you're traveling with horses, the home may be available for $100 per night when reserved in advance. There is a $50 cleaning fee and an additional $40 for pets. Please contact the host before booking to confirm availability and discuss your equine accommodations. Traveling with horses or an RV? We also offer: Six RV/horse trailer hookups with water and electric (two sites also include sewer connections) An 8-horse barn with four stalls featuring attached turnouts, A convenient wash bay Fans in every stall to help keep your horses comfortable We're pet-friendly, so your four-legged family members are welcome too! Our outdoor riding arena is currently under construction and will be available soon, making Rockin' C Ranch an even better destination for horse enthusiasts. Horse rates $30 per horse/night (if you provide shavings), $45 if we do (2 bags per stall). Discounted rates available for extended stays. $30 per night for each RV/horse trailer hookup, whether you're stopping overnight or planning a longer stay, Rockin' C Ranch offers a peaceful country setting with comfortable accommodations for both you and your horses. For your convenience, Tractor Supply Co. (TSC) and Atwoods are both located within 15 miles of the ranch, making it easy to pick up any supplies you may need during your stay. Website under construction. Currently accepting Venmo, Cashapp or PayPal. Location notes: Escape to Rockin' C Ranch in Lonoke, Arkansas—just 8 miles off I-40 in Lonoke, Arkansas.",
       "photoURLs": ["https://www.horsemotel.com/ZP-RockinC1Big.jpg", "https://www.horsemotel.com/ZP-RockinC3Big.jpg", "https://www.horsemotel.com/ZP-RockinC2Big.jpg", "https://www.horsemotel.com/ZP-RockinC4Big.jpg"],
@@ -2540,7 +2540,7 @@
       "website": "",
       "sourceUrl": "https://www.horsemotel.com/Colorado.html",
       "description": "Amazing Grace Ranch has large turn out paddocks available. No RV hook ups. Close to gas station and convenient stores. Between Hwy 24. and Hwy. 94. Both highways run east and west of Colorado Springs. Close to I-25. 1 hour south of Denver and 1 hour north of Pueblo. Also, 1 hour south of I-70. $25/per horse per night!",
-      "photoURLs": [],
+      "photoURLs": ["https://www.horsemotel.com/ZP-AmazingGBig.jpg"],
       "isVerified": false
     },
     {
@@ -12039,13 +12039,13 @@
       "country": "",
       "latitude": 35.5858611111111,
       "longitude": -96.663,
-      "hookups": ["Electric"],
-      "accommodations": ["Stalls", "RV Hookups"],
+      "hookups": [],
+      "accommodations": [],
       "phone": "405-368-4900",
       "email": "Msferguson1018@gmail.com",
       "website": "",
       "sourceUrl": "https://www.horsemotel.com/Oklahoma.html",
-      "description": "4, 15X20 stalls matted with shavings and 12X12 paddocks off of each stall. RV Hookup, with water. No sewage connection, but sewage disposal offered at additional cost of $15. 2 Large turnout paddocks available, one with run in shed access. Location notes: Prague Oklahoma close to historical Route 66. 7 miles South of I-44, Turner Turnpike, Exit 179. 8 miles North of I-40 exit 200.",
+      "description": "Location notes: Prague Oklahoma close to historical Route 66. 7 miles South of I-44, Turner Turnpike, Exit 179. 8 miles North of I-40 exit 200.",
       "photoURLs": ["https://www.horsemotel.com/ZP-TripleFRanch1Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch7Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch8Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch9Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch2Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch3Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch4Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch5Big.jpg", "https://www.horsemotel.com/ZP-TripleFRanch6Big.jpg"],
       "isVerified": false
     },
