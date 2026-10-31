@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-30T16:02:33Z",
-  "count": 911,
+  "generated": "2026-10-31T15:26:55Z",
+  "count": 912,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -10246,6 +10246,26 @@
       "sourceUrl": "https://www.horsemotel.com/NewMexico.html",
       "description": "Large, outdoor covered stalls, with complementary shavings. Stalls have clean water buckets filled prior to arrival. We have AZ Alfalfa and Bermuda grass available for purchase, $40 per horse per night. Airbnb fully stocked apartments, laundry/king bed/smart tv available located next to your horses. 50/30 plugs available for trailers, $60 per night. Free Wi-Fi available. We are set up for big rigs more than 5 horses, 24/7 on site security, feed, air bnbs and trailer/rv hook ups, turn out, multi day stays, emergency veterinary, wash rack, farriers. Location notes: Located 1.5 miles from I-10",
       "photoURLs": ["https://www.horsemotel.com/ZP-EnchantedEquestrian1Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian2Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian3Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian4Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian5Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian6Big.jpg", "https://www.horsemotel.com/ZP-EnchantedEquestrian7Big.jpg"],
+      "isVerified": false
+    },
+    {
+      "id": "horsemotel-9b2a22600f",
+      "name": "Grants Rodeo Grounds, Norene Y",
+      "location": "255 Betty Dr., Grants, New Mexico 87020",
+      "address": "255 Betty Dr., Grants, New Mexico 87020",
+      "city": "",
+      "state": "NM",
+      "country": "",
+      "latitude": 35.1480194,
+      "longitude": -107.8817504,
+      "hookups": [],
+      "accommodations": ["Stalls", "Paddocks", "Big Rig Friendly"],
+      "phone": "505-290-0977",
+      "email": "norenecanada@gmail.com",
+      "website": "https://Grantsrodeo.com",
+      "sourceUrl": "https://www.horsemotel.com/NewMexico.html",
+      "description": "We have plenty of open stalls covered stalls stalls under the arena cover. We have livestock holding pens, loading ramps for semi’s limited RV spots. Location notes: 255 Betty Dr. Grants, New Mexico. Exit 81 right off I 40.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-GrantsrodeoBig.jpg"],
       "isVerified": false
     },
     {
