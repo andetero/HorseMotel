@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-31T15:26:55Z",
+  "generated": "2026-11-01T16:55:53Z",
   "count": 912,
   "listings": [
     {
@@ -2824,26 +2824,6 @@
       "isVerified": true
     },
     {
-      "id": "horsemotel-7c6fe91c0f",
-      "name": "Ironstar Outpost West, Jeff Eisenbeiser",
-      "location": "20500 Council Road, Weston , CO 81091",
-      "address": "20500 Council Road, Weston , CO 81091",
-      "city": "Weston",
-      "state": "CO",
-      "country": "",
-      "latitude": 37.289929,
-      "longitude": -104.955613,
-      "hookups": ["Electric"],
-      "accommodations": ["Paddocks", "RV Hookups"],
-      "phone": "443-676-3811",
-      "email": "ironstaroutpost@gmail.com",
-      "website": "http://ironstaroutpost.com/",
-      "sourceUrl": "https://www.horsemotel.com/Colorado.html",
-      "description": "Electric 40' x 40' corral. Lodging also available. Location notes: Close to San Isabel National Forest and approximately 40 miles away from Trinidad, Walsenburg, and La Veta.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-IronstarWestBig.jpg"],
-      "isVerified": true
-    },
-    {
       "id": "horsemotel-80db9c94e0",
       "name": "J Bar Equestrian, Brett Jordan",
       "location": "12560 W US Hwy. 50, Salida , CO 81201",
@@ -3242,6 +3222,26 @@
       "sourceUrl": "https://www.horsemotel.com/Colorado.html",
       "description": "We offer 6 oversized box stalls with large runs. They all have automatic waterers and rubber mats. One bag of shavings is provided per day of stay. We also have two 30 amp hook ups for those that want to stay with their horses. Our fees are: $40 per night per horse, $20 for LQ Trailer electrical hook up per night, trailer parking is free. Dogs are welcome if on a leash. We have dog runs with shelter too. We have boarded horses monthly for over 10 years and have decided to help those on the road with their horses instead. We have owned horses for nearly 50 years and still have some of ours on the place. Our Veterinarian has even referred people to us with lame horses due to the care we give. Location notes: We are east of I-25 off Highway 14. We are 3.5 - 8 miles from restaurants, hotels and gas stations. 11 miles from CSU Vet Hospital, 14 miles from The Ranch Facility in Loveland, 22 miles from Island Grove in Greeley, and 43 miles from Frontier Park in Cheyenne. Horsetooth Rock is 35 minutes, Lori State Park is 30 minutes, and Red Feather Lakes area is an hour away for Trail riding.",
       "photoURLs": ["https://www.horsemotel.com/ZP-TurtleCreek2Big.jpg", "https://www.horsemotel.com/ZP-TurtleCreek3Big.jpg", "https://www.horsemotel.com/ZP-TurtleCreek4Big.jpg", "https://www.horsemotel.com/ZP-TurtleCreek5Big.jpg", "https://www.horsemotel.com/ZP-TurtleCreek6Big.jpg"],
+      "isVerified": true
+    },
+    {
+      "id": "horsemotel-7c6fe91c0f",
+      "name": "Weston, Colorado, Ironstar Outpost West",
+      "location": "20500 Council Road, Weston , CO 81091",
+      "address": "20500 Council Road, Weston , CO 81091",
+      "city": "Weston",
+      "state": "CO",
+      "country": "",
+      "latitude": 37.289929,
+      "longitude": -104.955613,
+      "hookups": ["Electric"],
+      "accommodations": ["Paddocks", "RV Hookups"],
+      "phone": "443-676-3811",
+      "email": "ironstaroutpost@gmail.com",
+      "website": "http://ironstaroutpost.com/",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileColoradoIronstar.html",
+      "description": "Electric 40' x 40' corral. Lodging also available. Location notes: Close to San Isabel National Forest and approximately 40 miles away from Trinidad, Walsenburg, and La Veta.",
+      "photoURLs": [],
       "isVerified": true
     },
     {
@@ -4841,9 +4841,9 @@
       "phone": "",
       "email": "outdoorslinds@gmail.com",
       "website": "",
-      "sourceUrl": "https://www.horsemotel.com/Idaho.html",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileIdahoL&L.html",
       "description": "Peaceful horse accommodations located just minutes from Highway 41 in Rathdrum, Idaho. Silent Pines Ranch offers safe, spacious overnight and short-term boarding for traveling horses as well as longer-term arrangements when available. Amenities include: * Large pastures * Secure stalls with attached 50' x 140' runs * Round pen for exercise and turnoutm * Fresh water and quality hay available * Easy trailer access and parking * Quiet, family-owned horse property. We prioritize the health and safety of all horses on the property. Current Coggins and Health Certificate are required prior to arrival. Whether you're passing through North Idaho or looking for a comfortable place for your horse to stay, Silent Pines Ranch provides a clean, welcoming environment with experienced horse care. Location notes: North of Coeur d'Alene.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-SilentPinesBig.jpg"],
+      "photoURLs": [],
       "isVerified": true
     },
     {
@@ -17309,7 +17309,7 @@
       "website": "https://www.craterviewhorsepark.com/",
       "sourceUrl": "https://www.horsemotel.com/Washington.html",
       "description": "Large indoor arena - 60' x 120', larger outdoor arena - 100' x 200'. World class outdoor Mountain Trail Course. Cozy 12' x 12' stalls with shavings included. RV hook ups. Private RV/Tent dry camp spaces. Nearby are Mayfield Lake, Mt. St Helens, Mt. Rainier, Centralia Outlet Stores, Lewis County Fair, hiking, biking & horseback riding trails. Location notes: Located just 14 miles off of I-5 and 6 miles to the town of Mossyrock, Bolender Horse Park is a beautiful stop for you and your horses. Whether you are on a long journey or plan to stay awhile, enjoy the amenities that the park and area have to offer.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-Bolender1Big.jpg", "https://www.horsemotel.com/ZP-Bolender2Big.jpg"],
+      "photoURLs": ["https://www.horsemotel.com/ZP-Bolender3Big.jpg", "https://www.horsemotel.com/ZP-Bolender4Big.jpg"],
       "isVerified": true
     },
     {
