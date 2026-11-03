@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-02T20:28:28Z",
+  "generated": "2026-11-03T17:57:59Z",
   "count": 912,
   "listings": [
     {
@@ -8047,26 +8047,6 @@
       "isVerified": true
     },
     {
-      "id": "horsemotel-e9eede74a2",
-      "name": "Connie Hood",
-      "location": "153 cr 244, Houlka , MS 38850",
-      "address": "153 cr 244, Houlka , MS 38850",
-      "city": "Houlka",
-      "state": "MS",
-      "country": "",
-      "latitude": 34.019276,
-      "longitude": -89.1667015,
-      "hookups": [],
-      "accommodations": ["Stalls", "Lodging"],
-      "phone": "662-419-7851",
-      "email": "cmhood69@gmail.com",
-      "website": "",
-      "sourceUrl": "https://www.horsemotel.com/Mississippi.html",
-      "description": "Grass 1 acre lots, 2 X Large Stalls or Show Barn 1/2 mile from AirBnB.",
-      "photoURLs": ["https://www.horsemotel.com/ZP-ConnieHood5Big.jpg", "https://www.horsemotel.com/ZP-ConnieHood2Big.jpg", "https://www.horsemotel.com/ZP-ConnieHood4Big.jpg", "https://www.horsemotel.com/ZP-ConnieHood3Big.jpg", "https://www.horsemotel.com/ZP-ConnieHood1Big.jpg", "https://www.horsemotel.com/ZP-ConnieHood6Big.jpg"],
-      "isVerified": true
-    },
-    {
       "id": "horsemotel-ea81f6a998",
       "name": "Golden Horse Stables",
       "location": "684 White Road, Florence , MS 39073",
@@ -8125,6 +8105,26 @@
       "sourceUrl": "https://www.horsemotel.com/Mississippi.html",
       "description": "Same-day reservations typically available. 12'x 12' stalls inside enclosed barn, shavings included. Stalls are $50/night per stall. No turn-outs or arena usage available. No tie-outs. No Riding On Property. Automatic waterers, permanent hay chicks corner hay bags. Disinfected between stays. Large circle drive that can fit a semi. Full RV hook-ups - $50/night (50 amp). On-ranch housing (first come, first served) $100/night, (queen rooms, double queen rooms, & full houses). Current Coggins, health certificate, & Proof of vaccination required before unloading. We are also an event facility & follow strict biosecurity protocols to keep all horses safe and healthy. Payment can be made via Cash (preferred), CashApp, Venmo, PayPal, or Apple Pay.br> Location notes: From Highway 11, take H Burge Road and go approximately 1 mile, turn left into big black gates that say Horse Haven. At night there are lights on top of the gate. Stay to the left at the fork & park in front of the barn to unload. 6.5 miles west off of I-59, 50 miles north of 1-10, 30 miles south of Hattiesburg, MS.",
       "photoURLs": ["https://www.horsemotel.com/ZP-HorseHavenMS1Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS2Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS3Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS4Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS5Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS6Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS7Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS8Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS9Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS10Big.jpg", "https://www.horsemotel.com/ZP-HorseHavenMS11Big.jpg"],
+      "isVerified": true
+    },
+    {
+      "id": "horsemotel-e9eede74a2",
+      "name": "Houlka, Mississippi, Connie Hood",
+      "location": "153 cr 244, Houlka , MS 38850",
+      "address": "153 cr 244, Houlka , MS 38850",
+      "city": "Houlka",
+      "state": "MS",
+      "country": "",
+      "latitude": 34.019276,
+      "longitude": -89.1667015,
+      "hookups": [],
+      "accommodations": ["Stalls", "Lodging"],
+      "phone": "662-419-7851",
+      "email": "cmhood69@gmail.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/A1MobilePages/A3MobileMississippiConnieHood.html",
+      "description": "Grass 1 acre lots, 2 X Large Stalls or Show Barn 1/2 mile from AirBnB.",
+      "photoURLs": [],
       "isVerified": true
     },
     {
