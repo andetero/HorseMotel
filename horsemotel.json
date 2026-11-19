@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-17T19:17:48Z",
-  "count": 913,
+  "generated": "2026-11-19T22:37:47Z",
+  "count": 914,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -3263,6 +3263,26 @@
       "description": "Overnight accommodations for you and your horses...Stalls and/or grass turnout. We are dog friendly!!!! Room for the whole family! Breakfast before you roll out!!!! Pricing is $200.00 for one horse and one room in our Inn. $30.00 per additional horse for paddock, and $40 if in need of a stall. Hay and water will be there....Room for a large rig to turn around and easy in out. Easiest if arrival is during daylight if possible. Location notes: 214 Candlewwod Mountain Road, New Milford, CT 06776",
       "photoURLs": [],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-43fb5d244c",
+      "name": "Huntersbrook Stable, Gina Volandre",
+      "location": "119 Hydeville Rd, Stafford Springs, CT 06076",
+      "address": "119 Hydeville Rd, Stafford Springs, CT 06076",
+      "city": "Stafford Springs",
+      "state": "CT",
+      "country": "",
+      "latitude": 41.995837,
+      "longitude": -72.2768768,
+      "hookups": [],
+      "accommodations": ["Stalls"],
+      "phone": "781-883-7090",
+      "email": "huntersbrook@comcast.net",
+      "website": "https://Huntersbrookstable.com",
+      "sourceUrl": "https://www.horsemotel.com/Connecticut.html",
+      "description": "2 12x12 box stalls with Dutch doors. Completely fenced in for security. Location notes: 119 Hydeville Rd Stafford Springs ,CT.",
+      "photoURLs": [],
+      "isVerified": false
     },
     {
       "id": "horsemotel-cb134d28a3",
