@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-20T18:42:34Z",
-  "count": 914,
+  "generated": "2026-11-21T17:38:52Z",
+  "count": 916,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -8168,6 +8168,26 @@
       "isVerified": true
     },
     {
+      "id": "horsemotel-c86fb5bccd",
+      "name": "KINGS FORGE RANCH, Adrian Mithell",
+      "location": "19405 K Cuevis Road, Saucier , MS 39574",
+      "address": "19405 K Cuevis Road, Saucier , MS 39574",
+      "city": "Saucier",
+      "state": "MS",
+      "country": "",
+      "latitude": 30.5695372,
+      "longitude": -89.1851178,
+      "hookups": ["Electric", "Water"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Lodging"],
+      "phone": "228-256-3400",
+      "email": "adrian.mitchell@kingsforgesteel.com",
+      "website": "",
+      "sourceUrl": "https://www.horsemotel.com/Mississippi.html",
+      "description": "Come and stay with us at Kings Forge Ranch. We offer overnight stays for you and your horses for 1, 2, or 3 nights. We offer 14 x 20 enclosed stalls. They have 200' x 300' runs attached. We also offer enclosed 10 x 20 stalls. We offer a 220' x 140' arena and a 60-foot round pen with lights. We have shavings and grass hay on site if needed. We have several hook ups for your horse trailers, providing water and electricity. Give me a call to schedule your stay; we look forward to seeing you! We offer Horse Trailer hook ups with water. I also have an Airbnb cowboy cabin on the ranch. Location notes: We are located just 10 minutes off of interstate 10 north of Gulfport Mississippi",
+      "photoURLs": ["https://www.horsemotel.com/ZP-KingsForge1Big.jpg", "https://www.horsemotel.com/ZP-KingsForge2Big.jpg", "https://www.horsemotel.com/ZP-KingsForge3Big.jpg", "https://www.horsemotel.com/ZP-KingsForge5Big.jpg", "https://www.horsemotel.com/ZP-KingsForge4Big.jpg", "https://www.horsemotel.com/ZP-KingsForge6Big.jpg", "https://www.horsemotel.com/ZP-KingsForge7Big.jpg"],
+      "isVerified": false
+    },
+    {
       "id": "horsemotel-d04b6d33c5",
       "name": "KMC Stables, Charles Des Angles",
       "location": "2158 Kiln Delisle Road, Pass Christian , MS 39571",
@@ -9427,6 +9447,26 @@
       "description": "Five, 12 x 12 stalls, 30A connection, rubber mats, metal bars between stalls Location notes: Mooresville, NC, (Charlotte Area).",
       "photoURLs": ["https://www.horsemotel.com/ZP-OakHillBig.jpg", "https://www.horsemotel.com/ZP-OakHill2Big.jpg", "https://www.horsemotel.com/ZP-OakHill3Big.jpg"],
       "isVerified": true
+    },
+    {
+      "id": "horsemotel-14a5bab831",
+      "name": "Old Stage Farm, Robin E Jennings",
+      "location": "1216 Deep Creek Ln, Yadkinville, NC 27055",
+      "address": "1216 Deep Creek Ln, Yadkinville, NC 27055",
+      "city": "Yadkinville",
+      "state": "NC",
+      "country": "",
+      "latitude": 36.1106904,
+      "longitude": -80.5721772,
+      "hookups": [],
+      "accommodations": ["Stalls", "Paddocks"],
+      "phone": "336-468-7458",
+      "email": "rjenn17@yadtel.net",
+      "website": "https://deepcreekkennel.com",
+      "sourceUrl": "https://www.horsemotel.com/NorthCarolina.html",
+      "description": "6 stall barn, water, riding ring, round pen, lots of pasture, and a bathroom for the 2 legged Location notes: 1044 Deep Creek Lane Yadkinville, NC 27055 .3 mile off Hwy 421",
+      "photoURLs": [],
+      "isVerified": false
     },
     {
       "id": "horsemotel-de1049dedb",
