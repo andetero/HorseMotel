@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-24T20:45:47Z",
-  "count": 916,
+  "generated": "2026-11-25T20:02:46Z",
+  "count": 918,
   "listings": [
     {
       "id": "horsemotel-2cc81afaa8",
@@ -3816,7 +3816,7 @@
       "longitude": -82.168878,
       "hookups": ["Electric", "Water"],
       "accommodations": ["Stalls", "Paddocks", "RV Hookups"],
-      "phone": "727-217-5772",
+      "phone": "352-356-5294",
       "email": "april.borovskaya@gmail.com",
       "website": "",
       "sourceUrl": "https://www.horsemotel.com/Florida.html",
@@ -16091,6 +16091,26 @@
       "isVerified": false
     },
     {
+      "id": "horsemotel-fc5a34de11",
+      "name": "Sunshine Stables, Paul Jenkins, 10846 FM 2589",
+      "location": "Dumas , TX 79029",
+      "address": "",
+      "city": "",
+      "state": "TX",
+      "country": "",
+      "latitude": 35.857906,
+      "longitude": -102.034723,
+      "hookups": ["Electric"],
+      "accommodations": ["Stalls", "Paddocks", "RV Hookups", "Big Rig Friendly"],
+      "phone": "806-570-8904 or 806-570-6090",
+      "email": "pjjenkins@hotmail.com",
+      "website": "http://www.sunshinestablestx.com",
+      "sourceUrl": "https://www.horsemotel.com/Texas.html",
+      "description": "Indoor or outdoor overnight stalls, monthly rental stalls, round pen, arena, wash area, RV Hookups. Plenty of room for big rigs. Health papers and a negative Coggins test are required. Please call to cancel a reservation. Location notes: West on 87 3.5 miles then 1/2 mile south on FM 2589, Dumas Texas",
+      "photoURLs": ["https://www.horsemotel.com/ZP-Sunshine1.jpg", "https://www.horsemotel.com/ZP-Sunshine2.jpg"],
+      "isVerified": true
+    },
+    {
       "id": "horsemotel-64342b7589",
       "name": "Texas Cozy Rentals, Bickham Ranch",
       "location": "6955 Bickham Cemetery Road, Bryan , TX 77808",
@@ -16648,6 +16668,26 @@
       "sourceUrl": "https://www.horsemotel.com/Utah.html",
       "description": "162 covered stalls, $20 per night; 9 24' x 30' outdoor pens, $15 per night per horse, up to 4 horses per pen. Warm-up arena, outdoor arena, electrical and water hook-ups for RV's, bathroom and shower facilities open 24 hours, wash rack, big rig access. Location notes: Minutes south of Moab in beautiful Canyonlands country.",
       "photoURLs": [],
+      "isVerified": false
+    },
+    {
+      "id": "horsemotel-25f11056fe",
+      "name": "Paria River Ranch, JEFFREY BUEHL or, Stephanie Seaholm",
+      "location": "11175 W Paria Valley Road, Kanab , UT 84741",
+      "address": "11175 W Paria Valley Road, Kanab , UT 84741",
+      "city": "Kanab",
+      "state": "UT",
+      "country": "",
+      "latitude": 37.106471,
+      "longitude": -111.912527,
+      "hookups": ["30A", "Electric"],
+      "accommodations": ["Paddocks", "RV Hookups", "Lodging", "Trails"],
+      "phone": "323-347-9185",
+      "email": "pariariverranch@protonmail.com",
+      "website": "https://pariariverranch.com/",
+      "sourceUrl": "https://www.horsemotel.com/Utah.html",
+      "description": "Horse camping, cabins, 30 amp hookups, dry camping. We offer 12' x 12' pipe corrals and have some larger corrals for 2 or 3 horses/mules. You provide everything. We will pick up manure outside of your corral once a day. Great place to stay overnight or longer to explore the amazing trails out our backdoor! Location notes: We are located on Route 89 between Page, Arizona and Kanab, Utah, backed up to Escalante Grand Staircase National Monument.",
+      "photoURLs": ["https://www.horsemotel.com/ZP-PariaRiver1Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver2Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver11Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver3Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver4Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver5Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver6Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver7Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver8Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver10Big.jpg", "https://www.horsemotel.com/ZP-PariaRiver9Big.jpg"],
       "isVerified": false
     },
     {
